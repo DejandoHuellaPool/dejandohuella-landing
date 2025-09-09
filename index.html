@@ -1,22 +1,14 @@
-from pathlib import Path
-
-root = Path("/mnt/data/dh_site_ready")
-root.mkdir(exist_ok=True)
-
-index_html = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <title>DejandoHuella Trader — .onion</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y planes premium. Pagos en BTC y USDT. Contacto PGP.">
-  <!-- Favicon inline para evitar 404 -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
   <style>
-    :root{
-      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
-      --warn:#f59e0b; --border:#1f2a3a; --link:#60a5fa;
-    }
+    :root{--bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
+          --warn:#f59e0b; --border:#1f2a3a; --link:#60a5fa;}
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
     .wrap{max-width:1000px;margin:auto;padding:24px}
@@ -33,281 +25,41 @@ index_html = """<!DOCTYPE html>
     .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
     .qr{width:110px;height:110px;border:1px solid var(--border);border-radius:10px;background:#0f1522;object-fit:contain}
-    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;
-         font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
     a{color:var(--link)}
     .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
-    @media (max-width:760px){ .grid-2{grid-template-columns:1fr} .qr{width:96px;height:96px} header img{width:56px;height:56px} h1{font-size:26px}}
-    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);
-          border-radius:14px;padding:16px}
-    .plan h3{margin:0;font-size:18px}
-    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;
-           border-radius:999px;color:var(--fg);background:#0f1522}
-    .note{color:var(--muted);margin:0}
+    @media (max-width:760px){.grid-2{grid-template-columns:1fr} .qr{width:96px;height:96px} header img{width:56px;height:56px} h1{font-size:26px}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- ENCABEZADO + LOGO -->
     <header>
-      <img loading="lazy" fetchpriority="high"
-           src="logo.png" alt="DejandoHuella logo"
-           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22&gt;&lt;rect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/&gt;&lt;text x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22&gt;DH&lt;/text&gt;&lt;/svg&gt;'">
+      <img src="logo.png" alt="DejandoHuella logo">
       <div>
         <h1>DejandoHuella Trader</h1>
-
-        <!-- CTA de contacto inmediato (dos botones, sin anidar) -->
         <p>
-          <a class="cta"
-             href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20demo&body=Hola%2C%20vengo%20desde%20la%20web.%20Mi%20nombre%20es%3A%20_____%20%0APrefiero%20contacto%3A%20Telegram%2FWhatsApp%2FEmail%20(%3Cusuario%3E)">
-             Solicitar información
-          </a>
+          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20demo">Solicitar información</a>
         </p>
-
         <p>
           <a id="onion-link" class="cta"
              href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=pages"
-             target="_blank" rel="noopener">
-             Abrir versión .onion
-          </a>
+             target="_blank" rel="noopener">Abrir versión .onion</a>
         </p>
-
-        <p>Trading BTC/USD automatizado (EA MT4) • Señales • Licencias • Mentoría</p>
       </div>
     </header>
-
-    <!-- PAGOS + QRs -->
-    <div class="card">
-      <h2>Pagos (verifica la red)</h2>
-      <div class="grid grid-2">
-        <!-- Columna QRs -->
-        <div class="grid" style="align-content:start">
-          <div>
-            <small>BTC (QR)</small><br>
-            <img class="qr" loading="lazy"
-                 src="qr_btc.png"
-                 alt="Código QR de pago BTC"
-                 onerror="this.onerror=null;this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4'">
-          </div>
-          <div>
-            <small>USDT TRC20 (QR)</small><br>
-            <img class="qr" loading="lazy"
-                 src="qr_trc20.png"
-                 alt="Código QR de pago USDT TRC20"
-                 onerror="this.onerror=null;this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd'">
-          </div>
-          <div>
-            <small>USDT BEP20 (QR)</small><br>
-            <img class="qr" loading="lazy"
-                 src="qr_bep20.png"
-                 alt="Código QR de pago USDT BEP20"
-                 onerror="this.onerror=null;this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'">
-          </div>
-          <div>
-            <small>USDT Arbitrum One (QR)</small><br>
-            <img class="qr" loading="lazy"
-                 src="qr_arb1.png"
-                 alt="Código QR de pago USDT Arbitrum One"
-                 onerror="this.onerror=null;this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'">
-          </div>
-          <div>
-            <small>USDT ERC-20 (QR)</small><br>
-            <img class="qr" loading="lazy"
-                 src="qr_erc20.png"
-                 alt="Código QR de pago USDT ERC-20"
-                 onerror="this.onerror=null;this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'">
-          </div>
-        </div>
-
-        <!-- Columna direcciones -->
-        <div class="addr">
-          <div>
-            <div class="row"><b>BTC</b><span class="tag">Bitcoin</span></div>
-            <code id="btc">bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4</code>
-            <span class="copy" onclick="copy('btc')">Copiar</span>
-          </div>
-          <div>
-            <div class="row"><b>USDT</b><span class="tag">TRC20 / Tron</span></div>
-            <code id="trc20">TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd</code>
-            <span class="copy" onclick="copy('trc20')">Copiar</span>
-          </div>
-          <div>
-            <div class="row"><b>USDT</b><span class="tag">BEP20 / BSC</span></div>
-            <code id="bep20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
-            <span class="copy" onclick="copy('bep20')">Copiar</span>
-          </div>
-          <div>
-            <div class="row"><b>USDT</b><span class="tag">Arbitrum One</span></div>
-            <code id="arb1">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
-            <span class="copy" onclick="copy('arb1')">Copiar</span>
-          </div>
-          <div>
-            <div class="row"><b>USDT</b><span class="tag">ERC-20 / Ethereum</span></div>
-            <code id="erc20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
-            <span class="copy" onclick="copy('erc20')">Copiar</span>
-          </div>
-        </div>
-      </div>
-      <small style="color:#94a3b8">Si envías por red equivocada, los fondos se pierden. Verifica dos veces.</small>
-    </div>
-
-    <!-- CÓMO PAGAR -->
-    <div class="card">
-      <h2>Cómo pagar (paso a paso)</h2>
-      <ol>
-        <li>Elige la <b>red correcta</b> (BTC, TRC20, BEP20, Arbitrum One o ERC-20).</li>
-        <li>Escanea el QR o copia la dirección con “Copiar”.</li>
-        <li>Envía el monto acordado y espera 1–3 confirmaciones.</li>
-        <li>Envíanos el <b>hash de la transacción</b> por correo para acreditar tu plan.</li>
-      </ol>
-    </div>
-
-    <!-- QUÉ RECIBES -->
-    <div class="card">
-      <h2>Qué recibes</h2>
-      <ul>
-        <li>✅ <b>Señales Premium</b> en tiempo real.</li>
-        <li>✅ <b>EA MT4</b> con licencia y soporte de instalación.</li>
-        <li>✅ <b>Mentoría / soporte</b> privado.</li>
-        <li>✅ <b>Transparencia</b>: bitácora de entradas (RSI, ADX, EMAs, zona, etc.).</li>
-      </ul>
-    </div>
-
-    <!-- PLANES PREMIUM -->
-    <div class="card" id="planes">
-      <h2>Planes Premium – DejandoHuella Trader</h2>
-      <div class="grid grid-2">
-        <div class="plan">
-          <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
-          <p class="note">
-            Acceso a un grupo privado en Telegram/WhatsApp con señales en tiempo real del par <b>BTC/USD</b>.
-            Incluye de 1 a 3 señales diarias, cada una con precio de entrada, <i>Stop Loss</i> y <i>Take Profit</i> definidos.
-            El cliente abre las operaciones en su propia cuenta con su broker. El valor se cobra mensualmente.
-          </p>
-        </div>
-        <div class="plan">
-          <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
-          <p class="note">
-            Acceso al EA <b>DejandoHuella_BTCUSD</b> en una cuenta MT4. Licencia válida por 12 meses e incluye
-            actualizaciones y soporte técnico básico. Ideal para traders que desean operar de forma automatizada
-            en su propia cuenta.
-          </p>
-        </div>
-        <div class="plan">
-          <h3>■ Licencia EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
-          <p class="note">
-            Incluye el EA completo sin restricciones, acceso a actualizaciones de por vida y <b>3 meses de mentoría personalizada</b>.
-            Acompañamiento en instalación, configuración y optimización del sistema. Plan exclusivo para quienes desean dominar
-            la herramienta y crecer con soporte avanzado.
-          </p>
-        </div>
-        <div class="plan">
-          <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
-          <p class="note">
-            Aporte inicial con participación en las utilidades del proyecto (señales + licencias). Incluye licencias
-            empresariales del EA y el derecho a usar la marca <b>DejandoHuella Trader</b> en su país o región.
-            El socio se convierte en aliado estratégico en la expansión internacional del proyecto.
-          </p>
-        </div>
-      </div>
-      <div style="margin-top:10px">
-        <a class="cta" href="#contacto">Solicitar información</a>
-      </div>
-    </div>
-
-    <!-- CONTACTO + PGP -->
-    <div class="card" id="contacto">
-      <h2>Contacto</h2>
-      <p><a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20demo&body=Hola%2C%20vengo%20desde%20la%20web.%20Mi%20nombre%20es%3A%20_____%20%0APrefiero%20contacto%3A%20Telegram%2FWhatsApp%2FEmail%20(%3Cusuario%3E)">Escríbenos a ProtonMail</a></p>
-      <p>.onion: <b id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</b>
-         <span class="copy" onclick="copy('onion')">Copiar</span></p>
-      <p><small>PGP para mensajes cifrados (compara la huella / fingerprint):</small></p>
-      <details open>
-        <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
-          <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
-        </summary>
-        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">
------BEGIN PGP PUBLIC KEY BLOCK-----
-xjMEaLfYihYJKwYBBAHaRw8BAQdAtxVgF8zGlETJFchumSOySa0fYyoWVL+k
-gAdoJzAIj7bNO0RlamFuZG9IdWVsbGFfUG9vbEBwcm90b24ubWUgPERlamFu
-ZG9IdWVsbGFfUG9vbEBwcm90b24ubWU+wsARBBMWCgCDBYJot9iKAwsJBwkQ
-E3LyVlOBZFJFFAAAAAAAHAAgc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9y
-Z7QGl5DnUkpLn44szFx+0bL7PtTKJ1OdjzCG3kKkrNbSAxUKCAQWAAIBAhkB
-ApsDAh4BFiEEbCamYwLiCV3KuuOkE3LyVlOBZFIAAGgwAQDxsnXKWpa6tDlA
-Q92ZfUqYf7Hu/jnJZXN00jpvsPnsJAEA00tUpVhkO62cYwIoR9LvOp8olQcs
-buCJOy/dk3rLzQvOOARot9iKEgorBgEEAZdVAQUBAQdAuuS/mnJR2JOjHm6N
-X8x/V4HLOgaLZqqtpwGZB7JpMBIDAQgHwr4EGBYKAHAFgmi32IoJEBNy8lZT
-gWRSRRQAAAAAABwAIHNhbHRAbm90YXRpb25zLm9wZW5wZ3Bqcy5vcme8JW46
-H2+MmFpdvrzyGXVqogCmc3ZqbY+s41cIvotS3QKbDBYhBGwmpmMC4gldyrrj
-pBNy8lZTgWRSAACwxgEAyq7WSbledwSIS15YtgmQmuAzDvd3+dqsjKI+s47Q
-XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
-=EcvG
------END PGP PUBLIC KEY BLOCK-----
-        </pre>
-      </details>
-    </div>
-
-    <!-- TRANSPARENCIA -->
-    <div class="card">
-      <h2>Transparencia de señales</h2>
-      <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br>
-      L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
-    </div>
-
     <p style="color:#94a3b8"><small>Última actualización: <span id="lu"></span></small></p>
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
-
   <script>
-    function copy(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      const txt = el.textContent.trim();
-      navigator.clipboard.writeText(txt).then(()=>{
-        const msg = document.createElement('div');
-        msg.textContent = "✔ Copiado";
-        msg.style.position = "fixed";
-        msg.style.bottom = "20px";
-        msg.style.right = "20px";
-        msg.style.background = "#22c55e";
-        msg.style.color = "#06250f";
-        msg.style.padding = "8px 12px";
-        msg.style.borderRadius = "8px";
-        msg.style.zIndex = "9999";
-        document.body.appendChild(msg);
-        setTimeout(()=>msg.remove(),1500);
-      });
-    }
-    // Fecha ISO YYYY-MM-DD
     document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
-
-    // Sincroniza el parámetro src hacia la versión .onion (si no viene, usa 'pages')
     (function(){
       try{
-        const url = new URL(window.location.href);
-        const src = url.searchParams.get('src') || 'pages';
-        const a = document.getElementById('onion-link');
-        if(a){ a.href = 'http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=' + encodeURIComponent(src); }
+        const url=new URL(window.location.href);
+        const src=url.searchParams.get('src')||'pages';
+        const a=document.getElementById('onion-link');
+        if(a){a.href='http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src='+encodeURIComponent(src);}
       }catch(e){}
     })();
   </script>
 </body>
 </html>
-"""
-
-(Path(root) / "index.html").write_text(index_html, encoding="utf-8")
-
-# 404 de cortesía
-(Path(root) / "404.html").write_text("<!doctype html><meta charset='utf-8'><meta http-equiv='refresh' content='0; url=./'>", encoding="utf-8")
-
-# README opcional
-readme = """# DejandoHuella Trader — Landing
-
-Clearnet: https://dejandohuellapool.github.io/dejandohuella-landing/
-.onion:   http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/
-
-Añadido tracking por `?src=` y botón para abrir versión .onion conservando el `src`.
-"""
-(Path(root) / "README.md").write_text(readme, encoding="utf-8")
-
-str(root)
