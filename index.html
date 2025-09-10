@@ -28,14 +28,38 @@
     .row{display:flex;gap:12px;align-items:center;justify-content:space-between}
     .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
-    .qrbox{display:flex;align-items:center;gap:10px}
-    .qr{width:110px;height:110px;border:1px solid var(--border);border-radius:10px;background:#0f1522;display:flex;align-items:center;justify-content:center}
     .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;
          font-weight:600;text-decoration:none;border:1px solid #0e7a41}
     a{color:var(--link)}
     .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
     .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-    @media (max-width:760px){ .grid-2{grid-template-columns:1fr} header img{width:56px;height:56px} h1{font-size:26px} .qr{width:96px;height:96px} }
+
+    /* ====== QRs - RESPONSIVE ====== */
+    .qrgrid{
+      display:grid; gap:14px;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      align-content:start;
+    }
+    @media (min-width:900px){
+      .qrgrid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+    }
+    .qritem{display:flex;align-items:center;gap:10px}
+    .qr{
+      width:clamp(88px, 26vw, 120px);
+      height:clamp(88px, 26vw, 120px);
+      border:1px solid var(--border);
+      border-radius:10px;background:#0f1522;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    /* fuerza el canvas del QR a encajar y no “desbordar” */
+    .qr canvas, .qr img{ width:100% !important; height:100% !important; }
+
+    @media (max-width:760px){
+      .grid-2{grid-template-columns:1fr}
+      header img{width:56px;height:56px}
+      h1{font-size:26px}
+    }
 
     /* PLANES */
     .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);
@@ -51,8 +75,12 @@
 
     <!-- ENCABEZADO + LOGO + CTAs -->
     <header>
-      <img src="img/logo.png" loading="lazy" decoding="async" alt="DejandoHuella logo"
-           onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E'">
+      <!-- Intenta logo.png (raíz); si falla, intenta img/logo.png; si falla, usa ícono DH -->
+      <img
+        src="logo.png"
+        loading="lazy" decoding="async" alt="DejandoHuella logo"
+        onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}"
+      >
       <div>
         <h1>DejandoHuella Trader</h1>
         <div class="cta-row">
@@ -68,13 +96,13 @@
       <h2>Pagos (verifica la red)</h2>
       <div class="grid grid-2">
 
-        <!-- Columna QRs -->
-        <div class="grid" style="align-content:start">
-          <div class="qrbox"><div id="qr-btc" class="qr"></div><div><small>BTC (QR)</small></div></div>
-          <div class="qrbox"><div id="qr-trc20" class="qr"></div><div><small>USDT TRC20 (QR)</small></div></div>
-          <div class="qrbox"><div id="qr-bep20" class="qr"></div><div><small>USDT BEP20 (QR)</small></div></div>
-          <div class="qrbox"><div id="qr-arb1" class="qr"></div><div><small>USDT Arbitrum One (QR)</small></div></div>
-          <div class="qrbox"><div id="qr-erc20" class="qr"></div><div><small>USDT ERC-20 (QR)</small></div></div>
+        <!-- Columna QRs (responsive, 2 col en móvil / 3 col en desktop) -->
+        <div class="qrgrid">
+          <div class="qritem"><div id="qr-btc"   class="qr"></div><small>BTC (QR)</small></div>
+          <div class="qritem"><div id="qr-trc20" class="qr"></div><small>USDT TRC20 (QR)</small></div>
+          <div class="qritem"><div id="qr-bep20" class="qr"></div><small>USDT BEP20 (QR)</small></div>
+          <div class="qritem"><div id="qr-arb1"  class="qr"></div><small>USDT Arbitrum One (QR)</small></div>
+          <div class="qritem"><div id="qr-erc20" class="qr"></div><small>USDT ERC-20 (QR)</small></div>
         </div>
 
         <!-- Columna direcciones -->
@@ -132,10 +160,7 @@
       <div class="grid grid-2">
         <div class="plan">
           <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
-          <p class="note">
-            Acceso a un grupo privado en Telegram/WhatsApp con señales en tiempo real del par <b>BTC/USD</b>.
-            Incluye de 1 a 3 señales diarias con entrada, <i>SL</i> y <i>TP</i>.
-          </p>
+          <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día con entrada, SL y TP.</p>
         </div>
         <div class="plan">
           <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
@@ -195,8 +220,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- Librería QR (CDN). Si necesitas 100% offline, te paso versión embebida. -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-MdXf+...ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Librería QR (CDN). Si necesitas 100% offline, te doy la versión embebida. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
     // Última actualización
@@ -240,18 +265,29 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20: '0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
     };
 
-    // Render QRs (size ~ 110px)
-    function makeQR(domId, text, size){
+    // Render QRs con tamaño que no se distorsiona
+    function makeQR(domId, text){
       const el = document.getElementById(domId);
       if(!el) return;
       el.innerHTML = '';
+      // calculamos tamaño real del contenedor (por si cambia con clamp)
+      const size = Math.min(el.clientWidth || 110, el.clientHeight || 110);
       new QRCode(el, { text, width:size, height:size, correctLevel: QRCode.CorrectLevel.M });
     }
-    makeQR('qr-btc',   ADDR.btc,   110);
-    makeQR('qr-trc20', ADDR.trc20, 110);
-    makeQR('qr-bep20', ADDR.bep20, 110);
-    makeQR('qr-arb1',  ADDR.arb1,  110);
-    makeQR('qr-erc20', ADDR.erc20, 110);
+    // inicial
+    makeQR('qr-btc',   ADDR.btc);
+    makeQR('qr-trc20', ADDR.trc20);
+    makeQR('qr-bep20', ADDR.bep20);
+    makeQR('qr-arb1',  ADDR.arb1);
+    makeQR('qr-erc20', ADDR.erc20);
+    // si cambia el tamaño (rotación móvil), volvemos a pintar
+    window.addEventListener('resize', () => {
+      makeQR('qr-btc',   ADDR.btc);
+      makeQR('qr-trc20', ADDR.trc20);
+      makeQR('qr-bep20', ADDR.bep20);
+      makeQR('qr-arb1',  ADDR.arb1);
+      makeQR('qr-erc20', ADDR.erc20);
+    });
   </script>
 </body>
 </html>
