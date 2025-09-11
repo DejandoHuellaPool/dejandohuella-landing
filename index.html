@@ -245,7 +245,7 @@
       <p>.onion: <b id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</b></p>
 
       <p><small>PGP para mensajes cifrados (compara la huella / fingerprint):</small></p>
-      <details open>
+      <details>
         <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
           <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
         </summary>
@@ -294,6 +294,20 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         const a = document.getElementById('onion-link');
         if (a) a.href = 'http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=' + encodeURIComponent(src);
       }catch(_){}
+    })();
+
+    // Aviso si no están en Tor. Copia la URL .onion al portapapeles.
+    (function(){
+      const link = document.getElementById('onion-link');
+      if(!link) return;
+      link.addEventListener('click', function (ev){
+        const isTor = /TorBrowser/i.test(navigator.userAgent);
+        if(!isTor){
+          ev.preventDefault();
+          navigator.clipboard.writeText(this.href).catch(()=>{});
+          alert('Este enlace solo abre en Tor Browser. Te copié la dirección .onion al portapapeles:\n\n' + this.href);
+        }
+      });
     })();
 
     // Copiar al clic
