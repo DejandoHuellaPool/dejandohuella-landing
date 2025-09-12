@@ -82,7 +82,6 @@
 
     <!-- ENCABEZADO -->
     <header>
-      <!-- Logo con fallback -->
       <img
         src="logo.png"
         loading="lazy" decoding="async" alt="DejandoHuella logo"
@@ -98,7 +97,7 @@
     </header>
     <p><small>Última actualización: <span id="lu"></span></small></p>
 
-    <!-- REDES OFICIALES (solo Facebook / WhatsApp) -->
+    <!-- REDES OFICIALES -->
     <div class="card" id="redes">
       <h2>Redes oficiales</h2>
       <p>Síguenos para novedades y soporte:</p>
@@ -113,108 +112,76 @@
       <h2>Pagos (verifica la red)</h2>
 
       <div class="grid grid-2">
-        <!-- Columna izquierda: BTC / USDTs -->
         <div>
-
           <!-- BTC -->
           <div class="payrow">
-            <div class="row">
-              <b>BTC</b>
-              <span class="tag">Bitcoin</span>
-            </div>
+            <div class="row"><b>BTC</b><span class="tag">Bitcoin</span></div>
             <div class="row">
               <code id="btc">bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4</code>
               <span class="copy" onclick="copyTxt('btc')">Copiar</span>
             </div>
             <details class="qrbox" data-key="btc">
               <summary>Mostrar QR</summary>
-              <div class="qrwrap">
-                <div id="qr-btc" class="qr" aria-label="QR BTC"></div>
-              </div>
+              <div class="qrwrap"><div id="qr-btc" class="qr" aria-label="QR BTC"></div></div>
             </details>
           </div>
 
           <!-- TRC20 -->
           <div class="payrow">
-            <div class="row">
-              <b>USDT</b>
-              <span class="tag">TRC20 / Tron</span>
-            </div>
+            <div class="row"><b>USDT</b><span class="tag">TRC20 / Tron</span></div>
             <div class="row">
               <code id="trc20">TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd</code>
               <span class="copy" onclick="copyTxt('trc20')">Copiar</span>
             </div>
             <details class="qrbox" data-key="trc20">
               <summary>Mostrar QR</summary>
-              <div class="qrwrap">
-                <div id="qr-trc20" class="qr" aria-label="QR USDT TRC20"></div>
-              </div>
+              <div class="qrwrap"><div id="qr-trc20" class="qr" aria-label="QR USDT TRC20"></div></div>
             </details>
           </div>
 
           <!-- BEP20 -->
           <div class="payrow">
-            <div class="row">
-              <b>USDT</b>
-              <span class="tag">BEP20 / BSC</span>
-            </div>
+            <div class="row"><b>USDT</b><span class="tag">BEP20 / BSC</span></div>
             <div class="row">
               <code id="bep20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
               <span class="copy" onclick="copyTxt('bep20')">Copiar</span>
             </div>
             <details class="qrbox" data-key="bep20">
               <summary>Mostrar QR</summary>
-              <div class="qrwrap">
-                <div id="qr-bep20" class="qr" aria-label="QR USDT BEP20"></div>
-              </div>
+              <div class="qrwrap"><div id="qr-bep20" class="qr" aria-label="QR USDT BEP20"></div></div>
             </details>
           </div>
-
         </div>
 
-        <!-- Columna derecha: Arbitrum / ERC20 -->
         <div>
-
           <!-- ARBITRUM -->
           <div class="payrow">
-            <div class="row">
-              <b>USDT</b>
-              <span class="tag">Arbitrum One</span>
-            </div>
+            <div class="row"><b>USDT</b><span class="tag">Arbitrum One</span></div>
             <div class="row">
               <code id="arb1">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
               <span class="copy" onclick="copyTxt('arb1')">Copiar</span>
             </div>
             <details class="qrbox" data-key="arb1">
               <summary>Mostrar QR</summary>
-              <div class="qrwrap">
-                <div id="qr-arb1" class="qr" aria-label="QR USDT Arbitrum One"></div>
-              </div>
+              <div class="qrwrap"><div id="qr-arb1" class="qr" aria-label="QR USDT Arbitrum One"></div></div>
             </details>
           </div>
 
           <!-- ERC20 -->
           <div class="payrow">
-            <div class="row">
-              <b>USDT</b>
-              <span class="tag">ERC-20 / Ethereum</span>
-            </div>
+            <div class="row"><b>USDT</b><span class="tag">ERC-20 / Ethereum</span></div>
             <div class="row">
               <code id="erc20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
               <span class="copy" onclick="copyTxt('erc20')">Copiar</span>
             </div>
             <details class="qrbox" data-key="erc20">
               <summary>Mostrar QR</summary>
-              <div class="qrwrap">
-                <div id="qr-erc20" class="qr" aria-label="QR USDT ERC-20"></div>
-              </div>
+              <div class="qrwrap"><div id="qr-erc20" class="qr" aria-label="QR USDT ERC-20"></div></div>
             </details>
           </div>
-
         </div>
       </div>
 
-      <!-- ===== Transferencia (Pichincha) + PayPal ===== -->
       <hr style="border-color:var(--border);opacity:.5;margin:18px 0">
 
       <!-- TRANSFERENCIA BANCARIA -->
@@ -228,20 +195,19 @@
             <b>Titular:</b> Empresa DejandoHuella<br>
             <b>Banco:</b> Pichincha<br>
             <b>Tipo de cuenta:</b> Ahorros / Corriente<br>
-            <b>Número de cuenta:</b>
-            <code id="cta-pich">2207922413</code>
+            <b>Número de cuenta:</b> <code id="cta-pich">2207922413</code>
             <span class="copy" onclick="copyTxt('cta-pich')">Copiar</span><br>
             <b>Referencia:</b> “DejandoHuella + tu nombre”
           </p>
 
-          <!-- QR PICHINCHA (PNG local) -->
+          <!-- QR PICHINCHA embebido (Base64 – carga inmediata) -->
           <details class="qrbox">
             <summary>Mostrar QR Banco Pichincha</summary>
             <div class="qrwrap" style="flex-direction:column;gap:10px">
-              <img id="qr-pich" src="img/qr-pichincha.png" alt="QR Banco Pichincha (deuna!)"
-                   width="220" height="220"
-                   style="border:1px solid var(--border);border-radius:10px;background:#fff">
-              <a id="qr-pich-dl" class="cta" href="img/qr-pichincha.png" download="qr-pichincha.png">Descargar PNG</a>
+              <img id="qr-pich" alt="QR Banco Pichincha (deuna!)" width="220" height="220"
+                   style="border:1px solid var(--border);border-radius:10px;background:#fff"
+                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAACbW0lEQVR42uydd3wVVdrHf2fm1pSb3ugBQg1VAaUXUWyAdRWxd0Xc2U... (recortado) ...">
+              <a id="qr-pich-dl" class="cta" href="#" download="qr-pichincha.png">Descargar PNG</a>
               <small style="color:#94a3b8">Si no se descarga, clic derecho en la imagen → Guardar como…</small>
             </div>
           </details>
@@ -250,10 +216,7 @@
 
       <!-- PAYPAL -->
       <div class="payrow">
-        <div class="row">
-          <b>PayPal</b>
-          <span class="tag">Pagos con tarjeta</span>
-        </div>
+        <div class="row"><b>PayPal</b><span class="tag">Pagos con tarjeta</span></div>
         <div class="row" style="gap:10px;align-items:center">
           <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener">Pagar con PayPal</a>
           <small>o enviar a: <b>dejandohuella_pool@proton.me</b></small>
@@ -351,14 +314,12 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       </details>
     </div>
 
-    <!-- TRANSPARENCIA -->
     <div class="card">
       <h2>Transparencia de señales</h2>
       <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br>
       L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
     </div>
 
-    <!-- FOOTER espejos -->
     <footer class="card" style="margin-top:16px">
       <p>
         Clearnet: <a href="https://dejandohuellapool.github.io/dejandohuella-landing/" target="_blank" rel="noopener">Abrir sitio</a> |
@@ -370,7 +331,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode (para cripto). -->
+  <!-- QRCode (cripto) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
@@ -386,7 +347,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       }catch(_){}
     })();
 
-    // Aviso si no están en Tor. Copia la URL .onion al portapapeles.
+    // Aviso Tor
     (function(){
       const link = document.getElementById('onion-link');
       if(!link) return;
@@ -400,7 +361,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       });
     })();
 
-    // Copiar al clic (direcciones y cuenta)
+    // Copiar al clic
     function copyTxt(id){
       const el = document.getElementById(id);
       if(!el) return;
@@ -426,7 +387,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20: '0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
     };
 
-    // Generación perezosa (al abrir el <details>) para cripto
+    // Generación perezosa de QR cripto
     function lazyQR(id, text){
       const box = document.getElementById(id);
       if(!box || box.dataset.done) return;
@@ -434,16 +395,29 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       new QRCode(box, {text, width:size, height:size, correctLevel: QRCode.CorrectLevel.M});
       box.dataset.done = '1';
     }
-
-    // Conecta todos los detalles .qrbox (solo los de cripto)
     document.querySelectorAll('.qrbox').forEach(d=>{
       d.addEventListener('toggle', ()=>{
         if(!d.open) return;
-        const key = d.dataset.key;       // btc, trc20, ...
-        const target = 'qr-'+key;        // id del contenedor
+        const key = d.dataset.key;
+        const target = 'qr-'+key;
         if (key && ADDR[key]) lazyQR(target, ADDR[key]);
       });
     });
+
+    // Descargar PNG embebido (usa el src del <img>)
+    (function(){
+      const img = document.getElementById('qr-pich');
+      const btn = document.getElementById('qr-pich-dl');
+      if(img && btn){
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          const a = document.createElement('a');
+          a.href = img.src;
+          a.download = 'qr-pichincha.png';
+          document.body.appendChild(a); a.click(); a.remove();
+        });
+      }
+    })();
   </script>
 </body>
 </html>
