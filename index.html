@@ -225,23 +225,24 @@
         </div>
         <div>
           <p style="margin:6px 0 10px">
-            <b>Titular:</b> Jimmy Paul Grijalva<br>
+            <b>Titular:</b> Empresa DejandoHuella<br>
             <b>Banco:</b> Pichincha<br>
             <b>Tipo de cuenta:</b> Ahorros / Corriente<br>
-            <b>Número de cuenta:</b> <code class="copy" onclick="navigator.clipboard.writeText('0000000000').then(()=>toast('✔ Copiado'))" aria-label="Copiar número de cuenta">0000000000</code><br>
-            <b>Identificación:</b> <code class="copy" onclick="navigator.clipboard.writeText('XXXXXXXXX').then(()=>toast('✔ Copiado'))" aria-label="Copiar identificación">XXXXXXXXX</code><br>
+            <b>Número de cuenta:</b>
+            <code id="cta-pich">2207922413</code>
+            <span class="copy" onclick="copyTxt('cta-pich')">Copiar</span><br>
             <b>Referencia:</b> “DejandoHuella + tu nombre”
           </p>
 
-          <!-- QR PICHINCHA embebido (PNG base64, offline) -->
+          <!-- QR PICHINCHA (PNG local) -->
           <details class="qrbox">
             <summary>Mostrar QR Banco Pichincha</summary>
             <div class="qrwrap" style="flex-direction:column;gap:10px">
-              <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
-                   style="border:1px solid var(--border);border-radius:10px"
-                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA30AAATvCAIAAAA94Q4oAAAACXBIWXMAAA7EAAAOxAGVKw4bAAGAFklEAAAgAElEQVR4nO3dTW5c933f8e9JmQowvR3S1uWqg5qk3bUu3iE2o3WfSbHT9fJ8h5Jm1f0Q8c8WkH2w9kqJgC9h1p9wQKJQ2C3nJxG0x+gqgJq/3cRrP8Gqv8A1G2b6rQm1yTjHqg3w1yVMK3d27rDG6e0r/9z7/0r3v9p7v3u9+9zzAMAAAAgEJf0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAA..." />
-              <a id="qr-pich-dl" class="cta" href="#" download="qr-pichincha.png">Descargar PNG</a>
-              <small style="color:#94a3b8">Si tu navegador no permite descargar, mantén pulsado (móvil) o clic derecho sobre la imagen para guardar.</small>
+              <img id="qr-pich" src="img/qr-pichincha.png" alt="QR Banco Pichincha (deuna!)"
+                   width="220" height="220"
+                   style="border:1px solid var(--border);border-radius:10px;background:#fff">
+              <a id="qr-pich-dl" class="cta" href="img/qr-pichincha.png" download="qr-pichincha.png">Descargar PNG</a>
+              <small style="color:#94a3b8">Si no se descarga, clic derecho en la imagen → Guardar como…</small>
             </div>
           </details>
         </div>
@@ -369,7 +370,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode (para cripto). Si quieres 100% offline, te paso versión embebida. -->
+  <!-- QRCode (para cripto). -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
@@ -399,7 +400,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       });
     })();
 
-    // Copiar al clic
+    // Copiar al clic (direcciones y cuenta)
     function copyTxt(id){
       const el = document.getElementById(id);
       if(!el) return;
@@ -443,21 +444,6 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         if (key && ADDR[key]) lazyQR(target, ADDR[key]);
       });
     });
-
-    // Botón "Descargar PNG" para el QR Pichincha (reusa el src del <img>)
-    (function(){
-      const img = document.getElementById('qr-pich');
-      const a = document.getElementById('qr-pich-dl');
-      if(img && a){ a.addEventListener('click', function(e){
-        e.preventDefault();
-        const link = document.createElement('a');
-        link.href = img.src;
-        link.download = 'qr-pichincha.png';
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      });}
-    })();
   </script>
 </body>
 </html>
