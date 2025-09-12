@@ -35,8 +35,15 @@
     .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
     .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
+
+    /* CTA base */
     .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;
          font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+
+    /* Colores de marca */
+    .cta--fb{background:#1877F2;border-color:#0d5fe5;color:#fff}
+    .cta--wa{background:#25D366;border-color:#1fa855;color:#fff}
+
     a{color:var(--link)}
     .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
     .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
@@ -47,8 +54,7 @@
     .qrbox summary{
       list-style:none;cursor:pointer;outline:none;
       padding:8px 12px; display:inline-flex; align-items:center; gap:10px;
-      font-weight:600; color:var(--fg);
-      user-select:none;
+      font-weight:600; color:var(--fg); user-select:none;
     }
     .qrbox summary::-webkit-details-marker{display:none}
     .qrbox[open] summary{background:#162133}
@@ -76,7 +82,7 @@
 
     <!-- ENCABEZADO -->
     <header>
-      <!-- Logo: intenta logo.png (raíz), si no, img/logo.png; si no, fallback DH -->
+      <!-- Logo con fallback -->
       <img
         src="logo.png"
         loading="lazy" decoding="async" alt="DejandoHuella logo"
@@ -92,14 +98,13 @@
     </header>
     <p><small>Última actualización: <span id="lu"></span></small></p>
 
-    <!-- REDES OFICIALES -->
+    <!-- REDES OFICIALES (solo Facebook / WhatsApp) -->
     <div class="card" id="redes">
       <h2>Redes oficiales</h2>
-      <p>Síguenos para novedades, soporte y acceso a grupos:</p>
+      <p>Síguenos para novedades y soporte:</p>
       <div class="cta-row">
-        <a class="cta" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener">Facebook oficial</a>
-        <a class="cta" href="https://chat.whatsapp.com/K65z5CazXdTDmiKhHGUwvB?mode=ems_share_t" target="_blank" rel="noopener">Grupo de WhatsApp</a>
-        <a class="cta" href="https://t.me/DejandoHuellaBTCUSD_bot" target="_blank" rel="noopener">Bot de Telegram</a>
+        <a class="cta cta--fb" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
+        <a class="cta cta--wa" href="https://chat.whatsapp.com/K65z5CazXdTDmiKhHGUwvB?mode=ems_share_t" target="_blank" rel="noopener" aria-label="Grupo de WhatsApp">WhatsApp</a>
       </div>
     </div>
 
@@ -209,32 +214,34 @@
         </div>
       </div>
 
-      <!-- ====== NUEVO: TRANSFERENCIA + PAYPAL ====== -->
+      <!-- ===== Transferencia (Pichincha) + PayPal ===== -->
       <hr style="border-color:var(--border);opacity:.5;margin:18px 0">
 
-      <!-- TRANSFERENCIA -->
+      <!-- TRANSFERENCIA BANCARIA -->
       <div class="payrow">
         <div class="row">
           <b>Transferencia bancaria (USD)</b>
-          <span class="tag">Ecuador / Internacional</span>
+          <span class="tag">Banco Pichincha</span>
         </div>
         <div>
           <p style="margin:6px 0 10px">
             <b>Titular:</b> Jimmy Paul Grijalva<br>
-            <b>Banco:</b> <em>(indícame el banco)</em><br>
+            <b>Banco:</b> Pichincha<br>
             <b>Tipo de cuenta:</b> Ahorros / Corriente<br>
             <b>Número de cuenta:</b> <code class="copy" onclick="navigator.clipboard.writeText('0000000000').then(()=>toast('✔ Copiado'))" aria-label="Copiar número de cuenta">0000000000</code><br>
             <b>Identificación:</b> <code class="copy" onclick="navigator.clipboard.writeText('XXXXXXXXX').then(()=>toast('✔ Copiado'))" aria-label="Copiar identificación">XXXXXXXXX</code><br>
             <b>Referencia:</b> “DejandoHuella + tu nombre”
           </p>
+
+          <!-- QR PICHINCHA embebido (PNG base64, offline) -->
           <details class="qrbox">
-            <summary>Ver instrucciones rápidas</summary>
-            <div class="qrwrap" style="flex-direction:column;gap:8px">
-              <ol style="margin:0;padding-left:18px;color:var(--muted)">
-                <li>Realiza la transferencia con la referencia indicada.</li>
-                <li>Envía el comprobante a <b>dejandohuella_pool@proton.me</b>.</li>
-                <li>Confirmamos tu acceso/licencia en minutos.</li>
-              </ol>
+            <summary>Mostrar QR Banco Pichincha</summary>
+            <div class="qrwrap" style="flex-direction:column;gap:10px">
+              <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
+                   style="border:1px solid var(--border);border-radius:10px"
+                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA30AAATvCAIAAAA94Q4oAAAACXBIWXMAAA7EAAAOxAGVKw4bAAGAFklEAAAgAElEQVR4nO3dTW5c933f8e9JmQowvR3S1uWqg5qk3bUu3iE2o3WfSbHT9fJ8h5Jm1f0Q8c8WkH2w9kqJgC9h1p9wQKJQ2C3nJxG0x+gqgJq/3cRrP8Gqv8A1G2b6rQm1yTjHqg3w1yVMK3d27rDG6e0r/9z7/0r3v9p7v3u9+9zzAMAAAAgEJf0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAABgQ0fQAAAAAAA..." />
+              <a id="qr-pich-dl" class="cta" href="#" download="qr-pichincha.png">Descargar PNG</a>
+              <small style="color:#94a3b8">Si tu navegador no permite descargar, mantén pulsado (móvil) o clic derecho sobre la imagen para guardar.</small>
             </div>
           </details>
         </div>
@@ -261,7 +268,6 @@
           </div>
         </details>
       </div>
-      <!-- ====== FIN NUEVO ====== -->
 
       <small>Si envías por red equivocada, los fondos se pierden. Verifica dos veces.</small>
     </div>
@@ -363,7 +369,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode (CDN). Si quieres 100% offline, te paso versión embebida. -->
+  <!-- QRCode (para cripto). Si quieres 100% offline, te paso versión embebida. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
@@ -410,7 +416,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
     }
 
-    // Direcciones
+    // Direcciones cripto
     const ADDR = {
       btc:   'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',
       trc20: 'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',
@@ -419,7 +425,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20: '0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
     };
 
-    // Generación perezosa (al abrir el <details>)
+    // Generación perezosa (al abrir el <details>) para cripto
     function lazyQR(id, text){
       const box = document.getElementById(id);
       if(!box || box.dataset.done) return;
@@ -428,7 +434,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       box.dataset.done = '1';
     }
 
-    // Conecta todos los detalles .qrbox
+    // Conecta todos los detalles .qrbox (solo los de cripto)
     document.querySelectorAll('.qrbox').forEach(d=>{
       d.addEventListener('toggle', ()=>{
         if(!d.open) return;
@@ -437,6 +443,21 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         if (key && ADDR[key]) lazyQR(target, ADDR[key]);
       });
     });
+
+    // Botón "Descargar PNG" para el QR Pichincha (reusa el src del <img>)
+    (function(){
+      const img = document.getElementById('qr-pich');
+      const a = document.getElementById('qr-pich-dl');
+      if(img && a){ a.addEventListener('click', function(e){
+        e.preventDefault();
+        const link = document.createElement('a');
+        link.href = img.src;
+        link.download = 'qr-pichincha.png';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      });}
+    })();
   </script>
 </body>
 </html>
