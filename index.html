@@ -19,10 +19,11 @@
   <style>
     :root{
       --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
-      --border:#1f2a3a; --link:#60a5fa;
+      --border:#1f2a3a; --link:#60a5fa; --ok:#22c55e; --warn:#f59e0b;
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
+    a{color:var(--link)}
     .wrap{max-width:1000px;margin:auto;padding:24px}
     header{display:flex;gap:14px;align-items:center;margin-bottom:8px}
     header img{width:64px;height:64px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
@@ -39,14 +40,11 @@
     /* CTA base */
     .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;
          font-weight:600;text-decoration:none;border:1px solid #0e7a41}
-
-    /* Colores de marca */
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
     .cta--fb{background:#1877F2;border-color:#0d5fe5;color:#fff}
     .cta--wa{background:#25D366;border-color:#1fa855;color:#fff}
 
-    a{color:var(--link)}
     .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 
     /* ====== QR desplegable ====== */
     .payrow{display:grid;gap:8px; margin-bottom:14px}
@@ -60,7 +58,7 @@
     .qrbox[open] summary{background:#162133}
     .qrwrap{display:flex;justify-content:center;align-items:center;padding:12px;border-top:1px solid var(--border)}
     .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
-    .qr canvas,.qr img{width:100% !important;height:100% !important}
+    .qr img{width:100%;height:100%;display:block}
 
     /* PLANES */
     .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);
@@ -107,7 +105,7 @@
       </div>
     </div>
 
-    <!-- PAGOS (con QR oculto en desplegable) -->
+    <!-- PAGOS (con QR desplegable) -->
     <div class="card">
       <h2>Pagos (verifica la red)</h2>
 
@@ -200,13 +198,13 @@
             <b>Referencia:</b> “DejandoHuella + tu nombre”
           </p>
 
-          <!-- QR PICHINCHA embebido (Base64 – carga inmediata) -->
+          <!-- QR Pichincha (embebido). Si quieres otro, reemplaza el src por tu base64 real. -->
           <details class="qrbox">
             <summary>Mostrar QR Banco Pichincha</summary>
             <div class="qrwrap" style="flex-direction:column;gap:10px">
-              <img id="qr-pich" alt="QR Banco Pichincha (deuna!)" width="220" height="220"
+              <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
                    style="border:1px solid var(--border);border-radius:10px;background:#fff"
-                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAACbW0lEQVR42uydd3wVVdrHf2fm1pSb3ugBQg1VAaUXUWyAdRWxd0Xc2U... (recortado) ...">
+                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAGlQJmH1Qq8gAAAABJRU5ErkJggg==">
               <a id="qr-pich-dl" class="cta" href="#" download="qr-pichincha.png">Descargar PNG</a>
               <small style="color:#94a3b8">Si no se descarga, clic derecho en la imagen → Guardar como…</small>
             </div>
@@ -293,8 +291,7 @@
         <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
           <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
         </summary>
-        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">
------BEGIN PGP PUBLIC KEY BLOCK-----
+        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
 xjMEaLfYihYJKwYBBAHaRw8BAQdAtxVgF8zGlETJFchumSOySa0fYyoWVL+k
 gAdoJzAIj7bNO0RlamFuZG9IdWVsbGFfUG9vbEBwcm90b24ubWUgPERlamFu
 ZG9IdWVsbGFfUG9vbEBwcm90b24ubWU+wsARBBMWCgCDBYJot9iKAwsJBwkQ
@@ -309,8 +306,7 @@ H2+MmFpdvrzyGXVqogCmc3ZqbY+s41cIvotS3QKbDBYhBGwmpmMC4gldyrrj
 pBNy8lZTgWRSAACwxgEAyq7WSbledwSIS15YtgmQmuAzDvd3+dqsjKI+s47Q
 XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
 =EcvG
------END PGP PUBLIC KEY BLOCK-----
-        </pre>
+-----END PGP PUBLIC KEY BLOCK-----</pre>
       </details>
     </div>
 
@@ -331,7 +327,10 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode (cripto) -->
+  <!-- Dependencia QR opcional (CDN) + fallback local -->
+  <script>
+    // Si no hay Internet/CDN, puedes comentar el siguiente script y dejar el fallback de imágenes.
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
@@ -344,8 +343,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         const src = new URL(location.href).searchParams.get('src') || 'pages';
         const a = document.getElementById('onion-link');
         if (a) a.href = 'http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=' + encodeURIComponent(src);
-      }catch(_){}
-    })();
+      }catch(_){}}
+    )();
 
     // Aviso Tor
     (function(){
@@ -355,17 +354,27 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         const isTor = /TorBrowser/i.test(navigator.userAgent);
         if(!isTor){
           ev.preventDefault();
-          navigator.clipboard.writeText(this.href).catch(()=>{});
-          alert('Este enlace solo abre en Tor Browser. Te copié la dirección .onion al portapapeles:\n\n' + this.href);
+          navigator.clipboard && navigator.clipboard.writeText(this.href).catch(()=>{});
+          alert('Este enlace solo abre en Tor Browser. Te copié la dirección .onion al portapapeles:
+
+' + this.href);
         }
       });
     })();
 
-    // Copiar al clic
+    // Copiar al clic (con fallback)
     function copyTxt(id){
       const el = document.getElementById(id);
       if(!el) return;
-      navigator.clipboard.writeText(el.textContent.trim()).then(()=>toast('✔ Copiado'));
+      const txt = el.textContent.trim();
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
+      }else{
+        const ta = document.createElement('textarea');
+        ta.value = txt; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); toast('✔ Copiado'); }catch(_){}
+        ta.remove();
+      }
     }
     function toast(text){
       const msg = document.createElement('div');
@@ -387,20 +396,29 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20: '0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
     };
 
-    // Generación perezosa de QR cripto
-    function lazyQR(id, text){
+    // Generación perezosa de QR cripto (si existe QRCode). Si no, usa fallback a imágenes locales.
+    function ensureQR(id, text, key){
       const box = document.getElementById(id);
       if(!box || box.dataset.done) return;
-      const size = Math.min(box.clientWidth||180, box.clientHeight||180);
-      new QRCode(box, {text, width:size, height:size, correctLevel: QRCode.CorrectLevel.M});
+      if(window.QRCode){
+        const size = Math.min(box.clientWidth||180, box.clientHeight||180);
+        new QRCode(box, {text, width:size, height:size, correctLevel: window.QRCode.CorrectLevel.M});
+      }else{
+        // Fallback a imagen local: coloca img/qr-<key>.png para cada red si no hay librería
+        const img = document.createElement('img');
+        img.alt = 'QR ' + key.toUpperCase();
+        img.src = 'img/qr-' + key + '.png';
+        box.appendChild(img);
+      }
       box.dataset.done = '1';
     }
+
     document.querySelectorAll('.qrbox').forEach(d=>{
       d.addEventListener('toggle', ()=>{
         if(!d.open) return;
-        const key = d.dataset.key;
+        const key = d.dataset.key; // btc, trc20, bep20, arb1, erc20
         const target = 'qr-'+key;
-        if (key && ADDR[key]) lazyQR(target, ADDR[key]);
+        if (key && ADDR[key]) ensureQR(target, ADDR[key], key);
       });
     });
 
@@ -412,8 +430,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         btn.addEventListener('click', function(e){
           e.preventDefault();
           const a = document.createElement('a');
-          a.href = img.src;
-          a.download = 'qr-pichincha.png';
+          a.href = img.src; a.download = 'qr-pichincha.png';
           document.body.appendChild(a); a.click(); a.remove();
         });
       }
