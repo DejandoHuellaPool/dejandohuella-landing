@@ -37,16 +37,13 @@
     .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
 
-    /* CTA base */
-    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;
-         font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
     .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
     .cta--fb{background:#1877F2;border-color:#0d5fe5;color:#fff}
     .cta--wa{background:#25D366;border-color:#1fa855;color:#fff}
 
     .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
 
-    /* ====== QR desplegable ====== */
     .payrow{display:grid;gap:8px; margin-bottom:14px}
     .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
     .qrbox summary{
@@ -60,12 +57,9 @@
     .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
     .qr img{width:100%;height:100%;display:block}
 
-    /* PLANES */
-    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);
-          border-radius:14px;padding:16px}
+    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
     .plan h3{margin:0;font-size:18px}
-    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;
-           border-radius:999px;color:var(--fg);background:#0f1522}
+    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
     .note{color:var(--muted);margin:0}
 
     @media (max-width:760px){
@@ -80,24 +74,21 @@
 
     <!-- ENCABEZADO -->
     <header>
-      <img
-        src="logo.png"
-        loading="lazy" decoding="async" alt="DejandoHuella logo"
-        onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}"
-      >
+      <img src="logo.png" loading="lazy" decoding="async" alt="DejandoHuella logo"
+           onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
       <div>
         <h1>DejandoHuella Trader</h1>
         <div class="cta-row">
           <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20informaci%C3%B3n">Solicitar información</a>
-          <!-- NUEVO: Botón directo al hub de WhatsApp -->
           <a class="cta cta--wa" href="whatsapp.html?src=home">WhatsApp (ventas)</a>
+          <a class="cta" href="verificacion.html">Verificación oficial</a>
           <a id="onion-link" class="cta" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=pages" target="_blank" rel="noopener">Abrir versión .onion</a>
         </div>
       </div>
     </header>
     <p><small>Última actualización: <span id="lu"></span></small></p>
 
-    <!-- REDES OFICIALES -->
+    <!-- REDES -->
     <div class="card" id="redes">
       <h2>Redes oficiales</h2>
       <p>Síguenos para novedades y soporte:</p>
@@ -107,7 +98,7 @@
       </div>
     </div>
 
-    <!-- PAGOS (con QR desplegable) -->
+    <!-- PAGOS -->
     <div class="card">
       <h2>Pagos (verifica la red)</h2>
 
@@ -184,7 +175,7 @@
 
       <hr style="border-color:var(--border);opacity:.5;margin:18px 0">
 
-      <!-- TRANSFERENCIA BANCARIA -->
+      <!-- TRANSFERENCIA -->
       <div class="payrow">
         <div class="row">
           <b>Transferencia bancaria (USD)</b>
@@ -200,7 +191,6 @@
             <b>Referencia:</b> “DejandoHuella + tu nombre”
           </p>
 
-          <!-- QR Pichincha embebido (base64 de ejemplo; reemplaza por el tuyo si quieres) -->
           <details class="qrbox">
             <summary>Mostrar QR Banco Pichincha</summary>
             <div class="qrwrap" style="flex-direction:column;gap:10px">
@@ -242,7 +232,7 @@
       <ol>
         <li>Elige la <b>red correcta</b> (BTC, TRC20, BEP20, Arbitrum One o ERC-20).</li>
         <li>Abre el QR con “Mostrar QR” o copia la dirección con “Copiar”.</li>
-        <li>Envía el monto acordado y espera 1–3 confirmaciones.</li>
+        <li>Envía el monto y espera 1–3 confirmaciones.</li>
         <li>Envíanos el <b>hash de la transacción</b> por correo para acreditar tu plan.</li>
       </ol>
     </div>
@@ -258,7 +248,7 @@
       </ul>
     </div>
 
-    <!-- PLANES -->
+    <!-- PLANES (CTA a WhatsApp) -->
     <div class="card" id="planes">
       <h2>Planes Premium – DejandoHuella Trader</h2>
       <div class="grid grid-2">
@@ -297,7 +287,7 @@
         <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
           <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
         </summary>
-        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
+<pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
 xjMEaLfYihYJKwYBBAHaRw8BAQdAtxVgF8zGlETJFchumSOySa0fYyoWVL+k
 gAdoJzAIj7bNO0RlamFuZG9IdWVsbGFfUG9vbEBwcm90b24ubWUgPERlamFu
 ZG9IdWVsbGFfUG9vbEBwcm90b24ubWU+wsARBBMWCgCDBYJot9iKAwsJBwkQ
@@ -318,8 +308,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
 
     <div class="card">
       <h2>Transparencia de señales</h2>
-      <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br>
-      L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
+      <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br> L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
     </div>
 
     <footer class="card" style="margin-top:16px">
@@ -328,28 +317,29 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
       </p>
       <p>Contacto: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
+      <p><a href="verificacion.html">Verificación oficial (enlaces y PGP)</a></p>
     </footer>
 
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode (cripto) -->
+  <!-- Librería de QR (si no carga, usamos fallback con imágenes) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
     // Fecha
     document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
 
-    // Propagar ?src a la .onion
+    // Propagar ?src a .onion
     (function(){
       try{
         const src = new URL(location.href).searchParams.get('src') || 'pages';
         const a = document.getElementById('onion-link');
         if (a) a.href = 'http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=' + encodeURIComponent(src);
-      }catch(_){ }
+      }catch(_){}
     })();
 
-    // Aviso Tor (con \n\n correcto para evitar errores JS)
+    // Aviso Tor (con saltos correctos)
     (function(){
       const link = document.getElementById('onion-link');
       if(!link) return;
@@ -363,7 +353,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       });
     })();
 
-    // Copiar al clic (con fallback)
+    // Copiar con fallback
     function copyTxt(id){
       const el = document.getElementById(id);
       if(!el) return;
@@ -373,18 +363,14 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       }else{
         const ta = document.createElement('textarea');
         ta.value = txt; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); toast('✔ Copiado'); }catch(_){ }
+        try{ document.execCommand('copy'); toast('✔ Copiado'); }catch(_){}
         ta.remove();
       }
     }
     function toast(text){
       const msg = document.createElement('div');
       msg.textContent = text;
-      Object.assign(msg.style,{
-        position:'fixed', bottom:'20px', right:'20px',
-        background:'#22c55e', color:'#06250f', padding:'8px 12px',
-        borderRadius:'8px', boxShadow:'0 2px 8px rgba(0,0,0,.4)', zIndex:'9999'
-      });
+      Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',padding:'8px 12px',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,.4)',zIndex:'9999'});
       document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
     }
 
@@ -397,7 +383,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20: '0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
     };
 
-    // Generación perezosa de QR cripto (si existe QRCode). Si no, fallback a imágenes locales.
+    // QR perezoso (si no hay librería, usa imágenes locales en /img/qr_*.png)
     function ensureQR(id, text, key){
       const box = document.getElementById(id);
       if(!box || box.dataset.done) return;
@@ -405,7 +391,6 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         const size = Math.min(box.clientWidth||180, box.clientHeight||180);
         new QRCode(box, {text, width:size, height:size, correctLevel: window.QRCode.CorrectLevel.M});
       }else{
-        // Fallback a imagen local (ya las tienes en /img/qr_*.png)
         const img = document.createElement('img');
         img.alt = 'QR ' + key.toUpperCase();
         img.src = 'img/qr_' + key + '.png';
@@ -422,7 +407,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       });
     });
 
-    // Descargar PNG embebido (usa el src del <img>)
+    // Descarga QR Pichincha
     (function(){
       const img = document.getElementById('qr-pich');
       const btn = document.getElementById('qr-pich-dl');
