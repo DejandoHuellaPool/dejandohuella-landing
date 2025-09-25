@@ -1,249 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<title>WhatsApp — DejandoHuella Trader</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Atención por WhatsApp: Señales BTC/USD, EA MT4 con licencia, mentoría y soporte.">
-<meta name="color-scheme" content="dark">
+  <meta charset="utf-8">
+  <title>WhatsApp — DejandoHuella Trader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:title" content="WhatsApp — DejandoHuella Trader">
+  <meta property="og:description" content="Chatea directo por WhatsApp para elegir tu plan.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/whatsapp.html">
 
-<meta property="og:site_name" content="DejandoHuella Trader">
-<meta property="og:title" content="WhatsApp — DejandoHuella Trader">
-<meta property="og:description" content="Escríbenos por WhatsApp para planes y soporte.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="img/og-image.png">
-<meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/whatsapp.html">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
-
-<!-- Meta Pixel -->
-<script>
+  <!-- (Opcional) Meta Pixel -->
+  <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[]; t=b.createElement(e); t.async=!0;
-  t.src=v; s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)
-  }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', 'PIXEL_ID_AQUI'); fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
 
-<style>
-:root{--bg:#0b0f16;--fg:#e5e7eb;--muted:#94a3b8;--card:#121826;--accent:#22c55e;--border:#1f2a3a;--link:#60a5fa}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
-a{color:var(--link)}
-.wrap{max-width:1000px;margin:auto;padding:24px}
-header{display:flex;gap:14px;align-items:center;margin-bottom:6px}
-header img{width:56px;height:56px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
-h1,h2{margin:.2em 0 10px}
-small,p,li{color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
-.grid{display:grid;gap:14px}
-.grid-2{grid-template-columns:1fr 1fr}
-.plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-.plan h3{margin:0;font-size:18px}
-.price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
-.cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
-.row{display:flex;gap:10px;flex-wrap:wrap}
-.copy{cursor:pointer;border:1px dashed var(--border);padding:6px 10px;border-radius:8px}
-code{background:#0f1522;border:1px solid var(--border);padding:4px 6px;border-radius:8px}
-footer p{margin:.4em 0}
-
-/* banner */
-.top-banner{background:#0f1522;border-bottom:1px solid #1f2a3a;color:#e5e7eb}
-.top-banner .wrap-b{max-width:1000px;margin:auto;padding:8px 24px;display:flex;gap:10px;align-items:center;justify-content:space-between}
-.top-banner small{color:#94a3b8}
-.top-banner a{color:#60a5fa;text-decoration:none;font-weight:600}
-.top-banner button{background:transparent;border:1px solid #1f2a3a;color:#94a3b8;border-radius:8px;padding:4px 8px;cursor:pointer}
-
-/* botón flotante */
-#wa-float{position:fixed;right:18px;bottom:18px;z-index:9999}
-#wa-float a{display:flex;align-items:center;gap:10px;background:#25D366;color:#06250f;text-decoration:none;padding:10px 14px;border-radius:999px;border:1px solid #1fa855;box-shadow:0 6px 18px rgba(0,0,0,.28);font-weight:700}
-#wa-float svg{width:20px;height:20px;display:block}
-
-@media (max-width:760px){.grid-2{grid-template-columns:1fr}}
-@media (max-width:560px){ #wa-float a span{display:none} }
-</style>
+  <style>
+    :root{--bg:#0b0f16;--fg:#e5e7eb;--muted:#94a3b8;--card:#121826;--accent:#22c55e;--border:#1f2a3a;--link:#60a5fa}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
+    .wrap{max-width:920px;margin:auto;padding:24px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
+    .row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .cta--wa{background:#25D366;border-color:#1fa855;color:#06250f}
+    h1{margin:0 0 8px;font-size:26px} h2{margin:0 0 12px}
+    .grid{display:grid;gap:14px} .grid-2{grid-template-columns:1fr 1fr}
+    .plan{display:flex;flex-direction:column;gap:10px;background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:14px}
+    .price{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:#08101b}
+    small,p{color:var(--muted)}
+    @media (max-width:760px){.grid-2{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <h1>WhatsApp — DejandoHuella Trader</h1>
+    <small>Atención comercial y soporte — <b>último update:</b> <span id="lu"></span></small>
 
-<!-- Banner anti-phishing -->
-<div class="top-banner" id="phishbar">
-  <div class="wrap-b">
-    <div>
-      <strong>⚠ Verifica los enlaces oficiales.</strong>
-      <small>Consulta la <a id="cta-verif-wa-top" href="verificacion.html">Verificación oficial</a> (enlaces y PGP).</small>
-    </div>
-    <button onclick="document.getElementById('phishbar').remove()">Cerrar</button>
-  </div>
-</div>
+    <div class="card">
+      <h2>Elige un plan y chatea por WhatsApp</h2>
+      <div class="grid grid-2">
 
-<div class="wrap">
-  <header>
-    <img src="logo.png" alt="DH" onerror="this.onerror=null;this.src='img/logo.png'">
-    <div>
-      <h1>WhatsApp — DejandoHuella Trader</h1>
-      <small>Atención comercial y soporte — último update: <span id="lu"></span></small>
-      <div class="row" style="margin-top:8px">
-        <a class="cta" id="cta-volver" href="./">Volver al inicio</a>
-        <a class="cta" id="cta-verif-wa" href="verificacion.html">Verificación oficial</a>
-        <a class="cta" id="fb-share-wa" href="#" rel="noopener">Compartir en Facebook</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="card">
-    <h2>Elige un plan y chatea por WhatsApp</h2>
-    <div class="grid grid-2">
-      <div class="plan">
-        <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
-        <p class="note">BTC/USD — 1–3 señales/día con entrada, SL y TP.</p>
-        <div class="row">
-          <a id="wa-sen" class="cta" target="_blank" rel="noopener">Chatear por WhatsApp</a>
-          <span class="copy" data-for="wa-sen">Copiar enlace</span>
+        <div class="plan">
+          <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
+          <p>BTC/USD — 1–3 señales/día con entrada, SL y TP.</p>
+          <div class="row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Señales Premium'});}catch(e){}">Chatear por WhatsApp</a>
+            <a class="cta" href="#" onclick="return copyLink(this);" data-link="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium">Copiar enlace</a>
+          </div>
         </div>
+
+        <div class="plan">
+          <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
+          <p>EA DejandoHuella_BTCUSD (1 cuenta MT4) + soporte y updates 12 meses.</p>
+          <div class="row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20licencia%20EA%20personal"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Licencia EA'});}catch(e){}">Chatear por WhatsApp</a>
+            <a class="cta" href="#" onclick="return copyLink(this);" data-link="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20licencia%20EA%20personal">Copiar enlace</a>
+          </div>
+        </div>
+
+        <div class="plan">
+          <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
+          <p>EA sin restricciones + 3 meses de mentoría, instalación y optimización.</p>
+          <div class="row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20EA%20Full%20%2B%20Mentor%C3%ADa"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'EA Full + Mentoría'});}catch(e){}">Chatear por WhatsApp</a>
+            <a class="cta" href="#" onclick="return copyLink(this);" data-link="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20EA%20Full%20%2B%20Mentor%C3%ADa">Copiar enlace</a>
+          </div>
+        </div>
+
+        <div class="plan">
+          <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
+          <p>Participación en utilidades y derecho de marca en tu región.</p>
+          <div class="row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Socio%20%2F%20Inversionista"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Socio/Inversionista'});}catch(e){}">Chatear por WhatsApp</a>
+            <a class="cta" href="#" onclick="return copyLink(this);" data-link="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Socio%20%2F%20Inversionista">Copiar enlace</a>
+          </div>
+        </div>
+
       </div>
 
-      <div class="plan">
-        <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
-        <p class="note">EA DejandoHuella_BTCUSD para 1 cuenta MT4. Soporte y updates 12 meses.</p>
-        <div class="row">
-          <a id="wa-lic" class="cta" target="_blank" rel="noopener">Chatear por WhatsApp</a>
-          <span class="copy" data-for="wa-lic">Copiar enlace</span>
-        </div>
-      </div>
-
-      <div class="plan">
-        <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
-        <p class="note">EA sin restricciones + 3 meses de mentoría, instalación y optimización.</p>
-        <div class="row">
-          <a id="wa-full" class="cta" target="_blank" rel="noopener">Chatear por WhatsApp</a>
-          <span class="copy" data-for="wa-full">Copiar enlace</span>
-        </div>
-      </div>
-
-      <div class="plan">
-        <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
-        <p class="note">Participación en utilidades y derecho de marca por región.</p>
-        <div class="row">
-          <a id="wa-socio" class="cta" target="_blank" rel="noopener">Chatear por WhatsApp</a>
-          <span class="copy" data-for="wa-socio">Copiar enlace</span>
-        </div>
-      </div>
+      <p style="margin-top:10px;color:#94a3b8">Tip: comparte estos enlaces por Facebook o donde quieras. El texto llega prellenado para acelerar la venta.</p>
     </div>
 
-    <p style="margin-top:10px"><small>Tip: comparte estos enlaces por Facebook o donde quieras. El texto llega prellenado para acelerar la venta.</small></p>
+    <div class="card">
+      <h2>Enlaces rápidos</h2>
+      <ul>
+        <li>Clearnet: <a href="./">dejandohuellapool.github.io/dejandohuella-landing/</a></li>
+        <li>.onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></li>
+        <li>ProtonMail: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></li>
+      </ul>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>Enlaces rápidos</h2>
-    <p>🌐 Clearnet: <a id="cta-clearnet" href="./?src=whatsapp">dejandohuellapool.github.io/dejandohuella-landing/</a></p>
-    <p>🧅 .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></p>
-    <p>✉️ ProtonMail: <a id="cta-mail-wa" href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
-  </div>
-
-  <footer class="card">
-    <p><small>© 2025 DejandoHuella Trader · El trading implica riesgo.</small></p>
-  </footer>
-</div>
-
-<!-- Botón flotante WhatsApp -->
-<div id="wa-float">
-  <a id="wa-float-link" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
-      <path d="M19.1 17.4c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1-1.2-.4-2.2-1.3-1.6-1.9-1.8-2.2 0-.5.1-.6.1-.2.2-.3.2-.3.3-.4.1-.2.2-.3.1-.2.1-.3 0-.3 0-.4c0-.1-.6-1.5-.8-2.1-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.4.1-.6.3s-.8.8-.8 2 .8 2.3.9 2.4c.1.2 1.6 2.5 3.9 3.5 2.3 1.1 2.3.7 2.7.6.4-.1 1.3-.5 1.4-1s.2-1 .1-1.1c-.1-.1-.3-.2-.6-.3zM15.8 3C9.6 3 4.6 7.9 4.6 14.1c0 2.5.9 4.8 2.3 6.6l-1.5 4.4 4.5-1.4c1.7 1.1 3.7 1.7 5.9 1.7 6.3 0 11.3-5.1 11.3-11.3S22.1 3 15.8 3zM15.8 24c-2 0-3.8-.6-5.3-1.6l-.4-.3-2.7.8.9-2.6-.3-.4c-1.2-1.6-2-3.6-2-5.8C6 9 10.4 4.6 15.8 4.6S25.6 9 25.6 14.4 21.2 24 15.8 24z"/>
-    </svg>
-    <span>WhatsApp</span>
-  </a>
-</div>
-
-<script>
-document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
-
-// Número WA y tracking
-const WHATSAPP_NUMBER = '593983566273';
-const SRC = new URL(location.href).searchParams.get('src') || 'pagina';
-
-// Mensajes
-const templates = {
-  sen: `Hola, quiero el plan Señales Premium (USD 500/mes).
-Mi nombre: _____  País: _____
-Red de pago (BTC/USDT/Banco): _____
-Vengo de: ${SRC}`,
-  lic: `Hola, quiero la Licencia EA Personal (USD 3000/anual).
-Mi nombre: _____
-Broker/Servidor MT4: _____
-ID de cuenta MT4: _____
-Red de pago: _____
-Vengo de: ${SRC}`,
-  full: `Hola, quiero EA Full + Mentoría (USD 7500).
-Nombre: _____
-Broker/Servidor MT4: _____
-ID de cuenta MT4: _____
-Red de pago: _____
-Vengo de: ${SRC}`,
-  socio: `Hola, me interesa ser socio/inversionista.
-Nombre: _____  País: _____
-Ticket estimado: _____
-Vengo de: ${SRC}`
-};
-function waLink(text){ return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`; }
-
-[['wa-sen','sen'],['wa-lic','lic'],['wa-full','full'],['wa-socio','socio']].forEach(([id,key])=>{
-  const a = document.getElementById(id);
-  if(a) a.href = waLink(templates[key]);
-});
-
-document.querySelectorAll('.copy').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const a = document.getElementById(btn.getAttribute('data-for'));
-    if(a && a.href){
-      navigator.clipboard && navigator.clipboard.writeText(a.href);
-      btn.textContent = '¡Copiado!'; setTimeout(()=>btn.textContent='Copiar enlace',1200);
+  <script>
+    document.getElementById('lu').textContent=new Date().toISOString().slice(0,10);
+    function copyLink(btn){
+      const url=btn.getAttribute('data-link')||''; if(!url) return false;
+      navigator.clipboard && navigator.clipboard.writeText(url).then(()=>ok());
+      function ok(){const d=document.createElement('div'); d.textContent='✔ Enlace copiado';
+        Object.assign(d.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',padding:'8px 12px',borderRadius:'8px',zIndex:'9999'}); 
+        document.body.appendChild(d); setTimeout(()=>d.remove(),1500);}
+      return false;
     }
-  });
-});
-
-// Botón flotante
-(function(){
-  const text = `Hola DejandoHuella, vengo de: ${SRC}\nPágina: ${document.title}`;
-  const link = waLink(text);
-  const a = document.getElementById('wa-float-link');
-  if(a) a.href = link;
-})();
-
-// Compartir en Facebook (sharer + ?src=facebook)
-(function(){
-  function fbShare(url){
-    var u = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
-    window.open(u, '_blank', 'noopener,width=720,height=540');
-  }
-  var shareBtn = document.getElementById('fb-share-wa');
-  if(shareBtn){
-    var url = new URL(location.href); url.searchParams.set('src','facebook');
-    shareBtn.addEventListener('click', function(e){ e.preventDefault(); fbShare(url.toString()); });
-  }
-})();
-
-// Eventos de Pixel en CTAs clave
-(function(){
-  var map = {
-    'wa-sen': 'ClickPlanSenales',
-    'wa-lic': 'ClickPlanLicencia',
-    'wa-full': 'ClickPlanFull',
-    'wa-socio': 'ClickPlanSocio',
-    'cta-volver': 'ClickVolverInicio',
-    'cta-verif-wa': 'ClickVerificacionDesdeWA',
-    'cta-clearnet': 'ClickClearnetDesdeWA',
-    'cta-mail-wa': 'ClickMailDesdeWA'
-  };
-  Object.keys(map).forEach(function(id){
-    var el = document.getElementById(id);
-    if(el){ el.addEventListener('click', function(){ try{ fbq('trackCustom', map[id]); }catch(e){} }); }
-  });
-})();
-</script>
+  </script>
 </body>
 </html>
