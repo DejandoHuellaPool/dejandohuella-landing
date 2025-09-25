@@ -337,16 +337,16 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     // Fecha
     document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
 
-    // Propagar ?src a la .onion
+    // Propagar ?src a la .onion  (CORREGIDO: sin llave extra)
     (function(){
       try{
         const src = new URL(location.href).searchParams.get('src') || 'pages';
         const a = document.getElementById('onion-link');
         if (a) a.href = 'http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=' + encodeURIComponent(src);
-      }catch(_){}}
-    )();
+      }catch(e){}
+    })();
 
-    // Aviso Tor
+    // Aviso Tor  (CORREGIDO: alert en una sola línea con \n\n)
     (function(){
       const link = document.getElementById('onion-link');
       if(!link) return;
@@ -355,9 +355,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         if(!isTor){
           ev.preventDefault();
           navigator.clipboard && navigator.clipboard.writeText(this.href).catch(()=>{});
-          alert('Este enlace solo abre en Tor Browser. Te copié la dirección .onion al portapapeles:
-
-' + this.href);
+          alert('Este enlace solo abre en Tor Browser. Te copié la dirección .onion al portapapeles:\n\n' + this.href);
         }
       });
     })();
@@ -401,7 +399,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       const box = document.getElementById(id);
       if(!box || box.dataset.done) return;
       if(window.QRCode){
-        const size = Math.min(box.clientWidth||180, box.clientHeight||180);
+        const w = box.clientWidth || 180, h = box.clientHeight || 180;
+        const size = Math.min(w, h) || 180; // tamaño seguro
         new QRCode(box, {text, width:size, height:size, correctLevel: window.QRCode.CorrectLevel.M});
       }else{
         // Fallback a imagen local: coloca img/qr-<key>.png para cada red si no hay librería
