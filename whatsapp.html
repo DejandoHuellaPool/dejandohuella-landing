@@ -6,14 +6,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Atención por WhatsApp: Señales BTC/USD, EA MT4 con licencia, mentoría y soporte.">
 <meta name="color-scheme" content="dark">
-<!-- OG -->
 <meta property="og:title" content="WhatsApp — DejandoHuella Trader">
 <meta property="og:description" content="Escríbenos por WhatsApp para planes y soporte.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="img/og-image.png">
 <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/whatsapp.html">
 <meta name="twitter:card" content="summary_large_image">
-
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
 <style>
 :root{--bg:#0b0f16;--fg:#e5e7eb;--muted:#94a3b8;--card:#121826;--accent:#22c55e;--border:#1f2a3a;--link:#60a5fa}
@@ -46,6 +44,11 @@ footer p{margin:.4em 0}
     <div>
       <h1>WhatsApp — DejandoHuella Trader</h1>
       <small>Atención comercial y soporte — último update: <span id="lu"></span></small>
+      <div class="row" style="margin-top:8px">
+        <a class="cta" href="./">Inicio</a>
+        <a class="cta" href="verificacion.html">Verificación oficial</a>
+        <a class="cta" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=wa" target="_blank" rel="noopener">Abrir .onion</a>
+      </div>
     </div>
   </header>
 
@@ -89,7 +92,7 @@ footer p{margin:.4em 0}
       </div>
     </div>
 
-    <p style="margin-top:10px"><small>Tip: comparte estos enlaces por Facebook o donde quieras. El texto llega prellenado para acelerar la venta.</small></p>
+    <p style="margin-top:10px"><small>Tip: comparte estos enlaces en Facebook o estados. El texto llega prellenado para acelerar la venta.</small></p>
   </div>
 
   <div class="card">
@@ -107,13 +110,13 @@ footer p{margin:.4em 0}
 <script>
 document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
 
-// 1) Tu número en formato internacional (solo dígitos, con código de país).
-const WHATSAPP_NUMBER = '593983877081'; // <-- tu número
+// 1) Tu número
+const WHATSAPP_NUMBER = '593983566273';
 
-// 2) Origen de tráfico (?src=...) para dejar constancia en el mensaje
+// 2) Origen
 const SRC = new URL(location.href).searchParams.get('src') || 'pagina';
 
-// 3) Plantillas de mensaje por plan
+// 3) Plantillas
 const templates = {
   sen: `Hola, quiero el plan Señales Premium (USD 500/mes).
 Mi nombre: _____  País: _____
@@ -137,13 +140,13 @@ Ticket estimado: _____
 Vengo de: ${SRC}`
 };
 
-// 4) Construye enlace wa.me
+// 4) link wa.me
 function waLink(text){
   const t = encodeURIComponent(text);
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${t}`;
 }
 
-// 5) Pinta enlaces
+// 5) Pintar enlaces
 [['wa-sen','sen'],['wa-lic','lic'],['wa-full','full'],['wa-socio','socio']]
 .forEach(([id,key])=>{
   const a = document.getElementById(id);
@@ -158,8 +161,7 @@ document.querySelectorAll('.copy').forEach(btn=>{
     const a = document.getElementById(forId);
     if(a && a.href){
       if(navigator.clipboard) navigator.clipboard.writeText(a.href);
-      btn.textContent = '¡Copiado!';
-      setTimeout(()=>btn.textContent='Copiar enlace',1200);
+      btn.textContent = '¡Copiado!'; setTimeout(()=>btn.textContent='Copiar enlace',1200);
     }
   });
 });
