@@ -34,10 +34,36 @@ small,p,li{color:var(--muted)}
 .copy{cursor:pointer;border:1px dashed var(--border);padding:6px 10px;border-radius:8px}
 code{background:#0f1522;border:1px solid var(--border);padding:4px 6px;border-radius:8px}
 footer p{margin:.4em 0}
+
+/* banner */
+.top-banner{background:#0f1522;border-bottom:1px solid #1f2a3a;color:#e5e7eb}
+.top-banner .wrap-b{max-width:1000px;margin:auto;padding:8px 24px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+.top-banner small{color:#94a3b8}
+.top-banner a{color:#60a5fa;text-decoration:none;font-weight:600}
+.top-banner button{background:transparent;border:1px solid #1f2a3a;color:#94a3b8;border-radius:8px;padding:4px 8px;cursor:pointer}
+
+/* botón flotante */
+#wa-float{position:fixed;right:18px;bottom:18px;z-index:9999}
+#wa-float a{display:flex;align-items:center;gap:10px;background:#25D366;color:#06250f;text-decoration:none;padding:10px 14px;border-radius:999px;border:1px solid #1fa855;box-shadow:0 6px 18px rgba(0,0,0,.28);font-weight:700}
+#wa-float svg{width:20px;height:20px;display:block}
+
 @media (max-width:760px){.grid-2{grid-template-columns:1fr}}
+@media (max-width:560px){ #wa-float a span{display:none} }
 </style>
 </head>
 <body>
+
+<!-- Banner anti-phishing -->
+<div class="top-banner" id="phishbar">
+  <div class="wrap-b">
+    <div>
+      <strong>⚠ Verifica los enlaces oficiales.</strong>
+      <small>Consulta la <a href="verificacion.html">Verificación oficial</a> (enlaces y PGP).</small>
+    </div>
+    <button onclick="document.getElementById('phishbar').remove()">Cerrar</button>
+  </div>
+</div>
+
 <div class="wrap">
   <header>
     <img src="logo.png" alt="DH" onerror="this.onerror=null;this.src='img/logo.png'">
@@ -45,9 +71,8 @@ footer p{margin:.4em 0}
       <h1>WhatsApp — DejandoHuella Trader</h1>
       <small>Atención comercial y soporte — último update: <span id="lu"></span></small>
       <div class="row" style="margin-top:8px">
-        <a class="cta" href="./">Inicio</a>
+        <a class="cta" href="./">Volver al inicio</a>
         <a class="cta" href="verificacion.html">Verificación oficial</a>
-        <a class="cta" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=wa" target="_blank" rel="noopener">Abrir .onion</a>
       </div>
     </div>
   </header>
@@ -92,7 +117,7 @@ footer p{margin:.4em 0}
       </div>
     </div>
 
-    <p style="margin-top:10px"><small>Tip: comparte estos enlaces en Facebook o estados. El texto llega prellenado para acelerar la venta.</small></p>
+    <p style="margin-top:10px"><small>Tip: comparte estos enlaces por Facebook o donde quieras. El texto llega prellenado para acelerar la venta.</small></p>
   </div>
 
   <div class="card">
@@ -107,16 +132,24 @@ footer p{margin:.4em 0}
   </footer>
 </div>
 
+<!-- Botón flotante WhatsApp -->
+<div id="wa-float">
+  <a id="wa-float-link" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+      <path d="M19.1 17.4c-.3-.1-1.6-.8-1.8-.9s-.4-.1-.6.1-.7.9-.9 1.1-.3.2-.6.1-1.2-.4-2.2-1.3-1.6-1.9-1.8-2.2 0-.5.1-.6.1-.2.2-.3.2-.3.3-.4.1-.2.2-.3.1-.2.1-.3 0-.3 0-.4c0-.1-.6-1.5-.8-2.1-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.4.1-.6.3s-.8.8-.8 2 .8 2.3.9 2.4c.1.2 1.6 2.5 3.9 3.5 2.3 1.1 2.3.7 2.7.6.4-.1 1.3-.5 1.4-1s.2-1 .1-1.1c-.1-.1-.3-.2-.6-.3zM15.8 3C9.6 3 4.6 7.9 4.6 14.1c0 2.5.9 4.8 2.3 6.6l-1.5 4.4 4.5-1.4c1.7 1.1 3.7 1.7 5.9 1.7 6.3 0 11.3-5.1 11.3-11.3S22.1 3 15.8 3zM15.8 24c-2 0-3.8-.6-5.3-1.6l-.4-.3-2.7.8.9-2.6-.3-.4c-1.2-1.6-2-3.6-2-5.8C6 9 10.4 4.6 15.8 4.6S25.6 9 25.6 14.4 21.2 24 15.8 24z"/>
+    </svg>
+    <span>WhatsApp</span>
+  </a>
+</div>
+
 <script>
 document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
 
-// 1) Tu número
+// Número WA y tracking
 const WHATSAPP_NUMBER = '593983566273';
-
-// 2) Origen
 const SRC = new URL(location.href).searchParams.get('src') || 'pagina';
 
-// 3) Plantillas
+// Mensajes
 const templates = {
   sen: `Hola, quiero el plan Señales Premium (USD 500/mes).
 Mi nombre: _____  País: _____
@@ -139,32 +172,30 @@ Nombre: _____  País: _____
 Ticket estimado: _____
 Vengo de: ${SRC}`
 };
+function waLink(text){ return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`; }
 
-// 4) link wa.me
-function waLink(text){
-  const t = encodeURIComponent(text);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${t}`;
-}
-
-// 5) Pintar enlaces
-[['wa-sen','sen'],['wa-lic','lic'],['wa-full','full'],['wa-socio','socio']]
-.forEach(([id,key])=>{
+[['wa-sen','sen'],['wa-lic','lic'],['wa-full','full'],['wa-socio','socio']].forEach(([id,key])=>{
   const a = document.getElementById(id);
-  if(!a) return;
-  a.href = waLink(templates[key]);
+  if(a) a.href = waLink(templates[key]);
 });
 
-// 6) Copiar enlace
 document.querySelectorAll('.copy').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    const forId = btn.getAttribute('data-for');
-    const a = document.getElementById(forId);
+    const a = document.getElementById(btn.getAttribute('data-for'));
     if(a && a.href){
-      if(navigator.clipboard) navigator.clipboard.writeText(a.href);
+      navigator.clipboard && navigator.clipboard.writeText(a.href);
       btn.textContent = '¡Copiado!'; setTimeout(()=>btn.textContent='Copiar enlace',1200);
     }
   });
 });
+
+// Botón flotante
+(function(){
+  const text = `Hola DejandoHuella, vengo de: ${SRC}\nPágina: ${document.title}`;
+  const link = waLink(text);
+  const a = document.getElementById('wa-float-link');
+  if(a) a.href = link;
+})();
 </script>
 </body>
 </html>
