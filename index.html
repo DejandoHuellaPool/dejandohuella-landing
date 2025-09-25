@@ -6,175 +6,409 @@
   <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Pagos por BTC y USDT (TRC20, BEP20, Arbitrum One, ERC-20).">
   <meta name="color-scheme" content="dark">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <link rel="icon" href="img/logo.png">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="DejandoHuella Trader — BTC/USD">
+  <meta property="og:description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Clearnet y .onion.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/og-image.png">
+  <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
   <style>
     :root{
       --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
-      --border:#1f2a3a; --link:#60a5fa;
+      --border:#1f2a3a; --link:#60a5fa; --ok:#22c55e; --warn:#f59e0b;
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
-    a{color:var(--link);text-underline-offset:2px}
-    .wrap{max-width:1000px;margin:auto;padding:16px}
-    header{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+    a{color:var(--link)}
+    .wrap{max-width:1000px;margin:auto;padding:24px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:8px}
     header img{width:64px;height:64px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
-    h1{font-size:28px;margin:0}
+    h1{font-size:32px;margin:0}
     h2{margin:0 0 10px}
-    .muted{color:var(--muted)}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin:16px 0}
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;min-height:44px;border-radius:12px;border:1px solid var(--border);color:var(--fg);text-decoration:none}
-    .btn--ok{background:var(--accent);color:#06250f;border-color:#0e7a41;font-weight:700}
-    .btn--ghost{background:transparent}
-    .copy{cursor:pointer;border:1px dashed var(--border);padding:6px 10px;border-radius:10px}
-    details{border:1px dashed var(--border);border-radius:12px;padding:10px}
-    details > summary{list-style:none;cursor:pointer;margin:-10px;-webkit-user-select:none;user-select:none;padding:10px;border-radius:10px}
-    details[open] > summary{background:#0f1522}
-    .qr{width:180px;height:180px;object-fit:contain;border-radius:12px;border:1px solid var(--border);background:#000;display:block}
-    code.badge{background:#0f1522;border:1px solid var(--border);padding:6px 10px;border-radius:10px}
-    .mono{font-family:ui-monospace,Consolas,Menlo,monospace}
-    @media (max-width:760px){ h1{font-size:22px} header img{width:56px;height:56px} }
+    p,li,small{color:var(--muted)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
+    .grid{display:grid;gap:14px}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
+    code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .cta--fb{background:#1877F2;border-color:#0d5fe5;color:#fff}
+    .cta--wa{background:#25D366;border-color:#1fa855;color:#fff}
+    .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
+    .payrow{display:grid;gap:8px; margin-bottom:14px}
+    .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
+    .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
+    .qrbox summary::-webkit-details-marker{display:none}
+    .qrbox[open] summary{background:#162133}
+    .qrwrap{display:flex;justify-content:center;align-items:center;padding:12px;border-top:1px solid var(--border)}
+    .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
+    .qr img{width:100%;height:100%;display:block}
+    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .plan h3{margin:0;font-size:18px}
+    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
+    .note{color:var(--muted);margin:0}
+    .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .bar a{color:#b4d2ff}
+    @media (max-width:760px){
+      .grid-2{grid-template-columns:1fr}
+      header img{width:56px;height:56px}
+      h1{font-size:26px}
+    }
   </style>
 </head>
 <body>
+  <div class="bar">
+    <span>⚠️ Verifica los enlaces oficiales. Usa nuestra <a href="verificacion.html">Verificación oficial</a> o la dirección .onion.</span>
+    <a class="cta" href="#" onclick="closeBar();return false;">Cerrar</a>
+  </div>
+
   <div class="wrap">
     <header>
-      <img src="img/logo.png" alt="DejandoHuella logo" loading="lazy" decoding="async">
+      <img src="logo.png" alt="DejandoHuella logo" loading="lazy" decoding="async"
+           onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
       <div>
         <h1>DejandoHuella Trader</h1>
-        <div class="row">
-          <a class="btn btn--ok" href="whatsapp.html">WhatsApp (ventas)</a>
-          <a class="btn btn--ghost" href="verificacion.html">Verificación oficial</a>
-          <!-- NUEVO: botón .onion (copiar) -->
-          <a class="btn" id="btnCopyOnion" href="#" title="Copiar dirección .onion">Copiar .onion</a>
+        <div class="cta-row">
+          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20informaci%C3%B3n">Solicitar información</a>
+          <a class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
+          <a class="cta" href="verificacion.html">Verificación oficial</a>
+          <a class="cta" href="#" onclick="return shareFB();">Compartir en Facebook</a>
+          <!-- NUEVO (solo añade, no rompe): botón para copiar .onion -->
+          <a class="cta" href="#" id="copyOnion">Copiar .onion</a>
         </div>
-        <small class="muted">.onion: <code class="badge mono">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></small>
       </div>
     </header>
 
-    <!-- NUEVO: Introducción breve -->
-    <section class="card" aria-labelledby="intro">
-      <h2 id="intro">¿Qué es y para qué sirve?</h2>
-      <p class="muted" style="margin:0">
-        Operamos <b>BTC/USD</b> y ofrecemos <b>señales</b> (1–3 por día), <b>EA para MT4 con licencia</b> y <b>mentoría</b>.
-        Eliges un plan, <b>pagas</b> (BTC/USDT o transferencia) y te damos acceso al <b>grupo privado</b> y/o al <b>EA</b>.
-        Soporte por WhatsApp y <a href="mailto:dejandohuella_pool@proton.me">ProtonMail</a>.
+    <p><small>Última actualización: <span id="lu"></span></small></p>
+
+    <!-- NUEVO: INTRODUCCIÓN BREVE (solo texto, sin tocar nada más) -->
+    <div class="card" id="intro">
+      <h2 style="margin-top:0">¿Qué es y cómo funciona?</h2>
+      <p class="note">
+        Operamos <b>BTC/USD</b> y ofrecemos <b>señales</b> (1–3/día), <b>EA para MT4</b> con licencia y <b>mentoría</b>.
+        Elige un plan, paga (BTC/USDT o banco) y recibes acceso al <b>grupo privado</b> y/o al <b>EA</b>.
+        Soporte por WhatsApp o <a href="mailto:dejandohuella_pool@proton.me">ProtonMail</a>.
       </p>
-    </section>
+    </div>
 
-    <!-- REDES -->
-    <section class="card" id="redes">
-      <h2 style="margin-top:0">Redes oficiales</h2>
-      <div class="row">
-        <a class="btn" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener">Facebook</a>
-        <a class="btn btn--ok" href="whatsapp.html">WhatsApp (ventas)</a>
+    <div class="card" id="redes">
+      <h2>Redes oficiales</h2>
+      <p>Síguenos para novedades y soporte:</p>
+      <div class="cta-row">
+        <a class="cta cta--fb" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
+        <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
       </div>
-    </section>
+    </div>
 
-    <!-- PAGOS -->
-    <section class="card">
-      <h2 style="margin-top:0">Pagos (verifica la red)</h2>
+    <div class="card">
+      <h2>Pagos (verifica la red)</h2>
 
-      <div class="card" style="margin:10px 0">
-        <h3 style="margin:.2rem 0">BTC</h3>
-        <div class="row" style="gap:8px">
-          <code id="btc" class="mono">bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4</code>
-          <span class="copy" onclick="copyTxt('btc')">Copiar</span>
+      <div class="grid grid-2">
+        <div>
+          <!-- BTC -->
+          <div class="payrow">
+            <div class="row"><b>BTC</b><span class="tag">Bitcoin</span></div>
+            <div class="row">
+              <code id="btc">bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4</code>
+              <span class="copy" onclick="copyTxt('btc')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="btc"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-btc" class="qr" aria-label="QR BTC"></div></div>
+            </details>
+          </div>
+
+          <!-- TRC20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">TRC20 / Tron</span></div>
+            <div class="row">
+              <code id="trc20">TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd</code>
+              <span class="copy" onclick="copyTxt('trc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="trc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-trc20" class="qr" aria-label="QR USDT TRC20"></div></div>
+            </details>
+          </div>
+
+          <!-- BEP20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">BEP20 / BSC</span></div>
+            <div class="row">
+              <code id="bep20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('bep20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="bep20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-bep20" class="qr" aria-label="QR USDT BEP20"></div></div>
+            </details>
+          </div>
         </div>
-        <details style="margin-top:10px">
-          <summary>Mostrar QR</summary>
-          <img class="qr" src="img/qr_btc.png" alt="QR Bitcoin" loading="lazy" onerror="this.style.display='none'">
-        </details>
-      </div>
 
-      <div class="card" style="margin:10px 0">
-        <h3 style="margin:.2rem 0">USDT (TRC20 / BEP20 / ERC-20 / Arbitrum One)</h3>
-        <div class="row" style="gap:8px">
-          <code id="usdt" class="mono">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
-          <span class="copy" onclick="copyTxt('usdt')">Copiar</span>
+        <div>
+          <!-- ARBITRUM ONE -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">Arbitrum One</span></div>
+            <div class="row">
+              <code id="arb1">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('arb1')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="arb1"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-arb1" class="qr" aria-label="QR USDT Arbitrum One"></div></div>
+            </details>
+          </div>
+
+          <!-- ERC-20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">ERC-20 / Ethereum</span></div>
+            <div class="row">
+              <code id="erc20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('erc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="erc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-erc20" class="qr" aria-label="QR USDT ERC-20"></div></div>
+            </details>
+          </div>
         </div>
-        <details style="margin-top:10px">
-          <summary>Mostrar QR</summary>
-          <img class="qr" src="img/qr_usdt.png" alt="QR USDT" loading="lazy" onerror="this.style.display='none'">
+      </div>
+
+      <hr style="border-color:var(--border);opacity:.5;margin:18px 0">
+
+      <!-- Transferencia bancaria -->
+      <div class="payrow">
+        <div class="row">
+          <b>Transferencia bancaria (USD)</b>
+          <span class="tag">Banco Pichincha</span>
+        </div>
+        <div>
+          <p style="margin:6px 0 10px">
+            <b>Titular:</b> Empresa DejandoHuella<br>
+            <b>Banco:</b> Pichincha<br>
+            <b>Tipo de cuenta:</b> Ahorros / Corriente<br>
+            <b>Número de cuenta:</b> <code id="cta-pich">2207922413</code>
+            <span class="copy" onclick="copyTxt('cta-pich')">Copiar</span><br>
+            <b>Referencia:</b> “DejandoHuella + tu nombre”
+          </p>
+
+          <details class="qrbox">
+            <summary>Mostrar QR Banco Pichincha</summary>
+            <div class="qrwrap" style="flex-direction:column;gap:10px">
+              <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
+                   style="border:1px solid var(--border);border-radius:10px;background:#fff"
+                   src="img/qr-pichincha.png">
+              <a id="qr-pich-dl" class="cta" href="img/qr-pichincha.png" download="qr-pichincha.png">Descargar PNG</a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- PayPal -->
+      <div class="payrow">
+        <div class="row"><b>PayPal</b><span class="tag">Pagos con tarjeta</span></div>
+        <div class="row" style="gap:10px;align-items:center">
+          <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener">Pagar con PayPal</a>
+          <small>o enviar a: <b>dejandohuella_pool@proton.me</b></small>
+        </div>
+        <details class="qrbox">
+          <summary>¿Cómo pagar por PayPal?</summary>
+          <div class="qrwrap" style="flex-direction:column;gap:8px">
+            <ol style="margin:0;padding-left:18px;color:var(--muted)">
+              <li>Abre el enlace PayPal o envía al correo indicado.</li>
+              <li>Incluye en el mensaje tu nombre y plan elegido.</li>
+              <li>Recibirás confirmación y acceso al grupo/EA.</li>
+            </ol>
+          </div>
         </details>
       </div>
 
-      <div class="card" style="margin:10px 0">
-        <h3 style="margin:.2rem 0">Transferencia bancaria (USD) — Banco Pichincha</h3>
-        <p class="muted" style="margin:.4rem 0 0 0">
-          Titular: <b>DejandoHuella</b> — Cuenta: <span class="mono">2207922413</span>
-        </p>
-        <details style="margin-top:10px" open>
-          <summary>Mostrar/ocultar QR Pichincha</summary>
-          <img class="qr" src="img/qr-pichincha.png" alt="QR Banco Pichincha" loading="lazy" onerror="this.style.display='none'">
-        </details>
-      </div>
+      <small>Si envías por red equivocada, los fondos se pierden. Verifica dos veces.</small>
+    </div>
 
-      <small class="muted">Si envías por red equivocada, los fondos se pierden.</small>
-    </section>
+    <div class="card">
+      <h2>Cómo pagar (paso a paso)</h2>
+      <ol>
+        <li>Elige la <b>red correcta</b> (BTC, TRC20, BEP20, Arbitrum One o ERC-20).</li>
+        <li>Abre el QR con “Mostrar QR” o copia la dirección con “Copiar”.</li>
+        <li>Envía el monto acordado y espera 1–3 confirmaciones.</li>
+        <li>Envíanos el <b>hash de la transacción</b> por correo para acreditar tu plan.</li>
+      </ol>
+    </div>
 
-    <!-- PLANES -->
-    <section class="card" id="planes">
-      <h2>Planes Premium – DejandoHuella Trader</h2>
-      <ul style="margin:0">
-        <li><b>Señales Premium</b> — USD 500 / mes (1–3 señales/día BTC/USD).</li>
-        <li><b>Licencia EA Personal</b> — USD 3,000 / anual (1 cuenta MT4, soporte y updates).</li>
-        <li><b>EA Full + Mentoría</b> — USD 7,500 / pago único (incluye 3 meses).</li>
-        <li><b>Socio / Inversionista</b> — desde USD 10,000.</li>
+    <div class="card">
+      <h2>Qué recibes</h2>
+      <ul>
+        <li>✅ <b>Señales Premium</b> en tiempo real.</li>
+        <li>✅ <b>EA MT4</b> con licencia y soporte de instalación.</li>
+        <li>✅ <b>Mentoría / soporte</b> privado.</li>
+        <li>✅ <b>Transparencia</b>: bitácora de entradas (RSI, ADX, EMAs, zona, etc.).</li>
       </ul>
-    </section>
+    </div>
 
-    <!-- CONTACTO -->
-    <section class="card" id="contacto">
+    <div class="card" id="planes">
+      <h2>Planes Premium – DejandoHuella Trader</h2>
+      <div class="grid grid-2">
+        <div class="plan">
+          <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
+          <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día con entrada, SL y TP.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Señales Premium'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
+          <p class="note">EA <b>DejandoHuella_BTCUSD</b> para una cuenta MT4. 12 meses con soporte y updates.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20licencia%20EA%20personal"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Licencia EA'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
+          <p class="note">EA sin restricciones + <b>3 meses de mentoría</b>, instalación y optimización.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20EA%20Full%20%2B%20Mentor%C3%ADa"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'EA Full + Mentoría'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
+          <p class="note">Participación en utilidades y derecho de marca en tu región.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Socio%20%2F%20Inversionista"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Socio/Inversionista'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px"><a class="cta" href="#contacto">Solicitar información</a></div>
+    </div>
+
+    <div class="card" id="contacto">
       <h2>Contacto</h2>
-      <p><a class="btn btn--ok" href="whatsapp.html">Abrir WhatsApp</a></p>
-      <p class="muted">Correo: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a><br>
-      PGP: <span class="mono">6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</span></p>
-    </section>
+      <p><a class="cta" href="mailto:dejandohuella_pool@proton.me">Escríbenos a ProtonMail</a></p>
+      <p>.onion: <b>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</b></p>
+
+      <p><small>PGP para mensajes cifrados (compara la huella / fingerprint):</small></p>
+      <details>
+        <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
+          <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
+        </summary>
+        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
+... (contenido de clave PGP recortado en esta copia de seguridad) ...
+-----END PGP PUBLIC KEY BLOCK-----</pre>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Transparencia de señales</h2>
+      <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br>L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
+    </div>
 
     <footer class="card" style="margin-top:16px">
-      <p>Clearnet: <a href="./">Abrir sitio</a> | .onion: <code class="mono">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></p>
+      <p>
+        Clearnet: <a href="./">Abrir sitio</a> |
+        .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
+      </p>
       <p>Contacto: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
     </footer>
 
-    <small class="muted">© <span id="yy"></span> DejandoHuella Trader</small>
+    <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <script>
-    // Año
-    document.getElementById('yy').textContent = new Date().getFullYear();
+  <!-- QRCode (CDN). Si falla, usamos fallback a imágenes locales -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    // Copiar texto con fallback
+  <script>
+    // Barra superior
+    function closeBar(){ const b=document.querySelector('.bar'); if(b) b.remove(); }
+
+    // Fecha
+    document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
+
+    // Copiar con fallback
     function copyTxt(id){
-      const el=document.getElementById(id); if(!el) return;
-      const txt=el.textContent.trim();
-      if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(ok); }
-      else{
+      const el = document.getElementById(id); if(!el) return;
+      const txt = el.textContent.trim();
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
+      }else{
         const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
-        ta.select(); try{document.execCommand('copy');}catch(_){}
-        ta.remove(); ok();
-      }
-      function ok(){
-        const d=document.createElement('div'); d.textContent='✔ Copiado';
-        Object.assign(d.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
-          padding:'8px 12px',borderRadius:'8px',zIndex:'9999'}); document.body.appendChild(d);
-        setTimeout(()=>d.remove(),1500);
+        ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(_){ }
+        ta.remove();
       }
     }
+    function toast(text){
+      const msg=document.createElement('div'); msg.textContent=text;
+      Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
+      padding:'8px 12px',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,.4)',zIndex:'9999'});
+      document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
+    }
 
-    // Copiar .onion
-    (function(){
-      const btn=document.getElementById('btnCopyOnion');
-      const onion='xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion';
-      btn?.addEventListener('click',e=>{
-        e.preventDefault();
-        navigator.clipboard?.writeText(onion).then(()=>{
-          const d=document.createElement('div'); d.textContent='✔ .onion copiado';
-          Object.assign(d.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
-            padding:'8px 12px',borderRadius:'8px',zIndex:'9999'}); document.body.appendChild(d);
-          setTimeout(()=>d.remove(),1500);
-        });
+    // Direcciones cripto
+    const ADDR = {
+      btc:'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',
+      trc20:'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',
+      bep20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      arb1:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'
+    };
+
+    // Generar QR perezoso: CDN o fallback a PNG local
+    function ensureQR(id, text, key){
+      const box=document.getElementById(id);
+      if(!box || box.dataset.done) return;
+      if(window.QRCode){
+        const size=Math.min(box.clientWidth||180, box.clientHeight||180);
+        new QRCode(box,{text,width:size,height:size,correctLevel: QRCode.CorrectLevel.M});
+      }else{
+        const img=document.createElement('img'); img.alt='QR '+key.toUpperCase(); img.src='img/qr_'+key+'.png';
+        box.appendChild(img);
+      }
+      box.dataset.done='1';
+    }
+    document.querySelectorAll('.qrbox').forEach(d=>{
+      d.addEventListener('toggle', ()=>{
+        if(!d.open) return;
+        const key=d.dataset.key; const target='qr-'+key;
+        if(key && ADDR[key]) ensureQR(target, ADDR[key], key);
       });
+    });
+
+    // Botón compartir Facebook
+    const SHARE_URL='https://dejandohuellapool.github.io/dejandohuella-landing/';
+    const SHARE_QUOTE='Señales BTC/USD, EA MT4 y mentoría — DejandoHuella Trader';
+    function shareFB(){
+      const u='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SHARE_URL)+'&quote='+encodeURIComponent(SHARE_QUOTE);
+      const w=720,h=640,left=(screen.width-w)/2,top=(screen.height-h)/2;
+      window.open(u,'fbshare',`width=${w},height=${h},left=${left},top=${top},menubar=0,toolbar=0,status=0`);
+      return false;
+    }
+
+    // NUEVO: Copiar .onion sin alterar nada más
+    (function(){
+      const btn=document.getElementById('copyOnion');
+      const onion='xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion';
+      if(btn){
+        btn.addEventListener('click',e=>{
+          e.preventDefault();
+          if(navigator.clipboard){ navigator.clipboard.writeText(onion).then(()=>toast('✔ .onion copiado')); }
+        });
+      }
     })();
   </script>
 </body>
