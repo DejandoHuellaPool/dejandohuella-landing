@@ -89,6 +89,8 @@
         <h1>DejandoHuella Trader</h1>
         <div class="cta-row">
           <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20informaci%C3%B3n">Solicitar información</a>
+          <!-- NUEVO: Botón directo al hub de WhatsApp -->
+          <a class="cta cta--wa" href="whatsapp.html?src=home">WhatsApp (ventas)</a>
           <a id="onion-link" class="cta" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=pages" target="_blank" rel="noopener">Abrir versión .onion</a>
         </div>
       </div>
@@ -101,7 +103,7 @@
       <p>Síguenos para novedades y soporte:</p>
       <div class="cta-row">
         <a class="cta cta--fb" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
-        <a class="cta cta--wa" href="https://chat.whatsapp.com/K65z5CazXdTDmiKhHGUwvB?mode=ems_share_t" target="_blank" rel="noopener" aria-label="Grupo de WhatsApp">WhatsApp</a>
+        <a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%20DejandoHuella%2C%20vengo%20de%20la%20web%20y%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="WhatsApp directo">WhatsApp</a>
       </div>
     </div>
 
@@ -198,13 +200,13 @@
             <b>Referencia:</b> “DejandoHuella + tu nombre”
           </p>
 
-          <!-- QR Pichincha (embebido). Si quieres otro, reemplaza el src por tu base64 real. -->
+          <!-- QR Pichincha embebido (base64 de ejemplo; reemplaza por el tuyo si quieres) -->
           <details class="qrbox">
             <summary>Mostrar QR Banco Pichincha</summary>
             <div class="qrwrap" style="flex-direction:column;gap:10px">
               <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
                    style="border:1px solid var(--border);border-radius:10px;background:#fff"
-                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAGlQJmH1Qq8gAAAABJRU5ErkJggg==">
+                   src="img/qr-pichincha.png">
               <a id="qr-pich-dl" class="cta" href="#" download="qr-pichincha.png">Descargar PNG</a>
               <small style="color:#94a3b8">Si no se descarga, clic derecho en la imagen → Guardar como…</small>
             </div>
@@ -245,29 +247,40 @@
       </ol>
     </div>
 
-    <!-- PLANES (con mailto prellenado) -->
+    <!-- QUÉ RECIBES -->
+    <div class="card">
+      <h2>Qué recibes</h2>
+      <ul>
+        <li>✅ <b>Señales Premium</b> en tiempo real.</li>
+        <li>✅ <b>EA MT4</b> con licencia y soporte de instalación.</li>
+        <li>✅ <b>Mentoría / soporte</b> privado.</li>
+        <li>✅ <b>Transparencia</b>: bitácora de entradas (RSI, ADX, EMAs, zona, etc.).</li>
+      </ul>
+    </div>
+
+    <!-- PLANES -->
     <div class="card" id="planes">
       <h2>Planes Premium – DejandoHuella Trader</h2>
       <div class="grid grid-2">
         <div class="plan">
           <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
           <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día con entrada, SL y TP.</p>
-          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Plan%20Se%C3%B1ales%20Premium&body=Hola%20equipo%2C%0D%0AQuiero%20informaci%C3%B3n%20para%20contratar%20el%20plan%20Se%C3%B1ales%20Premium.%0D%0AMi%20nombre%3A%20_____%0D%0AForma%20de%20pago%20(BTC%2FUSDT%2FTransferencia)%3A%20_____%0D%0AGracias.">Solicitar este plan</a>
+          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium%20(USD%20500%2Fmes).%0AMi%20nombre%3A%20_____%20%20Pa%C3%ADs%3A%20_____%0ARed%20de%20pago%20(BTC%2FUSDT%2FBanco)%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
         <div class="plan">
           <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
           <p class="note">EA <b>DejandoHuella_BTCUSD</b> para una cuenta MT4. 12 meses con soporte y updates.</p>
-          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Plan%20Licencia%20EA%20Personal&body=Hola%20equipo%2C%0D%0AQuiero%20la%20Licencia%20EA%20Personal%20(anual).%0D%0AMi%20nombre%3A%20_____%0D%0AID%20de%20cuenta%20MT4%20(ICMarketsSC-Live26)%3A%20_____%0D%0AForma%20de%20pago%3A%20_____%0D%0AGracias.">Solicitar este plan</a>
+          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20la%20Licencia%20EA%20Personal%20(USD%203000%2Fanual).%0AMi%20nombre%3A%20_____%0ABroker%2FServidor%20MT4%3A%20_____%0AID%20de%20cuenta%20MT4%3A%20_____%0ARed%20de%20pago%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
         <div class="plan">
           <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
           <p class="note">EA sin restricciones + <b>3 meses de mentoría</b>, instalación y optimización.</p>
-          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Plan%20EA%20Full%20%2B%20Mentor%C3%ADa&body=Hola%20equipo%2C%0D%0AQuiero%20el%20plan%20EA%20Full%20%2B%20Mentor%C3%ADa.%0D%0AMi%20nombre%3A%20_____%0D%0AID%20de%20cuenta%20MT4%3A%20_____%0D%0AForma%20de%20pago%3A%20_____%0D%0AGracias.">Solicitar este plan</a>
+          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20EA%20Full%20%2B%20Mentor%C3%ADa%20(USD%207500).%0ANombre%3A%20_____%0ABroker%2FServidor%20MT4%3A%20_____%0AID%20de%20cuenta%20MT4%3A%20_____%0ARed%20de%20pago%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
         <div class="plan">
           <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
           <p class="note">Participación en utilidades y derecho de marca en tu región.</p>
-          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Inter%C3%A9s%20en%20Socio%20%2F%20Inversionista&body=Hola%20equipo%2C%0D%0AEstoy%20interesado%20en%20ser%20socio%2Finversionista.%0D%0AMi%20nombre%3A%20_____%0D%0APa%C3%ADs%20%2F%20regi%C3%B3n%3A%20_____%0D%0ATicket%20estimado%3A%20_____%0D%0AGracias.">Solicitar este plan</a>
+          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20ser%20socio%2Finversionista.%0ANombre%3A%20_____%20%20Pa%C3%ADs%3A%20_____%0ATicket%20estimado%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
       </div>
       <div style="margin-top:10px"><a class="cta" href="#contacto">Solicitar información</a></div>
@@ -320,10 +333,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- Dependencia QR opcional (CDN) + fallback local -->
-  <script>
-    // Si no hay Internet/CDN, puedes comentar el siguiente script y dejar el fallback de imágenes.
-  </script>
+  <!-- QRCode (cripto) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
@@ -336,10 +346,10 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         const src = new URL(location.href).searchParams.get('src') || 'pages';
         const a = document.getElementById('onion-link');
         if (a) a.href = 'http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=' + encodeURIComponent(src);
-      }catch(e){}
+      }catch(_){ }
     })();
 
-    // Aviso Tor
+    // Aviso Tor (con \n\n correcto para evitar errores JS)
     (function(){
       const link = document.getElementById('onion-link');
       if(!link) return;
@@ -347,8 +357,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         const isTor = /TorBrowser/i.test(navigator.userAgent);
         if(!isTor){
           ev.preventDefault();
-          navigator.clipboard && navigator.clipboard.writeText(this.href).catch(()=>{});
-          alert('Este enlace solo abre en Tor Browser. Te copié la dirección .onion al portapapeles:\n\n' + this.href);
+          if(navigator.clipboard){ navigator.clipboard.writeText(this.href).catch(()=>{}); }
+          alert('Este enlace solo abre en Tor Browser.\n\nTe copié la dirección .onion al portapapeles:\n' + this.href);
         }
       });
     })();
@@ -363,7 +373,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       }else{
         const ta = document.createElement('textarea');
         ta.value = txt; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); toast('✔ Copiado'); }catch(_){}
+        try{ document.execCommand('copy'); toast('✔ Copiado'); }catch(_){ }
         ta.remove();
       }
     }
@@ -387,24 +397,22 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20: '0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
     };
 
-    // Generación perezosa de QR cripto (si existe QRCode). Si no, usa fallback a imágenes locales.
+    // Generación perezosa de QR cripto (si existe QRCode). Si no, fallback a imágenes locales.
     function ensureQR(id, text, key){
       const box = document.getElementById(id);
       if(!box || box.dataset.done) return;
       if(window.QRCode){
-        const w = box.clientWidth || 180, h = box.clientHeight || 180;
-        const size = Math.min(w, h) || 180;
+        const size = Math.min(box.clientWidth||180, box.clientHeight||180);
         new QRCode(box, {text, width:size, height:size, correctLevel: window.QRCode.CorrectLevel.M});
       }else{
-        // Fallback a imagen local: coloca img/qr-<key>.png para cada red si no hay librería
+        // Fallback a imagen local (ya las tienes en /img/qr_*.png)
         const img = document.createElement('img');
         img.alt = 'QR ' + key.toUpperCase();
-        img.src = 'img/qr-' + key + '.png';
+        img.src = 'img/qr_' + key + '.png';
         box.appendChild(img);
       }
       box.dataset.done = '1';
     }
-
     document.querySelectorAll('.qrbox').forEach(d=>{
       d.addEventListener('toggle', ()=>{
         if(!d.open) return;
