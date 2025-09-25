@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
   <!-- Open Graph / Twitter -->
+  <meta property="og:site_name" content="DejandoHuella Trader" />
   <meta property="og:title" content="DejandoHuella Trader — BTC/USD" />
   <meta property="og:description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Clearnet y .onion." />
   <meta property="og:type" content="website" />
@@ -16,6 +17,19 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
+
+  <!-- Meta Pixel (reemplaza PIXEL_ID_AQUI) -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[]; t=b.createElement(e); t.async=!0;
+    t.src=v; s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'PIXEL_ID_AQUI'); fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+
   <style>
     :root{
       --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
@@ -33,7 +47,7 @@
     .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
     .grid{display:grid;gap:14px}
     .grid-2{grid-template-columns:1fr 1fr}
-    .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
     .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
     .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
@@ -77,7 +91,7 @@
     <div class="wrap-b">
       <div>
         <strong>⚠ Verifica los enlaces oficiales.</strong>
-        <small>Usa nuestra <a href="verificacion.html">Verificación oficial</a> o la dirección .onion.</small>
+        <small>Usa nuestra <a href="verificacion.html" id="cta-verif-top">Verificación oficial</a> o la dirección .onion.</small>
       </div>
       <button onclick="document.getElementById('phishbar').remove()">Cerrar</button>
     </div>
@@ -90,9 +104,10 @@
       <div>
         <h1>DejandoHuella Trader</h1>
         <div class="cta-row">
-          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20informaci%C3%B3n">Solicitar información</a>
-          <a class="cta cta--wa" href="whatsapp.html?src=home">WhatsApp (ventas)</a>
-          <a class="cta" href="verificacion.html">Verificación oficial</a>
+          <a class="cta" id="cta-mail-home" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20informaci%C3%B3n">Solicitar información</a>
+          <a class="cta cta--wa" id="cta-wa-home" href="whatsapp.html?src=home">WhatsApp (ventas)</a>
+          <a class="cta" id="cta-verif-home" href="verificacion.html">Verificación oficial</a>
+          <a class="cta" id="fb-share-home" href="#" rel="noopener">Compartir en Facebook</a>
           <a id="onion-link" class="cta" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=pages" target="_blank" rel="noopener">Abrir versión .onion</a>
         </div>
       </div>
@@ -104,8 +119,8 @@
       <h2>Redes oficiales</h2>
       <p>Síguenos para novedades y soporte:</p>
       <div class="cta-row">
-        <a class="cta cta--fb" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
-        <a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%20DejandoHuella%2C%20vengo%20de%20la%20web%20y%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="WhatsApp directo">WhatsApp</a>
+        <a class="cta cta--fb" id="cta-fb-home" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
+        <a class="cta cta--wa" id="cta-wa-direct" href="https://wa.me/593983566273?text=Hola%20DejandoHuella%2C%20vengo%20de%20la%20web%20y%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="WhatsApp directo">WhatsApp</a>
       </div>
     </div>
 
@@ -192,25 +207,6 @@
         </div>
       </div>
 
-      <!-- PayPal -->
-      <div class="payrow">
-        <div class="row"><b>PayPal</b><span class="tag">Pagos con tarjeta</span></div>
-        <div class="row" style="gap:10px;align-items:center">
-          <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener">Pagar con PayPal</a>
-          <small>o enviar a: <b>dejandohuella_pool@proton.me</b></small>
-        </div>
-        <details class="qrbox">
-          <summary>¿Cómo pagar por PayPal?</summary>
-          <div class="qrwrap" style="flex-direction:column;gap:8px">
-            <ol style="margin:0;padding-left:18px;color:var(--muted)">
-              <li>Abre el enlace PayPal o envía al correo indicado.</li>
-              <li>Incluye en el mensaje tu nombre y plan elegido.</li>
-              <li>Recibirás confirmación y acceso al grupo/EA.</li>
-            </ol>
-          </div>
-        </details>
-      </div>
-
       <small>Si envías por red equivocada, los fondos se pierden. Verifica dos veces.</small>
     </div>
 
@@ -242,32 +238,34 @@
       <div class="grid grid-2">
         <div class="plan">
           <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
-          <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día con entrada, SL y TP.</p>
-          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium%20(USD%20500%2Fmes).%0AMi%20nombre%3A%20_____%20%20Pa%C3%ADs%3A%20_____%0ARed%20de%20pago%20(BTC%2FUSDT%2FBanco)%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
+          <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día.</p>
+          <p><a class="cta cta--wa" id="cta-planes-sen" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium%20(USD%20500%2Fmes).%0AMi%20nombre%3A%20_____%20%20Pa%C3%ADs%3A%20_____%0ARed%20de%20pago%20(BTC%2FUSDT%2FBanco)%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
         <div class="plan">
           <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
           <p class="note">EA <b>DejandoHuella_BTCUSD</b> para una cuenta MT4. 12 meses con soporte y updates.</p>
-          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20la%20Licencia%20EA%20Personal%20(USD%203000%2Fanual).%0AMi%20nombre%3A%20_____%0ABroker%2FServidor%20MT4%3A%20_____%0AID%20de%20cuenta%20MT4%3A%20_____%0ARed%20de%20pago%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
+          <p><a class="cta cta--wa" id="cta-planes-lic" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20la%20Licencia%20EA%20Personal%20(USD%203000%2Fanual).%0AMi%20nombre%3A%20_____%0ABroker%2FServidor%20MT4%3A%20_____%0AID%20de%20cuenta%20MT4%3A%20_____%0ARed%20de%20pago%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
         <div class="plan">
           <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
           <p class="note">EA sin restricciones + <b>3 meses de mentoría</b>, instalación y optimización.</p>
-          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20EA%20Full%20%2B%20Mentor%C3%ADa%20(USD%207500).%0ANombre%3A%20_____%0ABroker%2FServidor%20MT4%3A%20_____%0AID%20de%20cuenta%20MT4%3A%20_____%0ARed%20de%20pago%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
+          <p><a class="cta cta--wa" id="cta-planes-full" href="https://wa.me/593983566273?text=Hola%2C%20quiero%20EA%20Full%20%2B%20Mentor%C3%ADa%20(USD%207500).%0ANombre%3A%20_____%0ABroker%2FServidor%20MT4%3A%20_____%0AID%20de%20cuenta%20MT4%3A%20_____%0ARed%20de%20pago%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
         <div class="plan">
           <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
           <p class="note">Participación en utilidades y derecho de marca en tu región.</p>
-          <p><a class="cta cta--wa" href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20ser%20socio%2Finversionista.%0ANombre%3A%20_____%20%20Pa%C3%ADs%3A%20_____%0ATicket%20estimado%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
+          <p><a class="cta cta--wa" id="cta-planes-socio" href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20ser%20socio%2Finversionista.%0ANombre%3A%20_____%20%20Pa%C3%ADs%3A%20_____%0ATicket%20estimado%3A%20_____%0AVengo%20de%3A%20web" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
         </div>
       </div>
-      <div style="margin-top:10px"><a class="cta" href="#contacto">Solicitar información</a></div>
+      <div style="margin-top:10px">
+        <a class="cta" id="cta-contacto" href="#contacto">Solicitar información</a>
+      </div>
     </div>
 
     <!-- Contacto -->
     <div class="card" id="contacto">
       <h2>Contacto</h2>
-      <p><a class="cta" href="mailto:dejandohuella_pool@proton.me">Escríbenos a ProtonMail</a></p>
+      <p><a class="cta" id="cta-mail-contacto" href="mailto:dejandohuella_pool@proton.me">Escríbenos a ProtonMail</a></p>
       <p>.onion: <b id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</b></p>
 
       <p><small>PGP para mensajes cifrados (compara la huella / fingerprint):</small></p>
@@ -304,8 +302,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         Clearnet: <a href="https://dejandohuellapool.github.io/dejandohuella-landing/" target="_blank" rel="noopener">Abrir sitio</a> |
         .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
       </p>
-      <p><a href="verificacion.html">Verificación oficial (enlaces y PGP)</a></p>
-      <p>Contacto: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
+      <p><a id="cta-verif-footer" href="verificacion.html">Verificación oficial (enlaces y PGP)</a></p>
+      <p>Contacto: <a id="cta-mail-footer" href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
     </footer>
 
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
@@ -426,6 +424,38 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       const link = `https://wa.me/${NUMBER}?text=${encodeURIComponent(text)}`;
       const a = document.getElementById('wa-float-link');
       if(a) a.href = link;
+    })();
+
+    // Compartir en Facebook (abre sharer con ?src=facebook)
+    (function(){
+      function fbShare(url){
+        var u = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+        window.open(u, '_blank', 'noopener,width=720,height=540');
+      }
+      var homeShare = document.getElementById('fb-share-home');
+      if(homeShare){
+        var shareURL = location.origin + location.pathname + '?src=facebook';
+        homeShare.addEventListener('click', function(e){ e.preventDefault(); fbShare(shareURL); });
+      }
+    })();
+
+    // Eventos de Pixel en CTAs clave
+    (function(){
+      var map = {
+        'cta-wa-home': 'ClickWhatsAppHome',
+        'cta-planes-sen': 'ClickPlanSenales',
+        'cta-planes-lic': 'ClickPlanLicencia',
+        'cta-planes-full': 'ClickPlanFull',
+        'cta-planes-socio': 'ClickPlanSocio',
+        'cta-verif-home': 'ClickVerificacionTop',
+        'cta-verif-footer': 'ClickVerificacionFooter',
+        'cta-mail-home': 'ClickMailHome',
+        'cta-mail-footer': 'ClickMailFooter'
+      };
+      Object.keys(map).forEach(function(id){
+        var el = document.getElementById(id);
+        if(el){ el.addEventListener('click', function(){ try{ fbq('trackCustom', map[id]); }catch(e){} }); }
+      });
     })();
   </script>
 </body>
