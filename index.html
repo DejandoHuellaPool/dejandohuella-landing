@@ -2,280 +2,441 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Clases — Academia DejandoHuella (28 días)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>DejandoHuella Trader — .onion</title>
+  <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Pagos por BTC y USDT (TRC20, BEP20, Arbitrum One, ERC-20).">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Academia DejandoHuella: curso completo de 28 días (20–30 min/día) para pasar de cero a operar con disciplina y seguridad.">
-  <meta property="og:title" content="Clases — Academia DejandoHuella (28 días)">
-  <meta property="og:description" content="DejandoHuella te prepara paso a paso para ser un verdadero trader. 28 días de entrenamiento, seguro y sin humo.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="DejandoHuella Trader — BTC/USD">
+  <meta property="og:description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Clearnet y .onion.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/clases.html">
   <meta property="og:image" content="img/og-image.png">
+  <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
+  <!-- (Opcional) Meta Pixel: pon tu ID real si quieres medir -->
+  <!-- Sustituye PIXEL_ID_AQUI por tu ID o elimina todo este bloque -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
 
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
   <style>
     :root{
-      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#111827;
-      --border:#1f2a3a; --accent:#22c55e; --link:#3b82f6;
+      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
+      --border:#1f2a3a; --link:#60a5fa; --ok:#22c55e; --warn:#f59e0b;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,Segoe UI,Roboto,Inter}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
     a{color:var(--link)}
-    .wrap{max-width:1080px;margin:auto;padding:24px}
-    header{display:flex;gap:12px;align-items:center;margin-bottom:10px}
-    header img{width:56px;height:56px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
-    h1{margin:.1em 0 .2em;font-size:28px}
+    .wrap{max-width:1000px;margin:auto;padding:24px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:8px}
+    header img{width:64px;height:64px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
+    h1{font-size:32px;margin:0}
     h2{margin:0 0 10px}
-    h3{margin:0 0 8px}
     p,li,small{color:var(--muted)}
-    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
-    .cta--wa{background:#25D366;border-color:#1fa855;color:#06250f}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
     .grid{display:grid;gap:14px}
-    .grid-2{grid-template-columns:1fr 280px}
-    .toc{position:sticky;top:14px}
-    .toc a{display:block;padding:8px 10px;border-radius:10px;text-decoration:none;border:1px solid transparent;margin:4px 0}
-    .toc a:hover{background:#0f1522;border-color:var(--border)}
-    details{border:1px solid var(--border);border-radius:12px;background:#0f1522;padding:0;margin:10px 0}
-    details>summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
-    details>summary::-webkit-details-marker{display:none}
-    details[open]>summary{background:#121f33;border-bottom:1px solid var(--border)}
-    .lesson{padding:14px}
-    .badge{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid var(--border);background:#08101b;color:var(--muted);font-size:12px}
-    code{background:#0f1522;border:1px solid var(--border);padding:2px 6px;border-radius:8px}
-    ul.tight>li{margin:.2em 0}
-    @media (max-width:980px){.grid-2{grid-template-columns:1fr}}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
+    code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .cta--fb{background:#1877F2;border-color:#0d5fe5;color:#fff}
+    .cta--wa{background:#25D366;border-color:#1fa855;color:#fff}
+    .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
+    .payrow{display:grid;gap:8px; margin-bottom:14px}
+    .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
+    .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
+    .qrbox summary::-webkit-details-marker{display:none}
+    .qrbox[open] summary{background:#162133}
+    .qrwrap{display:flex;justify-content:center;align-items:center;padding:12px;border-top:1px solid var(--border)}
+    .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
+    .qr img{width:100%;height:100%;display:block}
+    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .plan h3{margin:0;font-size:18px}
+    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
+    .note{color:var(--muted);margin:0}
+    .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .bar a{color:#b4d2ff}
+    @media (max-width:760px){
+      .grid-2{grid-template-columns:1fr}
+      header img{width:56px;height:56px}
+      h1{font-size:26px}
+    }
+
+    /* === MINIPANEL SOLO PARA "Solicitar información" === */
+    .menu{position:relative;display:inline-block}
+    .menu-panel{position:absolute;top:110%;left:0;min-width:280px;background:#0f1522;border:1px solid var(--border);
+      border-radius:12px;padding:8px;display:none;z-index:20;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+    .menu-panel a{display:block;text-decoration:none;padding:10px 12px;border-radius:10px;color:var(--fg)}
+    .menu-panel a:hover{background:#111a2a}
   </style>
 </head>
 <body>
+  <div class="bar">
+    <span>⚠️ Verifica los enlaces oficiales. Usa nuestra <a href="verificacion.html">Verificación oficial</a> o la dirección .onion.</span>
+    <a class="cta" href="#" onclick="closeBar();return false;">Cerrar</a>
+  </div>
+
   <div class="wrap">
     <header>
-      <img src="logo.png" alt="DejandoHuella" onerror="this.onerror=null;this.src='img/logo.png'">
+      <img src="logo.png" alt="DejandoHuella logo" loading="lazy" decoding="async"
+           onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
       <div>
-        <h1>Academia DejandoHuella — Clases (28 días)</h1>
-        <small>20–30 min al día · de principiante a trader disciplinado</small>
+        <h1>DejandoHuella Trader</h1>
         <div class="cta-row">
-          <a id="lnk-home" class="cta" href="./">Inicio</a>
-          <a id="lnk-wa" class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas/soporte)</a>
-          <a id="lnk-ver" class="cta" href="verificacion.html">Verificación oficial</a>
+          <!-- Botón original + panel con 4 opciones (se agregó "Cursos Trading") -->
+          <div class="menu">
+            <a class="cta" href="#" id="btn-info">Solicitar información</a>
+            <div class="menu-panel" id="panel-info" aria-hidden="true">
+              <a class="cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
+              <a href="verificacion.html">Verificación oficial</a>
+              <a href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
+              <!-- NUEVO: SOLO ESTE BOTÓN -->
+              <a href="clases.html"><b>🎓 Cursos Trading</b></a>
+            </div>
+          </div>
+
+          <a class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
+          <a class="cta" href="verificacion.html">Verificación oficial</a>
+          <a class="cta" href="#" onclick="return shareFB();">Compartir en Facebook</a>
         </div>
       </div>
     </header>
 
-    <div class="grid grid-2">
-      <main>
-        <div class="card">
-          <h2>Cómo usar este curso</h2>
-          <p><b>Metodología DH:</b> simplicidad + seguridad. Base técnica: <b>EMA50/EMA200</b> (tendencia), <b>RSI</b> (impulso) y <b>ADX</b> (fuerza) en <b>BTC/USD</b>.</p>
-          <ul class="tight">
-            <li><b>Duración:</b> 28 días, 20–30 min/día (Objetivo · Teoría · Práctica · Tarea).</li>
-            <li><b>Reglas de oro:</b> primero <b>demo</b>, riesgo <b>≤1% por operación</b>, límite diario <b>–2%</b>, nada de apalancamiento al inicio.</li>
-            <li><b>Marca DH:</b> “DejandoHuella te prepara paso a paso para ser un verdadero trader”.</li>
-          </ul>
-        </div>
+    <p><small>Última actualización: <span id="lu"></span></small></p>
 
-        <!-- SEMANA 1 -->
-        <div class="card" id="semana1">
-          <h2>Semana 1 — Fundamentos & Seguridad</h2>
-          <details id="d1"><summary>Día 1 · Qué es trading y cómo se gana <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <p><b>Objetivo:</b> comprender el negocio real sin humo.</p>
-              <p><b>Conceptos:</b> Trading = comprar/vender para capturar diferencias; <b>Spot</b> (activo real) vs <b>Derivados</b> (contratos, apalancamiento — evitar al inicio).</p>
-              <p><b>Expectancy:</b> <code>E = Winrate×Ganancia media – Lossrate×Pérdida media</code>. Buscamos R/B ≥ 1:1.5.</p>
-              <p><b>Tarea:</b> compromiso diario (30–90 min) y objetivos de proceso.</p>
-            </div>
-          </details>
-
-          <details id="d2"><summary>Día 2 · Seguridad total (2FA, whitelists, anti-phishing) <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <ul class="tight">
-                <li>Contraseñas únicas y largas; <b>2FA con app</b> (no SMS).</li>
-                <li><b>Lista blanca de retiros</b> + confirmación por correo.</li>
-                <li>Verifica dominios oficiales (clearnet + <code>.onion</code>).</li>
-                <li>Nunca compartas seed/2FA ni instales control remoto.</li>
-              </ul>
-              <p><b>Tarea:</b> activar 2FA y whitelists. Protocolo anti-phishing (5 puntos).</p>
-            </div>
-          </details>
-
-          <details id="d3"><summary>Día 3 · Velas, estructura y tendencias (HH/HL, LH/LL) <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <p>Lee soportes/resistencias, rango vs tendencia.</p>
-              <p><b>Tarea:</b> 3 capturas de tendencias y 2 de rangos en H1/H4.</p>
-            </div>
-          </details>
-
-          <details id="d4"><summary>Día 4 · Panel DH: EMA50/200 + RSI + ADX ≥ 25 <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <p>Opera a favor del cruce EMA; RSI zona 50; ADX≥25.</p>
-              <p><b>Tarea:</b> plantilla guardada + 4 ejemplos con notas.</p>
-            </div>
-          </details>
-
-          <details id="d5"><summary>Día 5 · Órdenes: market/limit/stop, SL/TP desde el inicio <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <p>Tamaño = Riesgo$ / Distancia al SL$.</p>
-              <p><b>Tarea:</b> 3 operaciones DEMO con SL/TP y bitácora.</p>
-            </div>
-          </details>
-
-          <details id="d6"><summary>Día 6 · Gestión del riesgo (1% por trade, –2% diario) <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <p>R/B 1:1.5–2; límite diario –2%.</p>
-              <p><b>Tarea:</b> 5 cálculos de tamaño.</p>
-            </div>
-          </details>
-
-          <details id="d7"><summary>Día 7 · Psicología: evita el revenge <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <p>Mantras: 1% por trade, paro –2%, no mover SL, no perseguir.</p>
-              <p><b>Tarea:</b> Tarjeta de Reglas DH (10 líneas).</p>
-            </div>
-          </details>
-        </div>
-
-        <!-- SEMANA 2 -->
-        <div class="card" id="semana2">
-          <h2>Semana 2 — Plataforma, Setups y Bitácora</h2>
-          <details id="d8"><summary>Día 8 · MT4/MT5 a fondo (demo) <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Perfiles, plantillas, Diario/Expert, atajos, capturas. <b>Tarea:</b> perfil DH_BTCUSD listo.</p></div>
-          </details>
-          <details id="d9"><summary>Día 9 · Horarios, liquidez y noticias <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Sesiones Londres/NY; evita NFP/FOMC. <b>Tarea:</b> fija 2 horas diarias.</p></div>
-          </details>
-          <details id="d10"><summary>Día 10 · Setup DH #1 — Tendencia + Pullback <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <ol>
-                <li>EMA50 &gt; EMA200 a favor del trade.</li>
-                <li>RSI cruza 50 a favor.</li>
-                <li>ADX ≥ 25.</li>
-                <li>Pullback a EMA50 o zona; vela confirmación → entrada.</li>
-                <li>SL bajo swing; TP 1.5R–2R.</li>
-              </ol>
-              <p><b>Tarea:</b> backtest 10 casos (H1).</p>
-            </div>
-          </details>
-          <details id="d11"><summary>Día 11 · Setup DH #2 — Ruptura con retesteo (BREAK_L2) <span class="badge">20–30 min</span></summary>
-            <div class="lesson">
-              <ol>
-                <li>S/R claro en marco mayor; ruptura con cierre.</li>
-                <li>Retesteo + rechazo; RSI acompaña; ADX ≥ 25.</li>
-                <li>Entrada tras confirmación; SL detrás del nivel.</li>
-              </ol>
-              <p><b>Tarea:</b> 10 backtests (winrate + R medio).</p>
-            </div>
-          </details>
-          <details id="d12"><summary>Día 12 · Bitácora profesional <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Campos clave y evidencia. <b>Tarea:</b> volcar tus 20 backtests.</p></div>
-          </details>
-          <details id="d13"><summary>Día 13 · Errores caros y contramedidas <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Mover SL, entrar tarde, sin ADX≥25, noticias, sobreoperar. <b>Tarea:</b> tus 3 errores + contramedidas.</p></div>
-          </details>
-          <details id="d14"><summary>Día 14 · Revisión semanas 1–2 <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Informe breve: winrate, R medio, DD simulado, capturas y 2 ajustes.</p></div>
-          </details>
-        </div>
-
-        <!-- SEMANA 3 -->
-        <div class="card" id="semana3">
-          <h2>Semana 3 — Sistema DH, Gestión y Evaluación</h2>
-          <details id="d15"><summary>Día 15 · Filtros finos de entrada <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Mechas de rechazo, confluencia con EMA50; evita velas monstruo. <b>Tarea:</b> añade 2 filtros con ejemplos.</p></div>
-          </details>
-          <details id="d16"><summary>Día 16 · Salidas: TP fijo, parciales y trailing <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Default: TP 1.5R–2R; alternativas: parcial al 1R o trailing por swing/EMA.</p></div>
-          </details>
-          <details id="d17"><summary>Día 17 · Riesgo diario/semanal y límites duros <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Paro –2% diario, –4% semanal; máx 3 trades/día. Alarmas/pausas.</p></div>
-          </details>
-          <details id="d18"><summary>Día 18 · Backtest serio (50 trades) — parte 1 <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Mide winrate, R medio y peor racha. <b>Tarea:</b> 25 operaciones.</p></div>
-          </details>
-          <details id="d19"><summary>Día 19 · Backtest (hasta 50) — parte 2 <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Completa 50; guarda 3 casos icónicos (win, loss, gestión correcta).</p></div>
-          </details>
-          <details id="d20"><summary>Día 20 · Checklist pre-trade & rutina <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>7 puntos: EMAs, RSI, ADX, R, SL/TP, noticias, calma. <b>Tarea:</b> 3 simulaciones.</p></div>
-          </details>
-          <details id="d21"><summary>Día 21 · Informe del sistema DH v1 <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Documento con reglas, métricas, ejemplos, do/don’t y plan de mejora.</p></div>
-          </details>
-        </div>
-
-        <!-- SEMANA 4 -->
-        <div class="card" id="semana4">
-          <h2>Semana 4 — Transición a Real & Consolidación</h2>
-          <details id="d22"><summary>Día 22 · Primeros pasos en real (micro) <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>1 trade/día máx; 1% riesgo; solo Setup #1/#2 en ventana fuerte.</p></div>
-          </details>
-          <details id="d23"><summary>Día 23 · Gestión emocional en real <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Pausa tras pérdida; no recuperar; cerrar sesión si +2R.</p></div>
-          </details>
-          <details id="d24"><summary>Día 24 · Optimización ligera (una cosa a la vez) <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Ideas: filtro horario, rango máximo, parcial al 1R; medir 20 trades.</p></div>
-          </details>
-          <details id="d25"><summary>Día 25 · Seguridad avanzada y pagos cripto <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Verifica red; retiros de prueba; PGP/huella; registro de pagos.</p></div>
-          </details>
-          <details id="d26"><summary>Día 26 · Integración con Señales/EA DH (uso responsable) <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>SL real; validar con tu panel; demo 2–4 semanas; API sin retiro.</p></div>
-          </details>
-          <details id="d27"><summary>Día 27 · Plan mensual de crecimiento <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Subir riesgo a 1.25–1.5% solo con 2–3 semanas positivas y DD controlado.</p></div>
-          </details>
-          <details id="d28"><summary>Día 28 · Graduación (examen + compromiso) <span class="badge">20–30 min</span></summary>
-            <div class="lesson"><p>Examen corto y firma del Plan Operativo DH; revisión en 30 días.</p></div>
-          </details>
-        </div>
-
-        <div class="card">
-          <h2>Materiales sugeridos</h2>
-          <div class="cta-row">
-            <a class="cta" href="assets/Bitacora_DH.csv" download>Bitácora DH (CSV)</a>
-            <a class="cta" href="assets/Checklist_Seguridad_DH.pdf" download>Checklist Seguridad (PDF)</a>
-            <a class="cta" href="assets/Checklist_PreTrade_DH.pdf" download>Checklist Pre-Trade (PDF)</a>
-            <a class="cta" href="assets/Checklist_Seguridad_DH.md" download>Seguridad (MD)</a>
-            <a class="cta" href="assets/Checklist_PreTrade_DH.md" download>Pre-Trade (MD)</a>
-          </div>
-        </div>
-      </main>
-
-      <aside>
-        <div class="card toc">
-          <h3>Índice rápido</h3>
-          <a href="#semana1">Semana 1 — Fundamentos</a>
-          <a href="#semana2">Semana 2 — Plataforma y Setups</a>
-          <a href="#semana3">Semana 3 — Sistema y Gestión</a>
-          <a href="#semana4">Semana 4 — Real & Consolidación</a>
-          <hr style="border-color:var(--border);opacity:.5">
-          <a href="#d1">Día 1</a><a href="#d2">Día 2</a><a href="#d3">Día 3</a><a href="#d4">Día 4</a><a href="#d5">Día 5</a><a href="#d6">Día 6</a><a href="#d7">Día 7</a>
-          <a href="#d8">Día 8</a><a href="#d9">Día 9</a><a href="#d10">Día 10</a><a href="#d11">Día 11</a><a href="#d12">Día 12</a><a href="#d13">Día 13</a><a href="#d14">Día 14</a>
-          <a href="#d15">Día 15</a><a href="#d16">Día 16</a><a href="#d17">Día 17</a><a href="#d18">Día 18</a><a href="#d19">Día 19</a><a href="#d20">Día 20</a><a href="#d21">Día 21</a>
-          <a href="#d22">Día 22</a><a href="#d23">Día 23</a><a href="#d24">Día 24</a><a href="#d25">Día 25</a><a href="#d26">Día 26</a><a href="#d27">Día 27</a><a href="#d28">Día 28</a>
-        </div>
-      </aside>
+    <div class="card" id="redes">
+      <h2>Redes oficiales</h2>
+      <p>Síguenos para novedades y soporte:</p>
+      <div class="cta-row">
+        <a class="cta cta--fb" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
+        <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
+      </div>
     </div>
 
-    <footer class="card" style="margin-top:10px">
-      <p><small>© 2025 DejandoHuella Trader — “Te preparamos paso a paso para ser un verdadero trader”.</small></p>
+    <div class="card">
+      <h2>Pagos (verifica la red)</h2>
+
+      <div class="grid grid-2">
+        <div>
+          <!-- BTC -->
+          <div class="payrow">
+            <div class="row"><b>BTC</b><span class="tag">Bitcoin</span></div>
+            <div class="row">
+              <code id="btc">bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4</code>
+              <span class="copy" onclick="copyTxt('btc')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="btc"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-btc" class="qr" aria-label="QR BTC"></div></div>
+            </details>
+          </div>
+
+          <!-- TRC20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">TRC20 / Tron</span></div>
+            <div class="row">
+              <code id="trc20">TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd</code>
+              <span class="copy" onclick="copyTxt('trc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="trc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-trc20" class="qr" aria-label="QR USDT TRC20"></div></div>
+            </details>
+          </div>
+
+          <!-- BEP20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">BEP20 / BSC</span></div>
+            <div class="row">
+              <code id="bep20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('bep20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="bep20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-bep20" class="qr" aria-label="QR USDT BEP20"></div></div>
+            </details>
+          </div>
+        </div>
+
+        <div>
+          <!-- ARBITRUM ONE -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">Arbitrum One</span></div>
+            <div class="row">
+              <code id="arb1">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('arb1')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="arb1"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-arb1" class="qr" aria-label="QR USDT Arbitrum One"></div></div>
+            </details>
+          </div>
+
+          <!-- ERC-20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">ERC-20 / Ethereum</span></div>
+            <div class="row">
+              <code id="erc20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('erc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="erc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-erc20" class="qr" aria-label="QR USDT ERC-20"></div></div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border-color:var(--border);opacity:.5;margin:18px 0">
+
+      <!-- Transferencia bancaria -->
+      <div class="payrow">
+        <div class="row">
+          <b>Transferencia bancaria (USD)</b>
+          <span class="tag">Banco Pichincha</span>
+        </div>
+        <div>
+          <p style="margin:6px 0 10px">
+            <b>Titular:</b> Empresa DejandoHuella<br>
+            <b>Banco:</b> Pichincha<br>
+            <b>Tipo de cuenta:</b> Ahorros / Corriente<br>
+            <b>Número de cuenta:</b> <code id="cta-pich">2207922413</code>
+            <span class="copy" onclick="copyTxt('cta-pich')">Copiar</span><br>
+            <b>Referencia:</b> “DejandoHuella + tu nombre”
+          </p>
+
+          <details class="qrbox">
+            <summary>Mostrar QR Banco Pichincha</summary>
+            <div class="qrwrap" style="flex-direction:column;gap:10px">
+              <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
+                   style="border:1px solid var(--border);border-radius:10px;background:#fff"
+                   src="img/qr-pichincha.png">
+              <a id="qr-pich-dl" class="cta" href="img/qr-pichincha.png" download="qr-pichincha.png">Descargar PNG</a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- PayPal -->
+      <div class="payrow">
+        <div class="row"><b>PayPal</b><span class="tag">Pagos con tarjeta</span></div>
+        <div class="row" style="gap:10px;align-items:center">
+          <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener">Pagar con PayPal</a>
+          <small>o enviar a: <b>dejandohuella_pool@proton.me</b></small>
+        </div>
+        <details class="qrbox">
+          <summary>¿Cómo pagar por PayPal?</summary>
+          <div class="qrwrap" style="flex-direction:column;gap:8px">
+            <ol style="margin:0;padding-left:18px;color:var(--muted)">
+              <li>Abre el enlace PayPal o envía al correo indicado.</li>
+              <li>Incluye en el mensaje tu nombre y plan elegido.</li>
+              <li>Recibirás confirmación y acceso al grupo/EA.</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+
+      <small>Si envías por red equivocada, los fondos se pierden. Verifica dos veces.</small>
+    </div>
+
+    <div class="card">
+      <h2>Cómo pagar (paso a paso)</h2>
+      <ol>
+        <li>Elige la <b>red correcta</b> (BTC, TRC20, BEP20, Arbitrum One o ERC-20).</li>
+        <li>Abre el QR con “Mostrar QR” o copia la dirección con “Copiar”.</li>
+        <li>Envía el monto acordado y espera 1–3 confirmaciones.</li>
+        <li>Envíanos el <b>hash de la transacción</b> por correo para acreditar tu plan.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Qué recibes</h2>
+      <ul>
+        <li>✅ <b>Señales Premium</b> en tiempo real.</li>
+        <li>✅ <b>EA MT4</b> con licencia y soporte de instalación.</li>
+        <li>✅ <b>Mentoría / soporte</b> privado.</li>
+        <li>✅ <b>Transparencia</b>: bitácora de entradas (RSI, ADX, EMAs, zona, etc.).</li>
+      </ul>
+    </div>
+
+    <div class="card" id="planes">
+      <h2>Planes Premium – DejandoHuella Trader</h2>
+      <div class="grid grid-2">
+        <div class="plan">
+          <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
+          <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día con entrada, SL y TP.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Señales Premium'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
+          <p class="note">EA <b>DejandoHuella_BTCUSD</b> para una cuenta MT4. 12 meses con soporte y updates.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20licencia%20EA%20personal"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Licencia EA'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
+          <p class="note">EA sin restricciones + <b>3 meses de mentoría</b>, instalación y optimización.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20EA%20Full%20%2B%20Mentor%C3%ADa"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'EA Full + Mentoría'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
+          <p class="note">Participación en utilidades y derecho de marca en tu región.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Socio%20%2F%20Inversionista"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Socio/Inversionista'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px"><a class="cta" href="#contacto">Solicitar información</a></div>
+    </div>
+
+    <div class="card" id="contacto">
+      <h2>Contacto</h2>
+      <p><a class="cta" href="mailto:dejandohuella_pool@proton.me">Escríbenos a ProtonMail</a></p>
+      <p>.onion: <b>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</b></p>
+
+      <p><small>PGP para mensajes cifrados (compara la huella / fingerprint):</small></p>
+      <details>
+        <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
+          <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
+        </summary>
+        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
+xjMEaLfYihYJKwYBBAHaRw8BAQdAtxVgF8zGlETJFchumSOySa0fYyoWVL+k
+gAdoJzAIj7bNO0RlamFuZG9IdWVsbGFfUG9vbEBwcm90b24ubWUgPERlamFu
+ZG9IdWVsbGFfUG9vbEBwcm90b24ubWU+wsARBBMWCgCDBYJot9iKAwsJBwkQ
+E3LyVlOBZFJFFAAAAAAAHAAgc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9y
+Z7QGl5DnUkpLn44szFx+0bL7PtTKJ1OdjzCG3kKkrNbSAxUKCAQWAAIBAhkB
+ApsDAh4BFiEEbCamYwLiCV3KuuOkE3LyVlOBZFIAAGgwAQDxsnXKWpa6tDlA
+Q92ZfUqYf7Hu/jnJZXN00jpvsPnsJAEA00tUpVhkO62cYwIoR9LvOp8olQcs
+buCJOy/dk3rLzQvOOARot9iKEgorBgEEAZdVAQUBAQdAuuS/mnJR2JOjHm6N
+X8x/V4HLOgaLZqqtpwGZB7JpMBIDAQgHwr4EGBYKAHAFgmi32IoJEBNy8lZT
+gWRSRRQAAAAAABwAIHNhbHRAbm90YXRpb25zLm9wZW5wZ3Bqcy5vcme8JW46
+H2+MmFpdvrzyGXVqogCmc3ZqbY+s41cIvotS3QKbDBYhBGwmpmMC4gldyrrj
+pBNy8lZTgWRSAACwxgEAyq7WSbledwSIS15YtgmQmuAzDvd3+dqsjKI+s47Q
+XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
+=EcvG
+-----END PGP PUBLIC KEY BLOCK-----</pre>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Transparencia de señales</h2>
+      <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br>L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
+    </div>
+
+    <footer class="card" style="margin-top:16px">
+      <p>
+        Clearnet: <a href="./">Abrir sitio</a> |
+        .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
+      </p>
+      <p>Contacto: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
     </footer>
+
+    <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
+  <!-- QRCode (CDN). Si falla, usamos fallback a imágenes locales -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <script>
-    // Preserva ?src= al navegar
+    // Barra superior
+    function closeBar(){ const b=document.querySelector('.bar'); if(b) b.remove(); }
+
+    // Fecha
+    document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
+
+    // Menú "Solicitar información" (solo mostrar/ocultar)
     (function(){
-      const params = new URL(location.href).search;
-      if(!params) return;
-      ['lnk-home','lnk-wa','lnk-ver'].forEach(id=>{
-        const a=document.getElementById(id); if(!a) return;
-        const u=new URL(a.getAttribute('href'), location.href);
-        if(!u.search) u.search = params.replace(/^\?/, '?');
-        a.setAttribute('href', u.pathname + u.search + u.hash);
-      });
+      const btn=document.getElementById('btn-info');
+      const panel=document.getElementById('panel-info');
+      btn.addEventListener('click',(e)=>{e.preventDefault(); panel.style.display = panel.style.display==='block'?'none':'block';});
+      document.addEventListener('click',(e)=>{ if(!panel.contains(e.target) && e.target!==btn) panel.style.display='none'; });
     })();
+
+    // Copiar con fallback
+    function copyTxt(id){
+      const el = document.getElementById(id); if(!el) return;
+      const txt = el.textContent.trim();
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
+      }else{
+        const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
+        ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(_){}
+        ta.remove();
+      }
+    }
+    function toast(text){
+      const msg=document.createElement('div'); msg.textContent=text;
+      Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
+      padding:'8px 12px',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,.4)',zIndex:'9999'}); 
+      document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
+    }
+
+    // Direcciones cripto
+    const ADDR = {
+      btc:'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',
+      trc20:'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',
+      bep20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      arb1:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'
+    };
+
+    // Generar QR perezoso: CDN o fallback a PNG local
+    function ensureQR(id, text, key){
+      const box=document.getElementById(id);
+      if(!box || box.dataset.done) return;
+      if(window.QRCode){
+        const size=Math.min(box.clientWidth||180, box.clientHeight||180);
+        new QRCode(box,{text,width:size,height:size,correctLevel: QRCode.CorrectLevel.M});
+      }else{
+        const img=document.createElement('img'); img.alt='QR '+key.toUpperCase(); img.src='img/qr_'+key+'.png';
+        box.appendChild(img);
+      }
+      box.dataset.done='1';
+    }
+    document.querySelectorAll('.qrbox').forEach(d=>{
+      d.addEventListener('toggle', ()=>{
+        if(!d.open) return;
+        const key=d.dataset.key; const target='qr-'+key;
+        if(key && ADDR[key]) ensureQR(target, ADDR[key], key);
+      });
+    });
+
+    // Botón compartir Facebook
+    const SHARE_URL='https://dejandohuellapool.github.io/dejandohuella-landing/';
+    const SHARE_QUOTE='Señales BTC/USD, EA MT4 y mentoría — DejandoHuella Trader';
+    function shareFB(){
+      const u='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SHARE_URL)+'&quote='+encodeURIComponent(SHARE_QUOTE);
+      const w=720,h=640,left=(screen.width-w)/2,top=(screen.height-h)/2;
+      window.open(u,'fbshare',`width=${w},height=${h},left=${left},top=${top},menubar=0,toolbar=0,status=0`);
+      return false;
+    }
   </script>
 </body>
 </html>
