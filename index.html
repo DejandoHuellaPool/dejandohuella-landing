@@ -62,12 +62,17 @@
     .note{color:var(--muted);margin:0}
     .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
     .bar a{color:#b4d2ff}
-    /* Botón único con menú */
+    /* Botón único con mega-panel */
     .menu{position:relative;display:inline-block}
-    .menu-panel{position:absolute;top:110%;left:0;min-width:260px;background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px;display:none;z-index:20}
+    .menu-panel{position:absolute;top:110%;left:0;min-width:320px;max-width:520px;background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:10px;display:none;z-index:20;box-shadow:0 8px 28px rgba(0,0,0,.35)}
     .menu-panel a{display:block;text-decoration:none;padding:10px 12px;border-radius:10px;color:var(--fg)}
     .menu-panel a:hover{background:#111a2a}
-    @media (max-width:960px){.grid-2{grid-template-columns:1fr} header img{width:56px;height:56px} h1{font-size:26px}}
+    .menu-grid{display:grid;gap:10px}
+    .menu-grid.two{grid-template-columns:1fr 1fr}
+    .menu-title{font-weight:800;margin:6px 0 2px}
+    .menu-desc{color:var(--muted);font-size:14px;margin:0 0 8px}
+    .chip{display:inline-block;font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);background:#0b1322;margin-right:6px}
+    @media (max-width:960px){.grid-2{grid-template-columns:1fr} header img{width:56px;height:56px} h1{font-size:26px} .menu-panel{max-width:min(92vw,520px)}}
   </style>
 </head>
 <body>
@@ -87,12 +92,32 @@
           <div class="menu">
             <a class="cta" href="#" id="btn-info">Solicitar información</a>
             <div class="menu-panel" id="panel-info" role="menu" aria-hidden="true">
-              <a class="cta--wa" href="whatsapp.html" role="menuitem">WhatsApp (ventas)</a>
-              <a href="verificacion.html" role="menuitem">Verificación oficial</a>
-              <a href="clases.html" role="menuitem">Clases (28 días)</a>
-              <a href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader" role="menuitem">Solicitud por mail</a>
+              <!-- Bloque WhatsApp / Verificación / Mail -->
+              <div class="menu-grid two" style="margin-bottom:8px">
+                <a class="cta--wa" href="whatsapp.html" role="menuitem">WhatsApp (ventas)</a>
+                <a href="verificacion.html" role="menuitem">Verificación oficial</a>
+                <a href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader" role="menuitem">Solicitud por mail</a>
+              </div>
+              <hr style="border-color:var(--border);opacity:.5;margin:8px 0">
+              <!-- BLOQUE ACADEMIA DENTRO DEL PANEL -->
+              <div>
+                <div class="menu-title">Academia DejandoHuella — Clases</div>
+                <p class="menu-desc">
+                  28 días · 20–30 min/día · Seguridad, gestión de riesgo y sistema simple (EMA50/200 + RSI + ADX). 
+                  <span class="chip">Primero demo</span><span class="chip">Riesgo 1%</span><span class="chip">–2% diario</span>
+                </p>
+                <div class="menu-grid two">
+                  <a href="clases.html" role="menuitem"><b>📘 Abrir Clases (28 días)</b></a>
+                  <a href="assets/Bitacora_DH.csv" download role="menuitem">🗒️ Bitácora (CSV)</a>
+                  <a href="assets/Checklist_Seguridad_DH.pdf" download role="menuitem">🔐 Checklist Seguridad (PDF)</a>
+                  <a href="assets/Checklist_PreTrade_DH.pdf" download role="menuitem">✅ Checklist Pre-Trade (PDF)</a>
+                  <a href="assets/Checklist_Seguridad_DH.md" download role="menuitem">MD Seguridad</a>
+                  <a href="assets/Checklist_PreTrade_DH.md" download role="menuitem">MD Pre-Trade</a>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- /Botón único -->
         </div>
       </div>
     </header>
@@ -102,23 +127,7 @@
     <!-- Layout principal: contenido + sidebar -->
     <div class="grid grid-2">
       <main>
-        <!-- ACADEMIA / CLASES -->
-        <div class="card" id="academia">
-          <h2>Academia DejandoHuella — Clases</h2>
-          <p>“DejandoHuella te prepara paso a paso para ser un verdadero trader”. Curso práctico de <b>28 días</b>, <b>20–30 min/día</b>, con enfoque en <b>seguridad</b>, <b>gestión de riesgo</b> y un sistema simple (EMA50/200 + RSI + ADX) primero en <b>demo</b> y luego en <b>real</b>.</p>
-          <div class="cta-row">
-            <a class="cta" href="clases.html">Abrir Clases (28 días)</a>
-            <!-- Descargas (ajusta la ruta si usas otra carpeta) -->
-            <a class="cta" href="assets/Bitacora_DH.csv" download>Descargar Bitácora (CSV)</a>
-            <a class="cta" href="assets/Checklist_Seguridad_DH.pdf" download>Checklist Seguridad (PDF)</a>
-            <a class="cta" href="assets/Checklist_PreTrade_DH.pdf" download>Checklist Pre-Trade (PDF)</a>
-          </div>
-          <div class="cta-row">
-            <a class="cta" href="assets/Checklist_Seguridad_DH.md" download>Seguridad (MD)</a>
-            <a class="cta" href="assets/Checklist_PreTrade_DH.md" download>Pre-Trade (MD)</a>
-          </div>
-          <!-- NOTA: Sube estos archivos a /assets/ o cambia los href según tu ruta -->
-        </div>
+        <!-- (Se quitó la card "Academia" porque ya está dentro del botón) -->
 
         <div class="card">
           <h2>Pagos (verifica la red)</h2>
