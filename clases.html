@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Clases — Academia DejandoHuella (28 días)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Academia DejandoHuella: curso completo de 28 días (20–30 min/día) para pasar de cero a operar con disciplina y seguridad.">
+  <meta property="og:title" content="Clases — Academia DejandoHuella (28 días)">
+  <meta property="og:description" content="DejandoHuella te prepara paso a paso para ser un verdadero trader. 28 días de entrenamiento, seguro y sin humo.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/clases.html">
+  <meta property="og:image" content="img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root{
+      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#111827;
+      --border:#1f2a3a; --accent:#22c55e; --link:#3b82f6;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,Segoe UI,Roboto,Inter}
+    a{color:var(--link)}
+    .wrap{max-width:1080px;margin:auto;padding:24px}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+    header img{width:56px;height:56px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
+    h1{margin:.1em 0 .2em;font-size:28px}
+    h2{margin:0 0 10px}
+    h3{margin:0 0 8px}
+    p,li,small{color:var(--muted)}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .cta--wa{background:#25D366;border-color:#1fa855;color:#06250f}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
+    .grid{display:grid;gap:14px}
+    .grid-2{grid-template-columns:1fr 280px}
+    .toc{position:sticky;top:14px}
+    .toc a{display:block;padding:8px 10px;border-radius:10px;text-decoration:none;border:1px solid transparent;margin:4px 0}
+    .toc a:hover{background:#0f1522;border-color:var(--border)}
+    details{border:1px solid var(--border);border-radius:12px;background:#0f1522;padding:0;margin:10px 0}
+    details>summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:700;display:flex;align-items:center;justify-content:space-between}
+    details>summary::-webkit-details-marker{display:none}
+    details[open]>summary{background:#121f33;border-bottom:1px solid var(--border)}
+    .lesson{padding:14px}
+    .badge{display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid var(--border);background:#08101b;color:var(--muted);font-size:12px}
+    code{background:#0f1522;border:1px solid var(--border);padding:2px 6px;border-radius:8px}
+    ul.tight>li{margin:.2em 0}
+    @media (max-width:980px){.grid-2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="logo.png" alt="DejandoHuella" onerror="this.onerror=null;this.src='img/logo.png'">
+      <div>
+        <h1>Academia DejandoHuella — Clases (28 días)</h1>
+        <small>20–30 min al día · de principiante a trader disciplinado</small>
+        <div class="cta-row">
+          <a id="lnk-home" class="cta" href="./">Inicio</a>
+          <a id="lnk-wa" class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas/soporte)</a>
+          <a id="lnk-ver" class="cta" href="verificacion.html">Verificación oficial</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid grid-2">
+      <main>
+        <div class="card">
+          <h2>Cómo usar este curso</h2>
+          <p><b>Metodología DH:</b> simplicidad + seguridad. Base técnica: <b>EMA50/EMA200</b> (tendencia), <b>RSI</b> (impulso) y <b>ADX</b> (fuerza) en <b>BTC/USD</b>.</p>
+          <ul class="tight">
+            <li><b>Duración:</b> 28 días, 20–30 min/día (Objetivo · Teoría · Práctica · Tarea).</li>
+            <li><b>Reglas de oro:</b> primero <b>demo</b>, riesgo <b>≤1% por operación</b>, límite diario <b>–2%</b>, nada de apalancamiento al inicio.</li>
+            <li><b>Marca DH:</b> “DejandoHuella te prepara paso a paso para ser un verdadero trader”.</li>
+          </ul>
+        </div>
+
+        <!-- Semana 1 -->
+        <div class="card" id="semana1">
+          <h2>Semana 1 — Fundamentos & Seguridad</h2>
+
+          <details id="d1"><summary>Día 1 · Qué es trading y cómo se gana <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p><b>Objetivo:</b> comprender el negocio real sin humo.</p>
+              <p><b>Conceptos:</b> Trading = comprar/vender para capturar diferencias; <b>Spot</b> (activo real) vs <b>Derivados</b> (contratos, apalancamiento — evitar al inicio).</p>
+              <p><b>Expectancy:</b> <code>E = Winrate×Ganancia media – Lossrate×Pérdida media</code>. Buscamos R/B ≥ 1:1.5.</p>
+              <p><b>Práctica:</b> ejemplo con riesgo 1R (arriesgas 100 → objetivo 150–200). </p>
+              <p><b>Tarea:</b> escribe tu compromiso diario (30–90 min) y objetivos de proceso (disciplina, bitácora).</p>
+            </div>
+          </details>
+
+          <details id="d2"><summary>Día 2 · Seguridad total (2FA, whitelists, anti-phishing) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <ul class="tight">
+                <li>Contraseñas únicas y largas; <b>2FA con app</b> (no SMS).</li>
+                <li><b>Lista blanca de retiros</b> + confirmación por correo.</li>
+                <li>Verifica dominios oficiales (clearnet + <code>.onion</code>); desconfía de acortadores raros.</li>
+                <li>Nunca compartas seed/2FA ni instales control remoto para “soporte”.</li>
+              </ul>
+              <p><b>Tarea:</b> activar 2FA y whitelists. Escribe tu protocolo anti-phishing (5 puntos).</p>
+            </div>
+          </details>
+
+          <details id="d3"><summary>Día 3 · Velas, estructura y tendencias (HH/HL, LH/LL) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p><b>Objetivo:</b> leer el precio sin indicadores.</p>
+              <p><b>Conceptos:</b> estructura de mercado, soportes/resistencias, rango vs tendencia.</p>
+              <p><b>Práctica:</b> en BTCUSD (H1/H4) marca 3 tramos de tendencia y 2 rangos.</p>
+              <p><b>Tarea:</b> 3 capturas con explicación “por qué es tendencia” y “dónde NO opero”.</p>
+            </div>
+          </details>
+
+          <details id="d4"><summary>Día 4 · Panel DH: EMA50/200 + RSI + ADX ≥ 25 <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p><b>Regla base DH:</b> opera a favor del cruce de EMAs, confirma con RSI (zona 50) y exige ADX≥25.</p>
+              <p><b>Práctica:</b> configura plantilla en tu plataforma y guárdala.</p>
+              <p><b>Tarea:</b> 2 ejemplos alcistas y 2 bajistas en H1/H4 con tus notas.</p>
+            </div>
+          </details>
+
+          <details id="d5"><summary>Día 5 · Órdenes: market/limit/stop, SL/TP desde el inicio <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Coloca <b>SL/TP</b> al abrir la orden. Evita slippage entrando en confirmaciones claras.</p>
+              <p><b>Tamaño</b> = Riesgo$ / Distancia al SL$.</p>
+              <p><b>Tarea:</b> 3 operaciones en <b>demo</b> con SL/TP puestos y bitácora.</p>
+            </div>
+          </details>
+
+          <details id="d6"><summary>Día 6 · Gestión del riesgo (1% por trade, –2% diario) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Define riesgo por operación ≤1% y relación R/B de 1:1.5–2.</p>
+              <p><b>Tarea:</b> 5 cálculos de tamaño con distintos SL.</p>
+            </div>
+          </details>
+
+          <details id="d7"><summary>Día 7 · Psicología: reglas que te salvan del revenge <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p><b>Mantras DH:</b> “1% por trade”, “paro al –2%”, “no muevo SL” y “no persigo precio”.</p>
+              <p><b>Tarea:</b> Tarjeta de Reglas DH (10 líneas) visible en tu setup.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Semana 2 -->
+        <div class="card" id="semana2">
+          <h2>Semana 2 — Plataforma, Setups y Bitácora</h2>
+
+          <details id="d8"><summary>Día 8 · MT4/MT5 a fondo (demo) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Perfiles, plantillas, Diario/Expert, atajos, capturas.</p>
+              <p><b>Tarea:</b> perfil <b>DH_BTCUSD</b> listo.</p>
+            </div>
+          </details>
+
+          <details id="d9"><summary>Día 9 · Horarios, liquidez y noticias <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Sesiones Londres/NY, overlaps, evita NFP/FOMC al inicio.</p>
+              <p><b>Tarea:</b> fija 2 horas diarias de operativa.</p>
+            </div>
+          </details>
+
+          <details id="d10"><summary>Día 10 · Setup DH #1 — Tendencia + Pullback <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <ol>
+                <li>EMA50 &gt; EMA200 (alcista).</li>
+                <li>RSI cruza 50 a favor.</li>
+                <li>ADX ≥ 25.</li>
+                <li>Pullback a EMA50/zona; vela de confirmación → entrada.</li>
+                <li>SL bajo swing; TP 1.5R–2R.</li>
+              </ol>
+              <p><b>Tarea:</b> backtest 10 casos en H1.</p>
+            </div>
+          </details>
+
+          <details id="d11"><summary>Día 11 · Setup DH #2 — Ruptura con retesteo (BREAK_L2) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <ol>
+                <li>S/R claro en marco mayor y ruptura con cierre.</li>
+                <li>Retesteo + rechazo; RSI acompaña; ADX ≥ 25.</li>
+                <li>Entrada tras confirmación; SL detrás del nivel.</li>
+              </ol>
+              <p><b>Tarea:</b> 10 backtests; calcula winrate y R medio.</p>
+            </div>
+          </details>
+
+          <details id="d12"><summary>Día 12 · Bitácora profesional (tu espejo) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Campos: Fecha/Hora, Setup, Marco, Dirección, Entrada, SL, TP, Riesgo $/%, <b>R final</b>, Emoción (1–5), Error/Aprendizaje, Captura.</p>
+              <p><b>Tarea:</b> vuelca los 20 backtests de D10–D11.</p>
+            </div>
+          </details>
+
+          <details id="d13"><summary>Día 13 · Errores caros y contramedidas <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <ul class="tight">
+                <li>Mover SL • Entrar tarde • Operar sin ADX≥25 • Operar noticias • Sobreoperar</li>
+              </ul>
+              <p><b>Tarea:</b> lista de tus 3 errores probables + contramedidas.</p>
+            </div>
+          </details>
+
+          <details id="d14"><summary>Día 14 · Revisión semanas 1–2 (informe breve) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Mini-informe: winrate, R medio, DD simulado, capturas y 2 ajustes.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Semana 3 -->
+        <div class="card" id="semana3">
+          <h2>Semana 3 — Sistema DH, Gestión y Evaluación</h2>
+
+          <details id="d15"><summary>Día 15 · Filtros finos de entrada <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Usa mechas de rechazo, confluencia con EMA50 y evita velas monstruo.</p>
+              <p><b>Tarea:</b> añade 2 filtros a tu Setup #1 con ejemplos.</p>
+            </div>
+          </details>
+
+          <details id="d16"><summary>Día 16 · Salidas: TP fijo, parciales y trailing <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Default recomendado: <b>TP fijo 1.5R–2R</b>. Alternativas: parcial al 1R; trailing por swing/EMA.</p>
+              <p><b>Tarea:</b> define tu protocolo por defecto y cuándo cambiarlo.</p>
+            </div>
+          </details>
+
+          <details id="d17"><summary>Día 17 · Riesgo diario/semanal y límites duros <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Paro al <b>–2% diario</b> y <b>–4% semanal</b>; máximo 3 trades/día.</p>
+              <p><b>Tarea:</b> programa recordatorios y pausas.</p>
+            </div>
+          </details>
+
+          <details id="d18"><summary>Día 18 · Backtest serio (50 trades) — parte 1 <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Aplica reglas sin cambiarlas a mitad. Mide winrate, R medio y peor racha.</p>
+              <p><b>Tarea:</b> completa 25 hoy.</p>
+            </div>
+          </details>
+
+          <details id="d19"><summary>Día 19 · Backtest (hasta 50) — parte 2 <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p><b>Tarea:</b> termina 50 y guarda 3 casos icónicos (gran win, loss, gestión correcta).</p>
+            </div>
+          </details>
+
+          <details id="d20"><summary>Día 20 · Checklist pre-trade & rutina operativa <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Checklist: 1) EMAs a favor 2) RSI confirma 3) ADX≥25 4) R≥1:1.5 5) SL/TP listos 6) Sin noticia fuerte 7) Respiración 2 min.</p>
+              <p><b>Tarea:</b> 3 simulaciones usando el checklist.</p>
+            </div>
+          </details>
+
+          <details id="d21"><summary>Día 21 · Informe del sistema DH v1 <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Documento con reglas, métricas (winrate, R, DD), ejemplos, do/don’t y plan de mejora.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Semana 4 -->
+        <div class="card" id="semana4">
+          <h2>Semana 4 — Transición a Real & Consolidación</h2>
+
+          <details id="d22"><summary>Día 22 · Primeros pasos en real (micro) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>1 trade/día máx, <b>1% riesgo</b>, solo Setup #1/2 en tu ventana fuerte.</p>
+              <p><b>Tarea:</b> un trade real (si hay señal) o paper con captura + bitácora.</p>
+            </div>
+          </details>
+
+          <details id="d23"><summary>Día 23 · Gestión emocional en real <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Tras pérdida: pausa 15–30 min; revisa checklist; <b>no recuperar</b>. Tras ganancia grande: cierra sesión si superas +2R.</p>
+              <p><b>Tarea:</b> plan anti-revenge (10 líneas).</p>
+            </div>
+          </details>
+
+          <details id="d24"><summary>Día 24 · Optimización ligera (una cosa a la vez) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Ideas: filtro de horario, rango máximo, parcial al 1R. Cambia una variable y mide 20 trades.</p>
+            </div>
+          </details>
+
+          <details id="d25"><summary>Día 25 · Seguridad avanzada y pagos cripto <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <ul class="tight">
+                <li>Verifica <b>red</b> (TRC20/BEP20/ERC-20) antes de enviar.</li>
+                <li>Retiros de prueba simbólicos y registro.</li>
+                <li>PGP/huella y verificación de direcciones.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details id="d26"><summary>Día 26 · Integración con Señales/EA DH (uso responsable) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Siempre SL real; valida con tu panel; prueba en <b>demo 2–4 semanas</b>; API sin permiso de retiro.</p>
+              <p><b>Tarea:</b> ejecutar 3 señales en demo y compararlas con tu plan manual.</p>
+            </div>
+          </details>
+
+          <details id="d27"><summary>Día 27 · Plan mensual de crecimiento <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p>Subir riesgo a 1.25–1.5% solo con 2–3 semanas positivas, DD controlado y 90% de disciplina medida.</p>
+              <p><b>Tarea:</b> metas de proceso (n° setups de calidad, % disciplina), no de dinero.</p>
+            </div>
+          </details>
+
+          <details id="d28"><summary>Día 28 · Graduación DH (examen corto + compromiso) <span class="badge">20–30 min</span></summary>
+            <div class="lesson">
+              <p><b>Examen auto-evaluación:</b> 1) Define tu entrada #1 2) ¿Cuándo no operas? 3) ¿Qué haces al –2%? 4) ¿Cómo calculas tamaño? 5) ¿Qué valida ADX?</p>
+              <p><b>Compromiso:</b> firma tu <b>Plan Operativo DH</b> y fija revisión en 30 días.</p>
+              <p><i>Mensaje DH:</i> “No ganamos por adivinar, ganamos por <b>gestionar</b>”.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="card">
+          <h2>Materiales sugeridos</h2>
+          <ul>
+            <li><b>Bitácora DH</b> (CSV/Sheets) — campos: Fecha, Setup, Entrada, SL, TP, Riesgo, R final, Emoción, Error/Aprendizaje, Captura.</li>
+            <li><b>Checklist de Seguridad</b> — 2FA, whitelists, verificación de dominios/PGP, retiros de prueba.</li>
+            <li><b>Checklist Pre-Trade</b> — 7 puntos (EMAs, RSI, ADX, R, SL/TP, noticias, calma).</li>
+          </ul>
+          <p>Si quieres, los preparo como archivos descargables con tu marca.</p>
+        </div>
+      </main>
+
+      <aside>
+        <div class="card toc">
+          <h3>Índice rápido</h3>
+          <a href="#semana1">Semana 1 — Fundamentos</a>
+          <a href="#semana2">Semana 2 — Plataforma y Setups</a>
+          <a href="#semana3">Semana 3 — Sistema y Gestión</a>
+          <a href="#semana4">Semana 4 — Real & Consolidación</a>
+          <hr style="border-color:var(--border);opacity:.5">
+          <a href="#d1">Día 1</a><a href="#d2">Día 2</a><a href="#d3">Día 3</a><a href="#d4">Día 4</a><a href="#d5">Día 5</a><a href="#d6">Día 6</a><a href="#d7">Día 7</a>
+          <a href="#d8">Día 8</a><a href="#d9">Día 9</a><a href="#d10">Día 10</a><a href="#d11">Día 11</a><a href="#d12">Día 12</a><a href="#d13">Día 13</a><a href="#d14">Día 14</a>
+          <a href="#d15">Día 15</a><a href="#d16">Día 16</a><a href="#d17">Día 17</a><a href="#d18">Día 18</a><a href="#d19">Día 19</a><a href="#d20">Día 20</a><a href="#d21">Día 21</a>
+          <a href="#d22">Día 22</a><a href="#d23">Día 23</a><a href="#d24">Día 24</a><a href="#d25">Día 25</a><a href="#d26">Día 26</a><a href="#d27">Día 27</a><a href="#d28">Día 28</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="card" style="margin-top:10px">
+      <p><small>© 2025 DejandoHuella Trader — “Te preparamos paso a paso para ser un verdadero trader”.</small></p>
+    </footer>
+  </div>
+
+  <script>
+    // Preserva ?src= al navegar a Inicio / WhatsApp / Verificación
+    (function(){
+      const params = new URL(location.href).search;
+      if(!params) return;
+      ['lnk-home','lnk-wa','lnk-ver'].forEach(id=>{
+        const a=document.getElementById(id); if(!a) return;
+        const u=new URL(a.getAttribute('href'), location.href);
+        if(!u.search) u.search = params.replace(/^\?/, '?');
+        a.setAttribute('href', u.pathname + u.search + u.hash);
+      });
+    })();
+  </script>
+</body>
+</html>
