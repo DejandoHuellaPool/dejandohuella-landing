@@ -15,8 +15,7 @@
   <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- (Opcional) Meta Pixel: pon tu ID real si quieres medir -->
-  <!-- Sustituye PIXEL_ID_AQUI por tu ID o elimina todo este bloque -->
+  <!-- (Opcional) Meta Pixel (sin cambios) -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -28,16 +27,18 @@
     src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
+
   <style>
     :root{
-      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
-      --border:#1f2a3a; --link:#60a5fa; --ok:#22c55e; --warn:#f59e0b;
+      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826;
+      --accent:#22c55e; --accent2:#1ed760; --border:#1f2a3a; --link:#60a5fa;
+      --btnText:#06250f; --shadow:rgba(0,0,0,.45);
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
-    a{color:var(--link)}
-    .wrap{max-width:1000px;margin:auto;padding:24px}
-    header{display:flex;gap:14px;align-items:center;margin-bottom:8px}
+    a{color:var(--link);text-decoration:none}
+    .wrap{max-width:1100px;margin:auto;padding:24px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
     header img{width:64px;height:64px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
     h1{font-size:32px;margin:0}
     h2{margin:0 0 10px}
@@ -48,11 +49,32 @@
     .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
     .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
-    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-    .cta--fb{background:#1877F2;border-color:#0d5fe5;color:#fff}
-    .cta--wa{background:#25D366;border-color:#1fa855;color:#fff}
-    .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
+    /* === Botones 3D profesionales === */
+    .cta{
+      display:inline-block; min-width:180px; text-align:center;
+      background:linear-gradient(180deg,var(--accent2),var(--accent));
+      color:var(--btnText); padding:12px 18px; border-radius:12px;
+      font-weight:700; border:0; box-shadow:0 6px 0 #0e7a41, 0 8px 18px var(--shadow);
+      transform:translateY(0); transition:transform .08s ease, box-shadow .08s ease, filter .2s ease;
+      user-select:none; -webkit-tap-highlight-color:transparent
+    }
+    .cta:active{ transform:translateY(3px); box-shadow:0 3px 0 #0e7a41, 0 6px 12px var(--shadow) }
+    .cta--wa{background:linear-gradient(180deg,#2cf475,#25D366)}
+    .cta--dark{background:linear-gradient(180deg,#7aa9ff,#3b82f6); color:#081226; box-shadow:0 6px 0 #1f5cc8, 0 8px 18px var(--shadow)}
+
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+
+    /* Menú emergente del botón principal */
+    .menu{position:relative;display:inline-block}
+    .menu-panel{
+      position:absolute; top:110%; left:0; min-width:280px;
+      background:#0f1522; border:1px solid var(--border); border-radius:14px; padding:10px;
+      display:none; z-index:30; box-shadow:0 16px 28px var(--shadow)
+    }
+    .menu-panel a{display:block; margin:8px 0}
+    .menu-panel hr{border:0;border-top:1px solid var(--border);opacity:.6;margin:8px 0}
+
+    /* QR & pagos (sin cambios visuales fuertes) */
     .payrow{display:grid;gap:8px; margin-bottom:14px}
     .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
     .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
@@ -61,24 +83,31 @@
     .qrwrap{display:flex;justify-content:center;align-items:center;padding:12px;border-top:1px solid var(--border)}
     .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
     .qr img{width:100%;height:100%;display:block}
+
     .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
     .plan h3{margin:0;font-size:18px}
     .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
     .note{color:var(--muted);margin:0}
+
     .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
     .bar a{color:#b4d2ff}
-    @media (max-width:760px){
+
+    /* Responsive */
+    @media (max-width:980px){
+      .wrap{padding:18px}
       .grid-2{grid-template-columns:1fr}
       header img{width:56px;height:56px}
       h1{font-size:26px}
+      .cta{min-width:unset;width:100%}
+      .menu-panel{max-width:92vw}
     }
-
-    /* === MINIPANEL SOLO PARA "Solicitar información" === */
-    .menu{position:relative;display:inline-block}
-    .menu-panel{position:absolute;top:110%;left:0;min-width:280px;background:#0f1522;border:1px solid var(--border);
-      border-radius:12px;padding:8px;display:none;z-index:20;box-shadow:0 8px 28px rgba(0,0,0,.35)}
-    .menu-panel a{display:block;text-decoration:none;padding:10px 12px;border-radius:10px;color:var(--fg)}
-    .menu-panel a:hover{background:#111a2a}
+    /* Ajuste para móvil horizontal (apaisado) */
+    @media (max-height:520px) and (orientation:landscape){
+      .wrap{padding:14px}
+      .cta{padding:10px 14px}
+      header img{width:52px;height:52px}
+      h1{font-size:24px}
+    }
   </style>
 </head>
 <body>
@@ -94,21 +123,18 @@
       <div>
         <h1>DejandoHuella Trader</h1>
         <div class="cta-row">
-          <!-- Botón original + panel con 4 opciones (se agregó "Cursos Trading") -->
+          <!-- ÚNICO botón visible en la cabecera -->
           <div class="menu">
             <a class="cta" href="#" id="btn-info">Solicitar información</a>
+            <!-- Panel con TODAS las opciones -->
             <div class="menu-panel" id="panel-info" aria-hidden="true">
-              <a class="cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
-              <a href="verificacion.html">Verificación oficial</a>
-              <a href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
-              <!-- NUEVO: SOLO ESTE BOTÓN -->
-              <a href="clases.html"><b>🎓 Cursos Trading</b></a>
+              <a class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
+              <a class="cta" href="verificacion.html">Verificación oficial</a>
+              <a class="cta cta--dark" href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
+              <hr>
+              <a class="cta" href="clases.html"><b>🎓 Cursos Trading</b></a>
             </div>
           </div>
-
-          <a class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
-          <a class="cta" href="verificacion.html">Verificación oficial</a>
-          <a class="cta" href="#" onclick="return shareFB();">Compartir en Facebook</a>
         </div>
       </div>
     </header>
@@ -119,11 +145,13 @@
       <h2>Redes oficiales</h2>
       <p>Síguenos para novedades y soporte:</p>
       <div class="cta-row">
-        <a class="cta cta--fb" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
+        <!-- Si no quieres Facebook aquí, puedes borrar esta línea -->
+        <a class="cta cta--dark" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
         <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
       </div>
     </div>
 
+    <!-- ======= P A G O S ======= -->
     <div class="card">
       <h2>Pagos (verifica la red)</h2>
 
@@ -326,7 +354,7 @@
         <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
           <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
         </summary>
-        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
+<pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
 xjMEaLfYihYJKwYBBAHaRw8BAQdAtxVgF8zGlETJFchumSOySa0fYyoWVL+k
 gAdoJzAIj7bNO0RlamFuZG9IdWVsbGFfUG9vbEBwcm90b24ubWUgPERlamFu
 ZG9IdWVsbGFfUG9vbEBwcm90b24ubWU+wsARBBMWCgCDBYJot9iKAwsJBwkQ
@@ -361,7 +389,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode (CDN). Si falla, usamos fallback a imágenes locales -->
+  <!-- QRCode CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
@@ -371,7 +399,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     // Fecha
     document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
 
-    // Menú "Solicitar información" (solo mostrar/ocultar)
+    // Panel de "Solicitar información"
     (function(){
       const btn=document.getElementById('btn-info');
       const panel=document.getElementById('panel-info');
@@ -398,7 +426,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
     }
 
-    // Direcciones cripto
+    // Direcciones cripto (sin cambios)
     const ADDR = {
       btc:'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',
       trc20:'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',
@@ -407,7 +435,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'
     };
 
-    // Generar QR perezoso: CDN o fallback a PNG local
+    // QR perezoso
     function ensureQR(id, text, key){
       const box=document.getElementById(id);
       if(!box || box.dataset.done) return;
@@ -427,16 +455,6 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         if(key && ADDR[key]) ensureQR(target, ADDR[key], key);
       });
     });
-
-    // Botón compartir Facebook
-    const SHARE_URL='https://dejandohuellapool.github.io/dejandohuella-landing/';
-    const SHARE_QUOTE='Señales BTC/USD, EA MT4 y mentoría — DejandoHuella Trader';
-    function shareFB(){
-      const u='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SHARE_URL)+'&quote='+encodeURIComponent(SHARE_QUOTE);
-      const w=720,h=640,left=(screen.width-w)/2,top=(screen.height-h)/2;
-      window.open(u,'fbshare',`width=${w},height=${h},left=${left},top=${top},menubar=0,toolbar=0,status=0`);
-      return false;
-    }
   </script>
 </body>
 </html>
