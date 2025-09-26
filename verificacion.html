@@ -5,50 +5,20 @@
   <title>Verificación oficial — DejandoHuella Trader</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Verifica enlaces oficiales, dirección .onion y huella PGP de DejandoHuella Trader. Evita phishing.">
-
-  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Verificación oficial — DejandoHuella Trader">
   <meta property="og:description" content="Direcciones oficiales, clave PGP y enlaces válidos de DejandoHuella Trader.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/verificacion.html">
-  <meta property="og:image" content="img/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
-
-  <!-- Pixel (opcional) – comentado -->
-  <!--
-  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');</script>
-  -->
-
   <style>
-    :root{--bg:#0b0f16;--fg:#e5e7eb;--muted:#94a3b8;--card:#111827;--border:#1f2a3a;--accent:#22c55e;--link:#3b82f6}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
-    a{color:var(--link)}
+    :root{--bg:#0b0f16;--fg:#e5e7eb;--muted:#94a3b8;--card:#121826;--border:#1f2a3a;--accent:#22c55e;--link:#60a5fa}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
     .wrap{max-width:980px;margin:auto;padding:24px}
     h1{margin:0 0 10px} h2{margin:0 0 12px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
     code{background:#0f1522;border:1px solid var(--border);padding:4px 8px;border-radius:8px}
     .badge{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:#08101b;margin-left:8px}
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    a{color:var(--link)} small,p,li{color:var(--muted)}
     .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
-    .copy{cursor:pointer;border:1px dashed var(--border);padding:6px 10px;border-radius:8px;color:var(--fg);background:#0f1522}
-    small,p,li{color:var(--muted)}
-    /* Modal simple */
-    dialog{border:none;border-radius:16px;background:#0f1522;color:var(--fg);padding:0;max-width:520px;width:90%}
-    .modal-head{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700}
-    .modal-body{padding:14px 16px;display:grid;gap:10px}
-    .modal-row a{display:block;text-decoration:none;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:#121826;color:var(--fg)}
-    .modal-row a:hover{outline:2px solid #1f2937}
-    .modal-foot{padding:12px 16px;border-top:1px solid var(--border);text-align:right}
-    .btn{cursor:pointer;padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:#0f1522;color:var(--fg)}
-    .toast{position:fixed;bottom:20px;right:20px;background:#22c55e;color:#06250f;padding:8px 12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.4);z-index:9999}
   </style>
 </head>
 <body>
@@ -57,21 +27,18 @@
 
     <div class="card">
       <h2>Enlaces legítimos</h2>
-      <p><b>Clearnet:</b> <a id="lnk-home" href="./">https://dejandohuellapool.github.io/dejandohuella-landing/</a></p>
-
-      <div class="row" style="margin:.3rem 0 0">
-        <p style="margin:0"><b>.onion:</b> <code id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></p>
-        <button class="copy" type="button" data-for="onion">Copiar .onion</button>
-        <button id="open-onion" class="cta" type="button">Abrir .onion</button>
-      </div>
-
-      <p><b>WhatsApp ventas:</b> <a id="lnk-wa" href="whatsapp.html">Abrir hub</a></p>
+      <p><b>Clearnet:</b> <a href="./">https://dejandohuellapool.github.io/dejandohuella-landing/</a></p>
+      <p><b>.onion:</b> <code id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
+        <button class="cta" style="margin-left:8px" onclick="copyOnion()">Copiar .onion</button>
+        <a class="cta" style="margin-left:8px" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/" target="_blank" rel="noopener">Abrir .onion</a>
+      </p>
+      <p><b>WhatsApp ventas:</b> <a href="whatsapp.html">Abrir hub</a></p>
       <p><b>Correo:</b> <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
     </div>
 
     <div class="card">
       <h2>Huella PGP <span class="badge">6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</span></h2>
-      <p>La clave PGP completa se muestra en <a id="lnk-contacto" href="./#contacto">Contacto</a> del sitio principal.</p>
+      <p>La clave PGP completa se muestra en <a href="./#contacto">Contacto</a> del sitio principal.</p>
     </div>
 
     <div class="card">
@@ -84,79 +51,17 @@
     </div>
 
     <div class="card">
-      <a id="lnk-back" href="./" class="cta" style="text-decoration:none">Volver a inicio</a>
+      <a href="./" class="cta" style="text-decoration:none">Volver a inicio</a>
     </div>
   </div>
 
-  <!-- Modal de elección de navegador/app -->
-  <dialog id="dlg-onion">
-    <div class="modal-head">Elige cómo abrir la dirección .onion</div>
-    <div class="modal-body">
-      <div class="modal-row"><a id="m-open-here" href="#" rel="noopener">Abrir en este navegador</a></div>
-      <div class="modal-row"><a id="m-copy" href="#" rel="noopener">Copiar dirección .onion</a></div>
-      <!-- Android Tor Browser -->
-      <div class="modal-row"><a id="m-tor-android" href="#" rel="noopener">Abrir con Tor Browser (Android)</a></div>
-      <!-- iOS Onion Browser -->
-      <div class="modal-row"><a id="m-onion-ios" href="#" rel="noopener">Abrir con Onion Browser (iOS)</a></div>
-      <!-- Android Chrome/Brave (intent) -->
-      <div class="modal-row"><a id="m-chrome" href="#" rel="noopener">Abrir con Chrome (Android)</a></div>
-      <div class="modal-row"><a id="m-brave" href="#" rel="noopener">Abrir con Brave (Android)</a></div>
-    </div>
-    <div class="modal-foot"><button class="btn" onclick="dlg.close()">Cancelar</button></div>
-  </dialog>
-
-  <div id="live" aria-live="polite" aria-atomic="true" style="position:fixed;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"></div>
-
   <script>
-    const ONION = 'xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion';
-    const dlg = document.getElementById('dlg-onion');
-
-    // Preserva ?src= al volver
-    (function(){
-      const params = new URL(location.href).search;
-      if(params){
-        ['lnk-home','lnk-wa','lnk-contacto','lnk-back'].forEach(id=>{
-          const a = document.getElementById(id); if(!a) return;
-          const u = new URL(a.getAttribute('href'), location.href);
-          if(!u.search) u.search = params.replace(/^\?/, '?');
-          a.setAttribute('href', u.pathname + u.search + u.hash);
-        });
-      }
-    })();
-
-    // Copiar con toast accesible
-    function toast(msg){
-      const t=document.createElement('div'); t.className='toast'; t.setAttribute('role','status'); t.setAttribute('aria-live','polite');
-      t.textContent=msg; document.body.appendChild(t); document.getElementById('live').textContent=msg; setTimeout(()=>t.remove(),1500);
+    function copyOnion(){
+      const t=document.getElementById('onion').textContent.trim();
+      if(navigator.clipboard){navigator.clipboard.writeText(t);}
+      else{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}
+      alert('Dirección .onion copiada');
     }
-    function copyById(id){
-      const txt=document.getElementById(id)?.textContent?.trim(); if(!txt) return;
-      if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado')); }
-      else{ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(e){} ta.remove(); }
-    }
-    document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>copyById(b.dataset.for)));
-
-    // Abrir modal de opciones
-    document.getElementById('open-onion').addEventListener('click', ()=> dlg.showModal());
-
-    // Enlaces del modal
-    document.getElementById('m-open-here').href = 'http://' + ONION + '/?src=verif';
-    document.getElementById('m-copy').addEventListener('click', (e)=>{ e.preventDefault(); copyById('onion'); });
-
-    // Android Tor Browser (paquete org.torproject.torbrowser)
-    document.getElementById('m-tor-android').href =
-      `intent://%2F%2F${ONION}/#Intent;scheme=http;package=org.torproject.torbrowser;end`;
-
-    // iOS Onion Browser (usa esquema onion:// - algunos navegadores lo reconocen)
-    document.getElementById('m-onion-ios').href = `onion://${ONION}/`;
-
-    // Android Chrome
-    document.getElementById('m-chrome').href =
-      `intent://%2F%2F${ONION}/#Intent;scheme=http;package=com.android.chrome;end`;
-
-    // Android Brave
-    document.getElementById('m-brave').href =
-      `intent://%2F%2F${ONION}/#Intent;scheme=http;package=com.brave.browser;end`;
   </script>
 </body>
 </html>
