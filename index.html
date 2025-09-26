@@ -1,306 +1,415 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-   <title>DejandoHuella Trader | Official .onion Reporting / Trader (Official Site)</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="author" content="    DejandoHuella Trader | Official .onion Reporting / Trader (Official Site)  ">
-  <meta name="description" content="  DAMOS REPORTES Y TENEMOS UN EA CON LICENCIAS PROPIAS PARA TRADING   "/>
-  <meta name="generator" content="Teamflower__Studios.">
-  <meta name="keywords" content="DejandoHuella Trader , dejandehuella, Trader, Trader Trader , DejandoHuella, Dejando Huella, hjdfwww, Oficial, EA, EA OFICLALES, Traders, Bitcoin, BTCUSD, SEÑAles, SEÑAles de Trading,        "/>
-  <meta property="og:title" content="DejandoHuella Trader | Official .onion Reporting / Trader (Official Site)">
-  <meta property="og:author" content="    DejandoHuella Trader | Official .onion Reporting / Trader (Official Site)  ">
-  <meta property="og:keywords" content="DejandoHuella Trader , dejandehuella, Trader, Trader Trader , DejandoHuella, Dejando Huella, hjdfwww, Oficial, EA, EA OFICLALES, Traders, Bitcoin, BTCUSD, SEÑAles, SEÑAles de Trading,        "/>
-  <meta property="og:description" content="  DAMOS REPORTES Y TENEMOS UN EA CON LICENCIAS PROPIAS PARA TRADING   "/>
+  <meta charset="utf-8">
+  <title>DejandoHuella Trader — .onion</title>
+  <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Pagos por BTC y USDT (TRC20, BEP20, Arbitrum One, ERC-20).">
+  <meta name="color-scheme" content="dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="DejandoHuella Trader — BTC/USD">
+  <meta property="og:description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Clearnet y .onion.">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:site_name" content="    DejandoHuella Trader | Official .onion Reporting / Trader (Official Site)  ">
-  <meta property="subtitle" content="DejandoHuella Trader | Official .onion Reporting / Trader (Official Site)">
+  <meta property="og:image" content="img/og-image.png">
   <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
-  <meta property="og:image" content="https://dejandohuellapool.github.io/dejandohuella-landing/logo.png"/>
-  
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- (Opcional) Meta Pixel: pon tu ID real si quieres medir -->
+  <!-- Sustituye PIXEL_ID_AQUI por tu ID o elimina todo este bloque -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Rajdhani:wght@700&family=Montserrat:wght@800&display=swap');
-
-@font-face {
-font-family: 'ggsans-Normal';
-src: url('https://cdn.glitch.global/6a5e3d66-1d3e-4b5a-a50e-411cd75f9665/ggsans-Normal.woff?v=1717020398197') format('woff');
-font-weight: normal; font-style: normal; font-display: swap;
-}
-@font-face {
-font-family: 'ggsans-Bold';
-src: url('https://cdn.glitch.global/6a5e3d66-1d3e-4b5a-a50e-411cd75f9665/ggsans-Bold.woff?v=1717020397357') format('woff');
-font-weight: bold; font-style: normal; font-display: swap;
-}
-@font-face {
-font-family: 'ggsans-Medium';
-src: url('https://cdn.glitch.global/6a5e3d66-1d3e-4b5a-a50e-411cd75f9665/ggsans-Medium.woff?v=1717020397800') format('woff');
-font-weight: 600; font-style: normal; font-display: swap;
-}
-
-* { font-family: "ggsans-Normal", sans-serif; -webkit-tap-highlight-color: transparent; }
-.ffGgs { font-family: 'ggsans-Bold', sans-serif; font-weight: bold; letter-spacing: -0.4px;}
-.ffGgs2 { font-family: 'ggsans-Medium', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
-.ffGgs3 { font-family: 'ggsans-Normal', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
-
-/****************************************************************************************************/
- /* (tu CSS original) */
- * { color: #c9cccf; font-size: 16px; } /* mantenido; ver overrides abajo */
-
- body, html {
-   margin: 0; padding: 0; min-height: 100vh; height: auto; overflow-x: hidden; background: #040611;
-   background-image: 
-  radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.035) 1.5%, rgba(255, 255, 255, 0) 25%),
-  radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.06) 1.2%, rgba(255, 255, 255, 0) 22%),
-  radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.03) 1.8%, rgba(255, 255, 255, 0) 20%),
-  radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.045) 1.3%, rgba(255, 255, 255, 0) 23%),
-  radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 1.6%, rgba(255, 255, 255, 0) 18%);
-}
-.container { padding-left: 10px; padding-right: 10px; width: 100dvw; min-height: 100dvh; height: auto; }
-
-.header { min-height: 7.1vh; height: auto; display: flex; align-items: center; justify-content: center; color: #ffffff; padding-top: 15px; padding-bottom:10px; }
-.logo { width:55px ; height: 55px; background-image: linear-gradient(188deg, #09111ce4 10%, #0f0f0e 110%); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: -1px -1px 20px 0 #010314, 6px 6px 11px 0 #0000004d; }
-.logo img { width: 44px; height: 44px; border-radius: 10px; }
-.site-info { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.site-info h1 { font-size: 1.25rem; margin: 0; color: #fff; letter-spacing: -0.2px; }
-.site-info p { font-size: 12px; margin: 0; color: #bdbdbd; letter-spacing: 1.20px; }
-
-.contact-links { margin-top: 10px; display: grid; grid-template-columns: repeat(5, auto); gap: 8px; justify-content: center; justify-items: center; align-items: center; align-content: center; }
-.contact-links a { text-decoration: none; font-size: 13px; display: flex; align-items: center; justify-content: center; padding: 8px 12px 9px; border-radius: 12px; border: 1px solid #384eff00; color: #ffffff; background: linear-gradient(178deg, #101825c4 1%, #0b0a0a 110%); box-shadow: -1px -1px 12px 0 #010314e3, 4px 4px 9px 0 #00000060, inset 0 0 16px #7771ffa2, inset 2px 2px 0px 0 #d36cfe13; letter-spacing: 0.6px; }
-.contact-links a:hover { transform: translateY(-2px); box-shadow: -1px -1px 12px 0 #010314e3, 4px 4px 9px 0 #00000060, inset 0 0 16px #9aa2ff96, inset 2px 2px 0px 0 #d36cfe13; background: linear-gradient(176deg, #1a2c4b 1%, #0a0a0a 110%); }
-.contact-links a:active { transform: scale(.95); }
-
-.main-content { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 10px; }
-.card { background: linear-gradient(178deg, #0c1120e1 1%, #080707 110%); border: 1px solid #1b26a026; border-radius: 16px; padding: 16px 16px 18px; box-shadow: -1px -1px 20px 0 #010314, 6px 6px 11px 0 #0000004d; }
-.card h2 { margin-top: 0; color: #ffffff; font-size: 18px; letter-spacing: -0.10px; }
-
-.payment-section { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.payment-card { background: #0a0f1b; border: 1px solid #1b26a026; border-radius: 12px; padding: 12px; box-shadow: 0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
-.payment-card h3 { margin-top: 0; color: #e7e7e7; font-size: 16px; }
-
-.dirBtc { word-break: break-all; }
-.btc-address { background: #0a121f; border: 1px dashed #263b70c2; border-radius: 8px; padding: 6px; box-shadow: inset 0 0 0 #000, inset 0 0 18px #234a8b82; }
-.copy-btn { margin-top: 6px; padding: 6px 8px; background: linear-gradient(178deg, #101825c4 1%, #0b0a0a 110%); border: 1px solid #224a4f38; border-radius: 6px; cursor: pointer; font-size: 12px; box-shadow: -1px -1px 12px 0 #010314e3, 4px 4px 9px 0 #00000060, inset 0 0 16px #9aa2ff3f, inset 2px 2px 0px 0 #d36cfe13; color: #dfe2e7; }
-.copy-btn:hover { transform: translateY(-2px); box-shadow: -1px -1px 12px 0 #010314e3, 4px 4px 9px 0 #00000060, inset 0 0 16px #b9beff96, inset 2px 2px 0px 0 #d36cfe13; background: linear-gradient(176deg, #1a2c4b 1%, #0a0a0a 110%); }
-
-.qr { margin-top: 10px; width: 145px; height: 145px; border-radius: 8px; border: 1px solid #1f23288f; }
-
-.facebook-card { background: #0a0f1b; border: 1px solid #1b26a026; border-radius: 12px; height: fit-content; padding: 16px; box-shadow: 0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
-.facebook-card iframe { width: 100%; min-height: 66vh; height: fit-content; border: none; border-radius: 10px; box-shadow: 0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
-.grupoFacebook { width: 100%; min-height: 66vh; height: fit-content; border: none; border-radius: 10px; box-shadow: 0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
-
-.bxRg { width: auto; height: fit-content; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 10px; }
-.bx { display: flex; flex-direction: column; gap: 8px; background: #09111ce4; border: 1px solid #1b26a026; border-radius: 10px; padding: 12px; box-shadow: inset 0 0 0 #010314, inset 0 0 18px #030418c2; }
-.liSc { margin: 0; padding: 0; }
-.liSc li { list-style: square; margin: 6px 0 0 18px; color: #c4cdde; letter-spacing: 0.2px; line-height: 1.4;}
-
-.P_content { background: linear-gradient(178deg, #0b121eff 1%, #0e0c0c 110%); border: 1px solid #1b26a026; border-radius: 16px; padding: 20px; box-shadow: inset -1px -1px 0px 0 #5c98b382, inset 3px 3px 0px 0 #000000; margin: 5px 0 10px 0; }
-.bank-card { background: linear-gradient(178deg, #0a121ff6 1%, #1f0505 110%); border: 1px solid #1b26a026; border-radius: 12px; padding: 14px; box-shadow: inset -1px -1px 0px 0 #b6a85502, inset 2px 2px 0px 0 #000000; }
-.p-Boder { background: linear-gradient(178deg, #0b1018 1%, #0b0a0a 110%); border: 1px solid #1b26a026; border-radius: 12px; padding: 12px; box-shadow: inset -2px -2px 0px 0 #721ad11c, inset 2px 2px 0px 0 #000000; }
-
-.ayudaF { background: #0a111b; border: 1px solid #1b26a026; border-radius: 12px; padding: 12px; color: #ffffff; box-shadow: 0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
-.contact-box { background: #0a0f1b; border: 1px solid #1b26a026; border-radius: 12px; padding: 12px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-items: center; }
-.contact-button { text-decoration: none; font-size: 14px; color: #ffffff; width: 100%; display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 10px; border: 1px solid #384eff00; background: linear-gradient(178deg, #101825c4 1%, #0b0a0a 110%); box-shadow: -1px -1px 12px 0 #010314e3, 4px 4px 9px 0 #00000060, inset 0 0 16px #9aa2ff3f, inset 2px 2px 0px 0 #d36cfe13; }
-.contact-button:hover { transform: translateY(-2px); box-shadow: -1px -1px 12px 0 #010314e3, 4px 4px 9px 0 #00000060, inset 0 0 16px #9aa2ff96, inset 2px 2px 0px 0 #d36cfe13; background: linear-gradient(176deg, #1a2c4b 1%, #0a0a0a 110%); }
-
-.footer { color: #bdbdbd; text-align: center; padding: 8px 0 20px 0; }
-hr { border: none; border-top: 1px dashed #3c62b53f; margin: 10px 0; }
-
-.divvv { --bordrr0088:#01375e8c; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 8px; border-radius: 10px; background: linear-gradient(174deg, #0c121fc4 1%, #090808bb 110%); border: 1px solid #1b26a026; box-shadow: inset 0 0 0 #01375e, inset 0 0 22px #000000; }
-.scSe { display: grid; grid-template-columns: repeat(1, 1fr); gap: 8px; padding: 10px; background: #0a0f1b; border: 1px solid #1b26a026; border-radius: 12px; min-height: 90%; height: auto; }
-.divp { background: #040a13; border: 1px solid var(--bordrr0088); border-radius: 13px; padding: 12px; min-height: 50px; height: auto; box-shadow: inset 0 -10px 0 #041f49, inset 0 0 30px #031125e6; }
-.boxDerechh { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 8px; border-radius: 10px; background: linear-gradient(174deg, #0b121fd6 1%, #090808bb 110%); border: 1px solid #1b26a026; box-shadow: inset 0 0 0 #01375e, inset 0 0 22px #000000; }
-
-h2 { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 3px; border-radius: 10px; background: #0c1120e1; border: 1px solid #1b26a026; box-shadow: inset 0 0 0 #010314, inset 0 0 18px #040521; }
-
-@media (max-width: 840px) {
-  .container { padding-left: 10px; padding-right: 10px; }
-  .main-content { grid-template-columns: 1fr; }
-  .payment-section { grid-template-columns: 1fr; }
-}
-@media (max-width: 580px) {
-* { font-size: 15px; }
-.logo { width: 51px; height: 51px; }
-.logo img { width: 41px; height: 41px; border-radius: 9px; }
-.contact-links { gap: 9px; }
-.contact-links a { padding: 7px 9px 8px; font-size: 12px; border-radius: 10px; }
-h2 { padding: 8px 10px 2px; border-radius: 9px; }
-.bxRg { grid-template-columns: 1fr; gap: 12px; }
-.bx { padding: 8px; border-radius: 9px; background: linear-gradient(178deg, #0c1323e1 1%, #080707 110%); border: 1px solid #1b26a026; box-shadow: 0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
-.liSc li { margin: 5px 0 0 16px; }
-.P_content { padding: 10px; border-radius: 12px; }
-.payment-card { padding: 10px; }
-.qr { width: 120px; height: 120px; }
-.ayudaF, .contact-box { padding: 10px; }
-.contact-button { border-radius: 8px; padding: 7px; font-size: 13px; }
-.divvv { grid-template-columns: 1fr; gap: 10px; border-radius: 8px; padding: 6px;}
-.divp { border-radius: 10px; padding: 10px; }
-.boxDerechh { padding: 6px; border-radius: 9px; }
-}
-
-/* ===========================
-   PRO FIXES — Antidistorsión,
-   tipografía y responsive
-   =========================== */
-:root { --maxw: 1120px; }
-.container { max-width: var(--maxw); margin: 0 auto; }
-img { max-width: 100%; height: auto; image-rendering: auto; }
-.logo { width:56px; height:56px; }
-.logo img { width:42px; height:auto; }
-.qr { width: min(180px, 48vw); height: auto; aspect-ratio: 1/1; object-fit: contain; }
-.facebook-card iframe, .grupoFacebook { min-height: 420px; }
-.contact-links { grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap: 10px; }
-.contact-links a { min-height: 42px; }
-.main-content, .payment-section { gap: 16px; }
-h2 { font-size: clamp(17px, 1.8vw, 22px); }
-.ffGgs2, .ffGgs3 { letter-spacing: 0; }
-.dirBtc { overflow-wrap: anywhere; white-space: normal; }
-
-/* Transiciones más suaves; sin jank */
-* { transition: none; }
-@media (prefers-reduced-motion:no-preference){
-  .contact-links a, .copy-btn, .contact-button { transition: transform .15s ease, box-shadow .2s ease; }
-}
+    :root{
+      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826; --accent:#22c55e;
+      --border:#1f2a3a; --link:#60a5fa; --ok:#22c55e; --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
+    a{color:var(--link)}
+    .wrap{max-width:1000px;margin:auto;padding:24px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:8px}
+    header img{width:64px;height:64px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
+    h1{font-size:32px;margin:0}
+    h2{margin:0 0 10px}
+    p,li,small{color:var(--muted)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
+    .grid{display:grid;gap:14px}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
+    code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .cta--fb{background:#1877F2;border-color:#0d5fe5;color:#fff}
+    .cta--wa{background:#25D366;border-color:#1fa855;color:#fff}
+    .copy{cursor:pointer;border:1px dashed var(--border);padding:4px 8px;border-radius:8px;margin-left:8px}
+    .payrow{display:grid;gap:8px; margin-bottom:14px}
+    .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
+    .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
+    .qrbox summary::-webkit-details-marker{display:none}
+    .qrbox[open] summary{background:#162133}
+    .qrwrap{display:flex;justify-content:center;align-items:center;padding:12px;border-top:1px solid var(--border)}
+    .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
+    .qr img{width:100%;height:100%;display:block}
+    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .plan h3{margin:0;font-size:18px}
+    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
+    .note{color:var(--muted);margin:0}
+    .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .bar a{color:#b4d2ff}
+    @media (max-width:760px){
+      .grid-2{grid-template-columns:1fr}
+      header img{width:56px;height:56px}
+      h1{font-size:26px}
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">
-        <img src="logo.png" alt="Site Logo" onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
-      </div>
-      <div class="site-info">
-        <h1 class="ffGgs">DejandoHuella</h1>
-        <p class="ffGgs3">TRADER</p>
-      </div>
-    </div>
-
-    <!-- (contenido original intacto) -->
-    <!-- Redes -->
-    <div class="main-content">
-      <div class="card" style=" box-shadow:  0 0 0px 0 #ab81ed0a, -1px -1px 12px 0 #010314, 4px 4px 9px 0 #00000060, inset 0 0 16px #2e3357a2, inset 2px 2px 0px 0 #d36cfe13;">
-        <h2>Redes (Orientación y Respaldo)</h2>
-        <div class="bxRg">
-          <div class="bx">
-            <label><span style=" font-size: 14px; color: #d6d1fd;">🇪🇨 From- Ecuador (  <u>Grupo y Pagina</u>  ) Facebook /  Oficial </span></label>
-            <button onclick="window.open('https://www.facebook.com/share/1J54upxdPb/', '_blank')" class="copy-btn ffGgs3" style=" width: fit-content; display: flex; align-items: center; gap: 8px; ">
-              Abrir Facebook 
-              <span class="ayFx">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Logo_%282019%29.svg"  width="12" height="12"/>
-                <small style=" color: #c8d2ee; font-size: 12px;"> Seguiremos Actualizando  </small>
-              </span>
-            </button>
-          </div>
-          <div class="bx">
-            <label><span style=" font-size: 14px; color: #d6d1fd;">  🟢 WhatsApp de Ventas  ( Atención y Soporte )  </span></label>
-            <button onclick="window.open('whatsapp.html', '_self')" class="copy-btn ffGgs3" style=" width: fit-content; display: flex; align-items: center; gap: 8px; ">
-              Abrir WhatsApp 
-              <span class="ayFx">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"  width="12" height="12"/>
-                <small style=" color: #c8d2ee; font-size: 12px;">   </small>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Verificación -->
-      <div class="facebook-card">
-        <iframe class="grupoFacebook" src="verificacion.html" frameborder="0" scrolling="yes"></iframe>
-      </div>
-    </div>
-
-    <!-- Pagos -->
-    <div class="P_content">
-      <h2>Pagos (Verificar por favor 👇)</h2>
-      <div class="payment-section">
-        <div class="payment-card">
-          <h3>BTC</h3>
-          <div class="p-Boder">
-            <p style=" letter-spacing: 0.2px; color: #c4cdde; "> Puedes copiar la dirección tocando en copiar. </p>
-            <div class="btc-address" id="btc-address"><span> Dirección </span><b class="dirBtc ffGgs3"> bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4 </b></div>
-            <button class="copy-btn" onclick="copyAddress('btc-address')">Copiar</button>
-          </div>
-          <hr>
-          <div class="p-Boder">
-            <p style=" color: #c4cdde;"> Puedes escanear el qr. </p>
-            <img src="img/qr_btc.png" alt="BTC QR" class="qr" onerror="this.style.display='none'">
-          </div>
-        </div>
-
-        <div class="payment-card">
-          <h3>USDT (TRC20 / BEP20 / Arbitrum One / ERC-20)</h3>
-          <div class="p-Boder">
-            <p style=" letter-spacing: 0.2px; color: #c4cdde; "> Puedes copiar la dirección tocando en copiar. </p>
-            <div class="btc-address" id="usdt-address"><span>Dirección</span> <b class="dirBtc ffGgs3"> 0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F </b></div>
-            <button class="copy-btn" onclick="copyAddress('usdt-address')">Copiar</button>
-          </div>
-          <hr>
-          <div class="p-Boder">
-            <p style=" color: #c4cdde;"> Puedes escanear el qr. </p>
-            <img src="img/qr_usdt.png" alt="USDT QR" class="qr" onerror="this.style.display='none'">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cómo pagar / Banco / Contactos -->
-    <div class="divvv">
-      <div class="scSe">
-        <h3 class="ffGgs" style="margin:0;color:#fff;">¿Cómo pagar ?</h3>
-        <div class="divp"><span style=" color: #fff; font-size: 12px;">❔ <b class="ffGgs2"> Dale en Mostrar QR / Copiar, </b> Según las redes de arriba, ENVIA. Si tienes dudas nos contactas.</span></div>
-      </div>
-      <div class="scSe">
-        <h3 class="ffGgs" style="margin:0;color:#fff;">Transferencia Bancaria</h3>
-        <div class="divp">
-          <div class="bank-card">
-            <h4 class="ffGgs"> 💳 Banco Pichincha — Transferencia (USD) </h4>
-            <p><b class="ffGgs2">Titular:</b> Empresa DejandoHuella
-            <br> <b class="ffGgs2">Banco:</b> Pichincha
-            <br> <b class="ffGgs2">Tipo de Cuenta:</b> Ahorros / Corriente
-            <br> <b class="ffGgs2">Número de Cuenta:</b> <b class="dirBtc ffGgs3"> 2207922413 </b></p>
-            <div class="qr" style=" width: fit-content; height: fit-content; border-radius: 10px; padding: 10px; background: #080a0b;">
-              <img src="img/qr-pichincha.png" alt="Pago tarjeta QR" class="qr" style=" margin: 0;" onerror="this.style.display='none'">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="boxDerechh">
-      <h2>Contactos</h2>
-      <div class="contact-box">
-        <a href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium" class="contact-button">WhatsApp</a>
-        <a href="mailto:dejandohuella_pool@proton.me" class="contact-button">ProtonMail</a>
-        <a href="verificacion.html" class="contact-button">Verificación</a>
-        <a href="./" class="contact-button">Clearnet</a>
-      </div>
-      <hr>
-      <div class="ayudaF">
-        <h3 class="ffGgs" style="margin:0;color:#fff;">Información</h3>
-        <ul style=" padding: 0 0 0 20px; margin: 8px 0 0 0; ">
-          <li> Si envías a la Red Equivocada se perderán los Fondos </li>
-          <li> Disposición estética y clara para fácil entendimiento </li>
-          <li> En caso de dudas comunícate con nosotros </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer">
-      <hr style=" border-top: 1px dashed #0d4775dc; ">
-      <p style=" letter-spacing: 0.4px; "><b>DejandoHuella Trader</b> — Official <b>.onion (Reporting)</b> / Trader (Official Site)</p>
-      <p>Correo: <a href="mailto:dejandohuella_pool@proton.me" class="ffGgs2">dejandohuella_pool@proton.me</a> | PGP (huella / fingerprint): 6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</p>
-      <div><b>.onion ( situs ) :</b> <span class="ffGgs2"> xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion </span></div>
-    </div>
+  <div class="bar">
+    <span>⚠️ Verifica los enlaces oficiales. Usa nuestra <a href="verificacion.html">Verificación oficial</a> o la dirección .onion.</span>
+    <a class="cta" href="#" onclick="closeBar();return false;">Cerrar</a>
   </div>
 
+  <div class="wrap">
+    <header>
+      <img src="logo.png" alt="DejandoHuella logo" loading="lazy" decoding="async"
+           onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
+      <div>
+        <h1>DejandoHuella Trader</h1>
+        <div class="cta-row">
+          <a class="cta" href="mailto:dejandohuella_pool@proton.me?subject=Se%C3%B1ales%20BTCUSD%20-%20Quiero%20informaci%C3%B3n">Solicitar información</a>
+          <a class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
+          <a class="cta" href="verificacion.html">Verificación oficial</a>
+          <a class="cta" href="#" onclick="return shareFB();">Compartir en Facebook</a>
+        </div>
+      </div>
+    </header>
+
+    <p><small>Última actualización: <span id="lu"></span></small></p>
+
+    <div class="card" id="redes">
+      <h2>Redes oficiales</h2>
+      <p>Síguenos para novedades y soporte:</p>
+      <div class="cta-row">
+        <a class="cta cta--fb" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
+        <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Pagos (verifica la red)</h2>
+
+      <div class="grid grid-2">
+        <div>
+          <!-- BTC -->
+          <div class="payrow">
+            <div class="row"><b>BTC</b><span class="tag">Bitcoin</span></div>
+            <div class="row">
+              <code id="btc">bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4</code>
+              <span class="copy" onclick="copyTxt('btc')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="btc"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-btc" class="qr" aria-label="QR BTC"></div></div>
+            </details>
+          </div>
+
+          <!-- TRC20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">TRC20 / Tron</span></div>
+            <div class="row">
+              <code id="trc20">TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd</code>
+              <span class="copy" onclick="copyTxt('trc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="trc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-trc20" class="qr" aria-label="QR USDT TRC20"></div></div>
+            </details>
+          </div>
+
+          <!-- BEP20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">BEP20 / BSC</span></div>
+            <div class="row">
+              <code id="bep20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('bep20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="bep20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-bep20" class="qr" aria-label="QR USDT BEP20"></div></div>
+            </details>
+          </div>
+        </div>
+
+        <div>
+          <!-- ARBITRUM ONE -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">Arbitrum One</span></div>
+            <div class="row">
+              <code id="arb1">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('arb1')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="arb1"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-arb1" class="qr" aria-label="QR USDT Arbitrum One"></div></div>
+            </details>
+          </div>
+
+          <!-- ERC-20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">ERC-20 / Ethereum</span></div>
+            <div class="row">
+              <code id="erc20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('erc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="erc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-erc20" class="qr" aria-label="QR USDT ERC-20"></div></div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border-color:var(--border);opacity:.5;margin:18px 0">
+
+      <!-- Transferencia bancaria -->
+      <div class="payrow">
+        <div class="row">
+          <b>Transferencia bancaria (USD)</b>
+          <span class="tag">Banco Pichincha</span>
+        </div>
+        <div>
+          <p style="margin:6px 0 10px">
+            <b>Titular:</b> Empresa DejandoHuella<br>
+            <b>Banco:</b> Pichincha<br>
+            <b>Tipo de cuenta:</b> Ahorros / Corriente<br>
+            <b>Número de cuenta:</b> <code id="cta-pich">2207922413</code>
+            <span class="copy" onclick="copyTxt('cta-pich')">Copiar</span><br>
+            <b>Referencia:</b> “DejandoHuella + tu nombre”
+          </p>
+
+          <details class="qrbox">
+            <summary>Mostrar QR Banco Pichincha</summary>
+            <div class="qrwrap" style="flex-direction:column;gap:10px">
+              <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
+                   style="border:1px solid var(--border);border-radius:10px;background:#fff"
+                   src="img/qr-pichincha.png">
+              <a id="qr-pich-dl" class="cta" href="img/qr-pichincha.png" download="qr-pichincha.png">Descargar PNG</a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- PayPal -->
+      <div class="payrow">
+        <div class="row"><b>PayPal</b><span class="tag">Pagos con tarjeta</span></div>
+        <div class="row" style="gap:10px;align-items:center">
+          <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener">Pagar con PayPal</a>
+          <small>o enviar a: <b>dejandohuella_pool@proton.me</b></small>
+        </div>
+        <details class="qrbox">
+          <summary>¿Cómo pagar por PayPal?</summary>
+          <div class="qrwrap" style="flex-direction:column;gap:8px">
+            <ol style="margin:0;padding-left:18px;color:var(--muted)">
+              <li>Abre el enlace PayPal o envía al correo indicado.</li>
+              <li>Incluye en el mensaje tu nombre y plan elegido.</li>
+              <li>Recibirás confirmación y acceso al grupo/EA.</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+
+      <small>Si envías por red equivocada, los fondos se pierden. Verifica dos veces.</small>
+    </div>
+
+    <div class="card">
+      <h2>Cómo pagar (paso a paso)</h2>
+      <ol>
+        <li>Elige la <b>red correcta</b> (BTC, TRC20, BEP20, Arbitrum One o ERC-20).</li>
+        <li>Abre el QR con “Mostrar QR” o copia la dirección con “Copiar”.</li>
+        <li>Envía el monto acordado y espera 1–3 confirmaciones.</li>
+        <li>Envíanos el <b>hash de la transacción</b> por correo para acreditar tu plan.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Qué recibes</h2>
+      <ul>
+        <li>✅ <b>Señales Premium</b> en tiempo real.</li>
+        <li>✅ <b>EA MT4</b> con licencia y soporte de instalación.</li>
+        <li>✅ <b>Mentoría / soporte</b> privado.</li>
+        <li>✅ <b>Transparencia</b>: bitácora de entradas (RSI, ADX, EMAs, zona, etc.).</li>
+      </ul>
+    </div>
+
+    <div class="card" id="planes">
+      <h2>Planes Premium – DejandoHuella Trader</h2>
+      <div class="grid grid-2">
+        <div class="plan">
+          <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
+          <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día con entrada, SL y TP.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Señales Premium'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
+          <p class="note">EA <b>DejandoHuella_BTCUSD</b> para una cuenta MT4. 12 meses con soporte y updates.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20licencia%20EA%20personal"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Licencia EA'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
+          <p class="note">EA sin restricciones + <b>3 meses de mentoría</b>, instalación y optimización.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20EA%20Full%20%2B%20Mentor%C3%ADa"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'EA Full + Mentoría'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
+          <p class="note">Participación en utilidades y derecho de marca en tu región.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Socio%20%2F%20Inversionista"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Socio/Inversionista'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px"><a class="cta" href="#contacto">Solicitar información</a></div>
+    </div>
+
+    <div class="card" id="contacto">
+      <h2>Contacto</h2>
+      <p><a class="cta" href="mailto:dejandohuella_pool@proton.me">Escríbenos a ProtonMail</a></p>
+      <p>.onion: <b>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</b></p>
+
+      <p><small>PGP para mensajes cifrados (compara la huella / fingerprint):</small></p>
+      <details>
+        <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
+          <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
+        </summary>
+        <pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
+xjMEaLfYihYJKwYBBAHaRw8BAQdAtxVgF8zGlETJFchumSOySa0fYyoWVL+k
+gAdoJzAIj7bNO0RlamFuZG9IdWVsbGFfUG9vbEBwcm90b24ubWUgPERlamFu
+ZG9IdWVsbGFfUG9vbEBwcm90b24ubWU+wsARBBMWCgCDBYJot9iKAwsJBwkQ
+E3LyVlOBZFJFFAAAAAAAHAAgc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9y
+Z7QGl5DnUkpLn44szFx+0bL7PtTKJ1OdjzCG3kKkrNbSAxUKCAQWAAIBAhkB
+ApsDAh4BFiEEbCamYwLiCV3KuuOkE3LyVlOBZFIAAGgwAQDxsnXKWpa6tDlA
+Q92ZfUqYf7Hu/jnJZXN00jpvsPnsJAEA00tUpVhkO62cYwIoR9LvOp8olQcs
+buCJOy/dk3rLzQvOOARot9iKEgorBgEEAZdVAQUBAQdAuuS/mnJR2JOjHm6N
+X8x/V4HLOgaLZqqtpwGZB7JpMBIDAQgHwr4EGBYKAHAFgmi32IoJEBNy8lZT
+gWRSRRQAAAAAABwAIHNhbHRAbm90YXRpb25zLm9wZW5wZ3Bqcy5vcme8JW46
+H2+MmFpdvrzyGXVqogCmc3ZqbY+s41cIvotS3QKbDBYhBGwmpmMC4gldyrrj
+pBNy8lZTgWRSAACwxgEAyq7WSbledwSIS15YtgmQmuAzDvd3+dqsjKI+s47Q
+XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
+=EcvG
+-----END PGP PUBLIC KEY BLOCK-----</pre>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Transparencia de señales</h2>
+      <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br>L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
+    </div>
+
+    <footer class="card" style="margin-top:16px">
+      <p>
+        Clearnet: <a href="./">Abrir sitio</a> |
+        .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
+      </p>
+      <p>Contacto: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
+    </footer>
+
+    <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
+  </div>
+
+  <!-- QRCode (CDN). Si falla, usamos fallback a imágenes locales -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <script>
-    function copyAddress(elementId) {
-      const address = document.getElementById(elementId).innerText.trim();
-      navigator.clipboard.writeText(address).then(() => {
-        alert("Dirección copiada: " + address);
-      }).catch(err => { console.error("Error al copiar: ", err); });
+    // Barra superior
+    function closeBar(){ const b=document.querySelector('.bar'); if(b) b.remove(); }
+
+    // Fecha
+    document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
+
+    // Copiar con fallback
+    function copyTxt(id){
+      const el = document.getElementById(id); if(!el) return;
+      const txt = el.textContent.trim();
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
+      }else{
+        const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
+        ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(_){}
+        ta.remove();
+      }
+    }
+    function toast(text){
+      const msg=document.createElement('div'); msg.textContent=text;
+      Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
+      padding:'8px 12px',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,.4)',zIndex:'9999'}); 
+      document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
+    }
+
+    // Direcciones cripto
+    const ADDR = {
+      btc:'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',
+      trc20:'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',
+      bep20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      arb1:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'
+    };
+
+    // Generar QR perezoso: CDN o fallback a PNG local
+    function ensureQR(id, text, key){
+      const box=document.getElementById(id);
+      if(!box || box.dataset.done) return;
+      if(window.QRCode){
+        const size=Math.min(box.clientWidth||180, box.clientHeight||180);
+        new QRCode(box,{text,width:size,height:size,correctLevel: QRCode.CorrectLevel.M});
+      }else{
+        const img=document.createElement('img'); img.alt='QR '+key.toUpperCase(); img.src='img/qr_'+key+'.png';
+        box.appendChild(img);
+      }
+      box.dataset.done='1';
+    }
+    document.querySelectorAll('.qrbox').forEach(d=>{
+      d.addEventListener('toggle', ()=>{
+        if(!d.open) return;
+        const key=d.dataset.key; const target='qr-'+key;
+        if(key && ADDR[key]) ensureQR(target, ADDR[key], key);
+      });
+    });
+
+    // Botón compartir Facebook
+    const SHARE_URL='https://dejandohuellapool.github.io/dejandohuella-landing/';
+    const SHARE_QUOTE='Señales BTC/USD, EA MT4 y mentoría — DejandoHuella Trader';
+    function shareFB(){
+      const u='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SHARE_URL)+'&quote='+encodeURIComponent(SHARE_QUOTE);
+      const w=720,h=640,left=(screen.width-w)/2,top=(screen.height-h)/2;
+      window.open(u,'fbshare',`width=${w},height=${h},left=${left},top=${top},menubar=0,toolbar=0,status=0`);
+      return false;
     }
   </script>
 </body>
