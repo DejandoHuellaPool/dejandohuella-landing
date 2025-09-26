@@ -15,27 +15,19 @@
   <meta property="og:image" content="img/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Favicon minimal (SVG embebido) -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
 
-  <!-- (Opcional) Meta Pixel — comentado hasta tener tu ID -->
+  <!-- Pixel (opcional) – comentado -->
   <!--
-  <script>
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+  'https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');</script>
   -->
 
   <style>
-    :root{
-      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826;
-      --border:#1f2a3a; --accent:#22c55e; --link:#60a5fa;
-    }
+    :root{--bg:#0b0f16;--fg:#e5e7eb;--muted:#94a3b8;--card:#111827;--border:#1f2a3a;--accent:#22c55e;--link:#3b82f6}
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
     a{color:var(--link)}
@@ -44,10 +36,18 @@
     .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
     code{background:#0f1522;border:1px solid var(--border);padding:4px 8px;border-radius:8px}
     .badge{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:#08101b;margin-left:8px}
-    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
     .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
     .copy{cursor:pointer;border:1px dashed var(--border);padding:6px 10px;border-radius:8px;color:var(--fg);background:#0f1522}
     small,p,li{color:var(--muted)}
+    /* Modal simple */
+    dialog{border:none;border-radius:16px;background:#0f1522;color:var(--fg);padding:0;max-width:520px;width:90%}
+    .modal-head{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700}
+    .modal-body{padding:14px 16px;display:grid;gap:10px}
+    .modal-row a{display:block;text-decoration:none;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:#121826;color:var(--fg)}
+    .modal-row a:hover{outline:2px solid #1f2937}
+    .modal-foot{padding:12px 16px;border-top:1px solid var(--border);text-align:right}
+    .btn{cursor:pointer;padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:#0f1522;color:var(--fg)}
     .toast{position:fixed;bottom:20px;right:20px;background:#22c55e;color:#06250f;padding:8px 12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.4);z-index:9999}
   </style>
 </head>
@@ -58,11 +58,13 @@
     <div class="card">
       <h2>Enlaces legítimos</h2>
       <p><b>Clearnet:</b> <a id="lnk-home" href="./">https://dejandohuellapool.github.io/dejandohuella-landing/</a></p>
+
       <div class="row" style="margin:.3rem 0 0">
         <p style="margin:0"><b>.onion:</b> <code id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></p>
         <button class="copy" type="button" data-for="onion">Copiar .onion</button>
-        <a class="cta" id="lnk-onion" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=verif" target="_blank" rel="noopener">Abrir .onion</a>
+        <button id="open-onion" class="cta" type="button">Abrir .onion</button>
       </div>
+
       <p><b>WhatsApp ventas:</b> <a id="lnk-wa" href="whatsapp.html">Abrir hub</a></p>
       <p><b>Correo:</b> <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
     </div>
@@ -86,58 +88,75 @@
     </div>
   </div>
 
+  <!-- Modal de elección de navegador/app -->
+  <dialog id="dlg-onion">
+    <div class="modal-head">Elige cómo abrir la dirección .onion</div>
+    <div class="modal-body">
+      <div class="modal-row"><a id="m-open-here" href="#" rel="noopener">Abrir en este navegador</a></div>
+      <div class="modal-row"><a id="m-copy" href="#" rel="noopener">Copiar dirección .onion</a></div>
+      <!-- Android Tor Browser -->
+      <div class="modal-row"><a id="m-tor-android" href="#" rel="noopener">Abrir con Tor Browser (Android)</a></div>
+      <!-- iOS Onion Browser -->
+      <div class="modal-row"><a id="m-onion-ios" href="#" rel="noopener">Abrir con Onion Browser (iOS)</a></div>
+      <!-- Android Chrome/Brave (intent) -->
+      <div class="modal-row"><a id="m-chrome" href="#" rel="noopener">Abrir con Chrome (Android)</a></div>
+      <div class="modal-row"><a id="m-brave" href="#" rel="noopener">Abrir con Brave (Android)</a></div>
+    </div>
+    <div class="modal-foot"><button class="btn" onclick="dlg.close()">Cancelar</button></div>
+  </dialog>
+
   <div id="live" aria-live="polite" aria-atomic="true" style="position:fixed;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"></div>
 
   <script>
-    // Preserva ?src= al navegar de vuelta a Inicio/WhatsApp/Contacto
+    const ONION = 'xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion';
+    const dlg = document.getElementById('dlg-onion');
+
+    // Preserva ?src= al volver
     (function(){
       const params = new URL(location.href).search;
       if(params){
-        const add = (id, href)=>{
-          const a = document.getElementById(id);
-          if(!a) return;
+        ['lnk-home','lnk-wa','lnk-contacto','lnk-back'].forEach(id=>{
+          const a = document.getElementById(id); if(!a) return;
           const u = new URL(a.getAttribute('href'), location.href);
-          // si ya tiene params, no duplicar
           if(!u.search) u.search = params.replace(/^\?/, '?');
           a.setAttribute('href', u.pathname + u.search + u.hash);
-        };
-        add('lnk-home','./');
-        add('lnk-wa','whatsapp.html');
-        add('lnk-contacto','./#contacto');
-        add('lnk-back','./');
+        });
       }
     })();
 
-    // Copiar texto con fallback y toast accesible
+    // Copiar con toast accesible
     function toast(msg){
-      const t = document.createElement('div');
-      t.className = 'toast';
-      t.setAttribute('role','status');
-      t.setAttribute('aria-live','polite');
-      t.textContent = msg;
-      document.body.appendChild(t);
-      document.getElementById('live').textContent = msg; // lector de pantalla
-      setTimeout(()=>t.remove(),1500);
+      const t=document.createElement('div'); t.className='toast'; t.setAttribute('role','status'); t.setAttribute('aria-live','polite');
+      t.textContent=msg; document.body.appendChild(t); document.getElementById('live').textContent=msg; setTimeout(()=>t.remove(),1500);
     }
-    function copyTextById(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      const txt = el.textContent.trim();
-      if(navigator.clipboard && window.isSecureContext){
-        navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
-      }else{
-        const ta = document.createElement('textarea');
-        ta.value = txt; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); toast('✔ Copiado'); }catch(e){}
-        ta.remove();
-      }
+    function copyById(id){
+      const txt=document.getElementById(id)?.textContent?.trim(); if(!txt) return;
+      if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado')); }
+      else{ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(e){} ta.remove(); }
     }
-    document.querySelectorAll('.copy').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const forId = btn.getAttribute('data-for');
-        copyTextById(forId);
-      });
-    });
+    document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>copyById(b.dataset.for)));
+
+    // Abrir modal de opciones
+    document.getElementById('open-onion').addEventListener('click', ()=> dlg.showModal());
+
+    // Enlaces del modal
+    document.getElementById('m-open-here').href = 'http://' + ONION + '/?src=verif';
+    document.getElementById('m-copy').addEventListener('click', (e)=>{ e.preventDefault(); copyById('onion'); });
+
+    // Android Tor Browser (paquete org.torproject.torbrowser)
+    document.getElementById('m-tor-android').href =
+      `intent://%2F%2F${ONION}/#Intent;scheme=http;package=org.torproject.torbrowser;end`;
+
+    // iOS Onion Browser (usa esquema onion:// - algunos navegadores lo reconocen)
+    document.getElementById('m-onion-ios').href = `onion://${ONION}/`;
+
+    // Android Chrome
+    document.getElementById('m-chrome').href =
+      `intent://%2F%2F${ONION}/#Intent;scheme=http;package=com.android.chrome;end`;
+
+    // Android Brave
+    document.getElementById('m-brave').href =
+      `intent://%2F%2F${ONION}/#Intent;scheme=http;package=com.brave.browser;end`;
   </script>
 </body>
 </html>
