@@ -5,12 +5,21 @@
   <title>Verificación oficial — DejandoHuella Trader</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="color-scheme" content="dark">
+  <meta name="description" content="Verifica enlaces oficiales, dirección .onion y huella PGP de DejandoHuella Trader. Evita phishing.">
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Verificación oficial — DejandoHuella Trader">
   <meta property="og:description" content="Direcciones oficiales, clave PGP y enlaces válidos de DejandoHuella Trader.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/verificacion.html">
+  <meta property="og:image" content="img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- (Opcional) Meta Pixel -->
+  <!-- Favicon minimal (SVG embebido) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
+
+  <!-- (Opcional) Meta Pixel — comentado hasta tener tu ID -->
+  <!--
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -20,16 +29,26 @@
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+  -->
 
   <style>
-    :root{--bg:#0b0f16;--fg:#e5e7eb;--muted:#94a3b8;--card:#121826;--border:#1f2a3a;--accent:#22c55e;--link:#60a5fa}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
+    :root{
+      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826;
+      --border:#1f2a3a; --accent:#22c55e; --link:#60a5fa;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
+    a{color:var(--link)}
     .wrap{max-width:980px;margin:auto;padding:24px}
     h1{margin:0 0 10px} h2{margin:0 0 12px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
     code{background:#0f1522;border:1px solid var(--border);padding:4px 8px;border-radius:8px}
     .badge{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:#08101b;margin-left:8px}
-    a{color:var(--link)} small,p,li{color:var(--muted)}
+    .cta{display:inline-block;background:var(--accent);color:#06250f;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid #0e7a41}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .copy{cursor:pointer;border:1px dashed var(--border);padding:6px 10px;border-radius:8px;color:var(--fg);background:#0f1522}
+    small,p,li{color:var(--muted)}
+    .toast{position:fixed;bottom:20px;right:20px;background:#22c55e;color:#06250f;padding:8px 12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.4);z-index:9999}
   </style>
 </head>
 <body>
@@ -38,15 +57,19 @@
 
     <div class="card">
       <h2>Enlaces legítimos</h2>
-      <p><b>Clearnet:</b> <a href="./">https://dejandohuellapool.github.io/dejandohuella-landing/</a></p>
-      <p><b>.onion:</b> <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></p>
-      <p><b>WhatsApp ventas:</b> <a href="whatsapp.html">Abrir hub</a></p>
+      <p><b>Clearnet:</b> <a id="lnk-home" href="./">https://dejandohuellapool.github.io/dejandohuella-landing/</a></p>
+      <div class="row" style="margin:.3rem 0 0">
+        <p style="margin:0"><b>.onion:</b> <code id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></p>
+        <button class="copy" type="button" data-for="onion">Copiar .onion</button>
+        <a class="cta" id="lnk-onion" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=verif" target="_blank" rel="noopener">Abrir .onion</a>
+      </div>
+      <p><b>WhatsApp ventas:</b> <a id="lnk-wa" href="whatsapp.html">Abrir hub</a></p>
       <p><b>Correo:</b> <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
     </div>
 
     <div class="card">
       <h2>Huella PGP <span class="badge">6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</span></h2>
-      <p>La clave PGP completa se muestra en <a href="./#contacto">Contacto</a> del sitio principal.</p>
+      <p>La clave PGP completa se muestra en <a id="lnk-contacto" href="./#contacto">Contacto</a> del sitio principal.</p>
     </div>
 
     <div class="card">
@@ -59,8 +82,62 @@
     </div>
 
     <div class="card">
-      <a href="./" class="badge" style="text-decoration:none;background:#22c55e;color:#06250f;border-color:#0e7a41">Volver a inicio</a>
+      <a id="lnk-back" href="./" class="cta" style="text-decoration:none">Volver a inicio</a>
     </div>
   </div>
+
+  <div id="live" aria-live="polite" aria-atomic="true" style="position:fixed;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"></div>
+
+  <script>
+    // Preserva ?src= al navegar de vuelta a Inicio/WhatsApp/Contacto
+    (function(){
+      const params = new URL(location.href).search;
+      if(params){
+        const add = (id, href)=>{
+          const a = document.getElementById(id);
+          if(!a) return;
+          const u = new URL(a.getAttribute('href'), location.href);
+          // si ya tiene params, no duplicar
+          if(!u.search) u.search = params.replace(/^\?/, '?');
+          a.setAttribute('href', u.pathname + u.search + u.hash);
+        };
+        add('lnk-home','./');
+        add('lnk-wa','whatsapp.html');
+        add('lnk-contacto','./#contacto');
+        add('lnk-back','./');
+      }
+    })();
+
+    // Copiar texto con fallback y toast accesible
+    function toast(msg){
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.setAttribute('role','status');
+      t.setAttribute('aria-live','polite');
+      t.textContent = msg;
+      document.body.appendChild(t);
+      document.getElementById('live').textContent = msg; // lector de pantalla
+      setTimeout(()=>t.remove(),1500);
+    }
+    function copyTextById(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const txt = el.textContent.trim();
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
+      }else{
+        const ta = document.createElement('textarea');
+        ta.value = txt; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); toast('✔ Copiado'); }catch(e){}
+        ta.remove();
+      }
+    }
+    document.querySelectorAll('.copy').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const forId = btn.getAttribute('data-for');
+        copyTextById(forId);
+      });
+    });
+  </script>
 </body>
 </html>
