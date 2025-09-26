@@ -21,464 +21,137 @@
   <meta property="og:image" content="https://dejandohuellapool.github.io/dejandohuella-landing/logo.png"/>
   
   <style>
-    
+/* (tu CSS original resumido) */
+* { font-family: "ggsans-Normal", sans-serif; -webkit-tap-highlight-color: transparent; color:#c9cccf; font-size:16px;}
+.ffGgs { font-family: 'ggsans-Bold', sans-serif; font-weight: bold; letter-spacing: -0.4px;}
+.ffGgs2 { font-family: 'ggsans-Medium', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
+.ffGgs3 { font-family: 'ggsans-Normal', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
 
-
-
-
-
-
-* {
-font-family: "ggsans-Normal", sans-serif;
--webkit-tap-highlight-color: transparent;
+body, html { margin:0; padding:0; min-height:100vh; background:#040611;
+  background-image: radial-gradient(circle at 15% 30%, rgba(255,255,255,.035) 1.5%, rgba(255,255,255,0) 25%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,.06) 1.2%, rgba(255,255,255,0) 22%),
+                    radial-gradient(circle at 30% 80%, rgba(255,255,255,.03) 1.8%, rgba(255,255,255,0) 20%),
+                    radial-gradient(circle at 70% 70%, rgba(255,255,255,.045) 1.3%, rgba(255,255,255,0) 23%),
+                    radial-gradient(circle at 50% 50%, rgba(255,255,255,.02) 1.6%, rgba(255,255,255,0) 18%);
 }
 
-    .ffGgs { font-family: 'ggsans-Bold', sans-serif; font-weight: bold; letter-spacing: -0.4px;}
-    .ffGgs2 { font-family: 'ggsans-Medium', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
-    .ffGgs3 { font-family: 'ggsans-Normal', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
-
-/****************************************************************************************************/
-
-
-
-
- * { transition: 0.3s ;  color: #c9cccf;  font-size: 16px; }
-
- body, html {
-   margin: 0;
-   padding: 0;
-  min-height: 100vh; height: auto;
-   overflow-x: hidden;
-   background: #040611;
-
-   background-image: 
-  radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.035) 1.5%, rgba(255, 255, 255, 0) 25%),
-  radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.06) 1.2%, rgba(255, 255, 255, 0) 22%),
-  radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.03) 1.8%, rgba(255, 255, 255, 0) 20%),
-  radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.045) 1.3%, rgba(255, 255, 255, 0) 23%),
-  radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 1.6%, rgba(255, 255, 255, 0) 18%);
-
-
-
-   }
-
-   .container {
-/*  max-width: 1200px;*/
-     /*  height: 30dvh; */
-     padding-left: 10px; padding-right: 10px;
-
-
- width: 100dvw;
- min-height: 100dvh; height: auto;
-
- border: 1px solid #020d2511 ;
- border-left: 1px solid #020d256e;
- border-right: 1px solid #020d256e;
-/*  border: 1px solid red; */
- 
- background: linear-gradient(180deg, #040611b3, #00000070), radial-gradient(circle at 30% 10%, #33bbff0e, #001a3350), radial-gradient(circle at 70% 40%, #6a00ff0e, #14002950), radial-gradient(circle at 50% 80%, #ffaa0022, #331e0000);
-box-shadow: inset 0 0 55px 0 #02061b, inset 0 0 250px 90px #07193696;
-
+.container{ width:100dvw; min-height:100dvh; padding:0 10px; border:1px solid #020d2511; border-left:1px solid #020d256e; border-right:1px solid #020d256e;
+  background: linear-gradient(180deg, #040611b3, #00000070), radial-gradient(circle at 30% 10%, #33bbff0e, #001a3350), radial-gradient(circle at 70% 40%, #6a00ff0e, #14002950), radial-gradient(circle at 50% 80%, #ffaa0022, #331e0000);
+  box-shadow: inset 0 0 55px 0 #02061b, inset 0 0 250px 90px #07193696;
 }
 
+.vvv{ display:grid; grid-template-columns: repeat(2,1fr); gap:12px; padding:12px; border-radius:10px; background:linear-gradient(174deg,#0c121f 1%,#090808 110%); border:1px solid #1b26a026; box-shadow: inset 0 0 0 #01375e, inset 0 0 22px #000 }
+.pst{ border-radius:10px; padding:8px; background:linear-gradient(178deg,#0c1323 1%,#080707 110%); border:1px solid #1b26a026; box-shadow:0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
+p{ margin:0; padding:0; letter-spacing:.6px; color:#c4cada; font-size:12px;}
 
+.header{ min-height:7.1vh; display:flex; align-items:center; justify-content:center; color:#fff; padding:15px 0 10px }
+.logo{ width:55px; height:55px; background-image:linear-gradient(188deg,#09111ce4 10%,#0f0f0e 110%); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:-1px -1px 20px 0 #010314, 6px 6px 11px 0 #0006; }
+.logo img{ width:44px; height:44px; border-radius:10px; }
+.site-info{ display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.site-info h1{ margin:0; color:#fff; letter-spacing:-.2px; font-size:1.25rem }
+.site-info p{ margin:0; color:#bdbdbd; letter-spacing:1.2px; font-size:12px }
 
+.Psss{ background:linear-gradient(180deg,#040611a6,#00000066), radial-gradient(circle at 30% 10%, #33bbff0e, #001a3350), radial-gradient(circle at 70% 40%, #6a00ff0e, #14002950), radial-gradient(circle at 50% 80%, #ffaa0022, #331e0000);
+  box-shadow: inset 0 0 200px #020815, inset 18px 2px 180px #02061a80; border:1px solid #000d268a; padding:12px; border-radius:12px; }
+.Ps{ display:grid; grid-template-columns: 1fr 1fr; gap:12px }
+.Lis{ display:grid; grid-template-columns:1fr; gap:11px }
+.Item{ background:linear-gradient(178deg,#0c1323 1%,#080808 110%); border:1px solid #1b26a026; border-radius:12px; padding:10px; box-shadow:0 3px 11px 0 #020c25, inset 0 0 0 #03030b;}
+.bx{ background:#040a13; border:1px solid #0927a88a; border-radius:13px; padding:12px; box-shadow: inset 0 -10px 0 #041f49, inset 0 0 30px #031125e6; }
+.PsR{ display:grid; grid-template-columns:1fr; gap:12px }
+a{ color:#c9cccf }
 
-.vvv {
-display: grid;  grid-template-columns: repeat(2, 1fr);  gap: 12px;
-padding: 12px; border-radius: 10px;  margin-left: 0;  margin-right: 0;
- background: linear-gradient(  174deg, #0c121f 1%, #090808 110%);
- border: 1px solid #1b26a026;  box-shadow: inset 0 0 0 #01375e, inset 0 0 22px #000000;
-}
+.footer{ background:#040611d6; color:#bdbdbd; text-align:center; padding:10px; border-top:1px solid #0c19397a; border-left:1px solid #020d256e; border-right:1px solid #020d256e }
 
-
-  p {
-  margin: 0; padding: 0;
-  letter-spacing: 0.6px;
-  color: #c4cada; font-size: 12px; }
-
-.pst {
-border-radius: 10px; padding: 8px; 
-background: linear-gradient(  178deg, #0c1323 1%, #080707 110%);
-border: 1px solid #1b26a026; box-shadow:  0 3px 11px 0 #020c25, inset 0 0 0 #03030b;
-}
-
-
- 
-
-
-
-
-   .header {
-    min-height: 7.1vh; height: auto;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-   /*  backdrop-filter: blur(0.8px);*/ 
-     color: #ffffff;
-    padding-top: 15px; padding-bottom:10px ; 
-   /*  background: #090b19a3; */
-  /*   border-bottom: 1px solid #1b26a026;  */
-    /*  position:sticky; top: 0; left: 0; right: 0; z-index: 999; */
- 
-
-   }
-
-   .logo {
- /*    border: 1px dashed #6f38ff; */
-     width:55px ; height: 55px;
-    /*  margin-right: 10px; */
- 
- background-image: linear-gradient(  188deg, #09111ce4  10%, #0f0f0e 110%);
- 
-      /* border: 1px solid #1b26a026;  */
-     border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-         box-shadow:
-        0 0 0px 0 rgb(109, 69, 247, 0.4)  ,
-        -1px -1px 20px 0 #010314,
-        6px 6px 11px 0 #0000004d,     
-           2px 2px 0px 0 #2e084a00; 
-   }
-
-   .logo img {
-     width: 44px;
-     height: 44px;
-     border-radius: 10px;
- 
-    /* box-shadow:  2px 2px 20px 0 #00000044;*/
-   }
-
-   .site-info {
-/*    border: 1px dashed #ff38e7; */
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-   }
-
-   .site-info h1 {
-     font-size: 1.25rem;
-     margin: 0;
-     color: #fff;
-     letter-spacing: -0.2px;
-   }
-
-   .site-info p {
-     font-size: 12px;
-     margin: 0;
-     color: #bdbdbd;
-
-     letter-spacing: 1.20px;
-   }
-
-   .contact-links {
-     margin-top: 10px;
-
- display: grid; 
-grid-template-columns: /* 1fr 1fr 1fr */  repeat(5, auto) ;
-gap: 8px ;
-justify-content: center;
-justify-items: center;
-    align-items: center;
-align-content: center;
-
-      /*  display: flex;   align-items: center; justify-content:  center;  gap: 20px;  flex-wrap: wrap;   */
-   }
-
-   .contact-links a {
-
-  /* outline: 1px dashed #f551db;  */
- text-decoration: none;
-font-size: 13px;
-
-      display: flex;   align-items: center;   justify-content: center;
-padding: 8px 12px 9px;  
-border-radius: 12px;
- border: 1px solid #384eff00;
-
-color: #ffffff;
- background:  linear-gradient(  178deg, #101825c4 1%, #0b0a0a 110%);
-
-   box-shadow: 
-  0 0 0px 0 #ab81ed0a,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #7771ffa2, 
-   inset 2px 2px 0px 0 #d36cfe13;
-
-   letter-spacing: 0.6px;
-
-   }
-
-  .contact-links a:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-  0 0 0px 0 #ab81ed2b,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #9aa2ff96,
-   inset 2px 2px 0px 0 #d36cfe13; 
-
-  background: linear-gradient(  176deg, #1a2c4b 1%, #0a0a0a 110%); 
-  }
-
- .contact-links a:active {
-   transform: scale(.95);
- }
-
-
-
-
-
-
-
-
-
-
-.Psss {
-  background: linear-gradient(180deg, #040611a6, #00000066), radial-gradient(circle at 30% 10%, #33bbff0e, #001a3350), radial-gradient(circle at 70% 40%, #6a00ff0e, #14002950), radial-gradient(circle at 50% 80%, #ffaa0022, #331e0000);
-  box-shadow: inset 0 0 200px #020815, inset 18px 2px 180px #02061a80;
-border: 1px solid #000d268a; padding: 12px; border-radius: 12px;
-/*  display: grid; grid-template-columns: 1fr; gap: 10px;  */
-}
-
-
-
-.Ps {
- display: grid; grid-template-columns: 1fr  1fr ; gap: 12px; 
-}
-
-.Lis {
-display: grid; grid-template-columns: 1fr ;
-gap: 11px; 
-}
-
-.Item {
-   background: linear-gradient(  178deg, #0c1323 1%, #080808 110%);
-  border: 1px solid #1b26a026;  border-radius: 12px;  padding: 10px; 
-  box-shadow:  0 3px 11px 0 #020c25, inset 0 0 0 #03030b;
-}
-
-.bx {
-  background: #040a13; border: 1px solid #0927a88a; border-radius: 13px; padding: 12px; 
-  box-shadow: inset 0 -10px 0 #041f49, inset 0 0 30px #031125e6;
-}
-
-a { color: #c9cccf; }
-
-
-
-.PsR {
- /* outline: 1px dashed red; */
- display: grid; grid-template-columns: 1fr; gap: 12px;
-}
-
-
-
-
-      .footer {
-    background: #040611d6; 
-    color: #bdbdbd;
-    text-align: center;
-    padding: 10px;
-    border-top: 1px solid #0c19397a; border-left: 1px solid #020d256e;
- border-right: 1px solid #020d256e;
-   }
-
-
-
-
-
-
-@media (max-width: 800px)  { 
- * { font-size: 15px; }
-.Ps { grid-template-columns: 1fr;  }
-.Psss { padding: 8px; border-radius: 10px; }
-.Lis { gap: 9px; }
-.Item { border-radius: 10px; padding: 9px; }
-.bx { padding: 11px; border-radius: 11px; }
-.PsR { gap: 10px; }
-}
-
+/* ======= PRO FIXES ======= */
+:root{ --maxw: 980px; }
+.container{ max-width: var(--maxw); margin: 0 auto; }
+img{ max-width:100%; height:auto }
+.logo{ width:56px; height:56px }
+.logo img{ width:42px; height:auto }
+.vvv{ grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+.Ps{ grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:14px }
+.Item a{ display:inline-block; padding:8px 12px; border-radius:10px; background:#0a121f; border:1px dashed #2a3f79; }
+@media (max-width:800px){ .Ps{ grid-template-columns:1fr } .Psss{ padding:10px; border-radius:10px } }
   </style>
 </head>
 <body>
   <div class="container">
-
-
-
-
-
-
     <div class="header">
-     
-       
-
-        <div class="logo">
-      <img src="logo.png" alt="Site Logo"  onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
-    </div>
-
+      <div class="logo">
+        <img src="logo.png" alt="Site Logo" onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
+      </div>
       <div class="site-info">
         <h1 class="ffGgs">DejandoHuella</h1>
         <p class="ffGgs3">TRADER</p>
       </div>
     </div>
 
-
-
-
-
-
-
-
-<div class="vvv">
-
-<div class="pst">
-  <p>  En <b>WhatsApp  /  ProtonMail</b> Te contestamos con Gusto, Gracias </p>
-</div>
-
-<div class="pst">
-  <p>  En caso de intento de  <b>fishing</b> o algo que te parezca raro, escribemos. </p>
-</div>
-
-</div>
-
-
-
-
-
-
-
-<div class="Psss">
-
-
-
-<div class="Ps">
-  
-
-
-
-<div class="Lis">
-
-
- <div class="Item">
-  <label>  <span>  🔹 Señales Premium 
-    <div style=" display: inline-block; background: #070c14; outline: 1px dashed #611ef6; padding: 0px 8px; border-radius: 100px; ">  USD 500 / Mes </div>
-  </span>  </label>
-  <div class="bx">
-    <p class="ffGgs2"> BTCUSD — 1–3 Señales al día con Entrada,  SL y TP. </p>
-    <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20el%20plan%20Se%C3%B1ales%20Premium" target="_blank" rel="noopener" class="ffGgs2"> Chatear por WhatsApp </a>
-  </div>
-</div>
-
-
- <div class="Item">
-  <label>  <span>  🔹 Licencia  EA Personal   
-    <div style=" display: inline-block; background: #070c14; outline: 1px dashed #611ef6; padding: 0px 8px; border-radius: 100px; ">  USD 3000 / Anual </div>
-  </span>  </label>
-  <div class="bx">
-    <p class="ffGgs2"> EA DejandoHuella_BTCUSD (1 cuenta MT4) Soporte & Updates por 12 meses </p>
-    <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20info%20sobre%20la%20licencia%20EA%20Personal%20para%201%20cuenta%20MT4" target="_blank" rel="noopener" class="ffGgs2"> Chatear por WhatsApp </a>
-  </div>
-</div>
-
-
- <div class="Item">
-  <label>  <span>  🔹 EA Full + Mentoría   
-    <div style=" display: inline-block; background: #070c14; outline: 1px dashed #611ef6; padding: 0px 8px; border-radius: 100px; ">  USD 7500 / Único </div>
-  </span>  </label>
-  <div class="bx">
-    <p class="ffGgs2"> EA sin restricciones & 3 meses de Mentoría, instalación y optimización </p>
-    <a href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20el%20EA%20Full%20%2B%20Mentor%C3%ADa%20" target="_blank" rel="noopener" class="ffGgs2"> Chatear por WhatsApp </a>
-  </div>
-</div>
-
-
- <div class="Item">
-  <label>  <span>  🔹 Socio / Inversionista     
-    <div style=" display: inline-block; background: #070c14; outline: 1px dashed #611ef6; padding: 0px 8px; border-radius: 100px; "> desde USD 10,000 </div>
-  </span>  </label>
-  <div class="bx">
-    <p class="ffGgs2"> Participación en utilidades y derecho de marca </p>
-    <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20info%20sobre%20Socio%20%2F%20Inversionista" target="_blank" rel="noopener" class="ffGgs2"> Chatear por WhatsApp </a>
-  </div>
-</div>
-
-</div>
-
-
-
-
-
-<div class="PsR">
-
-
-<div class="Item">
-  <label>
-    <span> 🟢 Abrir  <b>WhatsApp</b>  Oficial </span>
-  </label>
-  <div class="bx">
-    <p> Al tocar te llevará a WhatsApp con un Mensaje, Puedes Editarlo. </p>
-    <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20el%20plan%20Se%C3%B1ales%20Premium" target="_blank" rel="noopener" class="ffGgs2"> Abrir WhatsApp  </a>
-  </div>
-</div>
-
-
-<div class="Item">
-  <label>
-    <span> ✉️  Abrir <b>ProtonMail</b>  </span>
-  </label>
-  <div class="bx">
-    <p> No dejes Espacios en Blanco si nos escribes por correo para poder responderte con rapidez. </p>
-    <a href="mailto:dejandohuella_pool@proton.me" target="_blank" rel="noopener" class="ffGgs2"> Abrir Correo  </a>
-  </div>
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="footer">
-      
-  
-  <p style=" letter-spacing: 0.4px; "> 
-    <b> DejandoHuella Trader </b> 
-    — Official <b> .onion (Reporting)</b> /  Trader (Official Site)
-  </p>
-
-<p>Correo: 
- <a href="mailto:dejandohuella_pool@proton.me" class="ffGgs2">dejandohuella_pool@proton.me</a> 
-  |  PGP (huella / fingerprint): 6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452 </p>
-
-<div> <b> .onion ( situs ) :</b> 
- <span class="ffGgs2"> xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion </span>
-</div>
-
+    <div class="vvv">
+      <div class="pst"><p>En <b>WhatsApp / ProtonMail</b> te contestamos con gusto. Gracias.</p></div>
+      <div class="pst"><p>Si ves intento de <b>phishing</b> o algo raro, escríbenos.</p></div>
     </div>
 
-  </div>
+    <div class="Psss">
+      <div class="Ps">
+        <div class="Lis">
+          <div class="Item">
+            <label><span>🔹 Señales Premium <div style="display:inline-block;background:#070c14;outline:1px dashed #611ef6;padding:0 8px;border-radius:100px;">USD 500 / Mes</div></span></label>
+            <div class="bx">
+              <p class="ffGgs2">BTCUSD — 1–3 Señales al día con Entrada, SL y TP.</p>
+              <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20el%20plan%20Se%C3%B1ales%20Premium" target="_blank" rel="noopener" class="ffGgs2">Chatear por WhatsApp</a>
+            </div>
+          </div>
 
+          <div class="Item">
+            <label><span>🔹 Licencia EA Personal <div style="display:inline-block;background:#070c14;outline:1px dashed #611ef6;padding:0 8px;border-radius:100px;">USD 3000 / Anual</div></span></label>
+            <div class="bx">
+              <p class="ffGgs2">EA DejandoHuella_BTCUSD (1 cuenta MT4) — Soporte & Updates 12 meses</p>
+              <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20info%20sobre%20la%20licencia%20EA%20Personal%20para%201%20cuenta%20MT4" target="_blank" rel="noopener" class="ffGgs2">Chatear por WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="Item">
+            <label><span>🔹 EA Full + Mentoría <div style="display:inline-block;background:#070c14;outline:1px dashed #611ef6;padding:0 8px;border-radius:100px;">USD 7500 / Único</div></span></label>
+            <div class="bx">
+              <p class="ffGgs2">EA sin restricciones & 3 meses de Mentoría, instalación y optimización</p>
+              <a href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20el%20EA%20Full%20%2B%20Mentor%C3%ADa%20" target="_blank" rel="noopener" class="ffGgs2">Chatear por WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="Item">
+            <label><span>🔹 Socio / Inversionista <div style="display:inline-block;background:#070c14;outline:1px dashed #611ef6;padding:0 8px;border-radius:100px;">desde USD 10,000</div></span></label>
+            <div class="bx">
+              <p class="ffGgs2">Participación en utilidades y derecho de marca</p>
+              <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20info%20sobre%20Socio%20%2F%20Inversionista" target="_blank" rel="noopener" class="ffGgs2">Chatear por WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="PsR">
+          <div class="Item">
+            <label><span>🟢 Abrir <b>WhatsApp</b> Oficial</span></label>
+            <div class="bx">
+              <p>Te lleva a WhatsApp con un mensaje editable.</p>
+              <a href="https://wa.me/593983566273?text=Hola%2C%20Quiero%20el%20plan%20Se%C3%B1ales%20Premium" target="_blank" rel="noopener" class="ffGgs2">Abrir WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="Item">
+            <label><span>✉️ Abrir <b>ProtonMail</b></span></label>
+            <div class="bx">
+              <p>Completa el correo sin espacios en blanco para responder rápido.</p>
+              <a href="mailto:dejandohuella_pool@proton.me" target="_blank" rel="noopener" class="ffGgs2">Abrir Correo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p style="letter-spacing:.4px;"><b>DejandoHuella Trader</b> — Official <b>.onion (Reporting)</b> / Trader (Official Site)</p>
+      <p>Correo: <a href="mailto:dejandohuella_pool@proton.me" class="ffGgs2">dejandohuella_pool@proton.me</a> | PGP: 6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</p>
+      <div><b>.onion (situs):</b> <span class="ffGgs2">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</span></div>
+    </div>
+  </div>
 </body>
 </html>
