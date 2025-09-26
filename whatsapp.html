@@ -9,7 +9,7 @@
 <meta property="og:title" content="WhatsApp — DejandoHuella Trader">
 <meta property="og:description" content="Escríbenos por WhatsApp para planes y soporte.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="img/og-image.png">
+<meta property="og:image" content="img/og-image.png"> <!-- 1200x630 -->
 <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/whatsapp.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
@@ -34,10 +34,12 @@ small,p,li{color:var(--muted)}
 .copy{cursor:pointer;border:1px dashed var(--border);padding:6px 10px;border-radius:8px}
 code{background:#0f1522;border:1px solid var(--border);padding:4px 6px;border-radius:8px}
 footer p{margin:.4em 0}
+#live{position:fixed;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 @media (max-width:760px){.grid-2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div id="live" role="status" aria-live="polite"></div>
 <div class="wrap">
   <header>
     <img src="logo.png" alt="DH" onerror="this.onerror=null;this.src='img/logo.png'">
@@ -45,8 +47,8 @@ footer p{margin:.4em 0}
       <h1>WhatsApp — DejandoHuella Trader</h1>
       <small>Atención comercial y soporte — último update: <span id="lu"></span></small>
       <div class="row" style="margin-top:8px">
-        <a class="cta" href="./">Inicio</a>
-        <a class="cta" href="verificacion.html">Verificación oficial</a>
+        <a class="cta" id="go-home" href="./">Inicio</a>
+        <a class="cta" id="go-verify" href="verificacion.html">Verificación oficial</a>
         <a class="cta" href="http://xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion/?src=wa" target="_blank" rel="noopener">Abrir .onion</a>
       </div>
     </div>
@@ -97,8 +99,9 @@ footer p{margin:.4em 0}
 
   <div class="card">
     <h2>Enlaces rápidos</h2>
-    <p>🌐 Clearnet: <a href="./?src=whatsapp">dejandohuellapool.github.io/dejandohuella-landing/</a></p>
-    <p>🧅 .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code></p>
+    <p>🌐 Clearnet: <a id="link-clearnet" href="./?src=whatsapp">dejandohuellapool.github.io/dejandohuella-landing/</a></p>
+    <p>🧅 .onion: <code id="onion">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
+      <span class="copy" data-for="onion">Copiar</span></p>
     <p>✉️ ProtonMail: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
   </div>
 
@@ -114,7 +117,7 @@ document.getElementById('lu').textContent = new Date().toISOString().slice(0,10)
 const WHATSAPP_NUMBER = '593983566273';
 
 // 2) Origen
-const SRC = new URL(location.href).searchParams.get('src') || 'pagina';
+const SRC = new URL(location.href).searchParams.get('src') || 'whatsapp';
 
 // 3) Plantillas
 const templates = {
@@ -154,17 +157,35 @@ function waLink(text){
   a.href = waLink(templates[key]);
 });
 
-// 6) Copiar enlace
+// 6) Copiar enlace/valor con feedback accesible + fallback
+function copyTextValue(txt){
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt); }
+  const live = document.getElementById('live'); live.textContent = 'Copiado';
+}
 document.querySelectorAll('.copy').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const forId = btn.getAttribute('data-for');
+    if(forId === 'onion'){
+      const v = document.getElementById('onion').textContent.trim(); copyTextValue(v); btn.textContent='¡Copiado!'; setTimeout(()=>btn.textContent='Copiar',1200); return;
+    }
     const a = document.getElementById(forId);
     if(a && a.href){
-      if(navigator.clipboard) navigator.clipboard.writeText(a.href);
+      copyTextValue(a.href);
       btn.textContent = '¡Copiado!'; setTimeout(()=>btn.textContent='Copiar enlace',1200);
     }
   });
 });
+
+// 7) Propagar ?src a Inicio y Verificación
+(function(){
+  const addSrc = url => url + (url.includes('?') ? '&' : '?') + 'src=' + encodeURIComponent(SRC);
+  const home = document.getElementById('go-home');
+  const verify = document.getElementById('go-verify');
+  const cl = document.getElementById('link-clearnet');
+  if(home) home.href = addSrc('./');
+  if(verify) verify.href = addSrc('verificacion.html');
+  if(cl) cl.href = addSrc('./');
+})();
 </script>
 </body>
 </html>
