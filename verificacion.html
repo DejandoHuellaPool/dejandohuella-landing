@@ -21,613 +21,94 @@
   <meta property="og:image" content="https://dejandohuellapool.github.io/dejandohuella-landing/logo.png"/>
   
   <style>
-    
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Rajdhani:wght@700&family=Montserrat:wght@800&display=swap');
+/* (tu CSS original) */
+* { font-family: "ggsans-Normal", sans-serif; -webkit-tap-highlight-color: transparent; color:#c9cccf; font-size:16px;}
+.ffGgs { font-family: 'ggsans-Bold', sans-serif; font-weight: bold; letter-spacing: -0.4px;}
+.ffGgs2 { font-family: 'ggsans-Medium', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
+.ffGgs3 { font-family: 'ggsans-Normal', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
 
-
-
-
-@font-face {
-font-family: 'ggsans-Normal';
-src: url('https://cdn.glitch.global/6a5e3d66-1d3e-4b5a-a50e-411cd75f9665/ggsans-Normal.woff?v=1717020398197') format('woff');
-font-weight: normal;
-font-style: normal;
-font-display: swap;
+body, html { margin:0; padding:0; min-height:100vh; background:#040611;
+  background-image: radial-gradient(circle at 15% 30%, rgba(255,255,255,.035) 1.5%, rgba(255,255,255,0) 25%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,.06) 1.2%, rgba(255,255,255,0) 22%),
+                    radial-gradient(circle at 30% 80%, rgba(255,255,255,.03) 1.8%, rgba(255,255,255,0) 20%),
+                    radial-gradient(circle at 70% 70%, rgba(255,255,255,.045) 1.3%, rgba(255,255,255,0) 23%),
+                    radial-gradient(circle at 50% 50%, rgba(255,255,255,.02) 1.6%, rgba(255,255,255,0) 18%);
 }
-
-
-
-@font-face {
-font-family: 'ggsans-Bold';
-src: url('https://cdn.glitch.global/6a5e3d66-1d3e-4b5a-a50e-411cd75f9665/ggsans-Bold.woff?v=1717020397357') format('woff');
-font-weight: bold;
-font-style: normal;
-font-display: swap;
-}
-
-@font-face {
-font-family: 'ggsans-Medium';
-src: url('https://cdn.glitch.global/6a5e3d66-1d3e-4b5a-a50e-411cd75f9665/ggsans-Medium.woff?v=1717020397800') format('woff');
-font-weight: 600;
-font-style: normal;
-font-display: swap;
-}
-
-* {
-font-family: "ggsans-Normal", sans-serif;
--webkit-tap-highlight-color: transparent;
-}
-
-    .ffGgs { font-family: 'ggsans-Bold', sans-serif; font-weight: bold; letter-spacing: -0.4px;}
-    .ffGgs2 { font-family: 'ggsans-Medium', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
-    .ffGgs3 { font-family: 'ggsans-Normal', sans-serif; font-weight: bold; letter-spacing: -0.2px;}
-
-/****************************************************************************************************/
-
-
-
-
- * { transition: 0.3s ;  color: #c9cccf;  font-size: 16px; }
-
- body, html {
-   margin: 0;
-   padding: 0;
-  min-height: 100vh; height: auto;
-   overflow-x: hidden;
-   background: #040611;
-
-
- background-image: 
-  radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.035) 1.5%, rgba(255, 255, 255, 0) 25%),
-  radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.06) 1.2%, rgba(255, 255, 255, 0) 22%),
-  radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.03) 1.8%, rgba(255, 255, 255, 0) 20%),
-  radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.045) 1.3%, rgba(255, 255, 255, 0) 23%),
-  radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 1.6%, rgba(255, 255, 255, 0) 18%);
-
-
-   }
-
-   .container {
-/*  max-width: 1200px;*/
-     /*  height: 30dvh; */
-     padding-left: 10px; padding-right: 10px;
-
-
- width: 100dvw;
- min-height: 100dvh; height: auto;
-
-/*  border: 1px solid red; */
-}
-
-   .header {
-    min-height: 7.1vh; height: auto;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-   /*  backdrop-filter: blur(0.8px);*/ 
-     color: #ffffff;
-    padding-top: 15px; padding-bottom:10px ; 
-   /*  background: #090b19a3; */
-  /*   border-bottom: 1px solid #1b26a026;  */
-    /*  position:sticky; top: 0; left: 0; right: 0; z-index: 999; */
- 
-
-   }
-
-   .logo {
- /*    border: 1px dashed #6f38ff; */
-     width:55px ; height: 55px;
-    /*  margin-right: 10px; */
- 
- background-image: linear-gradient(  188deg, #09111ce4  10%, #0f0f0e 110%);
- 
-      /* border: 1px solid #1b26a026;  */
-     border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-         box-shadow:
-        0 0 0px 0 rgb(109, 69, 247, 0.4)  ,
-        -1px -1px 20px 0 #010314,
-        6px 6px 11px 0 #0000004d,     
-           2px 2px 0px 0 #2e084a00; 
-   }
-
-   .logo img {
-     width: 44px;
-     height: 44px;
-     border-radius: 10px;
- 
-    /* box-shadow:  2px 2px 20px 0 #00000044;*/
-   }
-
-   .site-info {
-/*    border: 1px dashed #ff38e7; */
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-   }
-
-   .site-info h1 {
-     font-size: 1.25rem;
-     margin: 0;
-     color: #fff;
-     letter-spacing: -0.2px;
-   }
-
-   .site-info p {
-     font-size: 12px;
-     margin: 0;
-     color: #bdbdbd;
-
-     letter-spacing: 1.20px;
-   }
-
-   .contact-links {
-     margin-top: 10px;
-
- display: grid; 
-grid-template-columns: /* 1fr 1fr 1fr */  repeat(5, auto) ;
-gap: 8px ;
-justify-content: center;
-justify-items: center;
-    align-items: center;
-align-content: center;
-
-      /*  display: flex;   align-items: center; justify-content:  center;  gap: 20px;  flex-wrap: wrap;   */
-   }
-
-   .contact-links a {
-
-
-  /* outline: 1px dashed #f551db;  */
- text-decoration: none;
-font-size: 13px;
-
-      display: flex;   align-items: center;   justify-content: center;
-padding: 8px 12px 9px;  
-border-radius: 12px;
- border: 1px solid #384eff00;
-
-color: #ffffff;
- background:  linear-gradient(  178deg, #101825c4 1%, #0b0a0a 110%);
-
-   box-shadow: 
-  0 0 0px 0 #ab81ed0a,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #7771ffa2, 
-   inset 2px 2px 0px 0 #d36cfe13;
-
-   letter-spacing: 0.6px;
-
-   }
-
-  .contact-links a:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-  0 0 0px 0 #ab81ed2b,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #9aa2ff96,
-   inset 2px 2px 0px 0 #d36cfe13; 
-
-  background: linear-gradient(  176deg, #1a2c4b 1%, #0a0a0a 110%); 
-  }
-
- .contact-links a:active {
-   transform: scale(.95);
- }
-
-
-
-
-
-
-
-
-   /* Main Section */
-   .main-content {
-     
-  /* outline: 1px dashed green; */
-     display: grid;
-     grid-template-columns: repeat(2, 1fr);
-     gap: 20px;
-     padding: 10px;
-     /*  background: #090b19a3; */
-   }
-
-   .card {
-     background: linear-gradient(  178deg, #0c1120e1 1%, #080707 110%);
-     border: 1px solid #1b26a026;
-     border-radius: 16px;
-     padding: 16px 16px 18px;
-    /* box-shadow: inset -2px -2px 0px 0 #721ad11c,  inset 2px 2px 0px 0 #000000; */
-     box-shadow:
-        0 0 0px 0 rgb(109, 69, 247, 0.4)  ,
-        -1px -1px 20px 0 #010314,
-        6px 6px 11px 0 #0000004d,     
-           2px 2px 0px 0 #2e084a00; 
-   }
-
-   .card h2 {
-     margin-top: 0;
-     color: #ffffff;
-     font-size: 18px;
-     letter-spacing: -0.10px;
-   }
-
-   .payment-section {
-     display: grid;
-     grid-template-columns: repeat(2, 1fr);
-     gap: 20px;
-   }
-
-   .payment-card {
-     background: #0a0f1b;
-     border: 1px solid #1b26a026;
-     border-radius: 12px;
-     padding: 12px;
-     box-shadow:  0 3px 11px 0 #020c25,
-  inset 0 0 0 #03030b ;
-   }
-
-   .payment-card h3 {
-     margin-top: 0;
-     color: #e7e7e7;
-     font-size: 16px;
-   }
-
-  .dirBtc {
-    white-space-collapse: preserve-breaks;
- word-break: break-all; 
-   }
-  
-
-   .btc-address {
-       /* width: fit-content; */
-     background: #0a121f;
-     border: 1px dashed #263b70c2;
-     border-radius: 8px;
-     padding: 6px; 
-     box-shadow:  inset 0 0 0 #000, inset 0 0 18px #234a8b82 ;
-   }
-
-   .copy-btn {
-     margin-top: 6px;
-     padding: 6px 8px;
-     background:  linear-gradient(  178deg, #101825c4 1%, #0b0a0a 110%);
-     border: 1px solid #224a4f38;
-     border-radius: 6px;
-     cursor: pointer;
-     /* box-shadow:  0 0 0 #000, inset 0 0 18px #2d345cc0 ; */
-     font-size: 12px;
- 
- box-shadow: 
-  0 0 0px 0 #ab81ed2b,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #9aa2ff3f,
-   inset 2px 2px 0px 0 #d36cfe13;
- color: #dfe2e7;
-   }
- 
-.copy-btn:hover {
-
-transform: translateY(-2px);
- box-shadow: 
-  0 0 0px 0 #ab81ed2b,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #b9beff96,
-   inset 2px 2px 0px 0 #d36cfe13;
-
-background: linear-gradient(  176deg, #1a2c4b 1%, #0a0a0a 110%); 
-} 
-
-   .qr {
-     margin-top: 10px;
-     width: 145px;
-     height: 145px;
-     border-radius: 8px; 
-     border: 1px solid #1f23288f ; 
-   }
-
-   /* Facebook Section */
-   .facebook-card {
-     background: #0a0f1b;
-     border: 1px solid #1b26a026;
-     border-radius: 12px;
-     height: /* auto; */ fit-content;
-     padding: 16px; 
-      box-shadow:  0 3px 11px 0 #020c25,
-  inset 0 0 0 #03030b ;
-   }
-
-   .facebook-card iframe {
-     width: 100%;
-     min-height: 66vh; height: fit-content;
-     border: none; border-radius: 10px;
-     box-shadow:  0 3px 11px 0 #020c25,  inset 0 0 0 #03030b;
-   }
-
-   .grupoFacebook {
-      width: 100%;
-     min-height: 66vh; height: fit-content;
-     border: none; border-radius: 10px;
-     box-shadow:  0 3px 11px 0 #020c25,  inset 0 0 0 #03030b;
-   }
-
-
-
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-  .divvv {
- --bordrr0088:#01375e8c;
-
-display: grid;  grid-template-columns: repeat(2, 1fr);  gap: 12px;
-padding: 8px;  border-radius: 10px; 
-background: linear-gradient(  174deg, #0c121fc4 1%, #090808bb 110%);
-border: 1px solid #1b26a026;  box-shadow: inset 0 0 0 #01375e, inset 0 0 22px #000000; 
-}
-
-.scSe {
-  display: grid; grid-template-columns: repeat(1, 1fr); gap: 8px; 
-  padding: 10px;
-
-  background: #0a0f1b; border: 1px solid #1b26a026;
-  border-radius: 12px;
-  min-height: 90%; height: auto; 
-}
-
-  .divp {
-background: #040a13;  border: 1px solid var(--bordrr0088);
-    border-radius: 13px; padding: 12px; min-height: 50px;  height: auto; 
-box-shadow: inset 0 -10px 0 #041f49, inset 0 0 30px #031125e6; 
-  }
-
-.boxDerechh {
- display: grid;  grid-template-columns:  1fr ;  gap: 12px;
-  padding: 8px;  border-radius: 10px; 
- background: linear-gradient(  174deg, #0b121fd6 1%, #090808bb 110%);
- border: 1px solid #1b26a026;  
- box-shadow: inset 0 0 0 #01375e, inset 0 0 22px #000000; 
-}
-
-
- .ayudaF {
-     background: #0a111b;
-     border: 1px solid #1b26a026;
-     border-radius: 12px;
-     padding: 12px;
-     color: #ffffff;
-     box-shadow:  0 3px 11px 0 #020c25,
-  inset 0 0 0 #03030b ;
-   }
-
-   .contact-box {
-     background: #0a0f1b;
-     border: 1px solid #1b26a026;
-     border-radius: 12px;
-     padding: 12px;
-     display: grid; 
-grid-template-columns:  repeat(2, 1fr) ;
-gap: 10px ;
-  align-items: center;
-   }
-
-   .contact-button {
-
-/* outline: 1px dashed #ff38e7; */
- text-decoration: none;
- font-size: 14px;
-
-color: #ffffff;
- width: 100%;
- display: flex;   align-items: center;   justify-content: center;
- padding: 8px;  border-radius: 10px;
- border: 1px solid #384eff00;
-
-background:  linear-gradient(  178deg, #101825c4 1%, #0b0a0a 110%);
-
-box-shadow: 
-  0 0 0px 0 #ab81ed2b,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #9aa2ff3f,
-   inset 2px 2px 0px 0 #d36cfe13;
-
-   }
-
-   .contact-button:hover {
-        transform: translateY(-2px);
-   box-shadow: 
-  0 0 0px 0 #ab81ed2b,
-  -1px -1px 12px 0 #010314e3,
-  4px 4px 9px 0 #00000060,
-     inset 0 0 16px #9aa2ff96,
-   inset 2px 2px 0px 0 #d36cfe13;
-
-background: linear-gradient(  176deg, #1a2c4b 1%, #0a0a0a 110%); 
-   }
-
-
-
-
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-
-
-
-
-.textSub {
-  color: #dfe5ee; font-size: 12px; letter-spacing: 0.2px;
-}
-
-
-
-@media (max-width: 840px) { 
-
-  .container {
-      padding-left: 10px; padding-right: 10px;
-  }
-
-  .main-content { grid-template-columns: 1fr; }
-  .payment-section { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 580px) { 
-
-* {  font-size: 15px; } 
-
-
-.logo {  width: 51px; height: 51px; }
-.logo img { width: 41px; height: 41px; border-radius: 9px; }
-
-.contact-links { gap: 9px; }  
-.contact-links a { padding: 7px 9px 8px;  font-size: 12px; border-radius: 10px; }
-
-h2 { padding: 8px 10px; padding-bottom: 2px;  border-radius: 9px; }
-
-.bxRg { grid-template-columns: 1fr; gap: 12px; }
-.bx {
-  padding: 8px;
-  border-radius: 9px;
-background: linear-gradient(  178deg, #0c1323e1 1%, #080707 110%);
-border: 1px solid #1b26a026;
-box-shadow:  0 3px 11px 0 #020c25,
-inset 0 0 0 #03030b ;
-}
-
-.liSc li { margin: 5px 0 0 16px; }
-
-.P_content { padding: 10px; border-radius: 12px; } 
-
-.payment-card { padding: 10px; } 
-
-.qr { width: 120px; height: 120px; } 
-
-.ayudaF, .contact-box { padding: 10px; }
-.contact-button { border-radius: 8px; padding: 7px; font-size: 13px;  }
-
-.divvv { grid-template-columns:  1fr ;  gap: 10px; border-radius: 8px; padding: 6px;} 
-
-.divp {  border-radius: 10px; padding: 10px; }
-
-.boxDerechh { padding: 6px; border-radius: 9px; }
-
-} 
-
-
-
+.container{ width:100dvw; min-height:100dvh; padding:0 10px; }
+
+.header{ min-height:7.1vh; display:flex; align-items:center; justify-content:center; color:#fff; padding:15px 0 10px }
+.logo{ width:55px; height:55px; background-image:linear-gradient(188deg,#09111ce4 10%,#0f0f0e 110%); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:-1px -1px 20px 0 #010314, 6px 6px 11px 0 #0006; }
+.logo img{ width:44px; height:44px; border-radius:10px }
+.site-info{ display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.site-info h1{ margin:0; color:#fff; letter-spacing:-.2px; font-size:1.25rem }
+.site-info p{ margin:0; color:#bdbdbd; letter-spacing:1.2px; font-size:12px }
+
+.main-content{ display:grid; grid-template-columns: repeat(2,1fr); gap:20px; padding:10px }
+.card{ background:linear-gradient(178deg,#0c1120e1 1%,#080707 110%); border:1px solid #1b26a026; border-radius:16px; padding:16px 16px 18px; box-shadow:-1px -1px 20px 0 #010314, 6px 6px 11px 0 #0006 }
+.card h2{ margin-top:0; color:#fff; font-size:18px }
+
+.vvv{ display:grid; grid-template-columns: repeat(2,1fr); gap:12px; padding:8px; border-radius:10px; background:linear-gradient(174deg,#0c121fc4 1%,#090808bb 110%); border:1px solid #1b26a026; box-shadow: inset 0 0 0 #01375e, inset 0 0 22px #000; }
+.pst{ border-radius:10px; padding:8px; background:linear-gradient(178deg,#0c1323 1%,#080707 110%); border:1px solid #1b26a026; box-shadow:0 3px 11px 0 #020c25, inset 0 0 0 #03030b; }
+
+.facebook-card{ background:#0a0f1b; border:1px solid #1b26a026; border-radius:12px; height:fit-content; padding:16px; box-shadow:0 3px 11px 0 #020c25, inset 0 0 0 #03030b }
+.grupoFacebook, .facebook-card iframe{ width:100%; min-height:66vh; height:fit-content; border:none; border-radius:10px; box-shadow:0 3px 11px 0 #020c25, inset 0 0 0 #03030b }
+
+.footer{ color:#bdbdbd; text-align:center; padding:10px 0 20px }
+
+/* ======= PRO FIXES ======= */
+:root{ --maxw: 980px; }
+.container{ max-width: var(--maxw); margin: 0 auto; }
+img{ max-width:100%; height:auto }
+.logo{ width:56px; height:56px }
+.logo img{ width:42px; height:auto }
+.vvv{ grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+.facebook-card iframe, .grupoFacebook{ min-height: 420px }
+@media (max-width:840px){ .main-content{ grid-template-columns:1fr } }
+@media (max-width:580px){ .vvv{ grid-template-columns:1fr } }
   </style>
 </head>
 <body>
   <div class="container">
-
-
-
-
-
-
     <div class="header">
-     
-       
-
-        <div class="logo">
-      <img src="logo.png" alt="Site Logo"  onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
-    </div>
-
+      <div class="logo">
+        <img src="logo.png" alt="Site Logo" onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
+      </div>
       <div class="site-info">
         <h1 class="ffGgs">Verificación</h1>
         <p class="ffGgs3">TRADER</p>
       </div>
     </div>
 
-
-
-
-
-
-
     <div class="main-content">
-
-      <!-- Left Column -->
       <div class="card" style=" box-shadow:  0 0 0px 0 #ab81ed0a, -1px -1px 12px 0 #010314, 4px 4px 9px 0 #00000060, inset 0 0 16px #2e3357a2, inset 2px 2px 0px 0 #d36cfe13;">
         <h2>Canales Oficiales Verificación</h2>
-
- <div class="vvv">
-  
-  <div class="pst">
-    <b> Clearnet: </b> 
-    <span> <a href="./"> https://dejandohuellapool.github.io/dejandohuella-landing/ </a> </span>
-  </div>
-  
-  <div class="pst">
-    <b> .onion : </b> 
-    <span> <a href="#"> xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion  </a> </span>
-  </div>
-
-  <div class="pst">
-    <b>  WhatsApp Venta :  </b> 
-    <span> <a href="whatsapp.html"> Abrir Hub </a> </span>
-  </div>
-
-  <div class="pst">
-    <b> Correo : </b> 
-    <span> <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a> </span>
-  </div>
-
-</div>
-
-       
+        <div class="vvv">
+          <div class="pst"><b>Clearnet:</b> <span><a href="./">https://dejandohuellapool.github.io/dejandohuella-landing/</a></span></div>
+          <div class="pst"><b>.onion:</b> <span><a href="#">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</a></span></div>
+          <div class="pst"><b>WhatsApp Venta:</b> <span><a href="whatsapp.html">Abrir Hub</a></span></div>
+          <div class="pst"><b>Correo:</b> <span><a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></span></div>
+        </div>
       </div>
 
-      <!-- Right Column -->
       <div class="facebook-card">
-      
-<div> 
-  <b>  PGP ( huella / fingerprint ) :  </b> 
-  <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
-</div>
-
-
-<div> 
-  <h3> Consejos Anti-Phishing </h3>
-  <ul>
-    <li> Verifica el dominio exacto o la dirección .onion </li>
-    <li> Solo paga a las direcciones/QR de esta web </li>
-    <li> Nadie del equipo pedirá contraseñas ni códigos 2FA </li>
-  </ul>
-</div>
-
-
-
-
+        <div><b>PGP (huella / fingerprint):</b> <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code></div>
+        <div>
+          <h3>Consejos Anti-Phishing</h3>
+          <ul>
+            <li>Verifica el dominio exacto o la dirección .onion</li>
+            <li>Solo paga a las direcciones/QR de esta web</li>
+            <li>Nadie del equipo pedirá contraseñas ni códigos 2FA</li>
+          </ul>
+        </div>
       </div>
     </div>
-
-
-
 
     <div class="footer">
-      
-  <hr style=" border-top: 1px dashed #0d4775dc; "> 
-  <p style=" letter-spacing: 0.4px; "> 
-    <b> DejandoHuella Trader </b> 
-    — Official <b> .onion (Reporting)</b> /  Trader (Official Site)
-  </p>
-
-<p>Correo: 
- <a href="mailto:dejandohuella_pool@proton.me" class="ffGgs2">dejandohuella_pool@proton.me</a> 
-  |  PGP (huella / fingerprint): 6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452 </p>
-
-<div> <b> .onion ( situs ) :</b> 
- <span class="ffGgs2"> xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion </span>
-</div>
-
+      <hr style=" border-top: 1px dashed #0d4775dc; ">
+      <p style="letter-spacing:.4px;"><b>DejandoHuella Trader</b> — Official <b>.onion (Reporting)</b> / Trader (Official Site)</p>
+      <p>Correo: <a href="mailto:dejandohuella_pool@proton.me" class="ffGgs2">dejandohuella_pool@proton.me</a> | PGP: 6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</p>
+      <div><b>.onion (situs):</b> <span class="ffGgs2">xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</span></div>
     </div>
-
   </div>
-
 </body>
 </html>
