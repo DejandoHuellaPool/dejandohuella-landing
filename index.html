@@ -15,13 +15,13 @@
   <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- (Opcional) Meta Pixel (sin cambios) -->
+  <!-- (Opcional) Meta Pixel (en .onion puede no cargar; no bloquea la página) -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');
+  'https://connect.facebook.net/en_US/fbevents.js');try{fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');}catch(e){}
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
@@ -49,6 +49,8 @@
     .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
     .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
+    .copy{cursor:pointer;color:#b4d2ff;border:1px solid var(--border);padding:6px 10px;border-radius:10px;background:#0f1522}
+    .copy:hover{filter:brightness(1.1)}
     /* === Botones 3D profesionales === */
     .cta{
       display:inline-block; min-width:180px; text-align:center;
@@ -61,7 +63,6 @@
     .cta:active{ transform:translateY(3px); box-shadow:0 3px 0 #0e7a41, 0 6px 12px var(--shadow) }
     .cta--wa{background:linear-gradient(180deg,#2cf475,#25D366)}
     .cta--dark{background:linear-gradient(180deg,#7aa9ff,#3b82f6); color:#081226; box-shadow:0 6px 0 #1f5cc8, 0 8px 18px var(--shadow)}
-
     .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
 
     /* Menú emergente del botón principal */
@@ -74,7 +75,7 @@
     .menu-panel a{display:block; margin:8px 0}
     .menu-panel hr{border:0;border-top:1px solid var(--border);opacity:.6;margin:8px 0}
 
-    /* QR & pagos (sin cambios visuales fuertes) */
+    /* QR & pagos */
     .payrow{display:grid;gap:8px; margin-bottom:14px}
     .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
     .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
@@ -128,11 +129,11 @@
             <a class="cta" href="#" id="btn-info">Solicitar información</a>
             <!-- Panel con TODAS las opciones -->
             <div class="menu-panel" id="panel-info" aria-hidden="true">
-              <a class="cta cta--wa" href="whatsapp.html">WhatsApp (ventas)</a>
-              <a class="cta" href="verificacion.html">Verificación oficial</a>
+              <a class="cta cta--wa" href="whatsapp.html" rel="noopener">WhatsApp (ventas)</a>
+              <a class="cta" href="verificacion.html" rel="noopener">Verificación oficial</a>
               <a class="cta cta--dark" href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
               <hr>
-              <a class="cta" href="clases.html"><b>🎓 Cursos Trading</b></a>
+              <a class="cta" href="clases.html" rel="noopener"><b>🎓 Cursos Trading</b></a>
             </div>
           </div>
         </div>
@@ -145,8 +146,7 @@
       <h2>Redes oficiales</h2>
       <p>Síguenos para novedades y soporte:</p>
       <div class="cta-row">
-        <!-- Si no quieres Facebook aquí, puedes borrar esta línea -->
-        <a class="cta cta--dark" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener" aria-label="Facebook oficial">Facebook</a>
+        <a class="cta cta--dark" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener">Facebook</a>
         <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
       </div>
     </div>
@@ -389,8 +389,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- QRCode: usa CDN y hace fallback a imágenes locales si no carga (caso .onion) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
     // Barra superior
@@ -426,7 +426,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
     }
 
-    // Direcciones cripto (sin cambios)
+    // Direcciones cripto
     const ADDR = {
       btc:'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',
       trc20:'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',
@@ -435,12 +435,12 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'
     };
 
-    // QR perezoso
-    function ensureQR(id, text, key){
-      const box=document.getElementById(id);
+    // Crear QR (si la librería está disponible); si no, usa PNG local
+    function ensureQR(boxId, text, key){
+      const box=document.getElementById(boxId);
       if(!box || box.dataset.done) return;
       if(window.QRCode){
-        const size=Math.min(box.clientWidth||180, box.clientHeight||180);
+        const size=Math.min(180, 180);
         new QRCode(box,{text,width:size,height:size,correctLevel: QRCode.CorrectLevel.M});
       }else{
         const img=document.createElement('img'); img.alt='QR '+key.toUpperCase(); img.src='img/qr_'+key+'.png';
@@ -456,5 +456,54 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       });
     });
   </script>
+
+<section id="en-vivo" class="card" style="margin-top:24px">
+  <h2>Operaciones en vivo</h2>
+  <div id="live-op">
+    <div><strong>Par:</strong> <span id="lv-symbol">—</span></div>
+    <div><strong>Lado:</strong> <span id="lv-side">—</span></div>
+    <div><strong>Precio:</strong> <span id="lv-price">—</span></div>
+    <div><strong>Lote:</strong> <span id="lv-lots">—</span></div>
+    <div><strong>SL / TP:</strong> <span id="lv-sltp">—</span></div>
+    <div><strong>Hora:</strong> <span id="lv-ts">—</span></div>
+  </div>
+  <div style="margin-top:12px">
+    <img id="lv-shot" src="/live/shots/latest.jpg" alt="Captura MT4 en vivo"
+         style="width:100%;max-width:960px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2)">
+  </div>
+</section>
+
+<script>
+(function(){
+  const els = {
+    sym:  document.getElementById('lv-symbol'),
+    side: document.getElementById('lv-side'),
+    price:document.getElementById('lv-price'),
+    lots: document.getElementById('lv-lots'),
+    sltp: document.getElementById('lv-sltp'),
+    ts:   document.getElementById('lv-ts'),
+    img:  document.getElementById('lv-shot')
+  };
+  function render(d){
+    if(!d) return;
+    els.sym.textContent  = d.symbol || '—';
+    els.side.textContent = d.side   || '—';
+    els.price.textContent= d.price  || '—';
+    els.lots.textContent = d.lots   || '—';
+    els.sltp.textContent = (d.sl||'—') + ' / ' + (d.tp||'—');
+    els.ts.textContent   = d.ts     || '—';
+    els.img.src = '/live/shots/latest.jpg?ts=' + Date.now();
+  }
+  async function poll(){
+    try {
+      const r = await fetch('/live/last.json', {cache:'no-store'});
+      if(r.ok){ render(await r.json()); }
+    } catch(e){}
+    setTimeout(poll, 2500);
+  }
+  poll();
+})();
+</script>
+
 </body>
 </html>
