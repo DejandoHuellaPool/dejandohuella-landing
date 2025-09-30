@@ -116,6 +116,25 @@
       h1{font-size:24px}
     }
   </style>
+
+  <style>
+/* === Toast minimal === */
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0b2d18;color:#b7ffcd;border:1px solid #17472b;padding:10px 14px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .18s ease}
+  .toast.show{opacity:1}
+</style>
+
+
+<style>
+/* Pro Live UI additions */
+.skel{background:linear-gradient(90deg, #11151c 25%, #161b24 37%, #11151c 63%); background-size:400% 100%; animation:sk 1.2s ease-in-out infinite}
+@keyframes sk{0%{background-position:100% 0}100%{background-position:0 0}}
+.badge-live{position:absolute;right:10px;top:10px;background:#0b2d18;border:1px solid #17472b;color:#b7ffcd;padding:4px 8px;border-radius:999px;font-size:12px}
+.live-shot-wrap{position:relative}
+.live-meta{font-size:12px;color:#9aa4b2;margin-top:6px}
+.kv{display:inline-block; margin-right:10px}
+.kv b{color:#fff}
+</style>
+
 </head>
 <body>
   <div class="bar">
@@ -582,6 +601,235 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
   pollLast();
   pollHist();
   </script>
+
+
+  <div id="toast" class="toast" role="status" aria-live="polite" style="display:block">Copiado ✓</div>
+
+
+  <script>
+  (function(){
+    // Toast util
+    function toast(msg){
+      var t = document.getElementById('toast');
+      if(!t){
+        t = document.createElement('div');
+        t.id = 'toast';
+        t.className = 'toast';
+        t.setAttribute('role','status');
+        t.setAttribute('aria-live','polite');
+        document.body.appendChild(t);
+      }
+      t.textContent = msg || 'Listo';
+      t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 1200);
+    }
+
+    // Copy helpers (non-intrusive: no override of existing functions)
+    window.DH_copy = function(inputSel){
+      try{
+        var el = document.querySelector(inputSel);
+        if(!el) return false;
+        if(el.select) { el.select(); el.setSelectionRange(0, 99999); }
+        var ok = document.execCommand && document.execCommand('copy');
+        if(!ok && navigator.clipboard && el.value){ navigator.clipboard.writeText(el.value); ok = true; }
+        if(navigator.vibrate){ try{ navigator.vibrate(8); }catch(e){} }
+        toast(ok ? 'Copiado ✓' : 'Error al copiar');
+        return ok;
+      }catch(e){
+        toast('Error al copiar');
+        return false;
+      }
+    };
+
+    // Delegated handler for elements with data-copy-target
+    document.addEventListener('click', function(ev){
+      var t = ev.target.closest('[data-copy-target]');
+      if(!t) return;
+      var sel = t.getAttribute('data-copy-target');
+      if(sel) { DH_copy(sel); }
+    });
+
+    // Live shot cache-buster (non-intrusive)
+    function updateLiveShot(){
+      var img = document.getElementById('shot') || document.querySelector('img[src*="/live/shots/latest.jpg"]');
+      if(!img) return;
+      var base = (img.getAttribute('data-base-shot') || img.src || '/live/shots/latest.jpg').split('?')[0];
+      img.setAttribute('data-base-shot', base);
+      img.src = base + '?_=' + Date.now();
+    }
+    updateLiveShot();
+    setInterval(updateLiveShot, 5000);
+  })();
+  </script>
+
+
+<script>
+(function(){
+  // Only run after DOM is ready
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initProLive); } else { initProLive(); }
+
+  function initProLive(){
+    var lastBox = document.getElementById('lastBox');
+    var tradesBox = document.getElementById('tradesBox');
+    var shot = document.getElementById('shot');
+    var liveDot = document.getElementById('liveDot');
+    var liveMsg = document.getElementById('liveMsg');
+
+    // Add badge to screenshot
+    if(shot){
+      var wrap = shot.closest('.live-shot-wrap');
+      if(!wrap){
+        wrap = document.createElement('div');
+        wrap.className = 'live-shot-wrap';
+        shot.parentNode.insertBefore(wrap, shot);
+        wrap.appendChild(shot);
+      }
+      if(!wrap.querySelector('.badge-live')){
+        var b = document.createElement('span');
+        b.className = 'badge-live';
+        b.textContent = 'EN VIVO';
+        wrap.appendChild(b);
+      }
+    }
+
+    // Skeletons if empty
+    if(lastBox && !lastBox.textContent.trim()){
+      lastBox.innerHTML = '<div class="skel" style="height:52px;border-radius:10px"></div>';
+    }
+    if(tradesBox && !tradesBox.children.length){
+      tradesBox.innerHTML = '<div class="skel" style="height:140px;border-radius:10px"></div>';
+    }
+
+    var Pro = {
+      lastUrl: '/live/last.json',
+      tradesUrl: '/live/trades.jsonl',
+      shotUrl: '/live/shots/latest.jpg',
+      backoff: 5000,
+      backoffMax: 30000,
+      timer: null
+    };
+
+    function setStatus(ok, msg){
+      if(liveDot) liveDot.className = 'dot ' + (ok ? 'ok':'bad');
+      if(liveMsg) liveMsg.textContent = msg || (ok ? 'OK' : 'Sin datos de EA');
+    }
+
+    function safeParseJson(txt){
+      if(typeof txt !== 'string') return null;
+      txt = txt.replace(/^\ufeff|^\xfeff/, '').trim();
+      try{ return JSON.parse(txt); }catch(e){ return null; }
+    }
+
+    function normalize(obj){
+      if(!obj || typeof obj !== 'object') return {};
+      const map = {};
+      // normalize keys (spanish/english variants common in EA)
+      for (const k in obj){
+        const v = obj[k];
+        const key = k.toLowerCase();
+        map[key] = v;
+      }
+      // synonyms
+      const side = map.side || map.lado || map.type || map['order_type'] || map.signal || '';
+      const price = map.price || map.precio || map.pr || map.entry || map['open_price'] || map['precio_entrada'] || null;
+      const lot = map.lot || map.lote || map['volume'] || map['lots'] || null;
+      const sl = map.sl || map.stoploss || map['stop_loss'] || map['sl_price'] || null;
+      const tp = map.tp || map.takeprofit || map['take_profit'] || map['tp_price'] || null;
+      const level = map.level || map.dg_level || map['dg_l'] || map['dg_level_name'] || null;
+      const ts = map.ts || map.time || map.timestamp || map['open_time'] || map['fecha'] || null;
+      return {side, price, lot, sl, tp, level, ts};
+    }
+
+    function fmtTs(ts){
+      try{
+        const d = new Date(ts);
+        if (isNaN(d)) return '—';
+        const pad = (n)=>String(n).padStart(2,'0');
+        return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());
+      }catch{ return '—'; }
+    }
+
+    function renderLast(raw){
+      if(!lastBox) return;
+      if(!raw){ lastBox.innerHTML = '—'; return; }
+      var j = normalize(raw);
+      var side = (String(j.side||'').toUpperCase());
+      var tag = '<span class="tag '+(side==='BUY'?'buy':'sell')+'">'+(side||'—')+'</span>';
+      lastBox.innerHTML = tag + ' ' +
+        '<span class="kv">Precio: <b>'+(j.price ?? '—')+'</b></span>' +
+        '<span class="kv">Lote: <b>'+(j.lot ?? '—')+'</b></span>' +
+        '<span class="kv">SL: <b>'+(j.sl ?? '—')+'</b></span>' +
+        '<span class="kv">TP: <b>'+(j.tp ?? '—')+'</b></span>' +
+        (j.level ? '<span class="kv">Nivel: <b>DG_'+j.level+'</b></span>' : '') +
+        '<div class="live-meta">Actualizado: '+fmtTs(j.ts || Date.now())+'</div>';
+    }
+
+    function renderTrades(lines){
+      if(!tradesBox) return;
+      tradesBox.innerHTML = '';
+      if(!lines || !lines.length){ tradesBox.textContent = '—'; return; }
+      const max = Math.min(lines.length, 12);
+      for(let i=0;i<max;i++){
+        const raw = safeParseJson(lines[i]);
+        if(!raw) continue;
+        const j = normalize(raw);
+        const side = (String(j.side||'').toUpperCase());
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.innerHTML = `
+          <div><span class="tag ${side==='BUY'?'buy':'sell'}">${side||'—'}</span></div>
+          <div>Precio: <b>${j.price ?? '—'}</b></div>
+          <div>Lote: <b>${j.lot ?? '—'}</b></div>
+          <div>SL/TP: ${(j.sl ?? '—')} / ${(j.tp ?? '—')}</div>
+          <div class="muted">${fmtTs(j.ts || '')}</div>
+        `;
+        tradesBox.appendChild(row);
+      }
+    }
+
+    async function fetchText(url){
+      try{
+        const u = url + (url.includes('?') ? '&' : '?') + '_=' + Date.now();
+        const r = await fetch(u, {cache:'no-store'});
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        return await r.text();
+      }catch(e){
+        return null;
+      }
+    }
+
+    async function poll(){
+      // last.json
+      const lastTxt = await fetchText(Pro.lastUrl);
+      const last = safeParseJson(lastTxt||'');
+      renderLast(last);
+
+      // trades.jsonl
+      const tTxt = await fetchText(Pro.tradesUrl);
+      const lines = (tTxt||'').split('\n').filter(Boolean);
+      renderTrades(lines);
+
+      // screenshot
+      if(shot){
+        const base = (shot.getAttribute('data-base-shot') || Pro.shotUrl);
+        shot.setAttribute('data-base-shot', base);
+        shot.src = base + '?_=' + Date.now();
+      }
+
+      const ok = !!(last || lines.length);
+      setStatus(ok, ok ? 'OK' : 'Esperando datos…');
+
+      // backoff
+      clearTimeout(Pro.timer);
+      const next = ok ? 5000 : Math.min(Pro.backoff*1.5, Pro.backoffMax);
+      Pro.backoff = next;
+      Pro.timer = setTimeout(poll, next);
+    }
+
+    poll();
+  }
+})();
+</script>
 
 </body>
 </html>
