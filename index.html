@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- (Opcional) Meta Pixel (en .onion puede no cargar; no bloquea la página) -->
+  <!-- (Opcional) Meta Pixel -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -33,6 +33,7 @@
       --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826;
       --accent:#22c55e; --accent2:#1ed760; --border:#1f2a3a; --link:#60a5fa;
       --btnText:#06250f; --shadow:rgba(0,0,0,.45);
+      --green:#16a34a; --red:#dc2626;
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
@@ -51,7 +52,7 @@
     code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
     .copy{cursor:pointer;color:#b4d2ff;border:1px solid var(--border);padding:6px 10px;border-radius:10px;background:#0f1522}
     .copy:hover{filter:brightness(1.1)}
-    /* === Botones 3D profesionales === */
+    /* === Botones 3D === */
     .cta{
       display:inline-block; min-width:180px; text-align:center;
       background:linear-gradient(180deg,var(--accent2),var(--accent));
@@ -65,7 +66,6 @@
     .cta--dark{background:linear-gradient(180deg,#7aa9ff,#3b82f6); color:#081226; box-shadow:0 6px 0 #1f5cc8, 0 8px 18px var(--shadow)}
     .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
 
-    /* Menú emergente del botón principal */
     .menu{position:relative;display:inline-block}
     .menu-panel{
       position:absolute; top:110%; left:0; min-width:280px;
@@ -75,7 +75,6 @@
     .menu-panel a{display:block; margin:8px 0}
     .menu-panel hr{border:0;border-top:1px solid var(--border);opacity:.6;margin:8px 0}
 
-    /* QR & pagos */
     .payrow{display:grid;gap:8px; margin-bottom:14px}
     .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
     .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
@@ -93,6 +92,14 @@
     .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
     .bar a{color:#b4d2ff}
 
+    /* Live + historial */
+    .live-grid{display:grid;gap:12px}
+    .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:16px}
+    .badge{padding:2px 10px;border-radius:999px;font-weight:700;font-size:13px;display:inline-block}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid var(--border)}
+    th{text-align:left;color:#cbd5e1}
+
     /* Responsive */
     @media (max-width:980px){
       .wrap{padding:18px}
@@ -102,7 +109,6 @@
       .cta{min-width:unset;width:100%}
       .menu-panel{max-width:92vw}
     }
-    /* Ajuste para móvil horizontal (apaisado) */
     @media (max-height:520px) and (orientation:landscape){
       .wrap{padding:14px}
       .cta{padding:10px 14px}
@@ -124,10 +130,8 @@
       <div>
         <h1>DejandoHuella Trader</h1>
         <div class="cta-row">
-          <!-- ÚNICO botón visible en la cabecera -->
           <div class="menu">
             <a class="cta" href="#" id="btn-info">Solicitar información</a>
-            <!-- Panel con TODAS las opciones -->
             <div class="menu-panel" id="panel-info" aria-hidden="true">
               <a class="cta cta--wa" href="whatsapp.html" rel="noopener">WhatsApp (ventas)</a>
               <a class="cta" href="verificacion.html" rel="noopener">Verificación oficial</a>
@@ -389,7 +393,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
   </div>
 
-  <!-- QRCode: usa CDN y hace fallback a imágenes locales si no carga (caso .onion) -->
+  <!-- QRCode CDN -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
@@ -399,7 +403,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     // Fecha
     document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
 
-    // Panel de "Solicitar información"
+    // Panel "Solicitar información"
     (function(){
       const btn=document.getElementById('btn-info');
       const panel=document.getElementById('panel-info');
@@ -435,12 +439,12 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'
     };
 
-    // Crear QR (si la librería está disponible); si no, usa PNG local
+    // Crear QR (usa el texto real)
     function ensureQR(boxId, text, key){
       const box=document.getElementById(boxId);
       if(!box || box.dataset.done) return;
       if(window.QRCode){
-        const size=Math.min(180, 180);
+        const size=180;
         new QRCode(box,{text,width:size,height:size,correctLevel: QRCode.CorrectLevel.M});
       }else{
         const img=document.createElement('img'); img.alt='QR '+key.toUpperCase(); img.src='img/qr_'+key+'.png';
@@ -457,53 +461,115 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     });
   </script>
 
-<section id="en-vivo" class="card" style="margin-top:24px">
-  <h2>Operaciones en vivo</h2>
-  <div id="live-op">
-    <div><strong>Par:</strong> <span id="lv-symbol">—</span></div>
-    <div><strong>Lado:</strong> <span id="lv-side">—</span></div>
-    <div><strong>Precio:</strong> <span id="lv-price">—</span></div>
-    <div><strong>Lote:</strong> <span id="lv-lots">—</span></div>
-    <div><strong>SL / TP:</strong> <span id="lv-sltp">—</span></div>
-    <div><strong>Hora:</strong> <span id="lv-ts">—</span></div>
-  </div>
-  <div style="margin-top:12px">
-    <img id="lv-shot" src="/live/shots/latest.jpg" alt="Captura MT4 en vivo"
-         style="width:100%;max-width:960px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2)">
-  </div>
-</section>
+  <!-- ======= EN VIVO ======= -->
+  <section id="en-vivo" class="card" style="margin-top:24px">
+    <h2>Operaciones en vivo</h2>
+    <div class="live-grid">
+      <div class="kv">
+        <strong>Par:</strong>   <span id="lv-symbol">—</span>
+        <strong>Lado:</strong>  <span id="lv-side">—</span>
+        <strong>Precio:</strong><span id="lv-price">—</span>
+        <strong>Lote:</strong>  <span id="lv-lots">—</span>
+        <strong>SL / TP:</strong><span id="lv-sltp">—</span>
+        <strong>Hora:</strong>  <span id="lv-ts">—</span>
+      </div>
+      <img id="lv-shot" src="/live/shots/latest.jpg" alt="Captura MT4 en vivo"
+           style="width:100%;max-width:960px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2)">
+    </div>
+  </section>
 
-<script>
-(function(){
-  const els = {
-    sym:  document.getElementById('lv-symbol'),
-    side: document.getElementById('lv-side'),
-    price:document.getElementById('lv-price'),
-    lots: document.getElementById('lv-lots'),
-    sltp: document.getElementById('lv-sltp'),
-    ts:   document.getElementById('lv-ts'),
-    img:  document.getElementById('lv-shot')
-  };
-  function render(d){
-    if(!d) return;
-    els.sym.textContent  = d.symbol || '—';
-    els.side.textContent = d.side   || '—';
-    els.price.textContent= d.price  || '—';
-    els.lots.textContent = d.lots   || '—';
-    els.sltp.textContent = (d.sl||'—') + ' / ' + (d.tp||'—');
-    els.ts.textContent   = d.ts     || '—';
-    els.img.src = '/live/shots/latest.jpg?ts=' + Date.now();
+  <!-- ======= HISTORIAL ======= -->
+  <section id="hist" class="card" style="margin-top:16px">
+    <h2>Historial reciente</h2>
+    <div id="hist-empty" class="meta">Sin operaciones aún…</div>
+    <table id="hist-table" style="display:none">
+      <thead>
+        <tr>
+          <th>Hora</th><th>Par</th><th>Lado</th>
+          <th style="text-align:right">Precio</th><th style="text-align:right">Lote</th>
+          <th style="text-align:right">SL</th><th style="text-align:right">TP</th>
+        </tr>
+      </thead>
+      <tbody id="hist-body"></tbody>
+    </table>
+  </section>
+
+  <script>
+  // ===== Helpers UI =====
+  const $ = id => document.getElementById(id);
+  const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'),
+                   lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
+
+  function badgeHTML(text){
+    const s=(text||'').toUpperCase();
+    let color='#9aa6bd';
+    if(s.includes('BUY'))  color = getComputedStyle(document.documentElement).getPropertyValue('--green') || '#16a34a';
+    if(s.includes('SELL')) color = getComputedStyle(document.documentElement).getPropertyValue('--red')   || '#dc2626';
+    return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
   }
-  async function poll(){
-    try {
-      const r = await fetch('/live/last.json', {cache:'no-store'});
-      if(r.ok){ render(await r.json()); }
-    } catch(e){}
-    setTimeout(poll, 2500);
+  function nice(n, dp){
+    if(n===undefined || n===null || n==='') return '—';
+    const x=Number(n); if(Number.isNaN(x)) return '—';
+    return dp===undefined ? x.toString() : x.toFixed(dp);
   }
-  poll();
-})();
-</script>
+  function localTs(ts){
+    if(!ts) return '—';
+    const t = ts.replace(/\./g,'-').replace(' ','T'); // "YYYY.MM.DD HH:MM:SS" -> ISO
+    const d = new Date(t);
+    return Number.isNaN(+d) ? ts : d.toLocaleString();
+  }
+
+  // ===== Último evento =====
+  async function pollLast(){
+    try{
+      const r = await fetch('/live/last.json?ts='+Date.now(), {cache:'no-store'});
+      if(r.ok){
+        const d = await r.json();
+        liveEls.sym.textContent = d.symbol || '—';
+        liveEls.side.innerHTML  = badgeHTML(d.side);
+        liveEls.price.textContent = nice(d.price);
+        liveEls.lots.textContent  = nice(d.lots,2);
+        liveEls.sltp.textContent  = `${nice(d.sl)} / ${nice(d.tp)}`;
+        liveEls.ts.textContent    = localTs(d.ts);
+        liveEls.img.src = '/live/shots/latest.jpg?ts='+Date.now(); // evita caché
+      }
+    }catch(e){}
+    setTimeout(pollLast, 2500);
+  }
+
+  // ===== Historial (últimas 10 de trades.jsonl) =====
+  async function pollHist(){
+    const tbl=$('hist-table'), body=$('hist-body'), empty=$('hist-empty');
+    function render(rows){
+      if(!rows.length){ tbl.style.display='none'; empty.style.display='block'; return; }
+      empty.style.display='none'; tbl.style.display='table';
+      body.innerHTML = rows.map(r=>(
+        `<tr>
+          <td>${localTs(r.ts)}</td>
+          <td>${r.symbol||'—'}</td>
+          <td>${badgeHTML(r.side)}</td>
+          <td style="text-align:right">${nice(r.price)}</td>
+          <td style="text-align:right">${nice(r.lots,2)}</td>
+          <td style="text-align:right">${nice(r.sl)}</td>
+          <td style="text-align:right">${nice(r.tp)}</td>
+        </tr>`
+      )).join('');
+    }
+    try{
+      const r = await fetch('/live/trades.jsonl?ts='+Date.now(), {cache:'no-store'});
+      if(!r.ok){ render([]); return; }
+      const txt = await r.text();
+      const lines = txt.trim().split(/\r?\n/).filter(Boolean);
+      const objs  = lines.slice(-10).map(l=>{try{return JSON.parse(l);}catch(_){return null;}}).filter(Boolean).reverse();
+      render(objs);
+    }catch(_){ render([]); }
+    setTimeout(pollHist, 5000);
+  }
+
+  // Init
+  pollLast();
+  pollHist();
+  </script>
 
 </body>
 </html>
