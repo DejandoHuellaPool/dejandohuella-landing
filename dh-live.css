@@ -1,0 +1,18 @@
+
+/* DejandoHuella - EN VIVO mobile tweaks (scoped) */
+#hist .card-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#hist table { width:100%; border-collapse: collapse; table-layout: fixed; }
+#hist thead th { position: sticky; top: 0; background: #0f172a; z-index: 1; }
+#hist th, #hist td { padding: 8px 10px; }
+@media (max-width: 640px){
+  #hist h2 { font-size: 1rem; }
+  #hist th, #hist td { font-size: 12px; line-height: 1.2; padding: 6px 8px; }
+  #hist table th:nth-child(1), #hist table td:nth-child(1) { min-width: 120px; }
+  #hist table th:nth-child(2), #hist table td:nth-child(2) { min-width: 70px; }
+  #hist table th:nth-child(3), #hist table td:nth-child(3) { min-width: 70px; }
+  #hist table th:nth-child(4), #hist table td:nth-child(4) { min-width: 90px; }
+  #hist table th:nth-child(5), #hist table td:nth-child(5) { min-width: 70px; }
+  #hist table th:nth-child(6), #hist table td:nth-child(6) { min-width: 90px; }
+  #hist table th:nth-child(7), #hist table td:nth-child(7) { min-width: 90px; }
+  #hist .badge { transform: scale(0.9); transform-origin: left center; }
+}
