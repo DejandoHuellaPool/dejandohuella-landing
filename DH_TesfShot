@@ -1,0 +1,55 @@
+//+------------------------------------------------------------------+
+//|                                                  DH_TestShot.mq4 |
+//|  Prueba de captura con 2 rutas, alerta y verificación            |
+//+------------------------------------------------------------------+
+#property strict
+
+void ShowResult(string title, string relPath, bool ok, int err)
+{
+   // Verifica realmente si quedó escrito
+   bool exists = FileIsExist(relPath);
+   string msg = StringFormat(
+      "%s\nChartScreenShot: %s\nArchivo: %s\nExiste: %s\nError: %d",
+      title,
+      (ok ? "OK" : "FALLO"),
+      relPath,
+      (exists ? "SI" : "NO"),
+      err
+   );
+   Print("DH_TestShot -> ", msg);
+   Alert("DH_TestShot\n", msg);
+}
+
+void OnStart()
+{
+   // Rutas a probar
+   string p1 = "live\\shots\\latest.jpg"; // estándar de tu web
+   string p2 = "live\\latest.jpg";        // ruta alternativa (sin subcarpeta)
+
+   // 0) Tocar/crear algo dentro de 'live\\shots' (ayuda a crear/escribir en la carpeta)
+   ResetLastError();
+   int h = FileOpen("live\\shots\\__touch.tmp", FILE_WRITE|FILE_TXT|FILE_ANSI);
+   if(h >= 0){ FileWriteString(h, "ok"); FileClose(h); }
+   int touchErr = GetLastError();
+   Print("DH_TestShot touch shots: err=", touchErr);
+
+   // 1) Forzar repintado del chart antes de la captura
+   ChartRedraw();
+   Sleep(200);
+
+   // 2) Intento A: ruta estándar con subcarpeta
+   ResetLastError();
+   bool ok1 = ChartScreenShot(0, p1, 1280, 720, ALIGN_RIGHT);
+   int  e1  = GetLastError();
+   ShowResult("INTENTO A (live\\shots\\latest.jpg)", p1, ok1, e1);
+
+   // 3) Si falla A, probamos una ruta más simple (sin subcarpeta)
+   if(!ok1)
+   {
+      Sleep(150);
+      ResetLastError();
+      bool ok2 = ChartScreenShot(0, p2, 1280, 720, ALIGN_RIGHT);
+      int  e2  = GetLastError();
+      ShowResult("INTENTO B (live\\latest.jpg)", p2, ok2, e2);
+   }
+}
