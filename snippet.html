@@ -1,0 +1,37 @@
+
+<!-- ======= HISTORIAL ======= -->
+<section id="hist" class="card" style="margin-top:16px">
+  <h2>Historial reciente</h2>
+  <div class="card-body">
+    <table>
+      <thead>
+        <tr><th>Hora</th><th>Par</th><th>Lado</th><th>Precio</th><th>Lote</th><th>SL</th><th>TP</th></tr>
+      </thead>
+      <tbody id="hist-body">
+        <tr><td colspan="7">Sin operaciones aún...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ======= EN VIVO ======= -->
+<section id="en-vivo" class="card" style="margin-top:16px">
+  <h2>Operaciones en vivo</h2>
+  <div class="grid-2">
+    <div class="live-fields">
+      <div><b>Par:</b> <span id="lv-symbol">—</span></div>
+      <div><b>Lado:</b> <span id="lv-side">—</span></div>
+      <div><b>Precio:</b> <span id="lv-price">—</span></div>
+      <div><b>Lote:</b> <span id="lv-lots">—</span></div>
+      <div><b>SL / TP:</b> <span id="lv-sltp">—</span></div>
+      <div><b>Hora:</b> <span id="lv-ts">—</span></div>
+    </div>
+    <div class="live-shot">
+      <img id="lv-shot" alt="Captura MT4 en vivo" src="/live/shots/latest.png" style="max-width:100%;border-radius:12px;display:block">
+    </div>
+  </div>
+</section>
+
+<!-- Carga el módulo EN VIVO -->
+<link rel="stylesheet" href="dh-live.css">
+<script src="dh-live.js"></script>
