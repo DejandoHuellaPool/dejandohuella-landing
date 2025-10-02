@@ -340,32 +340,62 @@ button[data-alert-close]{
     setTimeout(pollLast, 2500);
   }
 
-  // ===== Historial (últimas 10 de trades.jsonl) =====
+  // ===== Historial (ajustado para \r\n literales, "}{", y mapeo de claves) =====
   async function pollHist(){
     const tbl=$('hist-table'), body=$('hist-body'), empty=$('hist-empty');
+
     function render(rows){
       if(!rows.length){ tbl.style.display='none'; empty.style.display='block'; return; }
       empty.style.display='none'; tbl.style.display='table';
       body.innerHTML = rows.map(r=>(
         `<tr>
           <td>${localTs(r.ts)}</td>
-          <td>${r.symbol||'—'}</td>
+          <td>${(r.symbol && r.symbol!=='0')?r.symbol:'BTCUSD'}</td>
           <td>${badgeHTML(r.side)}</td>
           <td style="text-align:right">${nice(r.price)}</td>
-          <td style="text-align:right">${nice(r.lots,2)}</td>
+          <td style="text-align:right">${nice(r.lot??r.lots,2)}</td>
           <td style="text-align:right">${nice(r.sl)}</td>
           <td style="text-align:right">${nice(r.tp)}</td>
         </tr>`
       )).join('');
     }
+
     try{
       const r   = await fetch('/live/trades.jsonl?ts='+Date.now(), {cache:'no-store'});
       if(!r.ok){ render([]); return; }
-      const txt = await r.text();
-      const lines = (txt||'').trim().split(/\r?\n/).filter(Boolean);
-      const objs  = lines.slice(-10).map(l=>{try{return JSON.parse(l);}catch(_){return null;}}).filter(Boolean).reverse();
-      render(objs);
+
+      // Texto completo
+      let txt = await r.text();
+
+      // 1) Convertir secuencias literales a saltos reales
+      txt = txt.replace(/\\r\\n/g, '\n').replace(/\\n/g, '\n');
+
+      // 2) Separar líneas; si viene todo pegado, partir por "}{"
+      let lines = txt.split(/\r?\n/).filter(Boolean);
+      if (lines.length === 1 && lines[0].includes('}{')) {
+        lines = lines[0].replace(/}\s*{/g, '}\n{').split('\n');
+      }
+
+      // 3) Parsear tolerante y mapear claves
+      const objs  = [];
+      for (const raw of lines.slice(-50)) {
+        let o;
+        try { o = JSON.parse(raw); } catch { continue; }
+        const item = {
+          ts:   o.ts ?? o.time ?? o.timestamp ?? '',
+          symbol: (o.symbol && o.symbol !== '0') ? o.symbol : 'BTCUSD',
+          side: (o.side ?? o.tipo ?? '').toString().toUpperCase(),
+          price: o.price ?? o.precio ?? '',
+          lot:  o.lot ?? o.lots ?? o.lotes ?? o.volume ?? '',
+          sl:   o.sl ?? o.stoploss ?? '',
+          tp:   o.tp ?? o.takeprofit ?? ''
+        };
+        objs.push(item);
+      }
+
+      render(objs.reverse());
     }catch(_){ render([]); }
+
     setTimeout(pollHist, 5000);
   }
 
@@ -790,4 +820,3 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     </div>
   </details>
 </section>
-
