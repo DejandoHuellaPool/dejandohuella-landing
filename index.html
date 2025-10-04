@@ -3,92 +3,216 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DejandoHuella Trader</title>
-  <meta name="description" content="Señales en vivo y registro de operaciones." />
+  <title>DejandoHuella Trader — Señales en Vivo</title>
+  <meta name="description" content="Panel público de DejandoHuella Trader: historial y operación en vivo desde MT4." />
+  <meta name="color-scheme" content="dark" />
   <link rel="icon" href="img/logo.png" />
+
+  <!-- ====== ESTILOS ====== -->
   <style>
+    /* ==== PALETA ==== */
     :root{
-      --bg:#0e1320;--card:#141a2a;--muted:#9aa4b2;--text:#e8eefc;
-      --ok:#2ed573;--warn:#ffd166;--fail:#ff6b6b;--accent:#5ce1a9;
-      --line:#1f2740;
+      --bg:#0c0f17;
+      --card:#121826;
+      --line:#20293f;
+      --muted:#97a2b3;
+      --text:#e8eefc;
+      --accent:#5ce1a9;
+      --accent-2:#42c6ff;
+      --ok:#2ed573;
+      --warn:#ffd166;
+      --err:#ff6b6b;
+      --shadow:0 6px 16px rgba(0,0,0,.35);
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+
+    /* ==== RESETEO / BASE ==== */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
     a{color:var(--accent);text-decoration:none}
-    .wrap{max-width:980px;margin:28px auto;padding:0 14px}
-    .header{display:flex;align-items:center;gap:14px}
-    .brand{font-weight:700;font-size:20px}
-    .btn{background:#1d8f5a;border:0;color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer}
+    .wrap{max-width:1000px;margin:0 auto;padding:20px 14px 60px}
+
+    /* ==== TOP ALERT ==== */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:#0d1423; border-bottom:1px solid var(--line);
+      padding:6px 12px; font-size:12.5px; color:#d9e6ffc7;
+      display:flex; gap:10px; align-items:center;
+    }
+    .topbar .dot{width:8px;height:8px;border-radius:50%;background:#ffd166}
+    .topbar .sep{opacity:.35;margin:0 4px}
+    .topbar a{color:#8bdcff}
+
+    /* ==== CABECERA ==== */
+    .header{display:flex;align-items:center;gap:12px;margin:14px 0 6px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:44px;height:44px;border-radius:10px;box-shadow:var(--shadow)}
+    .brand .t1{font-weight:800;font-size:20px;letter-spacing:.2px}
+    .header .flex{flex:1}
+    .btn{
+      background:#1d8f5a;border:0;color:#fff;font-weight:700;
+      padding:10px 14px;border-radius:10px;cursor:pointer;
+      transition:.15s transform ease;
+      box-shadow:var(--shadow);
+    }
     .btn:active{transform:translateY(1px)}
+    .subtle{color:var(--muted); font-size:12.5px}
+
+    /* ==== CARDS/CONTENEDORES ==== */
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .card h2{margin:0 0 10px;font-size:20px}
     .muted{color:var(--muted)}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
-    .card + .card{margin-top:18px}
-    h2{margin:0 0 10px 0;font-size:22px}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
-    th:first-child,td:first-child{text-align:left}
-    tr:last-child td{border-bottom:0}
-    .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-weight:700;font-size:12px}
-    .buy{background:rgba(46,213,115,.12);color:var(--ok);border:1px solid rgba(46,213,115,.35)}
-    .sell{background:rgba(255,107,107,.12);color:var(--fail);border:1px solid rgba(255,107,107,.35)}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}}
-    .live-shot{width:100%;display:block;border-radius:8px;border:1px solid var(--line);background:#0b0f1a}
-    .row{display:grid;grid-template-columns:120px 1fr;gap:8px;margin:4px 0}
+    .row{display:grid;grid-template-columns:120px 1fr;gap:8px;margin:5px 0}
     .key{color:var(--muted)}
-    .actions{display:flex;gap:10px;margin-top:8px}
-    .social{display:flex;gap:10px}
-    .sbtn{border:1px solid var(--line);background:#1b2237;color:#cfe7ff;padding:10px 14px;border-radius:10px}
-    details.ac{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0}
-    details.ac summary{cursor:pointer;list-style:none;padding:14px 16px;font-weight:700}
+    .value{letter-spacing:.2px}
+
+    /* ==== TABLA ==== */
+    .table-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--line)}
+    th{font-weight:700;text-align:right;color:#c6d6ee}
+    th:first-child, td:first-child{text-align:left}
+    tr:last-child td{border-bottom:0}
+
+    /* ==== PILLS ==== */
+    .pill{display:inline-block;font-weight:800;padding:2px 10px;border-radius:999px;font-size:12px}
+    .buy{color:#1ecf74;background:rgba(30,207,116,.12);border:1px solid rgba(30,207,116,.45)}
+    .sell{color:#ff6b6b;background:rgba(255,107,107,.12);border:1px solid rgba(255,107,107,.45)}
+
+    /* ==== LIVE SHOT ==== */
+    .live-shot{
+      width:100%;display:block;border-radius:10px;
+      border:1px solid var(--line);background:#0b0f1a;
+    }
+
+    /* ==== SOCIAL ==== */
+    .social{display:flex;gap:10px;flex-wrap:wrap}
+    .sbtn{
+      border:1px solid var(--line);background:#16213b;color:#cfe7ff;
+      padding:10px 14px;border-radius:10px;display:inline-flex;gap:8px;align-items:center;
+    }
+
+    /* ==== DETAILS (acordeón) ==== */
+    details.ac{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    details.ac summary{
+      list-style:none;cursor:pointer;padding:14px 16px;background:#101728;font-weight:800
+    }
     details.ac summary::-webkit-details-marker{display:none}
-    details.ac summary::before{content:"▸ ";color:var(--muted)}
-    details.ac[open] summary::before{content:"▾ "}
-    .acc-body{padding:4px 16px 16px 16px;border-top:1px solid var(--line)}
+    details.ac summary::before{content:"▸  ";color:var(--muted)}
+    details.ac[open] summary::before{content:"▾  "}
+    .acc-body{padding:12px 16px;background:var(--card);border-top:1px solid var(--line)}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:820px){.grid-2{grid-template-columns:1fr}}
+
+    .qr{
+      border:1px dashed #2a3555;background:#0d1426;border-radius:12px;
+      padding:10px;text-align:center
+    }
+    .qr img{max-width:180px;width:100%;height:auto;display:block;margin:10px auto 6px;border-radius:10px}
+    .tag{display:inline-block;padding:2px 8px;border-radius:8px;font-weight:700;background:#1c2747;color:#bcd9ff;border:1px solid #2c3a63}
+
+    .copy{display:flex;gap:8px}
+    .copy input{
+      flex:1;background:#0f1730;border:1px solid var(--line);border-radius:10px;
+      color:#e8eefc;padding:10px 12px
+    }
+
+    /* ==== CONTROLES ==== */
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .switch{display:inline-flex;gap:8px;align-items:center}
+    .switch input{accent-color:#40d1a8}
+
+    /* ==== FOOT ==== */
+    .foot{color:var(--muted);text-align:center;margin-top:16px}
+
+    /* ==== HELPERS ==== */
+    .hidden{display:none !important}
   </style>
 </head>
-<body>
-  <div class="wrap">
 
+<body>
+  <!-- ====== BARRA SUPERIOR ====== -->
+  <div class="topbar">
+    <span class="dot"></span>
+    Verifica los enlaces oficiales.
+    <span class="sep">|</span>
+    Verificación: <a href="verificacion.html" target="_blank" rel="noopener">abrir</a>
+    <span class="sep">|</span>
+    .onion: <a href="https://dejandohuellapool.github.io/dejandohuella-landing/" target="_blank" rel="noopener">Clearnet</a> /
+    <a href="http://dejandohuella*****.onion" target="_blank" rel="noopener">Onion</a>
+  </div>
+
+  <div class="wrap">
+    <!-- ====== CABECERA ====== -->
     <div class="header">
-      <img src="img/logo.png" alt="logo" width="42" height="42" />
-      <div class="brand">DejandoHuella Trader</div>
-      <div style="flex:1"></div>
+      <div class="brand">
+        <img src="img/logo.png" alt="logo" />
+        <div class="t1">DejandoHuella Trader</div>
+      </div>
+      <div class="flex"></div>
       <button class="btn" onclick="window.open('https://wa.me/','_blank')">Solicitar información</button>
     </div>
+    <div class="subtle" id="lastUpdate">Última actualización: —</div>
 
-    <div class="muted" id="lastUpdate" style="margin:6px 0 14px 0;">Última actualización: —</div>
+    <!-- ====== CONTROLES ====== -->
+    <div class="controls" style="margin:10px 0 16px">
+      <button class="btn" id="btnRefresh">Actualizar ahora</button>
+      <div class="switch">
+        <input type="checkbox" id="autoRefresh" checked />
+        <label for="autoRefresh" class="muted">Auto-refresh cada 15s</label>
+      </div>
+      <div class="muted">|</div>
+      <div class="muted">Fuente MT4: <span class="mono">live/last.json</span>, <span class="mono">live/trades.jsonl</span>, <span class="mono">live/shots/latest.jpg</span></div>
+    </div>
 
-    <!-- Historial -->
+    <!-- ====== HISTORIAL ====== -->
     <div class="card">
       <h2>Historial reciente</h2>
-      <div class="muted" id="noHistory" style="display:none">Sin operaciones aún…</div>
-      <div class="table-wrap">
-        <table id="historyTbl" aria-label="Historial reciente">
+      <div id="histEmpty" class="muted hidden">Sin operaciones aún…</div>
+      <div class="table-wrap" id="histWrap">
+        <table id="tblHist" aria-label="Historial reciente">
           <thead>
             <tr>
-              <th>Hora</th><th>Par</th><th>Lado</th><th>Precio</th>
-              <th>Lote</th><th>SL</th><th>TP</th>
+              <th>Hora</th>
+              <th>Par</th>
+              <th>Lado</th>
+              <th>Precio</th>
+              <th>Lote</th>
+              <th>SL</th>
+              <th>TP</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody><!-- filas generadas por JS --></tbody>
         </table>
       </div>
     </div>
 
-    <!-- En vivo -->
+    <!-- ====== EN VIVO ====== -->
     <div class="card">
       <h2>Operaciones en vivo</h2>
-      <div class="grid">
+      <div class="grid-2">
         <div>
-          <div class="row"><div class="key">Par:</div>   <div id="liveSymbol">—</div></div>
-          <div class="row"><div class="key">Lado:</div>  <div id="liveSide">—</div></div>
-          <div class="row"><div class="key">Precio:</div><div id="livePrice">—</div></div>
-          <div class="row"><div class="key">Lote:</div>  <div id="liveLot">—</div></div>
+          <div class="row"><div class="key">Par:</div>   <div class="value" id="liveSymbol">—</div></div>
+          <div class="row"><div class="key">Lado:</div>  <div class="value" id="liveSide">—</div></div>
+          <div class="row"><div class="key">Precio:</div><div class="value" id="livePrice">—</div></div>
+          <div class="row"><div class="key">Lote:</div>  <div class="value" id="liveLot">—</div></div>
           <div class="row"><div class="key">SL / TP:</div>
-            <div><span id="liveSL">—</span> / <span id="liveTP">—</span></div></div>
-          <div class="row"><div class="key">Hora:</div>  <div id="liveTs">—</div></div>
+            <div class="value"><span id="liveSL">—</span> / <span id="liveTP">—</span></div></div>
+          <div class="row"><div class="key">Hora:</div>  <div class="value" id="liveTs">—</div></div>
         </div>
         <div>
           <img id="liveShot" class="live-shot" alt="Captura MT4 en vivo" src="live/shots/latest.jpg" />
@@ -96,134 +220,228 @@
       </div>
     </div>
 
-    <!-- Redes -->
+    <!-- ====== REDES ====== -->
     <div class="card">
       <h2>Redes oficiales</h2>
       <div class="muted">Síguenos para novedades y soporte:</div>
-      <div class="social" style="margin-top:8px">
-        <a class="sbtn" href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a class="sbtn" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+      <div class="social" style="margin-top:10px">
+        <a class="sbtn" href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+          <span>🌐</span> Facebook
+        </a>
+        <a class="sbtn" href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <span>💬</span> WhatsApp
+        </a>
       </div>
     </div>
 
-    <!-- 📁 Medios de Pago + Planes (bloque plegable) -->
-    <details class="ac" id="pagos-planes">
+    <!-- ====== MEDIOS DE PAGO + PLANES (con QRs) ====== -->
+    <details class="ac" id="pagos-planes" open>
       <summary>📁 Medios de Pagos + Planes Premium – DejandoHuella Trader</summary>
       <div class="acc-body">
-        <h3 style="margin:6px 0 8px 0">Medios de pago</h3>
-        <ul>
-          <li><span class="mono">BTC</span> on-chain</li>
-          <li><span class="mono">USDT (TRC20)</span></li>
-          <li>Transferencia bancaria (consultar países disponibles)</li>
-        </ul>
+        <div class="grid-2">
+          <!-- QRs -->
+          <div>
+            <h3 style="margin:6px 0 6px">Cripto (QR / dirección)</h3>
 
-        <h3 style="margin:14px 0 8px 0">Planes Premium</h3>
-        <ul>
-          <li><b>Plan Básico</b>: historial y señal en vivo.</li>
-          <li><b>Plan Pro</b>: incluye alertas priorizadas.</li>
-          <li><b>Plan VIP</b>: soporte 1:1 y configuración.</li>
-        </ul>
+            <div class="qr">
+              <div class="tag">USDT · BEP20</div>
+              <img src="qr_bep20.png" alt="QR USDT BEP20" />
+              <div class="copy">
+                <input id="addrBEP20" class="mono" value="TU-DIRECCION-USDT-BEP20" readonly />
+                <button class="btn" onclick="copyAddr('addrBEP20')">Copiar</button>
+              </div>
+            </div>
 
-        <div class="actions">
-          <button class="btn" onclick="window.open('https://wa.me/','_blank')">Solicitar precios</button>
+            <div class="qr" style="margin-top:10px">
+              <div class="tag">USDT · ERC20</div>
+              <img src="qr_erc20.png" alt="QR USDT ERC20" />
+              <div class="copy">
+                <input id="addrERC20" class="mono" value="TU-DIRECCION-USDT-ERC20" readonly />
+                <button class="btn" onclick="copyAddr('addrERC20')">Copiar</button>
+              </div>
+            </div>
+
+            <div class="qr" style="margin-top:10px">
+              <div class="tag">USDT · TRC20</div>
+              <img src="qr_trc20.png" alt="QR USDT TRC20" />
+              <div class="copy">
+                <input id="addrTRC20" class="mono" value="TU-DIRECCION-USDT-TRC20" readonly />
+                <button class="btn" onclick="copyAddr('addrTRC20')">Copiar</button>
+              </div>
+            </div>
+
+            <div class="qr" style="margin-top:10px">
+              <div class="tag">USDT · ARB1</div>
+              <img src="qr_arb1.png" alt="QR USDT ARB1" />
+              <div class="copy">
+                <input id="addrARB1" class="mono" value="TU-DIRECCION-USDT-ARB1" readonly />
+                <button class="btn" onclick="copyAddr('addrARB1')">Copiar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Planes -->
+          <div>
+            <h3 style="margin:6px 0 6px">Planes Premium</h3>
+            <ul style="margin:0 0 8px 16px">
+              <li><b>Básico</b>: historial en tiempo real + señal en vivo.</li>
+              <li><b>Pro</b>: todo lo del Básico + alertas priorizadas.</li>
+              <li><b>VIP</b>: Pro + soporte 1:1 + configuración dedicada.</li>
+            </ul>
+
+            <div class="muted" style="margin:8px 0">Para precios y activación, contáctanos por WhatsApp:</div>
+            <button class="btn" onclick="window.open('https://wa.me/','_blank')">Solicitar precios</button>
+
+            <hr style="border:none;border-top:1px solid var(--line);margin:16px 0">
+            <h3 style="margin:6px 0 6px">Notas</h3>
+            <ul style="margin:0 0 0 16px">
+              <li>Una vez realizada la transacción, envía el comprobante para acreditación.</li>
+              <li>Las direcciones pueden cambiar por seguridad; usa siempre las que ves aquí.</li>
+              <li>Para bancos locales o pagos alternos, solicita instrucciones en soporte.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </details>
 
-    <div class="muted" style="text-align:center;margin:18px 0 40px 0">© 2025 DejandoHuella Trader</div>
+    <!-- ====== VERIFICACIÓN ====== -->
+    <details class="ac" style="margin-top:12px">
+      <summary>🔒 Verificación oficial</summary>
+      <div class="acc-body">
+        <p class="muted">Comprueba dominios y enlaces en <a href="verificacion.html" target="_blank" rel="noopener">verificacion.html</a>.  
+        Si recibes enlaces por fuera de nuestros dominios oficiales, no envíes fondos.</p>
+      </div>
+    </details>
+
+    <!-- ====== FOOT ====== -->
+    <div class="foot">
+      © 2025 DejandoHuella Trader · <span class="muted">Atajos</span>:
+      <span class="mono">R</span> refrescar, <span class="mono">A</span> auto-refresh on/off
+    </div>
   </div>
 
+  <!-- ====== SCRIPTS ====== -->
   <script>
-    // util
-    const $ = (s, p=document)=>p.querySelector(s);
+    /* Utilidades */
+    const $ = (sel,ctx=document)=>ctx.querySelector(sel);
     const fmt = n => Number(n).toLocaleString('es-PE',{maximumFractionDigits:2});
-    const cacheBust = () => Math.floor(Date.now()/1000);
+    const bust = () => Math.floor(Date.now()/1000); // cache-buster
 
-    // pintar último update en base al "ts" del live
     function setLastUpdate(ts){
-      const el = $('#lastUpdate');
-      if(!ts){ el.textContent='Última actualización: —'; return; }
-      el.textContent = 'Última actualización: ' + ts.replaceAll('_',' ');
+      $('#lastUpdate').textContent = 'Última actualización: ' + (ts ? ts.replaceAll('_',' ') : '—');
     }
 
-    // cargar operaciones en vivo
+    /* Copiar direcciones */
+    function copyAddr(id){
+      const el = $('#'+id);
+      el.select(); el.setSelectionRange(0, 99999);
+      try{
+        navigator.clipboard.writeText(el.value);
+        const original = el.value;
+        el.value = '¡Copiado!';
+        setTimeout(()=>{ el.value = original; }, 900);
+      }catch(e){}
+    }
+
+    /* CARGA EN VIVO */
     async function loadLive(){
       try{
-        const r = await fetch('live/last.json?v=' + cacheBust(), {cache:'no-store'});
+        const r = await fetch('live/last.json?v='+bust(),{cache:'no-store'});
         if(!r.ok) throw new Error('HTTP '+r.status);
         const j = await r.json();
 
         $('#liveSymbol').textContent = j.symbol ?? '—';
-        const sideEl = $('#liveSide');
         const side = (j.side||'').toUpperCase();
-        sideEl.innerHTML = side ? `<span class="pill ${side==='BUY'?'buy':'sell'}">${side}</span>` : '—';
-
+        $('#liveSide').innerHTML = side ? `<span class="pill ${side==='BUY'?'buy':'sell'}">${side}</span>` : '—';
         $('#livePrice').textContent = j.price ? fmt(j.price) : '—';
         $('#liveLot').textContent   = j.lot ?? '—';
         $('#liveSL').textContent    = j.sl ? fmt(j.sl) : '—';
         $('#liveTP').textContent    = j.tp ? fmt(j.tp) : '—';
-        $('#liveTs').textContent    = j.ts  ?? '—';
-
+        $('#liveTs').textContent    = j.ts ?? '—';
         setLastUpdate(j.ts);
 
         const shot = $('#liveShot');
-        // cache buster visual
-        shot.src = 'live/shots/latest.jpg?v=' + cacheBust();
+        shot.src = 'live/shots/latest.jpg?v='+bust();
       }catch(e){
-        console.error('live error', e);
+        console.error('live error:', e);
       }
     }
 
-    // cargar historial (toma las últimas 3 líneas de trades.jsonl)
+    /* HISTORIAL: últimas 6 líneas de trades.jsonl (ordenadas desc) */
     async function loadHistory(){
       try{
-        const r = await fetch('live/trades.jsonl?v=' + cacheBust(), {cache:'no-store'});
+        const r = await fetch('live/trades.jsonl?v='+bust(),{cache:'no-store'});
         if(!r.ok) throw new Error('HTTP '+r.status);
         const txt = await r.text();
         const lines = txt.trim().split(/\r?\n/).filter(Boolean);
-        const last3 = lines.slice(-3).reverse(); // más reciente primero
+        const last = lines.slice(-6).reverse();
 
-        const tbody = $('#historyTbl tbody');
-        tbody.innerHTML = '';
+        const tb = $('#tblHist tbody');
+        tb.innerHTML = '';
 
-        if(last3.length===0){
-          $('#noHistory').style.display='block';
-          $('#historyTbl').style.display='none';
+        if(last.length===0){
+          $('#histEmpty').classList.remove('hidden');
+          $('#histWrap').classList.add('hidden');
           return;
         }else{
-          $('#noHistory').style.display='none';
-          $('#historyTbl').style.display='table';
+          $('#histEmpty').classList.add('hidden');
+          $('#histWrap').classList.remove('hidden');
         }
 
-        last3.forEach(l=>{
+        last.forEach(row=>{
           try{
-            const j = JSON.parse(l);
+            const j = JSON.parse(row);
             const tr = document.createElement('tr');
-            const pill = `<span class="pill ${String(j.side).toUpperCase()==='BUY'?'buy':'sell'}">${(j.side||'').toUpperCase()}</span>`;
+            const pill = (j.side||'').toUpperCase()==='BUY'
+              ? `<span class="pill buy">BUY</span>` : `<span class="pill sell">SELL</span>`;
             tr.innerHTML = `
-              <td>${j.ts??'—'}</td>
-              <td>${j.symbol??'—'}</td>
+              <td>${j.ts ?? '—'}</td>
+              <td>${j.symbol ?? '—'}</td>
               <td style="text-align:center">${pill}</td>
               <td>${j.price?fmt(j.price):'—'}</td>
-              <td>${j.lot??'—'}</td>
+              <td>${j.lot ?? '—'}</td>
               <td>${j.sl?fmt(j.sl):'—'}</td>
               <td>${j.tp?fmt(j.tp):'—'}</td>`;
-            tbody.appendChild(tr);
+            tb.appendChild(tr);
           }catch(_){}
         });
       }catch(e){
-        console.error('history error', e);
-        $('#noHistory').style.display='block';
-        $('#historyTbl').style.display='none';
+        console.error('history error:', e);
+        $('#histEmpty').classList.remove('hidden');
+        $('#histWrap').classList.add('hidden');
       }
     }
 
-    // refrezco periódico
+    /* CICLO */
+    let timer = null;
     function tick(){
       loadLive(); loadHistory();
     }
+    function startAuto(){
+      stopAuto();
+      timer = setInterval(tick, 15000);
+    }
+    function stopAuto(){
+      if(timer){ clearInterval(timer); timer=null; }
+    }
+
+    // Eventos
+    $('#btnRefresh').addEventListener('click', tick);
+    $('#autoRefresh').addEventListener('change', e=>{
+      if(e.target.checked) startAuto(); else stopAuto();
+    });
+    document.addEventListener('keydown', e=>{
+      if(e.key==='r' || e.key==='R') tick();
+      if(e.key==='a' || e.key==='A'){
+        const chk = $('#autoRefresh');
+        chk.checked = !chk.checked;
+        chk.dispatchEvent(new Event('change'));
+      }
+    });
+
+    // Init
     tick();
-    setInterval(tick, 15000); // 15s
+    startAuto();
   </script>
 </body>
 </html>
