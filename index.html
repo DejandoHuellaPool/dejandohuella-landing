@@ -1,418 +1,229 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>DejandoHuella Trader — .onion</title>
-  <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Pagos por BTC y USDT (TRC20, BEP20, Arbitrum One, ERC-20).">
-  <meta name="color-scheme" content="dark">
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="DejandoHuella Trader — BTC/USD">
-  <meta property="og:description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Clearnet y .onion.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="img/og-image.png">
-  <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- (Opcional) Meta Pixel -->
-  <script>
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');try{fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');}catch(e){}
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DejandoHuella Trader</title>
+  <meta name="description" content="Señales en vivo y registro de operaciones." />
+  <link rel="icon" href="img/logo.png" />
   <style>
     :root{
-      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826;
-      --accent:#22c55e; --accent2:#1ed760; --border:#1f2a3a; --link:#60a5fa;
-      --btnText:#06250f; --shadow:rgba(0,0,0,.45);
-      --green:#16a34a; --red:#dc2626;
+      --bg:#0e1320;--card:#141a2a;--muted:#9aa4b2;--text:#e8eefc;
+      --ok:#2ed573;--warn:#ffd166;--fail:#ff6b6b;--accent:#5ce1a9;
+      --line:#1f2740;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
-    a{color:var(--link);text-decoration:none}
-    .wrap{max-width:1100px;margin:auto;padding:24px}
-    header{display:flex;gap:14px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
-    header img{width:64px;height:64px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
-    h1{font-size:32px;margin:0}
-    h2{margin:0 0 10px}
-    p,li,small{color:var(--muted)}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
-    .grid{display:grid;gap:14px}
-    .grid-2{grid-template-columns:1fr 1fr}
-    .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
-    code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
-    .copy{cursor:pointer;color:#b4d2ff;border:1px solid var(--border);padding:6px 10px;border-radius:10px;background:#0f1522}
-    .copy:hover{filter:brightness(1.1)}
-    /* === Botones 3D === */
-    .cta{
-      display:inline-block; min-width:180px; text-align:center;
-      background:linear-gradient(180deg,var(--accent2),var(--accent));
-      color:var(--btnText); padding:12px 18px; border-radius:12px;
-      font-weight:700; border:0; box-shadow:0 6px 0 #0e7a41, 0 8px 18px var(--shadow);
-      transform:translateY(0); transition:transform .08s ease, box-shadow .08s ease, filter .2s ease;
-      user-select:none; -webkit-tap-highlight-color:transparent
-    }
-    .cta:active{ transform:translateY(3px); box-shadow:0 3px 0 #0e7a41, 0 6px 12px var(--shadow) }
-    .cta--wa{background:linear-gradient(180deg,#2cf475,#25D366)}
-    .cta--dark{background:linear-gradient(180deg,#7aa9ff,#3b82f6); color:#081226; box-shadow:0 6px 0 #1f5cc8, 0 8px 18px var(--shadow)}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-
-    .menu{position:relative;display:inline-block}
-    .menu-panel{
-      position:absolute; top:110%; left:0; min-width:280px;
-      background:#0f1522; border:1px solid var(--border); border-radius:14px; padding:10px;
-      display:none; z-index:30; box-shadow:0 16px 28px var(--shadow)
-    }
-    .menu-panel a{display:block; margin:8px 0}
-    .menu-panel hr{border:0;border-top:1px solid var(--border);opacity:.6;margin:8px 0}
-
-    .payrow{display:grid;gap:8px; margin-bottom:14px}
-    .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
-    .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
-    .qrbox summary::-webkit-details-marker{display:none}
-    .qrbox[open] summary{background:#162133}
-    .qrwrap{display:flex;justify-content:center;align-items:center;padding:12px;border-top:1px solid var(--border)}
-    .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
-    .qr img{width:100%;height:100%;display:block}
-
-    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-    .plan h3{margin:0;font-size:18px}
-    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
-    .note{color:var(--muted);margin:0}
-
-    .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
-    .bar a{color:#b4d2ff}
-
-    /* Live + historial */
-    .live-grid{display:grid;gap:12px}
-    .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:16px}
-    .badge{padding:2px 10px;border-radius:999px;font-weight:700;font-size:13px;display:inline-block}
+    body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:980px;margin:28px auto;padding:0 14px}
+    .header{display:flex;align-items:center;gap:14px}
+    .brand{font-weight:700;font-size:20px}
+    .btn{background:#1d8f5a;border:0;color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer}
+    .btn:active{transform:translateY(1px)}
+    .muted{color:var(--muted)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+    .card + .card{margin-top:18px}
+    h2{margin:0 0 10px 0;font-size:22px}
     table{width:100%;border-collapse:collapse}
-    th,td{padding:8px;border-bottom:1px solid var(--border)}
-    th{text-align:left;color:#cbd5e1}
-
-    /* Responsive */
-    @media (max-width:980px){
-      .wrap{padding:18px}
-      .grid-2{grid-template-columns:1fr}
-      header img{width:56px;height:56px}
-      h1{font-size:26px}
-      .cta{min-width:unset;width:100%}
-      .menu-panel{max-width:92vw}
-    }
-    @media (max-height:520px) and (orientation:landscape){
-      .wrap{padding:14px}
-      .cta{padding:10px 14px}
-      header img{width:52px;height:52px}
-      h1{font-size:24px}
-    }
-  </style>
-
-  <!-- Mini-tweaks visuales (idénticos a tu archivo) -->
-  <style>
-  #hist .card-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  #hist table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  #hist thead th { position: sticky; top: 0; background: #0f172a; z-index: 1; }
-  #hist th, #hist td { padding: 8px 10px; }
-  @media (max-width: 640px){
-    #hist h2 { font-size: 1rem; }
-    #hist th, #hist td { font-size: 12px; line-height: 1.2; padding: 6px 8px; }
-    #hist table th:nth-child(1), #hist table td:nth-child(1) { min-width: 120px; }
-    #hist table th:nth-child(2), #hist table td:nth-child(2) { min-width: 70px; }
-    #hist table th:nth-child(3), #hist table td:nth-child(3) { min-width: 70px; }
-    #hist table th:nth-child(4), #hist table td:nth-child(4) { min-width: 90px; }
-    #hist table th:nth-child(5), #hist table td:nth-child(5) { min-width: 70px; }
-    #hist table th:nth-child(6), #hist table td:nth-child(6) { min-width: 90px; }
-    #hist table th:nth-child(7), #hist table td:nth-child(7) { min-width: 90px; }
-    #hist .badge { transform: scale(0.9); transform-origin: left center; }
-  }
-  </style>
-
-  <!-- Control de refresco (idéntico a tu archivo) -->
-  <style>
-    #refresh-ctrl{
-      position:fixed !important; top:8px !important; left:8px !important;
-      right:auto !important; bottom:auto !important; z-index:9999 !important;
-      display:flex !important; gap:4px !important; transform:scale(0.7);
-      transform-origin: top left; opacity:.85;
-    }
-    #refresh-ctrl #btn-hard-reload{ padding:2px 6px !important; font-size:10px !important; line-height:1 !important; box-shadow:0 2px 0 #14532d !important; border-radius:8px !important; }
-    #refresh-ctrl label{ padding:2px 6px !important; font-size:10px !important; border-radius:8px !important; }
-    @media (max-width: 480px){ #refresh-ctrl{ transform:scale(0.6); } }
+    th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+    th:first-child,td:first-child{text-align:left}
+    tr:last-child td{border-bottom:0}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-weight:700;font-size:12px}
+    .buy{background:rgba(46,213,115,.12);color:var(--ok);border:1px solid rgba(46,213,115,.35)}
+    .sell{background:rgba(255,107,107,.12);color:var(--fail);border:1px solid rgba(255,107,107,.35)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:760px){.grid{grid-template-columns:1fr}}
+    .live-shot{width:100%;display:block;border-radius:8px;border:1px solid var(--line);background:#0b0f1a}
+    .row{display:grid;grid-template-columns:120px 1fr;gap:8px;margin:4px 0}
+    .key{color:var(--muted)}
+    .actions{display:flex;gap:10px;margin-top:8px}
+    .social{display:flex;gap:10px}
+    .sbtn{border:1px solid var(--line);background:#1b2237;color:#cfe7ff;padding:10px 14px;border-radius:10px}
+    details.ac{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0}
+    details.ac summary{cursor:pointer;list-style:none;padding:14px 16px;font-weight:700}
+    details.ac summary::-webkit-details-marker{display:none}
+    details.ac summary::before{content:"▸ ";color:var(--muted)}
+    details.ac[open] summary::before{content:"▾ "}
+    .acc-body{padding:4px 16px 16px 16px;border-top:1px solid var(--line)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
   </style>
 </head>
 <body>
+  <div class="wrap">
 
-<!-- ======= REFRESH CONTROL ======= -->
-<div id="refresh-ctrl" style="position:fixed; right:12px; bottom:12px; z-index:9999; display:flex; gap:8px;">
-  <button id="btn-hard-reload" style="padding:10px 14px; border-radius:12px; background:#22c55e; color:#091015; border:0; font-weight:700; box-shadow:0 6px 0 #14532d; cursor:pointer">Actualizar ahora</button>
-  <label style="display:flex; align-items:center; gap:6px; background:#111826; color:#e5e7eb; padding:10px 12px; border-radius:12px; border:1px solid #1f2937;">
-    <input id="chk-auto" type="checkbox">
-    Auto 5s
-  </label>
-</div>
+    <div class="header">
+      <img src="img/logo.png" alt="logo" width="42" height="42" />
+      <div class="brand">DejandoHuella Trader</div>
+      <div style="flex:1"></div>
+      <button class="btn" onclick="window.open('https://wa.me/','_blank')">Solicitar información</button>
+    </div>
 
-<div class="bar">
-  <span>⚠️ Verifica los enlaces oficiales. Usa nuestra <a href="verificacion.html">Verificación oficial</a> o la dirección .onion.</span>
-  <a class="cta" href="#" onclick="closeBar();return false;">Cerrar</a>
-</div>
+    <div class="muted" id="lastUpdate" style="margin:6px 0 14px 0;">Última actualización: —</div>
 
-<div class="wrap">
-  <header>
-    <img src="logo.png" alt="DejandoHuella logo" loading="lazy" decoding="async"
-         onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
-    <div>
-      <h1>DejandoHuella Trader</h1>
-      <div class="cta-row">
-        <div class="menu">
-          <a class="cta" href="#" id="btn-info">Solicitar información</a>
-          <div class="menu-panel" id="panel-info" aria-hidden="true">
-            <a class="cta cta--wa" href="whatsapp.html" rel="noopener">WhatsApp (ventas)</a>
-            <a class="cta" href="verificacion.html" rel="noopener">Verificación oficial</a>
-            <a class="cta cta--dark" href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
-            <hr>
-            <a class="cta" href="clases.html" rel="noopener"><b>🎓 Cursos Trading</b></a>
-          </div>
+    <!-- Historial -->
+    <div class="card">
+      <h2>Historial reciente</h2>
+      <div class="muted" id="noHistory" style="display:none">Sin operaciones aún…</div>
+      <div class="table-wrap">
+        <table id="historyTbl" aria-label="Historial reciente">
+          <thead>
+            <tr>
+              <th>Hora</th><th>Par</th><th>Lado</th><th>Precio</th>
+              <th>Lote</th><th>SL</th><th>TP</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- En vivo -->
+    <div class="card">
+      <h2>Operaciones en vivo</h2>
+      <div class="grid">
+        <div>
+          <div class="row"><div class="key">Par:</div>   <div id="liveSymbol">—</div></div>
+          <div class="row"><div class="key">Lado:</div>  <div id="liveSide">—</div></div>
+          <div class="row"><div class="key">Precio:</div><div id="livePrice">—</div></div>
+          <div class="row"><div class="key">Lote:</div>  <div id="liveLot">—</div></div>
+          <div class="row"><div class="key">SL / TP:</div>
+            <div><span id="liveSL">—</span> / <span id="liveTP">—</span></div></div>
+          <div class="row"><div class="key">Hora:</div>  <div id="liveTs">—</div></div>
+        </div>
+        <div>
+          <img id="liveShot" class="live-shot" alt="Captura MT4 en vivo" src="live/shots/latest.jpg" />
         </div>
       </div>
     </div>
-  </header>
 
-  <p><small>Última actualización: <span id="lu"></span></small></p>
-
-  <!-- ======= HISTORIAL ======= -->
-  <section id="hist" class="card" style="margin-top:16px">
-    <h2>Historial reciente</h2>
-    <div id="hist-empty" class="meta">Sin operaciones aún…</div>
-    <table id="hist-table" style="display:none">
-      <thead>
-        <tr>
-          <th>Hora</th><th>Par</th><th>Lado</th>
-          <th style="text-align:right">Precio</th><th style="text-align:right">Lote</th>
-          <th style="text-align:right">SL</th><th style="text-align:right">TP</th>
-        </tr>
-      </thead>
-      <tbody id="hist-body"></tbody>
-    </table>
-  </section>
-
-  <!-- ======= EN VIVO ======= -->
-  <section id="en-vivo" class="card" style="margin-top:24px">
-    <h2>Operaciones en vivo</h2>
-    <div class="live-grid">
-      <div class="kv">
-        <strong>Par:</strong>   <span id="lv-symbol">—</span>
-        <strong>Lado:</strong>  <span id="lv-side">—</span>
-        <strong>Precio:</strong><span id="lv-price">—</span>
-        <strong>Lote:</strong>  <span id="lv-lots">—</span>
-        <strong>SL / TP:</strong><span id="lv-sltp">—</span>
-        <strong>Hora:</strong>  <span id="lv-ts">—</span>
+    <!-- Redes -->
+    <div class="card">
+      <h2>Redes oficiales</h2>
+      <div class="muted">Síguenos para novedades y soporte:</div>
+      <div class="social" style="margin-top:8px">
+        <a class="sbtn" href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a class="sbtn" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
       </div>
-      <!-- 🔧 RUTA RELATIVA -->
-      <img id="lv-shot" src="live/shots/latest.jpg" alt="Captura MT4 en vivo"
-           style="width:100%;max-width:960px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2)">
     </div>
-  </section>
 
-  <div class="card" id="redes">
-    <h2>Redes oficiales</h2>
-    <p>Síguenos para novedades y soporte:</p>
-    <div class="cta-row">
-      <a class="cta cta--dark" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener">Facebook</a>
-      <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
-    </div>
+    <!-- 📁 Medios de Pago + Planes (bloque plegable) -->
+    <details class="ac" id="pagos-planes">
+      <summary>📁 Medios de Pagos + Planes Premium – DejandoHuella Trader</summary>
+      <div class="acc-body">
+        <h3 style="margin:6px 0 8px 0">Medios de pago</h3>
+        <ul>
+          <li><span class="mono">BTC</span> on-chain</li>
+          <li><span class="mono">USDT (TRC20)</span></li>
+          <li>Transferencia bancaria (consultar países disponibles)</li>
+        </ul>
+
+        <h3 style="margin:14px 0 8px 0">Planes Premium</h3>
+        <ul>
+          <li><b>Plan Básico</b>: historial y señal en vivo.</li>
+          <li><b>Plan Pro</b>: incluye alertas priorizadas.</li>
+          <li><b>Plan VIP</b>: soporte 1:1 y configuración.</li>
+        </ul>
+
+        <div class="actions">
+          <button class="btn" onclick="window.open('https://wa.me/','_blank')">Solicitar precios</button>
+        </div>
+      </div>
+    </details>
+
+    <div class="muted" style="text-align:center;margin:18px 0 40px 0">© 2025 DejandoHuella Trader</div>
   </div>
 
-  <!-- ======= PAGOS + PLANES (idénticos) ======= -->
-  <!-- (…todo tu bloque de pagos, QR, planes y footer permanece intacto; lo omití por brevedad si ya lo tienes igual) -->
+  <script>
+    // util
+    const $ = (s, p=document)=>p.querySelector(s);
+    const fmt = n => Number(n).toLocaleString('es-PE',{maximumFractionDigits:2});
+    const cacheBust = () => Math.floor(Date.now()/1000);
 
-  <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
-</div>
-
-<!-- QRCode CDN -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
-  // Barra superior
-  function closeBar(){ const b=document.querySelector('.bar'); if(b) b.remove(); }
-
-  // Fecha
-  document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
-
-  // Panel "Solicitar información"
-  (function(){
-    const btn=document.getElementById('btn-info');
-    const panel=document.getElementById('panel-info');
-    btn.addEventListener('click',(e)=>{e.preventDefault(); panel.style.display = panel.style.display==='block'?'none':'block';});
-    document.addEventListener('click',(e)=>{ if(!panel.contains(e.target) && e.target!==btn) panel.style.display='none'; });
-  })();
-
-  // Copiar con fallback (igual que antes)
-  function copyTxt(id){
-    const el = document.getElementById(id); if(!el) return;
-    const txt = el.textContent.trim();
-    if(navigator.clipboard && window.isSecureContext){
-      navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
-    }else{
-      const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
-      ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(_){}
-      ta.remove();
+    // pintar último update en base al "ts" del live
+    function setLastUpdate(ts){
+      const el = $('#lastUpdate');
+      if(!ts){ el.textContent='Última actualización: —'; return; }
+      el.textContent = 'Última actualización: ' + ts.replaceAll('_',' ');
     }
-  }
-  function toast(text){
-    const msg=document.createElement('div'); msg.textContent=text;
-    Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
-    padding:'8px 12px',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,.4)',zIndex:'9999'});
-    document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
-  }
-</script>
 
-<!-- ===== Lectura robusta de live + historial (RUTAS RELATIVAS) ===== -->
-<script>
-const $ = id => document.getElementById(id);
-const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'),
-                 lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
+    // cargar operaciones en vivo
+    async function loadLive(){
+      try{
+        const r = await fetch('live/last.json?v=' + cacheBust(), {cache:'no-store'});
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        const j = await r.json();
 
-function badgeHTML(text){
-  const s=(text||'').toUpperCase();
-  let color='#9aa6bd';
-  if(s.includes('BUY'))  color = getComputedStyle(document.documentElement).getPropertyValue('--green') || '#16a34a';
-  if(s.includes('SELL')) color = getComputedStyle(document.documentElement).getPropertyValue('--red')   || '#dc2626';
-  return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
-}
-function nice(n, dp){
-  if(n===undefined || n===null || n==='') return '—';
-  const x=Number(n); if(Number.isNaN(x)) return '—';
-  return dp===undefined ? x.toString() : x.toFixed(dp);
-}
-function localTs(ts){
-  if(!ts) return '—';
-  const t = ts.replace(/\./g,'-').replace(' ','T');
-  const d = new Date(t);
-  return Number.isNaN(+d) ? ts : d.toLocaleString();
-}
-function safeParseJson(txt){
-  if(!txt) return null;
-  try{
-    txt = txt.replace(/^\uFEFF/, '').trim();
-    const a = txt.indexOf('{'), b = txt.lastIndexOf('}');
-    if(a>=0 && b>=0) txt = txt.slice(a,b+1);
-    return JSON.parse(txt);
-  }catch(_){ return null; }
-}
+        $('#liveSymbol').textContent = j.symbol ?? '—';
+        const sideEl = $('#liveSide');
+        const side = (j.side||'').toUpperCase();
+        sideEl.innerHTML = side ? `<span class="pill ${side==='BUY'?'buy':'sell'}">${side}</span>` : '—';
 
-async function pollLast(){
-  try{
-    // 🔧 RUTA RELATIVA
-    const r   = await fetch('live/last.json?ts='+Date.now(), {cache:'no-store'});
-    const txt = await r.text();
-    const d   = safeParseJson(txt);
-    if(d){
-      liveEls.sym.textContent   = d.symbol || '—';
-      liveEls.side.innerHTML    = badgeHTML(d.side);
-      liveEls.price.textContent = nice(d.price);
-      liveEls.lots.textContent  = nice(d.lots,2);
-      liveEls.sltp.textContent  = `${nice(d.sl)} / ${nice(d.tp)}`;
-      liveEls.ts.textContent    = localTs(d.ts);
-      // 🔧 RUTA RELATIVA + cache-buster
-      liveEls.img.src = 'live/shots/latest.jpg?ts=' + Date.now();
+        $('#livePrice').textContent = j.price ? fmt(j.price) : '—';
+        $('#liveLot').textContent   = j.lot ?? '—';
+        $('#liveSL').textContent    = j.sl ? fmt(j.sl) : '—';
+        $('#liveTP').textContent    = j.tp ? fmt(j.tp) : '—';
+        $('#liveTs').textContent    = j.ts  ?? '—';
+
+        setLastUpdate(j.ts);
+
+        const shot = $('#liveShot');
+        // cache buster visual
+        shot.src = 'live/shots/latest.jpg?v=' + cacheBust();
+      }catch(e){
+        console.error('live error', e);
+      }
     }
-  }catch(_){}
-  setTimeout(pollLast, 2500);
-}
 
-async function pollHist(){
-  const tbl=$('hist-table'), body=$('hist-body'), empty=$('hist-empty');
-  function render(rows){
-    if(!rows.length){ tbl.style.display='none'; empty.style.display='block'; return; }
-    empty.style.display='none'; tbl.style.display='table';
-    body.innerHTML = rows.map(r=>(
-      `<tr>
-        <td>${localTs(r.ts)}</td>
-        <td>${r.symbol||'—'}</td>
-        <td>${badgeHTML(r.side)}</td>
-        <td style="text-align:right">${nice(r.price)}</td>
-        <td style="text-align:right">${nice(r.lots,2)}</td>
-        <td style="text-align:right">${nice(r.sl)}</td>
-        <td style="text-align:right">${nice(r.tp)}</td>
-      </tr>`
-    )).join('');
-  }
-  try{
-    // 🔧 RUTA RELATIVA
-    const r   = await fetch('live/trades.jsonl?ts='+Date.now(), {cache:'no-store'});
-    if(!r.ok){ render([]); return; }
-    const txt = await r.text();
-    const lines = (txt||'').trim().split(/\r?\n/).filter(Boolean);
-    const objs  = lines.slice(-10).map(l=>{try{return JSON.parse(l);}catch(_){return null;}}).filter(Boolean).reverse();
-    render(objs);
-  }catch(_){ render([]); }
-  setTimeout(pollHist, 5000);
-}
+    // cargar historial (toma las últimas 3 líneas de trades.jsonl)
+    async function loadHistory(){
+      try{
+        const r = await fetch('live/trades.jsonl?v=' + cacheBust(), {cache:'no-store'});
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        const txt = await r.text();
+        const lines = txt.trim().split(/\r?\n/).filter(Boolean);
+        const last3 = lines.slice(-3).reverse(); // más reciente primero
 
-pollLast();
-pollHist();
-</script>
+        const tbody = $('#historyTbl tbody');
+        tbody.innerHTML = '';
 
-<!-- ===== Recarga completa opcional + anti-caché imagen ===== -->
-<script>
-(function(){
-  const btn = document.getElementById('btn-hard-reload');
-  const chk = document.getElementById('chk-auto');
-  let timer = null;
-  function start(){ stop(); timer = setInterval(function(){ location.reload(); }, 5000); }
-  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-  if(btn){
-    btn.addEventListener('click', function(){
-      const url = new URL(window.location.href);
-      url.searchParams.set('ts', Date.now());
-      window.location.replace(url.toString());
-    });
-  }
-  if(chk){
-    try{ const saved = localStorage.getItem('dh_auto_reload_5s'); if(saved==='1'){ chk.checked=true; start(); } }catch(_){}
-    chk.addEventListener('change', function(){ if(chk.checked){ start(); try{localStorage.setItem('dh_auto_reload_5s','1')}catch(_){} } else { stop(); try{localStorage.removeItem('dh_auto_reload_5s')}catch(_){} } });
-  }
-})();
-</script>
+        if(last3.length===0){
+          $('#noHistory').style.display='block';
+          $('#historyTbl').style.display='none';
+          return;
+        }else{
+          $('#noHistory').style.display='none';
+          $('#historyTbl').style.display='table';
+        }
 
-<!-- Micro-tweak del botón “Cerrar” -->
-<script>
-(function(){
-  var sel = '#site-alert button, .site-alert button, .alert-banner button';
-  var btn = document.querySelector(sel);
-  if(btn){
-    btn.textContent = '×';
-    btn.setAttribute('aria-label','Cerrar');
-    btn.classList.add('btn-close');
-  }
-})();
-</script>
-
-<!-- Anti-caché de URL (?v=timestamp si no existe) -->
-<script>
-(function(){
-  try{
-    var u = new URL(location.href);
-    if(!u.searchParams.get('v')){
-      u.searchParams.set('v', Date.now());
-      history.replaceState(null, '', u.toString());
+        last3.forEach(l=>{
+          try{
+            const j = JSON.parse(l);
+            const tr = document.createElement('tr');
+            const pill = `<span class="pill ${String(j.side).toUpperCase()==='BUY'?'buy':'sell'}">${(j.side||'').toUpperCase()}</span>`;
+            tr.innerHTML = `
+              <td>${j.ts??'—'}</td>
+              <td>${j.symbol??'—'}</td>
+              <td style="text-align:center">${pill}</td>
+              <td>${j.price?fmt(j.price):'—'}</td>
+              <td>${j.lot??'—'}</td>
+              <td>${j.sl?fmt(j.sl):'—'}</td>
+              <td>${j.tp?fmt(j.tp):'—'}</td>`;
+            tbody.appendChild(tr);
+          }catch(_){}
+        });
+      }catch(e){
+        console.error('history error', e);
+        $('#noHistory').style.display='block';
+        $('#historyTbl').style.display='none';
+      }
     }
-  }catch(_){}
-})();
-</script>
 
+    // refrezco periódico
+    function tick(){
+      loadLive(); loadHistory();
+    }
+    tick();
+    setInterval(tick, 15000); // 15s
+  </script>
 </body>
 </html>
