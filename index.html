@@ -119,106 +119,97 @@
       h1{font-size:24px}
     }
   </style>
-<style>
+  <style>
+  /* ======= Mobile tune for HISTORIAL (safe & scoped) ======= */
+  #hist .card-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #hist table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  #hist thead th { position: sticky; top: 0; background: #0f172a; z-index: 1; }
 
-/* ======= Mobile tune for HISTORIAL (safe & scoped) ======= */
-#hist .card-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-#hist table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-#hist thead th { position: sticky; top: 0; background: #0f172a; z-index: 1; }
+  #hist th, #hist td { padding: 8px 10px; }
 
-#hist th, #hist td { padding: 8px 10px; }
+  @media (max-width: 640px){
+    #hist h2 { font-size: 1rem; }
+    #hist th, #hist td { font-size: 12px; line-height: 1.2; padding: 6px 8px; }
+    /* Column min-widths by index (Hora, Par, Lado, Precio, Lote, SL, TP) */
+    #hist table th:nth-child(1), #hist table td:nth-child(1) { min-width: 120px; } /* Hora */
+    #hist table th:nth-child(2), #hist table td:nth-child(2) { min-width: 70px; }  /* Par  */
+    #hist table th:nth-child(3), #hist table td:nth-child(3) { min-width: 70px; }  /* Lado */
+    #hist table th:nth-child(4), #hist table td:nth-child(4) { min-width: 90px; }  /* Precio */
+    #hist table th:nth-child(5), #hist table td:nth-child(5) { min-width: 70px; }  /* Lote */
+    #hist table th:nth-child(6), #hist table td:nth-child(6) { min-width: 90px; }  /* SL */
+    #hist table th:nth-child(7), #hist table td:nth-child(7) { min-width: 90px; }  /* TP */
+    #hist .badge { transform: scale(0.9); transform-origin: left center; }
+  }
+  </style>
+  <style>
+  /* ======= UI tweaks: alerta superior + refresh control (aditivo y escopado) ======= */
+  #refresh-ctrl{ right:auto !important; left:12px !important; bottom:12px !important; }
+  #refresh-ctrl #btn-hard-reload{ padding:6px 10px !important; font-size:12px !important; box-shadow:0 4px 0 #14532d !important; }
 
-@media (max-width: 640px){
-  #hist h2 { font-size: 1rem; }
-  #hist th, #hist td { font-size: 12px; line-height: 1.2; padding: 6px 8px; }
-  /* Column min-widths by index (Hora, Par, Lado, Precio, Lote, SL, TP) */
-  #hist table th:nth-child(1), #hist table td:nth-child(1) { min-width: 120px; } /* Hora */
-  #hist table th:nth-child(2), #hist table td:nth-child(2) { min-width: 70px; }  /* Par  */
-  #hist table th:nth-child(3), #hist table td:nth-child(3) { min-width: 70px; }  /* Lado */
-  #hist table th:nth-child(4), #hist table td:nth-child(4) { min-width: 90px; }  /* Precio */
-  #hist table th:nth-child(5), #hist table td:nth-child(5) { min-width: 70px; }  /* Lote */
-  #hist table th:nth-child(6), #hist table td:nth-child(6) { min-width: 90px; }  /* SL */
-  #hist table th:nth-child(7), #hist table td:nth-child(7) { min-width: 90px; }  /* TP */
-  #hist .badge { transform: scale(0.9); transform-origin: left center; }
-}
+  /* Banner de verificación (texto y botón más pequeños) */
+  #site-alert, .site-alert, .alert-banner{ font-size:13px !important; line-height:1.25 !important; }
+  #site-alert .btn-close, .site-alert .btn-close, .alert-banner .btn-close,
+  #site-alert button.close, .site-alert button.close, .alert-banner button.close{
+    font-size:12px !important; padding:4px 8px !important; min-width:auto !important; border-radius:8px !important;
+  }
+  </style>
+  <style>
+  /* ======= Overwrite: ubicacion y tamaño del control de refresco ======= */
+  #refresh-ctrl{
+    position:fixed !important;
+    top:12px !important;
+    right:12px !important;
+    left:auto !important;
+    bottom:auto !important;
+    z-index:9999 !important;
+  }
+  #refresh-ctrl #btn-hard-reload{
+    padding:4px 8px !important;
+    font-size:11px !important;
+    box-shadow:0 3px 0 #14532d !important;
+  }
 
-</style>
-<style>
-
-/* ======= UI tweaks: alerta superior + refresh control (aditivo y escopado) ======= */
-#refresh-ctrl{ right:auto !important; left:12px !important; bottom:12px !important; }
-#refresh-ctrl #btn-hard-reload{ padding:6px 10px !important; font-size:12px !important; box-shadow:0 4px 0 #14532d !important; }
-
-/* Banner de verificación (texto y botón más pequeños) */
-#site-alert, .site-alert, .alert-banner{ font-size:13px !important; line-height:1.25 !important; }
-#site-alert .btn-close, .site-alert .btn-close, .alert-banner .btn-close,
-#site-alert button.close, .site-alert button.close, .alert-banner button.close{
-  font-size:12px !important; padding:4px 8px !important; min-width:auto !important; border-radius:8px !important;
-}
-
-</style>
-<style>
-
-/* ======= Overwrite: ubicacion y tamaño del control de refresco ======= */
-#refresh-ctrl{
-  position:fixed !important;
-  top:12px !important;
-  right:12px !important;
-  left:auto !important;
-  bottom:auto !important;
-  z-index:9999 !important;
-}
-#refresh-ctrl #btn-hard-reload{
-  padding:4px 8px !important;
-  font-size:11px !important;
-  box-shadow:0 3px 0 #14532d !important;
-}
-
-
-/* ======= Close button tiny ======= */
-button[data-alert-close]{
-  font-size:12px !important;
-  line-height:1 !important;
-  padding:2px 6px !important;
-  min-width:auto !important;
-  height:auto !important;
-  border-radius:8px !important;
-}
-
-</style>
-<style>
-
-/* ======= Ultra-compact refresh control (top-left) ======= */
-#refresh-ctrl{
-  position:fixed !important;
-  top:8px !important;
-  left:8px !important;
-  right:auto !important;
-  bottom:auto !important;
-  z-index:9999 !important;
-  display:flex !important;
-  gap:4px !important;
-  transform:scale(0.7); /* super diminuto */
-  transform-origin: top left;
-  opacity:0.85;
-}
-#refresh-ctrl #btn-hard-reload{
-  padding:2px 6px !important;
-  font-size:10px !important;
-  line-height:1 !important;
-  box-shadow:0 2px 0 #14532d !important;
-  border-radius:8px !important;
-}
-#refresh-ctrl label{
-  padding:2px 6px !important;
-  font-size:10px !important;
-  border-radius:8px !important;
-}
-@media (max-width: 480px){
-  #refresh-ctrl{ transform:scale(0.6); }
-}
-
-</style>
+  /* ======= Close button tiny ======= */
+  button[data-alert-close]{
+    font-size:12px !important;
+    line-height:1 !important;
+    padding:2px 6px !important;
+    min-width:auto !important;
+    height:auto !important;
+    border-radius:8px !important;
+  }
+  </style>
+  <style>
+  /* ======= Ultra-compact refresh control (top-left) ======= */
+  #refresh-ctrl{
+    position:fixed !important;
+    top:8px !important;
+    left:8px !important;
+    right:auto !important;
+    bottom:auto !important;
+    z-index:9999 !important;
+    display:flex !important;
+    gap:4px !important;
+    transform:scale(0.7); /* super diminuto */
+    transform-origin: top left;
+    opacity:0.85;
+  }
+  #refresh-ctrl #btn-hard-reload{
+    padding:2px 6px !important;
+    font-size:10px !important;
+    line-height:1 !important;
+    box-shadow:0 2px 0 #14532d !important;
+    border-radius:8px !important;
+  }
+  #refresh-ctrl label{
+    padding:2px 6px !important;
+    font-size:10px !important;
+    border-radius:8px !important;
+  }
+  @media (max-width: 480px){
+    #refresh-ctrl{ transform:scale(0.6); }
+  }
+  </style>
 </head>
 <body>
 
@@ -261,7 +252,6 @@ button[data-alert-close]{
 
     <div class="card" id="redes">
       <h2>
-
 <!-- ======= HISTORIAL ======= -->
   <section id="hist" class="card" style="margin-top:16px">
     <h2>Historial reciente</h2>
@@ -277,166 +267,6 @@ button[data-alert-close]{
       <tbody id="hist-body"></tbody>
     </table>
   </section>
-
-
-<!-- ======= MEDIOS DE PAGO (btn colapsable) ======= -->
-
-  <script>
-  // ===== Helpers UI =====
-  const $ = id => document.getElementById(id);
-  const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'),
-                   lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
-
-  function badgeHTML(text){
-    const s=(text||'').toUpperCase();
-    let color='#9aa6bd';
-    if(s.includes('BUY'))  color = getComputedStyle(document.documentElement).getPropertyValue('--green') || '#16a34a';
-    if(s.includes('SELL')) color = getComputedStyle(document.documentElement).getPropertyValue('--red')   || '#dc2626';
-    return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
-  }
-  function nice(n, dp){
-    if(n===undefined || n===null || n==='') return '—';
-    const x=Number(n); if(Number.isNaN(x)) return '—';
-    return dp===undefined ? x.toString() : x.toFixed(dp);
-  }
-  function localTs(ts){
-    if(!ts) return '—';
-    const t = ts.replace(/\./g,'-').replace(' ','T'); // "YYYY.MM.DD HH:MM:SS" -> ISO
-    const d = new Date(t);
-    return Number.isNaN(+d) ? ts : d.toLocaleString();
-  }
-  // *** NUEVO: parseo tolerante para Tor / text/plain / BOM ***
-  function safeParseJson(txt){
-    if(!txt) return null;
-    try{
-      txt = txt.replace(/^\uFEFF/, '').trim();
-      const a = txt.indexOf('{'), b = txt.lastIndexOf('}');
-      if(a>=0 && b>=0) txt = txt.slice(a,b+1);
-      return JSON.parse(txt);
-    }catch(_){ return null; }
-  }
-
-  // ===== Último evento (robusto) =====
-  async function pollLast(){
-    try{
-      const r   = await fetch('/live/last.json?ts='+Date.now(), {cache:'no-store'});
-      const txt = await r.text();                // <- texto SIEMPRE (más tolerante)
-      const d   = safeParseJson(txt);
-      if(d){
-        liveEls.sym.textContent   = d.symbol || '—';
-        liveEls.side.innerHTML    = badgeHTML(d.side);
-        liveEls.price.textContent = nice(d.price);
-        liveEls.lots.textContent  = nice(d.lots,2);
-        liveEls.sltp.textContent  = `${nice(d.sl)} / ${nice(d.tp)}`;
-        liveEls.ts.textContent    = localTs(d.ts);
-        // evita caché de la imagen
-        liveEls.img.src = '/live/shots/latest.jpg?ts=' + Date.now();
-      }
-    }catch(_){}
-    setTimeout(pollLast, 2500);
-  }
-
-  // ===== Historial (últimas 10 de trades.jsonl) =====
-  async function pollHist(){
-    const tbl=$('hist-table'), body=$('hist-body'), empty=$('hist-empty');
-    function render(rows){
-      if(!rows.length){ tbl.style.display='none'; empty.style.display='block'; return; }
-      empty.style.display='none'; tbl.style.display='table';
-      body.innerHTML = rows.map(r=>(
-        `<tr>
-          <td>${localTs(r.ts)}</td>
-          <td>${r.symbol||'—'}</td>
-          <td>${badgeHTML(r.side)}</td>
-          <td style="text-align:right">${nice(r.price)}</td>
-          <td style="text-align:right">${nice(r.lots,2)}</td>
-          <td style="text-align:right">${nice(r.sl)}</td>
-          <td style="text-align:right">${nice(r.tp)}</td>
-        </tr>`
-      )).join('');
-    }
-    try{
-      const r   = await fetch('/live/trades.jsonl?ts='+Date.now(), {cache:'no-store'});
-      if(!r.ok){ render([]); return; }
-      const txt = await r.text();
-      const lines = (txt||'').trim().split(/\r?\n/).filter(Boolean);
-      const objs  = lines.slice(-10).map(l=>{try{return JSON.parse(l);}catch(_){return null;}}).filter(Boolean).reverse();
-      render(objs);
-    }catch(_){ render([]); }
-    setTimeout(pollHist, 5000);
-  }
-
-  // Init
-  pollLast();
-  pollHist();
-  </script>
-
-
-<script>
-// ======= ADITIVO: recarga completa opcional + refresco de imagen MT4 sin tocar el resto =======
-(function(){
-  const btn = document.getElementById('btn-hard-reload');
-  const chk = document.getElementById('chk-auto');
-  let timer = null;
-  function start(){ stop(); timer = setInterval(function(){ location.reload(); }, 5000); }
-  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-  if(btn){
-    btn.addEventListener('click', function(){
-      const url = new URL(window.location.href);
-      url.searchParams.set('ts', Date.now());
-      window.location.replace(url.toString());
-    });
-  }
-  if(chk){
-    try{ const saved = localStorage.getItem('dh_auto_reload_5s'); if(saved==='1'){ chk.checked=true; start(); } }catch(_){}
-    chk.addEventListener('change', function(){ if(chk.checked){ start(); try{localStorage.setItem('dh_auto_reload_5s','1')}catch(_){} } else { stop(); try{localStorage.removeItem('dh_auto_reload_5s')}catch(_){} } });
-  }
-
-  // Refresco de imagen del MT4 (lv-shot) cada 2.5s sin modificar su ruta
-  function refreshImage(){
-    var img = document.getElementById('lv-shot');
-    if(!img) return;
-    var base = img.getAttribute('data-base') || (img.src||'').split('?')[0];
-    // Si no es latest.png/jpg, intentará png y luego jpg automáticamente
-    var url = new URL(base, window.location.origin);
-    var path = url.pathname;
-    function setSrcWithTs(b){ img.setAttribute('data-base', b); img.src = b + (b.indexOf('?')===-1?'?':'&') + 'ts=' + Date.now(); }
-    function attempt(list, idx){
-      if(idx>=list.length){ return; }
-      var candidate = list[idx];
-      var test = new Image();
-      test.onload = function(){ setSrcWithTs(candidate); };
-      test.onerror = function(){ attempt(list, idx+1); };
-      test.src = candidate + '?ping=' + Date.now();
-    }
-    if(/latest\.(png|jpg|jpeg)$/i.test(path)){
-      setSrcWithTs(base);
-    }else{
-      var dir = path.replace(/[^\/]*$/, ''); // directorio
-      attempt([dir+'latest.png', dir+'latest.jpg'], 0);
-    }
-  }
-  window.DH_refreshImage = refreshImage;
-  setInterval(refreshImage, 2500);
-})();
-</script>
-
-<script>
-(function(){
-  // Cambiar 'Cerrar' por '×' en la alerta superior (no destructivo)
-  var sel = '#site-alert button, .site-alert button, .alert-banner button';
-  var btn = document.querySelector(sel);
-  if(btn){
-    btn.textContent = '×';
-    btn.setAttribute('aria-label','Cerrar');
-    // añade clase común para que tome el estilo
-    btn.classList.add('btn-close');
-  }
-})();
-</script>
-
-</body>
-</html>
-
 
 <!-- ======= EN VIVO ======= -->
   <section id="en-vivo" class="card" style="margin-top:24px">
@@ -462,8 +292,6 @@ Redes oficiales</h2>
         <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
       </div>
     </div>
-
-    
 
 <section id="medios-pago" class="card" style="margin-top:16px">
   <details>
@@ -775,23 +603,158 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     });
   </script>
 
-  
+  <!-- ===== Lectura robusta de live + historial (aditivo) ===== -->
+  <script>
+  const $ = id => document.getElementById(id);
+  const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'),
+                   lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
 
-  
-    </div>
-  </details>
-</section>
-
-<!-- ====== BLOQUE NUEVO (muy pequeño y sin tocar nada de arriba): anti-caché de URL ====== -->
-<script>
-(function(){
-  // Adjunta un parámetro `v` con timestamp a la URL actual (solo reemplaza en el historial)
-  try{
-    var u = new URL(location.href);
-    if(!u.searchParams.get('v')){
-      u.searchParams.set('v', Date.now());
-      history.replaceState(null, '', u.toString());
+  function badgeHTML(text){
+    const s=(text||'').toUpperCase();
+    let color='#9aa6bd';
+    if(s.includes('BUY'))  color = getComputedStyle(document.documentElement).getPropertyValue('--green') || '#16a34a';
+    if(s.includes('SELL')) color = getComputedStyle(document.documentElement).getPropertyValue('--red')   || '#dc2626';
+    return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
+  }
+  function nice(n, dp){
+    if(n===undefined || n===null || n==='') return '—';
+    const x=Number(n); if(Number.isNaN(x)) return '—';
+    return dp===undefined ? x.toString() : x.toFixed(dp);
+  }
+  function localTs(ts){
+    if(!ts) return '—';
+    const t = ts.replace(/\./g,'-').replace(' ','T');
+    const d = new Date(t);
+    return Number.isNaN(+d) ? ts : d.toLocaleString();
+  }
+  function safeParseJson(txt){
+    if(!txt) return null;
+    try{
+      txt = txt.replace(/^\uFEFF/, '').trim();
+      const a = txt.indexOf('{'), b = txt.lastIndexOf('}');
+      if(a>=0 && b>=0) txt = txt.slice(a,b+1);
+      return JSON.parse(txt);
+    }catch(_){ return null; }
+  }
+  async function pollLast(){
+    try{
+      const r   = await fetch('/live/last.json?ts='+Date.now(), {cache:'no-store'});
+      const txt = await r.text();
+      const d   = safeParseJson(txt);
+      if(d){
+        liveEls.sym.textContent   = d.symbol || '—';
+        liveEls.side.innerHTML    = badgeHTML(d.side);
+        liveEls.price.textContent = nice(d.price);
+        liveEls.lots.textContent  = nice(d.lots,2);
+        liveEls.sltp.textContent  = `${nice(d.sl)} / ${nice(d.tp)}`;
+        liveEls.ts.textContent    = localTs(d.ts);
+        liveEls.img.src = '/live/shots/latest.jpg?ts=' + Date.now();
+      }
+    }catch(_){}
+    setTimeout(pollLast, 2500);
+  }
+  async function pollHist(){
+    const tbl=$('hist-table'), body=$('hist-body'), empty=$('hist-empty');
+    function render(rows){
+      if(!rows.length){ tbl.style.display='none'; empty.style.display='block'; return; }
+      empty.style.display='none'; tbl.style.display='table';
+      body.innerHTML = rows.map(r=>(
+        `<tr>
+          <td>${localTs(r.ts)}</td>
+          <td>${r.symbol||'—'}</td>
+          <td>${badgeHTML(r.side)}</td>
+          <td style="text-align:right">${nice(r.price)}</td>
+          <td style="text-align:right">${nice(r.lots,2)}</td>
+          <td style="text-align:right">${nice(r.sl)}</td>
+          <td style="text-align:right">${nice(r.tp)}</td>
+        </tr>`
+      )).join('');
     }
-  }catch(_){}
-})();
-</script>
+    try{
+      const r   = await fetch('/live/trades.jsonl?ts='+Date.now(), {cache:'no-store'});
+      if(!r.ok){ render([]); return; }
+      const txt = await r.text();
+      const lines = (txt||'').trim().split(/\r?\n/).filter(Boolean);
+      const objs  = lines.slice(-10).map(l=>{try{return JSON.parse(l);}catch(_){return null;}}).filter(Boolean).reverse();
+      render(objs);
+    }catch(_){ render([]); }
+    setTimeout(pollHist, 5000);
+  }
+  pollLast();
+  pollHist();
+  </script>
+
+  <!-- ===== Recarga completa opcional + anti-caché imagen (aditivo) ===== -->
+  <script>
+  (function(){
+    const btn = document.getElementById('btn-hard-reload');
+    const chk = document.getElementById('chk-auto');
+    let timer = null;
+    function start(){ stop(); timer = setInterval(function(){ location.reload(); }, 5000); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    if(btn){
+      btn.addEventListener('click', function(){
+        const url = new URL(window.location.href);
+        url.searchParams.set('ts', Date.now());
+        window.location.replace(url.toString());
+      });
+    }
+    if(chk){
+      try{ const saved = localStorage.getItem('dh_auto_reload_5s'); if(saved==='1'){ chk.checked=true; start(); } }catch(_){}
+      chk.addEventListener('change', function(){ if(chk.checked){ start(); try{localStorage.setItem('dh_auto_reload_5s','1')}catch(_){} } else { stop(); try{localStorage.removeItem('dh_auto_reload_5s')}catch(_){} } });
+    }
+    function refreshImage(){
+      var img = document.getElementById('lv-shot');
+      if(!img) return;
+      var base = img.getAttribute('data-base') || (img.src||'').split('?')[0];
+      var url = new URL(base, window.location.origin);
+      var path = url.pathname;
+      function setSrcWithTs(b){ img.setAttribute('data-base', b); img.src = b + (b.indexOf('?')===-1?'?':'&') + 'ts=' + Date.now(); }
+      function attempt(list, idx){
+        if(idx>=list.length){ return; }
+        var candidate = list[idx];
+        var test = new Image();
+        test.onload = function(){ setSrcWithTs(candidate); };
+        test.onerror = function(){ attempt(list, idx+1); };
+        test.src = candidate + '?ping=' + Date.now();
+      }
+      if(/latest\.(png|jpg|jpeg)$/i.test(path)){
+        setSrcWithTs(base);
+      }else{
+        var dir = path.replace(/[^\/]*$/, '');
+        attempt([dir+'latest.png', dir+'latest.jpg'], 0);
+      }
+    }
+    window.DH_refreshImage = refreshImage;
+    setInterval(refreshImage, 2500);
+  })();
+  </script>
+
+  <!-- ===== Micro-tweak visual del botón “Cerrar” del banner ===== -->
+  <script>
+  (function(){
+    var sel = '#site-alert button, .site-alert button, .alert-banner button';
+    var btn = document.querySelector(sel);
+    if(btn){
+      btn.textContent = '×';
+      btn.setAttribute('aria-label','Cerrar');
+      btn.classList.add('btn-close');
+    }
+  })();
+  </script>
+
+  <!-- ===== Anti-caché de URL (agrega ?v=timestamp si no existe) ===== -->
+  <script>
+  (function(){
+    try{
+      var u = new URL(location.href);
+      if(!u.searchParams.get('v')){
+        u.searchParams.set('v', Date.now());
+        history.replaceState(null, '', u.toString());
+      }
+    }catch(_){}
+  })();
+  </script>
+
+</body>
+</html>
