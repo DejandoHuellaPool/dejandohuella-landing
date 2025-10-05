@@ -19,7 +19,22 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
-  <link rel="preload" as="image" href="live/shots/latest.jpg">
+  <!-- PRELOAD dinámico para que respete el prefijo en GH Pages -->
+  <link rel="preload" as="image" href="" id="preload-shot">
+
+  <!-- ⬇️ NUEVO: autodetección de entorno y helpers de ruta -->
+  <script>
+    (function(){
+      // En GitHub Pages el sitio vive bajo /dejandohuella-landing
+      var isGH = location.host.includes('github.io') || location.pathname.startsWith('/dejandohuella-landing');
+      window.DH_BASE = isGH ? '/dejandohuella-landing' : '';
+      // Raíz de /live (JSON/JSONL/JPG) para ambos entornos:
+      window.DH_ROOT = window.DH_BASE + '/live';
+      // Configura el <link rel="preload"> para latest.jpg
+      var pre = document.getElementById('preload-shot');
+      if (pre) pre.href = window.DH_ROOT + '/shots/latest.jpg?ts=' + Date.now();
+    })();
+  </script>
 
   <style>
     :root{
@@ -213,8 +228,8 @@
       </div>
     </div>
 
-    <!-- Imagen MT4 (ruta RELATIVA al repo) -->
-    <img id="lv-shot" src="live/shots/latest.jpg" alt="Captura MT4 en vivo"
+    <!-- Imagen MT4: src se setea por JS con DH_ROOT para evitar cache -->
+    <img id="lv-shot" src="" alt="Captura MT4 en vivo"
          style="width:100%;max-width:1000px;border-radius:12px;border:1px solid var(--border);display:block;margin:auto"
          loading="lazy" decoding="async">
   </section>
@@ -442,7 +457,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
   // ===== Utilidades base =====
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement;
-  const LIVE_ROOT = (window.DH_ROOT || 'live'); // RUTA RELATIVA
+  const LIVE_ROOT = (window.DH_ROOT || 'live'); // RUTA RELATIVA (set por el script del <head>)
   const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'), lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
   const status = { pill:$('status-pill'), dot:$('dot'), text:$('status-text') };
   let lastUpdate = 0;
@@ -465,8 +480,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
   }
   function nice(n,dp){ if(n===undefined||n===null||n==='')return '—'; const x=Number(n); if(Number.isNaN(x))return '—'; return dp===undefined?x.toString():x.toFixed(dp); }
-  function localTs(ts){ if(!ts)return '—'; const t=ts.replace(/\\./g,'-').replace(' ','T'); const d=new Date(t); return Number.isNaN(+d)?ts:d.toLocaleString(); }
-  function safeParseJson(txt){ if(!txt)return null; try{ txt=txt.replace(/^\\uFEFF/,'').trim(); const a=txt.indexOf('{'),b=txt.lastIndexOf('}'); if(a>=0&&b>=0) txt=txt.slice(a,b+1); return JSON.parse(txt);}catch(_){return null;} }
+  function localTs(ts){ if(!ts)return '—'; const t=ts.replace(/\./g,'-').replace(' ','T'); const d=new Date(t); return Number.isNaN(+d)?ts:d.toLocaleString(); }
+  function safeParseJson(txt){ if(!txt)return null; try{ txt=txt.replace(/^\uFEFF/,'').trim(); const a=txt.indexOf('{'),b=txt.lastIndexOf('}'); if(a>=0&&b>=0) txt=txt.slice(a,b+1); return JSON.parse(txt);}catch(_){return null;} }
   function toast(text){
     const msg=document.createElement('div'); msg.textContent=text;
     Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
@@ -547,6 +562,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         liveEls.lots.textContent=nice(d.lot??d.lots,2);
         liveEls.sltp.textContent=`${nice(d.sl)} / ${nice(d.tp)}`;
         liveEls.ts.textContent=localTs(d.ts);
+        // refresca imagen respetando prefijo y rompiendo caché
         liveEls.img.src=`${LIVE_ROOT}/shots/latest.jpg?ts=${Date.now()}`;
         setStatus(true);
         backoff = 1500; // reset
