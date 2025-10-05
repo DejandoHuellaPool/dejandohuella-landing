@@ -1,66 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 
-
 <script>
-// === AUTODETECCIÓN GH PAGES / NGINX + HELPERS DE RUTA ===
+// ⚡ GH Pages hotfix: matar SW y forzar 1 recarga con ?v=timestamp para bustear caché del HTML
 (function(){
-  var looksGH = location.host.endsWith('github.io');
-  var base = (window.DH_BASE !== undefined) ? window.DH_BASE :
-             (looksGH ? '/dejandohuella-landing' :
-              (location.pathname.startsWith('/dejandohuella-landing') ? '/dejandohuella-landing' : ''));
-  window.DH_BASE = base;
-  window.DH_ROOT = (window.DH_ROOT !== undefined) ? window.DH_ROOT : (base + '/live');
-  // Preload dinámico si existe
-  var pre = document.querySelector('link#preload-shot');
-  if (pre) pre.href = window.DH_ROOT + '/shots/latest.jpg?ts=' + Date.now();
-})();
-
-// === CANDIDATAS DE URL + FETCH CON FALLBACK + CACHE-BUSTING ===
-function dhCandidates(path){
-  var p = path[0] === '/' ? path : '/' + path;
-  var abs = window.DH_ROOT + p;      // ej: '/dejandohuella-landing/live/last.json'
-  var relAbs = '/live' + p;          // '/live/last.json'
-  var rel = 'live' + p;              // 'live/last.json'
-  return Array.from(new Set([abs, relAbs, rel]));
-}
-
-async function dhFetchText(path, timeoutMs){
-  const urls = dhCandidates(path);
-  const tmo = timeoutMs || 6000;
-  let lastErr;
-  for (const u of urls){
-    const url = u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
-    try{
-      const ctrl = new AbortController();
-      const tid = setTimeout(()=>ctrl.abort(), tmo);
-      const r = await fetch(url, { cache:'no-store', signal: ctrl.signal });
-      clearTimeout(tid);
-      if(r.ok) return await r.text();
-      lastErr = new Error('HTTP ' + r.status + ' @ ' + url);
-    }catch(e){ lastErr = e; }
+  // 1) Si no hay ?v=... en la URL, recarga una sola vez con ese parámetro
+  var u = new URL(location.href);
+  if(!u.searchParams.has('v')){
+    u.searchParams.set('v', Date.now().toString());
+    // Recarga una vez con la URL versionada (evita bucles)
+    location.replace(u.toString());
   }
-  throw lastErr || new Error('No reachable URL for ' + path);
-}
 
-window.DH_FETCH_JSON = async function(path){
-  const txt = await dhFetchText(path, 7000);
-  const clean = txt.replace(/^\uFEFF/, '').trim();
-  return JSON.parse(clean);
-};
-
-window.DH_FETCH_JSONL = async function(path){
-  const txt = await dhFetchText(path, 7000);
-  return txt.split(/\r?\n/).filter(Boolean).map(s=>{ try{return JSON.parse(s);}catch(_){return null;} }).filter(Boolean);
-};
-
-window.DH_IMG_URL = function(path){
-  const u = dhCandidates(path)[0];
-  return u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
-};
+  // 2) Mata cualquier Service Worker antiguo (si existiera)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(rs){
+      rs.forEach(function(r){ r.unregister(); });
+    });
+  }
+})();
 </script>
-
-
 
 
 
