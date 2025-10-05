@@ -1,3 +1,5 @@
 {"side":"BUY","symbol":"BTCUSD","price":123406.00,"lot":0.20,"sl":122056.00,"tp":123506.00,"level":"BREAK_L2","ts":"2025.10.05 20:01"}\r\n{"ts":"2025.10.05 20:01:40","symbol":"BTCUSD","side":"BUY_CLOSE","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
 {"ts":"2025.10.05 20:03:00","symbol":"BTCUSD","side":"BUY","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
-{"side":"BUY","symbol":"BTCUSD","price":123491.50,"lot":0.20,"sl":122141.50,"tp":123591.50,"level":"BREAK_L2","ts":"2025.10.05 20:03"}\r\n
+{"side":"BUY","symbol":"BTCUSD","price":123491.50,"lot":0.20,"sl":122141.50,"tp":123591.50,"level":"BREAK_L2","ts":"2025.10.05 20:03"}\r\n{"ts":"2025.10.05 21:03:59","symbol":"BTCUSD","side":"BUY","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
+{"ts":"2025.10.05 21:06:36","symbol":"BTCUSD","side":"BUY_CLOSE","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
+{"ts":"2025.10.05 21:06:56","symbol":"BTCUSD","side":"BUY","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
