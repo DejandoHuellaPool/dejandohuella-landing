@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>DejandoHuella Trader — Clearnet</title>
+  <title>DejandoHuella Trader — Clearnet (Optimizada)</title>
   <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Pagos por BTC y USDT (TRC20, BEP20, Arbitrum One, ERC-20).">
   <meta name="color-scheme" content="dark">
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
@@ -19,13 +19,14 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
+  <link rel="preload" as="image" href="live/shots/latest.jpg">
 
   <style>
     :root{
       --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826;
       --accent:#22c55e; --accent2:#1ed760; --border:#1f2a3a; --link:#60a5fa;
       --btnText:#06250f; --shadow:rgba(0,0,0,.45);
-      --green:#16a34a; --red:#dc2626;
+      --green:#16a34a; --red:#dc2626; --warn:#f59e0b;
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
@@ -92,6 +93,9 @@
     th,td{padding:8px;border-bottom:1px solid var(--border)}
     th{text-align:left;color:#cbd5e1}
 
+    .status-pill{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:#0f1522}
+    .dot{width:10px;height:10px;border-radius:50%}
+
     /* Responsive */
     @media (max-width:980px){
       .wrap{padding:18px}
@@ -121,7 +125,7 @@
     /* Controles mini */
     #refresh-ctrl{
       position:fixed; top:8px; left:8px; z-index:9999;
-      display:flex; gap:4px; transform:scale(.7); transform-origin:top left; opacity:.85;
+      display:flex; gap:4px; transform:scale(.7); transform-origin:top left; opacity:.9;
     }
     #refresh-ctrl button, #refresh-ctrl label{
       padding:2px 6px; font-size:10px; line-height:1; border-radius:8px;
@@ -130,31 +134,35 @@
 </head>
 <body>
 
+<noscript>
+  <div class="bar" role="status" aria-live="polite">⚠️ Activa JavaScript para ver datos EN VIVO y el historial.</div>
+</noscript>
+
 <!-- Controles -->
-<div id="refresh-ctrl">
+<div id="refresh-ctrl" aria-label="Controles de recarga">
   <button id="btn-hard-reload" style="background:#22c55e;color:#091015;border:0;font-weight:700;box-shadow:0 2px 0 #14532d">Actualizar</button>
   <label style="display:flex;align-items:center;gap:6px;background:#111826;color:#e5e7eb;border:1px solid #1f2937">
-    <input id="chk-auto" type="checkbox"> Auto 5s
+    <input id="chk-auto" type="checkbox" aria-label="Auto recarga cada 5s"> Auto 5s
   </label>
-  <button id="btn-pgp-mini" class="copy">PGP</button>
-  <button id="refresh-close" class="copy">Cerrar</button>
+  <button id="btn-pgp-mini" class="copy" aria-label="Ir a PGP">PGP</button>
+  <button id="refresh-close" class="copy" aria-label="Ocultar controles">Cerrar</button>
 </div>
 
 <div class="bar" id="site-alert">
-  <span>⚠️ Verifica los enlaces oficiales. Usa nuestra <a href="verificacion.html">Verificación oficial</a> o la dirección .onion.</span>
-  <button class="cta" data-alert-close>×</button>
+  <span>⚠️ Verifica los enlaces oficiales. Usa nuestra <a href="verificacion.html" rel="noopener noreferrer">Verificación oficial</a> o la dirección .onion.</span>
+  <button class="cta" data-alert-close aria-label="Cerrar aviso">×</button>
 </div>
 
 <div class="wrap">
   <header>
-    <img src="logo.png" alt="DejandoHuella logo" loading="lazy" decoding="async"
+    <img src="logo.png" alt="Logo de DejandoHuella" loading="lazy" decoding="async"
           onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
     <div>
       <h1>DejandoHuella Trader</h1>
       <div class="cta-row">
         <div class="menu">
-          <a class="cta" href="#" id="btn-info">Solicitar información</a>
-          <div class="menu-panel" id="panel-info" aria-hidden="true">
+          <a class="cta" href="#" id="btn-info" aria-haspopup="true" aria-expanded="false">Solicitar información</a>
+          <div class="menu-panel" id="panel-info" aria-hidden="true" role="menu">
             <a class="cta cta--wa" href="whatsapp.html" rel="noopener">WhatsApp (ventas)</a>
             <a class="cta" href="verificacion.html" rel="noopener">Verificación oficial</a>
             <a class="cta cta--dark" href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
@@ -168,8 +176,14 @@
   </header>
 
   <!-- HISTORIAL (único) -->
-  <section id="hist" class="card" style="margin-top:8px">
-    <h2>Historial reciente</h2>
+  <section id="hist" class="card" style="margin-top:8px" aria-live="polite">
+    <div class="row" style="margin-bottom:6px">
+      <h2 style="margin:0">Historial reciente</h2>
+      <span id="status-pill" class="status-pill" title="Estado de conexión">
+        <span class="dot" id="dot" style="background:#f87171"></span>
+        <small id="status-text">Desconectado</small>
+      </span>
+    </div>
     <div id="hist-empty" class="meta">Sin operaciones aún…</div>
     <table id="hist-table" style="display:none">
       <thead>
@@ -184,7 +198,7 @@
   </section>
 
   <!-- OPERACIÓN EN VIVO (datos arriba, imagen sola abajo) -->
-  <section id="live" class="card" style="margin-top:16px">
+  <section id="live" class="card" style="margin-top:16px" aria-live="polite">
     <h2>Operación en vivo</h2>
 
     <!-- Cuadro de datos -->
@@ -201,7 +215,8 @@
 
     <!-- Imagen MT4 (ruta RELATIVA al repo) -->
     <img id="lv-shot" src="live/shots/latest.jpg" alt="Captura MT4 en vivo"
-         style="width:100%;max-width:1000px;border-radius:12px;border:1px solid var(--border);display:block;margin:auto">
+         style="width:100%;max-width:1000px;border-radius:12px;border:1px solid var(--border);display:block;margin:auto"
+         loading="lazy" decoding="async">
   </section>
 
   <!-- Redes -->
@@ -209,7 +224,7 @@
     <h2>Redes oficiales</h2>
     <p>Síguenos para novedades y soporte:</p>
     <div class="cta-row">
-      <a class="cta cta--dark" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener">Facebook</a>
+      <a class="cta cta--dark" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener noreferrer">Facebook</a>
       <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
     </div>
   </div>
@@ -300,7 +315,7 @@
                 <div class="qrwrap" style="flex-direction:column;gap:10px">
                   <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
                       style="border:1px solid var(--border);border-radius:10px;background:#fff"
-                      src="img/qr-pichincha.png">
+                      src="img/qr-pichincha.png" loading="lazy" decoding="async">
                   <a id="qr-pich-dl" class="cta" href="img/qr-pichincha.png" download="qr-pichincha.png">Descargar PNG</a>
                 </div>
               </details>
@@ -310,7 +325,7 @@
           <div class="payrow">
             <div class="row"><b>PayPal</b><span class="tag">Pagos con tarjeta</span></div>
             <div class="row" style="gap:10px;align-items:center">
-              <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener">Pagar con PayPal</a>
+              <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener noreferrer">Pagar con PayPal</a>
               <small>o enviar a: <b>dejandohuella_pool@proton.me</b></small>
             </div>
             <details class="qrbox">
@@ -337,7 +352,7 @@
               <div class="cta-row">
                 <a class="cta cta--wa"
                   href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium"
-                  target="_blank" rel="noopener">Chatear por WhatsApp</a>
+                  target="_blank" rel="noopener noreferrer">Chatear por WhatsApp</a>
               </div>
             </div>
             <div class="plan">
@@ -346,7 +361,7 @@
               <div class="cta-row">
                 <a class="cta cta--wa"
                   href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20licencia%20EA%20personal"
-                  target="_blank" rel="noopener">Chatear por WhatsApp</a>
+                  target="_blank" rel="noopener noreferrer">Chatear por WhatsApp</a>
               </div>
             </div>
             <div class="plan">
@@ -355,7 +370,7 @@
               <div class="cta-row">
                 <a class="cta cta--wa"
                   href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20EA%20Full%20%2B%20Mentor%C3%ADa"
-                  target="_blank" rel="noopener">Chatear por WhatsApp</a>
+                  target="_blank" rel="noopener noreferrer">Chatear por WhatsApp</a>
               </div>
             </div>
             <div class="plan">
@@ -364,7 +379,7 @@
               <div class="cta-row">
                 <a class="cta cta--wa"
                   href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Socio%20%2F%20Inversionista"
-                  target="_blank" rel="noopener">Chatear por WhatsApp</a>
+                  target="_blank" rel="noopener noreferrer">Chatear por WhatsApp</a>
               </div>
             </div>
           </div>
@@ -419,77 +434,112 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
   </section>
 </div>
 
-<!-- QRCode -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- QRCode (con SRI) -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-2Y8A1aR8fWm9rTqvQXoQd7CjD2LdWw6Qy3r1r0q8oC0l1v2m2o2d6q9hX2u3XoCIiXv2iVwV4J7v3gQn1G8z0w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
-  // Fecha
-  document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
+(function(){
+  // ===== Utilidades base =====
+  const $ = (id) => document.getElementById(id);
+  const root = document.documentElement;
+  const LIVE_ROOT = (window.DH_ROOT || 'live'); // RUTA RELATIVA
+  const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'), lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
+  const status = { pill:$('status-pill'), dot:$('dot'), text:$('status-text') };
+  let lastUpdate = 0;
 
-  // Panel "Solicitar información"
-  (function(){
-    const btn=document.getElementById('btn-info');
-    const panel=document.getElementById('panel-info');
-    btn.addEventListener('click',(e)=>{e.preventDefault(); panel.style.display = panel.style.display==='block'?'none':'block';});
-    document.addEventListener('click',(e)=>{ if(!panel.contains(e.target) && e.target!==btn) panel.style.display='none'; });
-  })();
-
-  // Cerrar alerta
-  document.querySelector('[data-alert-close]')?.addEventListener('click',()=>document.getElementById('site-alert')?.remove());
-
-  // Copiar
-  function copyTxt(id){
-    const el=document.getElementById(id); if(!el) return;
-    const txt=el.textContent.trim();
-    if(navigator.clipboard && window.isSecureContext){
-      navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
-    }else{
-      const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
-      ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(_){}
-      ta.remove();
+  function setStatus(ok){
+    const now = Date.now();
+    if(ok){ lastUpdate = now; status.dot.style.background = getCss('--green') || '#16a34a'; status.text.textContent = 'En vivo'; }
+    else{
+      const age = now - lastUpdate;
+      if(age > 10000){ status.dot.style.background = '#f87171'; status.text.textContent = 'Desconectado'; }
+      else{ status.dot.style.background = getCss('--warn') || '#f59e0b'; status.text.textContent = 'Reintentando…'; }
     }
   }
+  function getCss(v){ return getComputedStyle(root).getPropertyValue(v); }
+  function badgeHTML(text){
+    const s=(text||'').toUpperCase();
+    let color='#9aa6bd';
+    if(s.includes('BUY'))  color=getCss('--green')||'#16a34a';
+    if(s.includes('SELL')) color=getCss('--red')||'#dc2626';
+    return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
+  }
+  function nice(n,dp){ if(n===undefined||n===null||n==='')return '—'; const x=Number(n); if(Number.isNaN(x))return '—'; return dp===undefined?x.toString():x.toFixed(dp); }
+  function localTs(ts){ if(!ts)return '—'; const t=ts.replace(/\\./g,'-').replace(' ','T'); const d=new Date(t); return Number.isNaN(+d)?ts:d.toLocaleString(); }
+  function safeParseJson(txt){ if(!txt)return null; try{ txt=txt.replace(/^\\uFEFF/,'').trim(); const a=txt.indexOf('{'),b=txt.lastIndexOf('}'); if(a>=0&&b>=0) txt=txt.slice(a,b+1); return JSON.parse(txt);}catch(_){return null;} }
   function toast(text){
     const msg=document.createElement('div'); msg.textContent=text;
     Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
     padding:'8px 12px',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,.4)',zIndex:'9999'});
     document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
   }
+  function copyTxt(id){
+    const el=$(id); if(!el) return;
+    const txt=el.textContent.trim();
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(txt).then(()=>{toast('✔ Copiado'); if(navigator.vibrate) navigator.vibrate(15);});
+    }else{
+      const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
+      ta.select(); try{document.execCommand('copy');toast('✔ Copiado'); if(navigator.vibrate) navigator.vibrate(15);}catch(_){/* noop */}
+      ta.remove();
+    }
+  }
+  window.copyTxt = copyTxt; // expone para botones
 
-  // QR dinámicos
+  // ===== Panel "Solicitar información" mejorado =====
+  (function(){
+    const btn=$('btn-info');
+    const panel=$('panel-info');
+    function close(){ panel.style.display='none'; btn.setAttribute('aria-expanded','false'); }
+    function toggle(e){ e.preventDefault(); const show= panel.style.display!=='block'; panel.style.display = show?'block':'none'; btn.setAttribute('aria-expanded', show?'true':'false'); }
+    btn.addEventListener('click',toggle);
+    document.addEventListener('click',(e)=>{ if(panel.style.display==='block' && !panel.contains(e.target) && e.target!==btn) close(); });
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+  })();
+
+  // ===== Cerrar alerta =====
+  document.querySelector('[data-alert-close]')?.addEventListener('click',()=>document.getElementById('site-alert')?.remove());
+
+  // ===== Fecha =====
+  $('lu').textContent = new Date().toISOString().slice(0,10);
+
+  // ===== QR dinámicos =====
   const ADDR={btc:'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',trc20:'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',bep20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',arb1:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'};
   function ensureQR(boxId,text,key){
-    const box=document.getElementById(boxId);
+    const box=$(boxId);
     if(!box || box.dataset.done) return;
-    if(window.QRCode){ new QRCode(box,{text,width:180,height:180,correctLevel:QRCode.CorrectLevel.M});}
-    else{ const img=document.createElement('img'); img.alt='QR '+key.toUpperCase(); img.src='img/qr_'+key+'.png'; box.appendChild(img); }
+    if(window.QRCode){ new QRCode(box,{text, width:180, height:180, correctLevel:QRCode.CorrectLevel.M}); }
+    else{ const img=document.createElement('img'); img.alt='QR '+(key||''); img.loading='lazy'; img.decoding='async'; img.src='img/qr_'+key+'.png'; box.appendChild(img); }
     box.dataset.done='1';
   }
   document.querySelectorAll('.qrbox').forEach(d=>{
     d.addEventListener('toggle', ()=>{ if(!d.open) return; const key=d.dataset.key; const target='qr-'+key; if(key && ADDR[key]) ensureQR(target,ADDR[key],key); });
   });
 
-  // ===== Live helpers =====
-  const $=id=>document.getElementById(id);
-  const liveEls={sym:$('lv-symbol'),side:$('lv-side'),price:$('lv-price'),lots:$('lv-lots'),sltp:$('lv-sltp'),ts:$('lv-ts'),img:$('lv-shot')};
-  const LIVE_ROOT=(window.DH_ROOT||'live'); // *** RUTA RELATIVA ***
+  // ===== POLLING con abort + backoff + pausa en background =====
+  let histTimer=null, lastTimer=null, imgTimer=null;
+  let lastAbort=null, histAbort=null;
+  let backoff=1500; // ms (se ajusta dinámicamente)
 
-  function badgeHTML(text){
-    const s=(text||'').toUpperCase();
-    let color='#9aa6bd';
-    if(s.includes('BUY'))  color=getComputedStyle(document.documentElement).getPropertyValue('--green')||'#16a34a';
-    if(s.includes('SELL')) color=getComputedStyle(document.documentElement).getPropertyValue('--red')||'#dc2626';
-    return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
+  async function fetchText(url, signal){
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 4000); // timeout 4s
+    try{
+      const r = await fetch(url,{cache:'no-store', signal: signal || ctrl.signal});
+      clearTimeout(t);
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return await r.text();
+    }catch(e){ clearTimeout(t); throw e; }
   }
-  function nice(n,dp){ if(n===undefined||n===null||n==='')return '—'; const x=Number(n); if(Number.isNaN(x))return '—'; return dp===undefined?x.toString():x.toFixed(dp); }
-  function localTs(ts){ if(!ts)return '—'; const t=ts.replace(/\./g,'-').replace(' ','T'); const d=new Date(t); return Number.isNaN(+d)?ts:d.toLocaleString(); }
-  function safeParseJson(txt){ if(!txt)return null; try{ txt=txt.replace(/^\uFEFF/,'').trim(); const a=txt.indexOf('{'),b=txt.lastIndexOf('}'); if(a>=0&&b>=0) txt=txt.slice(a,b+1); return JSON.parse(txt);}catch(_){return null;} }
+
+  function schedule(fn, ms){ return setTimeout(fn, ms); }
+  function clearTimers(){ [histTimer,lastTimer,imgTimer].forEach(t=>t&&clearTimeout(t)); }
 
   async function pollLast(){
     try{
-      const r=await fetch(`${LIVE_ROOT}/last.json?ts=${Date.now()}`,{cache:'no-store'});
-      const txt=await r.text();
-      const d=safeParseJson(txt);
+      lastAbort?.abort(); lastAbort = new AbortController();
+      const txt = await fetchText(`${LIVE_ROOT}/last.json?ts=${Date.now()}`, lastAbort.signal);
+      const d = safeParseJson(txt);
       if(d){
         liveEls.sym.textContent=d.symbol||'—';
         liveEls.side.innerHTML=badgeHTML(d.side);
@@ -498,9 +548,13 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         liveEls.sltp.textContent=`${nice(d.sl)} / ${nice(d.tp)}`;
         liveEls.ts.textContent=localTs(d.ts);
         liveEls.img.src=`${LIVE_ROOT}/shots/latest.jpg?ts=${Date.now()}`;
+        setStatus(true);
+        backoff = 1500; // reset
+      } else {
+        setStatus(false);
       }
-    }catch(_){}
-    setTimeout(pollLast,2500);
+    }catch(_){ setStatus(false); backoff = Math.min(backoff*1.5, 6000); }
+    lastTimer = schedule(pollLast, backoff);
   }
 
   async function pollHist(){
@@ -520,17 +574,16 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         </tr>`).join('');
     }
     try{
-      const r=await fetch(`${LIVE_ROOT}/trades.jsonl?ts=${Date.now()}`,{cache:'no-store'});
-      if(!r.ok){ render([]); return; }
-      const txt=await r.text();
+      histAbort?.abort(); histAbort = new AbortController();
+      const txt = await fetchText(`${LIVE_ROOT}/trades.jsonl?ts=${Date.now()}`, histAbort.signal);
       const lines=(txt||'').trim().split(/\r?\n/).filter(Boolean);
       const objs=lines.slice(-10).map(l=>{try{return JSON.parse(l);}catch(_){return null;}}).filter(Boolean).reverse();
       render(objs);
-    }catch(_){ render([]); }
-    setTimeout(pollHist,5000);
+      setStatus(true);
+    }catch(_){ setStatus(false); }
+    histTimer = schedule(pollHist, Math.max(2500, backoff));
   }
 
-  // Refresco defensivo de la imagen (si cambian png/jpg)
   function refreshImage(){
     const img=liveEls.img; if(!img) return;
     const baseDir=`${LIVE_ROOT}/shots/`;
@@ -544,22 +597,21 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       test.src=u;
     })(0);
   }
-  setInterval(refreshImage,2500); // paralelo al poll
 
-  // Init
-  pollLast();
-  pollHist();
+  // Pausar y reanudar en background
+  function startLoops(){ pollLast(); pollHist(); imgTimer=setInterval(refreshImage, 2500); }
+  function stopLoops(){ clearTimers(); lastAbort?.abort(); histAbort?.abort(); }
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden){ stopLoops(); } else { startLoops(); } });
 
   // Controles
   (function(){
-    const btn=document.getElementById('btn-hard-reload');
-    const chk=document.getElementById('chk-auto');
-    const closeBtn=document.getElementById('refresh-close');
-    const pgpMini=document.getElementById('btn-pgp-mini');
-    let timer=null;
-
-    function start(){ stop(); timer=setInterval(()=>location.reload(),5000); }
-    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    const btn=$('btn-hard-reload');
+    const chk=$('chk-auto');
+    const closeBtn=$('refresh-close');
+    const pgpMini=$('btn-pgp-mini');
+    let auto=null;
+    function startAuto(){ stopAuto(); auto=setInterval(()=>location.reload(),5000); }
+    function stopAuto(){ if(auto){ clearInterval(auto); auto=null; } }
 
     btn?.addEventListener('click', ()=>{
       const url=new URL(window.location.href);
@@ -567,8 +619,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
       window.location.replace(url.toString());
     });
     if(chk){
-      try{ const saved=localStorage.getItem('dh_auto_reload_5s'); if(saved==='1'){ chk.checked=true; start(); } }catch(_){}
-      chk.addEventListener('change', ()=>{ if(chk.checked){ start(); try{localStorage.setItem('dh_auto_reload_5s','1')}catch(_){}} else { stop(); try{localStorage.removeItem('dh_auto_reload_5s')}catch(_){} }});
+      try{ const saved=localStorage.getItem('dh_auto_reload_5s'); if(saved==='1'){ chk.checked=true; startAuto(); } }catch(_){/* ignore */}
+      chk.addEventListener('change', ()=>{ if(chk.checked){ startAuto(); try{localStorage.setItem('dh_auto_reload_5s','1')}catch(_){}} else { stopAuto(); try{localStorage.removeItem('dh_auto_reload_5s')}catch(_){}} });
     }
     closeBtn?.addEventListener('click',()=>document.getElementById('refresh-ctrl')?.remove());
     pgpMini?.addEventListener('click',()=>{ const det=document.querySelector('#contacto details'); if(det){ det.open=true; det.scrollIntoView({behavior:'smooth',block:'center'});} });
@@ -579,8 +631,12 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     try{
       const u=new URL(location.href);
       if(!u.searchParams.get('v')){ u.searchParams.set('v',Date.now()); history.replaceState(null,'',u.toString()); }
-    }catch(_){}
+    }catch(_){/* noop */}
   })();
+
+  // Iniciar
+  startLoops();
+})();
 </script>
 </body>
 </html>
