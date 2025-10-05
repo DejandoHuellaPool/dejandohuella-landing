@@ -1,6 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
+
+
+<script>
+// === AUTODETECCIÓN GH PAGES / NGINX + HELPERS DE RUTA ===
+(function(){
+  var looksGH = location.host.endsWith('github.io');
+  var base = (window.DH_BASE !== undefined) ? window.DH_BASE :
+             (looksGH ? '/dejandohuella-landing' :
+              (location.pathname.startsWith('/dejandohuella-landing') ? '/dejandohuella-landing' : ''));
+  window.DH_BASE = base;
+  window.DH_ROOT = (window.DH_ROOT !== undefined) ? window.DH_ROOT : (base + '/live');
+  // Preload dinámico si existe
+  var pre = document.querySelector('link#preload-shot');
+  if (pre) pre.href = window.DH_ROOT + '/shots/latest.jpg?ts=' + Date.now();
+})();
+
+// === CANDIDATAS DE URL + FETCH CON FALLBACK + CACHE-BUSTING ===
+function dhCandidates(path){
+  var p = path[0] === '/' ? path : '/' + path;
+  var abs = window.DH_ROOT + p;      // ej: '/dejandohuella-landing/live/last.json'
+  var relAbs = '/live' + p;          // '/live/last.json'
+  var rel = 'live' + p;              // 'live/last.json'
+  return Array.from(new Set([abs, relAbs, rel]));
+}
+
+async function dhFetchText(path, timeoutMs){
+  const urls = dhCandidates(path);
+  const tmo = timeoutMs || 6000;
+  let lastErr;
+  for (const u of urls){
+    const url = u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+    try{
+      const ctrl = new AbortController();
+      const tid = setTimeout(()=>ctrl.abort(), tmo);
+      const r = await fetch(url, { cache:'no-store', signal: ctrl.signal });
+      clearTimeout(tid);
+      if(r.ok) return await r.text();
+      lastErr = new Error('HTTP ' + r.status + ' @ ' + url);
+    }catch(e){ lastErr = e; }
+  }
+  throw lastErr || new Error('No reachable URL for ' + path);
+}
+
+window.DH_FETCH_JSON = async function(path){
+  const txt = await dhFetchText(path, 7000);
+  const clean = txt.replace(/^\uFEFF/, '').trim();
+  return JSON.parse(clean);
+};
+
+window.DH_FETCH_JSONL = async function(path){
+  const txt = await dhFetchText(path, 7000);
+  return txt.split(/\r?\n/).filter(Boolean).map(s=>{ try{return JSON.parse(s);}catch(_){return null;} }).filter(Boolean);
+};
+
+window.DH_IMG_URL = function(path){
+  const u = dhCandidates(path)[0];
+  return u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+};
+</script>
+
+
+
+
+
+
+
 <head>
+
+
+
+
+
+
+
   <meta charset="utf-8">
   <title>DejandoHuella Trader — Clearnet (Optimizada)</title>
   <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Pagos por BTC y USDT (TRC20, BEP20, Arbitrum One, ERC-20).">
@@ -775,6 +848,91 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
   setInterval(updateHist, 7000);
 })();
 </script>
+
+
+
+
+<script>
+// === BOOSTER: si tu script original no actualiza, este se encarga sin romper nada ===
+(function(){
+  const $ = (id)=>document.getElementById(id);
+  const elSym=$('lv-symbol'), elSide=$('lv-side'), elPrice=$('lv-price'),
+        elLots=$('lv-lots'), elSLTP=$('lv-sltp'), elTS=$('lv-ts'),
+        elShot=$('lv-shot'), pill=$('status-pill'), dot=$('dot'), stext=$('status-text'),
+        histBody=$('hist-body'), histTbl=$('hist-table'), histEmpty=$('hist-empty');
+
+  function nice(n,dp){ if(n===undefined||n===null||n==='')return '—'; const x=Number(n); if(Number.isNaN(x))return '—'; return dp===undefined?x.toString():x.toFixed(dp); }
+  function localTs(ts){ if(!ts) return '—'; const t = new Date((ts+'').replace(/\./g,'-').replace(' ','T')); return isNaN(+t)? ts : t.toLocaleString(); }
+  function badgeHTML(text){
+    const s=(text||'').toUpperCase(); let color='#9aa6bd';
+    if(s.includes('BUY'))  color='#16a34a';
+    if(s.includes('SELL')) color='#dc2626';
+    return '<span class="badge" style="background:'+color+'22;color:'+color+'">'+(s||'—')+'</span>';
+  }
+  function setStatus(ok){
+    if(!pill||!dot||!stext) return;
+    if(ok){ dot.style.background='#16a34a'; stext.textContent='En vivo'; }
+    else  { dot.style.background='#f87171'; stext.textContent='Desconectado'; }
+  }
+
+  async function updateLast(){
+    try{
+      const last = await window.DH_FETCH_JSON('/last.json');
+      if(elSym)   elSym.textContent = last.symbol || '—';
+      if(elSide)  elSide.innerHTML  = badgeHTML(last.side);
+      if(elPrice) elPrice.textContent = nice(last.price);
+      if(elLots)  elLots.textContent  = nice(last.lot ?? last.lots, 2);
+      if(elSLTP)  elSLTP.textContent  = nice(last.sl) + ' / ' + nice(last.tp);
+      if(elTS)    elTS.textContent    = localTs(last.ts);
+
+      if(elShot){
+        const u = window.DH_IMG_URL('/shots/latest.jpg');
+        elShot.src = u; // siempre con cache-bust
+      }
+      setStatus(true);
+    }catch(e){
+      setStatus(false);
+    }
+  }
+
+  async function updateHist(){
+    if(!histBody) return;
+    try{
+      const rows = await window.DH_FETCH_JSONL('/trades.jsonl');
+      const last10 = rows.slice(-10).reverse();
+      if(last10.length===0){
+        if(histTbl) histTbl.style.display='none';
+        if(histEmpty) histEmpty.style.display='block';
+        return;
+      }
+      if(histEmpty) histEmpty.style.display='none';
+      if(histTbl) histTbl.style.display='table';
+      histBody.innerHTML = last10.map(r=>(`
+        <tr>
+          <td>${ localTs(r.ts) }</td>
+          <td>${ (r.symbol||'—') }</td>
+          <td>${ badgeHTML(r.side) }</td>
+          <td style="text-align:right">${ nice(r.price) }</td>
+          <td style="text-align:right">${ nice(r.lot ?? r.lots, 2) }</td>
+          <td style="text-align:right">${ nice(r.sl) }</td>
+          <td style="text-align:right">${ nice(r.tp) }</td>
+        </tr>
+      `)).join('');
+      setStatus(true);
+    }catch(e){
+      setStatus(false);
+    }
+  }
+
+  updateLast(); updateHist();
+  setInterval(updateLast, 5000);
+  setInterval(updateHist, 7000);
+})();
+</script>
+
+
+
+
 
 </body>
 </html>
