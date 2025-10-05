@@ -25,6 +25,55 @@
 
 
 
+<!-- FORZAR RUTAS 1.1: GH Pages vs Onion -->
+<script>
+(function(){
+  // Forzar rutas según host, sin autodetección “lista”
+  if (location.host.endsWith('github.io')) {
+    // GH Pages (project pages)
+    window.DH_BASE = '/dejandohuella-landing';
+    window.DH_ROOT = '/dejandohuella-landing/live';
+  } else {
+    // Onion/Nginx
+    window.DH_BASE = '';
+    window.DH_ROOT = '/live';
+  }
+
+  // Helpers mínimos con cache-busting
+  window.DH_FETCH_JSON = async function(path){
+    const url = window.DH_ROOT + (path[0]==='/'?path:'/'+path) + '?ts=' + Date.now();
+    const r = await fetch(url, {cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status+' @ '+url);
+    return r.json();
+  };
+  window.DH_FETCH_JSONL = async function(path){
+    const url = window.DH_ROOT + (path[0]==='/'?path:'/'+path) + '?ts=' + Date.now();
+    const r = await fetch(url, {cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status+' @ '+url);
+    const txt = await r.text();
+    return txt.split(/\r?\n/).filter(Boolean).map(s=>{try{return JSON.parse(s);}catch(_){return null;}}).filter(Boolean);
+  };
+  window.DH_IMG_URL = function(path){
+    const url = window.DH_ROOT + (path[0]==='/'?path:'/'+path) + '?ts=' + Date.now();
+    return url;
+  };
+
+  // (opcional) Mata SW en GH Pages para evitar HTML viejo y recarga 1 vez con ?v
+  try{
+    if (location.host.endsWith('github.io')) {
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));
+      }
+      const u = new URL(location.href);
+      if(!u.searchParams.has('v')){ u.searchParams.set('v', Date.now()); location.replace(u.toString()); }
+    }
+  }catch(e){}
+})();
+</script>
+
+
+
+
 <head>
 
 
