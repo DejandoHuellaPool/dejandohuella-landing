@@ -1,388 +1,936 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>DejandoHuella Trader — Panel</title>
+  <meta charset="utf-8">
+  <title>DejandoHuella Trader — .onion</title>
+  <meta name="description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Pagos por BTC y USDT (TRC20, BEP20, Arbitrum One, ERC-20).">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="DejandoHuella Trader — BTC/USD">
+  <meta property="og:description" content="Señales BTC/USD, EA MT4 con licencia, mentoría y soporte. Clearnet y .onion.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/og-image.png">
+  <meta property="og:url" content="https://dejandohuellapool.github.io/dejandohuella-landing/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- (Opcional) Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');try{fbq('init','PIXEL_ID_AQUI');fbq('track','PageView');}catch(e){}
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=PIXEL_ID_AQUI&ev=PageView&noscript=1"/></noscript>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
 
   <style>
     :root{
-      --bg:#0c1117;
-      --card:#121a24;
-      --muted:#9fb3c8;
-      --text:#e5edf5;
-      --accent:#00c16a;
-      --accent-2:#2ea3f2;
-      --danger:#ff4d4d;
-      --border:#1e2a36;
-      --chip:#0f1720;
-      --shadow:0 6px 22px rgba(0,0,0,.35);
-      --radius:14px;
-      --radius-sm:10px;
-      --font: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-      --mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      --bg:#0b0f16; --fg:#e5e7eb; --muted:#94a3b8; --card:#121826;
+      --accent:#22c55e; --accent2:#1ed760; --border:#1f2a3a; --link:#60a5fa;
+      --btnText:#06250f; --shadow:rgba(0,0,0,.45);
+      --green:#16a34a; --red:#dc2626;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:radial-gradient(80% 120% at 100% 0%,#0e1622 0%, var(--bg) 60%) no-repeat fixed;
-      line-height:1.45;
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,Segoe UI,Roboto,Inter}
+    a{color:var(--link);text-decoration:none}
+    .wrap{max-width:1100px;margin:auto;padding:24px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+    header img{width:64px;height:64px;border-radius:12px;border:1px solid var(--border);object-fit:cover;background:#0f1522}
+    h1{font-size:32px;margin:0}
+    h2{margin:0 0 10px}
+    p,li,small{color:var(--muted)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin:18px 0}
+    .grid{display:grid;gap:14px}
+    .grid-2{grid-template-columns:1fr 1fr}
+    .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .tag{font-size:12px;padding:2px 8px;border:1px solid var(--border);border-radius:12px;color:var(--muted)}
+    code{background:#0f1522;border:1px solid var(--border);padding:6px 8px;border-radius:10px;word-break:break-all}
+    .copy{cursor:pointer;color:#b4d2ff;border:1px solid var(--border);padding:6px 10px;border-radius:10px;background:#0f1522}
+    .copy:hover{filter:brightness(1.1)}
+    /* === Botones 3D === */
+    .cta{
+      display:inline-block; min-width:180px; text-align:center;
+      background:linear-gradient(180deg,var(--accent2),var(--accent));
+      color:var(--btnText); padding:12px 18px; border-radius:12px;
+      font-weight:700; border:0; box-shadow:0 6px 0 #0e7a41, 0 8px 18px var(--shadow);
+      transform:translateY(0); transition:transform .08s ease, box-shadow .08s ease, filter .2s ease;
+      user-select:none; -webkit-tap-highlight-color:transparent
     }
-    a{color:var(--accent-2);text-decoration:none}
-    .wrap{max-width:1060px;margin:28px auto;padding:0 14px}
+    .cta:active{ transform:translateY(3px); box-shadow:0 3px 0 #0e7a41, 0 6px 12px var(--shadow) }
+    .cta--wa{background:linear-gradient(180deg,#2cf475,#25D366)}
+    .cta--dark{background:linear-gradient(180deg,#7aa9ff,#3b82f6); color:#081226; box-shadow:0 6px 0 #1f5cc8, 0 8px 18px var(--shadow)}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
 
-    /* Top Notice + Controls */
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      background:linear-gradient(180deg, rgba(12,17,23,.92), rgba(12,17,23,.70));
-      backdrop-filter:saturate(180%) blur(8px);
-      border-bottom:1px solid var(--border);
+    .menu{position:relative;display:inline-block}
+    .menu-panel{
+      position:absolute; top:110%; left:0; min-width:280px;
+      background:#0f1522; border:1px solid var(--border); border-radius:14px; padding:10px;
+      display:none; z-index:30; box-shadow:0 16px 28px var(--shadow)
     }
-    .topbar-inner{max-width:1060px;margin:0 auto;padding:8px 14px;display:flex;gap:8px;align-items:center}
-    .badge{
-      font-family:var(--mono);
-      font-size:.68rem;
-      background:#0a2a18;border:1px solid #164c2d;color:#9ff2c4;
-      padding:6px 8px;border-radius:10px;box-shadow:var(--shadow);
+    .menu-panel a{display:block; margin:8px 0}
+    .menu-panel hr{border:0;border-top:1px solid var(--border);opacity:.6;margin:8px 0}
+
+    .payrow{display:grid;gap:8px; margin-bottom:14px}
+    .qrbox{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0f1522}
+    .qrbox summary{list-style:none;cursor:pointer;outline:none;padding:8px 12px;display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--fg);user-select:none}
+    .qrbox summary::-webkit-details-marker{display:none}
+    .qrbox[open] summary{background:#162133}
+    .qrwrap{display:flex;justify-content:center;align-items:center;padding:12px;border-top:1px solid var(--border)}
+    .qr{width:180px;height:180px;border:1px solid var(--border);border-radius:10px;background:#0b0f16;display:flex;align-items:center;justify-content:center}
+    .qr img{width:100%;height:100%;display:block}
+
+    .plan{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .plan h3{margin:0;font-size:18px}
+    .price{display:inline-block;font-weight:700;border:1px solid var(--border);padding:4px 10px;border-radius:999px;color:var(--fg);background:#0f1522}
+    .note{color:var(--muted);margin:0}
+
+    .bar{background:#0f1522;border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .bar a{color:#b4d2ff}
+
+    /* Live + historial */
+    .live-grid{display:grid;gap:12px}
+    .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:16px}
+    .badge{padding:2px 10px;border-radius:999px;font-weight:700;font-size:13px;display:inline-block}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid var(--border)}
+    th{text-align:left;color:#cbd5e1}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .wrap{padding:18px}
+      .grid-2{grid-template-columns:1fr}
+      header img{width:56px;height:56px}
+      h1{font-size:26px}
+      .cta{min-width:unset;width:100%}
+      .menu-panel{max-width:92vw}
     }
-    .tiny-controls{margin-left:auto;display:flex;gap:8px}
-    .btn-tiny{
-      font-size:.68rem;line-height:1;
-      padding:6px 8px;border-radius:8px;border:1px solid var(--border);
-      background:var(--chip);color:var(--muted);cursor:pointer;
-      display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 0 rgba(0,0,0,.18);
-    }
-    .btn-tiny.success{background:#0f2b1e;border-color:#1f5e45;color:#b6ffe3}
-    .btn-tiny.warn{background:#29120f;border-color:#6a251d;color:#ffb3a7}
-    .btn-tiny.blue{background:#0f2334;border-color:#1b4a6b;color:#a7d9ff}
-    .btn-tiny:hover{filter:brightness(1.12)}
-
-    /* Card */
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .card-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-    .card-body{padding:14px 18px}
-    .title{display:flex;align-items:center;gap:10px;font-weight:700}
-    .logo{width:36px;height:36px;border-radius:10px;background:#1b2836;border:1px solid var(--border);display:grid;place-content:center;font-weight:800}
-
-    .pill{font-size:.72rem;padding:6px 10px;border-radius:999px;background:#0d1b27;border:1px solid var(--border);color:#a8c3d7}
-
-    .grid{display:grid;grid-template-columns:1fr;gap:16px}
-    @media(min-width:840px){
-      .grid{grid-template-columns:1fr}
-    }
-
-    /* History Table */
-    table{width:100%;border-collapse:collapse;font-size:.88rem}
-    th,td{padding:10px 8px;border-bottom:1px dashed #1d2a36}
-    th{font-weight:600;color:#9fbad0;text-transform:uppercase;font-size:.72rem;letter-spacing:.02em}
-    .buy{color:#46e79a;font-weight:700}
-    .sell{color:#ff7777;font-weight:700}
-    .mono{font-family:var(--mono);font-size:.86rem}
-
-    /* Live block */
-    .kv{display:grid;grid-template-columns:repeat(2,auto);gap:10px 22px;margin:8px 0 12px}
-    .kv b{color:#9fbad0;font-weight:600}
-    .shot{
-      width:100%;aspect-ratio:16/9;border-radius:12px;
-      border:1px solid var(--border);background:#0b141e;
-      object-fit:contain;display:block;box-shadow:var(--shadow)
-    }
-    .row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-    .row .btn{padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0f1723;color:#b8d2ea;cursor:pointer}
-    .row .btn.green{background:#0f2b1f;color:#bfffe8;border-color:#1c6046}
-
-    .actions{display:flex;gap:8px;flex-wrap:wrap}
-    .social{display:flex;gap:10px}
-    .social a{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#0f1723;color:#cde3ff}
-    .social a.whatsapp{background:#0d2a1d;border-color:#1d5b41;color:#b3ffe1}
-    .muted{color:#99adc2}
-    .small{font-size:.82rem}
-
-    /* Accordion */
-    .accordion{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
-    .acc-item + .acc-item{border-top:1px solid var(--border)}
-    .acc-btn{width:100%;text-align:left;background:#0e1622;color:var(--text);padding:14px 16px;border:0;display:flex;align-items:center;gap:10px;cursor:pointer}
-    .acc-panel{display:none;padding:12px 16px;background:#0c131e}
-    .qr-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;align-items:start}
-    .qr{background:#0e1724;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center}
-    .qr img{max-width:220px;width:100%;height:auto;border-radius:8px;display:block;margin:6px auto}
-    .label{font-size:.78rem;color:#9fbad0;margin-top:6px}
-
-    /* PGP Modal */
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.55);z-index:200}
-    .modal.open{display:grid}
-    .modal-card{width:min(720px,94vw);background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
-    .modal-card h3{margin:0;padding:12px 14px;border-bottom:1px solid var(--border)}
-    .modal-body{padding:14px}
-    .pgp{width:100%;min-height:240px;background:#0a1420;color:#a7c7dd;border:1px solid #1b3248;border-radius:10px;padding:12px;font-family:var(--mono);font-size:.82rem;white-space:pre;overflow:auto}
-    .modal-actions{display:flex;gap:8px;justify-content:flex-end;padding:12px 14px;border-top:1px solid var(--border)}
-
-    .timestamp{color:#7fa5c4;font-family:var(--mono);font-size:.78rem}
-    footer{padding:30px 6px;color:#6d839a;text-align:center}
-    .sep{height:18px}
-
-    /* Mobile controls sizing */
-    @media(max-width:560px){
-      .btn-tiny{padding:5px 7px;font-size:.66rem}
-      .badge{padding:5px 6px;font-size:.62rem}
-      .title .logo{width:30px;height:30px}
-      .kv{grid-template-columns:auto 1fr}
-      .social a{padding:9px 10px}
-      .row .btn{padding:8px 10px}
+    @media (max-height:520px) and (orientation:landscape){
+      .wrap{padding:14px}
+      .cta{padding:10px 14px}
+      header img{width:52px;height:52px}
+      h1{font-size:24px}
     }
   </style>
+<style>
+
+/* ======= Mobile tune for HISTORIAL (safe & scoped) ======= */
+#hist .card-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#hist table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+#hist thead th { position: sticky; top: 0; background: #0f172a; z-index: 1; }
+
+#hist th, #hist td { padding: 8px 10px; }
+
+@media (max-width: 640px){
+  #hist h2 { font-size: 1rem; }
+  #hist th, #hist td { font-size: 12px; line-height: 1.2; padding: 6px 8px; }
+  /* Column min-widths by index (Hora, Par, Lado, Precio, Lote, SL, TP) */
+  #hist table th:nth-child(1), #hist table td:nth-child(1) { min-width: 120px; } /* Hora */
+  #hist table th:nth-child(2), #hist table td:nth-child(2) { min-width: 70px; }  /* Par  */
+  #hist table th:nth-child(3), #hist table td:nth-child(3) { min-width: 70px; }  /* Lado */
+  #hist table th:nth-child(4), #hist table td:nth-child(4) { min-width: 90px; }  /* Precio */
+  #hist table th:nth-child(5), #hist table td:nth-child(5) { min-width: 70px; }  /* Lote */
+  #hist table th:nth-child(6), #hist table td:nth-child(6) { min-width: 90px; }  /* SL */
+  #hist table th:nth-child(7), #hist table td:nth-child(7) { min-width: 90px; }  /* TP */
+  #hist .badge { transform: scale(0.9); transform-origin: left center; }
+}
+
+</style>
+<style>
+
+/* ======= UI tweaks: alerta superior + refresh control (aditivo y escopado) ======= */
+#refresh-ctrl{ right:auto !important; left:12px !important; bottom:12px !important; }
+#refresh-ctrl #btn-hard-reload{ padding:6px 10px !important; font-size:12px !important; box-shadow:0 4px 0 #14532d !important; }
+
+/* Banner de verificación (texto y botón más pequeños) */
+#site-alert, .site-alert, .alert-banner{ font-size:13px !important; line-height:1.25 !important; }
+#site-alert .btn-close, .site-alert .btn-close, .alert-banner .btn-close,
+#site-alert button.close, .site-alert button.close, .alert-banner button.close{
+  font-size:12px !important; padding:4px 8px !important; min-width:auto !important; border-radius:8px !important;
+}
+
+</style>
+<style>
+
+/* ======= Overwrite: ubicacion y tamaño del control de refresco ======= */
+#refresh-ctrl{
+  position:fixed !important;
+  top:12px !important;
+  right:12px !important;
+  left:auto !important;
+  bottom:auto !important;
+  z-index:9999 !important;
+}
+#refresh-ctrl #btn-hard-reload{
+  padding:4px 8px !important;
+  font-size:11px !important;
+  box-shadow:0 3px 0 #14532d !important;
+}
+
+
+/* ======= Close button tiny ======= */
+button[data-alert-close]{
+  font-size:12px !important;
+  line-height:1 !important;
+  padding:2px 6px !important;
+  min-width:auto !important;
+  height:auto !important;
+  border-radius:8px !important;
+}
+
+</style>
+<style>
+
+/* ======= Ultra-compact refresh control (top-left) ======= */
+#refresh-ctrl{
+  position:fixed !important;
+  top:8px !important;
+  left:8px !important;
+  right:auto !important;
+  bottom:auto !important;
+  z-index:9999 !important;
+  display:flex !important;
+  gap:4px !important;
+  transform:scale(0.7); /* super diminuto */
+  transform-origin: top left;
+  opacity:0.85;
+}
+#refresh-ctrl #btn-hard-reload{
+  padding:2px 6px !important;
+  font-size:10px !important;
+  line-height:1 !important;
+  box-shadow:0 2px 0 #14532d !important;
+  border-radius:8px !important;
+}
+#refresh-ctrl label{
+  padding:2px 6px !important;
+  font-size:10px !important;
+  border-radius:8px !important;
+}
+@media (max-width: 480px){
+  #refresh-ctrl{ transform:scale(0.6); }
+}
+
+</style>
 </head>
 <body>
-  <!-- Top notice -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <span class="badge">⚠️ Verifica los enlaces. Usa la Verificación oficial o la dirección .onion.</span>
-      <div class="tiny-controls">
-        <button id="btnRefresh" class="btn-tiny">↻ Actualizar</button>
-        <button id="btnAuto" class="btn-tiny blue" aria-pressed="false">⏱ Auto 5s: OFF</button>
-        <button id="btnPGP" class="btn-tiny success">🔐 PGP</button>
-        <button id="btnClose" class="btn-tiny warn">✕ Cerrar</button>
-      </div>
-    </div>
+
+<!-- ======= REFRESH CONTROL (ADITIVO, SIN ELIMINAR NADA) ======= -->
+<div id="refresh-ctrl" style="position:fixed; right:12px; bottom:12px; z-index:9999; display:flex; gap:8px;">
+  <button id="btn-hard-reload" style="padding:10px 14px; border-radius:12px; background:#22c55e; color:#091015; border:0; font-weight:700; box-shadow:0 6px 0 #14532d; cursor:pointer">Actualizar ahora</button>
+  <label style="display:flex; align-items:center; gap:6px; background:#111826; color:#e5e7eb; padding:10px 12px; border-radius:12px; border:1px solid #1f2937;">
+    <input id="chk-auto" type="checkbox">
+    Auto 5s
+  </label>
+</div>
+
+  <div class="bar">
+    <span>⚠️ Verifica los enlaces oficiales. Usa nuestra <a href="verificacion.html">Verificación oficial</a> o la dirección .onion.</span>
+    <a class="cta" href="#" onclick="closeBar();return false;">Cerrar</a>
   </div>
 
   <div class="wrap">
-    <!-- Header -->
-    <div class="card">
-      <div class="card-head">
-        <div class="title">
-          <div class="logo">🐾</div>
-          <div>
-            <div style="font-size:1.05rem;font-weight:800">DejandoHuella Trader</div>
-            <div class="timestamp">Última actualización: <span id="lastUpdate">—</span></div>
-          </div>
-        </div>
-        <button id="btnInfo" class="pill">Solicitar información</button>
-      </div>
-    </div>
-
-    <div class="sep"></div>
-
-    <!-- History + Live -->
-    <div class="grid">
-      <!-- History -->
-      <section class="card" id="historyCard">
-        <div class="card-head">
-          <div class="title">📜 <span>Historial reciente</span></div>
-        </div>
-        <div class="card-body">
-          <div class="table-wrap">
-            <table id="tblHistory" aria-label="Historial de operaciones">
-              <thead>
-                <tr>
-                  <th>Hora</th>
-                  <th>Par</th>
-                  <th>Lado</th>
-                  <th>Precio</th>
-                  <th>Lote</th>
-                  <th>SL</th>
-                  <th>TP</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td colspan="7" class="muted small">Cargando historial…</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- Live -->
-      <section class="card" id="liveCard">
-        <div class="card-head">
-          <div class="title">🟢 <span>Operaciones en vivo</span></div>
-        </div>
-        <div class="card-body">
-          <div class="kv">
-            <b>Par:</b>    <div id="kvSymbol" class="mono">—</div>
-            <b>Lado:</b>   <div id="kvSide" class="mono">—</div>
-            <b>Precio:</b> <div id="kvPrice" class="mono">—</div>
-            <b>Lote:</b>   <div id="kvLot" class="mono">—</div>
-            <b>SL / TP:</b><div id="kvSLTP" class="mono">—</div>
-            <b>Hora:</b>   <div id="kvTime" class="mono">—</div>
-          </div>
-
-          <img id="liveShot" alt="Captura MT4 en vivo" class="shot" src="live/shots/latest.jpg" loading="lazy">
-
-          <div class="sep"></div>
-          <div class="actions">
-            <div class="social">
-              <a href="https://facebook.com" target="_blank" rel="noopener">📘 Facebook</a>
-              <a class="whatsapp" href="https://wa.me/" target="_blank" rel="noopener">🟢 WhatsApp</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div class="sep"></div>
-
-    <!-- Payments -->
-    <section class="accordion">
-      <div class="acc-item">
-        <button class="acc-btn" data-acc>💳 Medios de Pagos + Planes Premium – DejandoHuella Trader</button>
-        <div class="acc-panel">
-          <div class="qr-wrap">
-            <div class="qr">
-              <div class="label">Banco Pichincha</div>
-              <img src="img/qr_pichincha.png" alt="QR Banco Pichincha">
-              <div class="small muted mono">Titular / Ref: **Actualiza con tus datos**</div>
-            </div>
-            <div class="qr">
-              <div class="label">Cripto (BEP20)</div>
-              <img src="img/qr_bep20.png" alt="QR BEP20">
-              <div class="small muted mono">Dirección: <span id="addrBep20">—</span></div>
+    <header>
+      <img src="logo.png" alt="DejandoHuella logo" loading="lazy" decoding="async"
+           onerror="if(this.dataset.try!=='1'){this.dataset.try='1';this.src='img/logo.png';}else{this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%230b0f16%22/%3E%3Ctext x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 font-size=%2228%22 fill=%22%23e5e7eb%22 font-family=%22Arial%22%3EDH%3C/text%3E%3C/svg%3E';}">
+      <div>
+        <h1>DejandoHuella Trader</h1>
+        <div class="cta-row">
+          <div class="menu">
+            <a class="cta" href="#" id="btn-info">Solicitar información</a>
+            <div class="menu-panel" id="panel-info" aria-hidden="true">
+              <a class="cta cta--wa" href="whatsapp.html" rel="noopener">WhatsApp (ventas)</a>
+              <a class="cta" href="verificacion.html" rel="noopener">Verificación oficial</a>
+              <a class="cta cta--dark" href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
+              <hr>
+              <a class="cta" href="clases.html" rel="noopener"><b>🎓 Cursos Trading</b></a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </header>
 
-    <footer>© <span id="yyyy"></span> DejandoHuella Trader</footer>
-  </div>
+    <p><small>Última actualización: <span id="lu"></span></small></p>
 
-  <!-- PGP Modal -->
-  <div id="pgpModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pgpTitle">
-    <div class="modal-card">
-      <h3 id="pgpTitle">🔐 PGP público (verifica huella/fingerprint)</h3>
-      <div class="modal-body">
-        <pre id="pgpBlock" class="pgp">-----BEGIN PGP PUBLIC KEY BLOCK-----
-mQINBGWlZGgBEADG6q8v5g2jUo2qJH+9V3S1mSsc9m2Xf9dS4e2Zkqk7i5bBqVg1
-IX9w6z2pG3b6sD6t0lQmQ3QqzvboC1Av8i9r4Gg1HfWPa3x6X3zZ4sJr+V8mYI7e
-QfG7Xk3JcW5QvD0qS9p3mw6A2oUqf4J6X4n3KQJ4ax+8hwmN0ZkT7ZJ5qF9o4Vbq
-… (reemplaza con tu clave real)
------END PGP PUBLIC KEY BLOCK-----</pre>
-      </div>
-      <div class="modal-actions">
-        <button class="btn-tiny blue" id="btnCopyPGP">Copiar</button>
-        <button class="btn-tiny warn" id="btnClosePGP">Cerrar</button>
-      </div>
-    </div>
-  </div>
+    <div class="card" id="redes">
+      <h2>
+
+<!-- ======= HISTORIAL ======= -->
+  <section id="hist" class="card" style="margin-top:16px">
+    <h2>Historial reciente</h2>
+    <div id="hist-empty" class="meta">Sin operaciones aún…</div>
+    <table id="hist-table" style="display:none">
+      <thead>
+        <tr>
+          <th>Hora</th><th>Par</th><th>Lado</th>
+          <th style="text-align:right">Precio</th><th style="text-align:right">Lote</th>
+          <th style="text-align:right">SL</th><th style="text-align:right">TP</th>
+        </tr>
+      </thead>
+      <tbody id="hist-body"></tbody>
+    </table>
+  </section>
+
+
+<!-- ======= MEDIOS DE PAGO (btn colapsable) ======= -->
 
   <script>
-  (function(){
-    const $ = (s,p=document)=>p.querySelector(s);
-    const $$ = (s,p=document)=>Array.from(p.querySelectorAll(s));
-    const fmt = (n)=> (n==null||n==='') ? '—' : Number(n).toLocaleString('en-US',{maximumFractionDigits:5});
-    const qv = ()=> `?v=${Date.now()}`;
+  // ===== Helpers UI =====
+  const $ = id => document.getElementById(id);
+  const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'),
+                   lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
 
-    // UI basic
-    const lastUpdateEl = $("#lastUpdate");
-    const shotEl = $("#liveShot");
-    const autoBtn = $("#btnAuto");
-    const pgpModal = $("#pgpModal");
+  function badgeHTML(text){
+    const s=(text||'').toUpperCase();
+    let color='#9aa6bd';
+    if(s.includes('BUY'))  color = getComputedStyle(document.documentElement).getPropertyValue('--green') || '#16a34a';
+    if(s.includes('SELL')) color = getComputedStyle(document.documentElement).getPropertyValue('--red')   || '#dc2626';
+    return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
+  }
+  function nice(n, dp){
+    if(n===undefined || n===null || n==='') return '—';
+    const x=Number(n); if(Number.isNaN(x)) return '—';
+    return dp===undefined ? x.toString() : x.toFixed(dp);
+  }
+  function localTs(ts){
+    if(!ts) return '—';
+    const t = ts.replace(/\./g,'-').replace(' ','T'); // "YYYY.MM.DD HH:MM:SS" -> ISO
+    const d = new Date(t);
+    return Number.isNaN(+d) ? ts : d.toLocaleString();
+  }
+  // *** NUEVO: parseo tolerante para Tor / text/plain / BOM ***
+  function safeParseJson(txt){
+    if(!txt) return null;
+    try{
+      txt = txt.replace(/^\uFEFF/, '').trim();
+      const a = txt.indexOf('{'), b = txt.lastIndexOf('}');
+      if(a>=0 && b>=0) txt = txt.slice(a,b+1);
+      return JSON.parse(txt);
+    }catch(_){ return null; }
+  }
 
-    // Persist auto refresh
-    let auto = localStorage.getItem("auto5s") === "1";
-    const setAutoLabel = ()=> {
-      autoBtn.setAttribute('aria-pressed', auto ? 'true':'false');
-      autoBtn.textContent = `⏱ Auto 5s: ${auto?"ON":"OFF"}`;
-    };
-    setAutoLabel();
-
-    // Actions
-    $("#btnRefresh").addEventListener("click", refreshAll);
-    autoBtn.addEventListener("click", ()=>{
-      auto = !auto; localStorage.setItem("auto5s", auto?"1":"0");
-      setAutoLabel();
-    });
-    $("#btnClose").addEventListener("click", ()=> window.scrollTo({top:0,behavior:'smooth'}));
-    $("#btnPGP").addEventListener("click", ()=> pgpModal.classList.add("open"));
-    $("#btnClosePGP").addEventListener("click", ()=> pgpModal.classList.remove("open"));
-    $("#btnCopyPGP").addEventListener("click", ()=>{
-      const t = $("#pgpBlock").innerText; navigator.clipboard.writeText(t);
-    });
-
-    // Accordion
-    $$("[data-acc]").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const panel = btn.parentElement.querySelector(".acc-panel");
-        const open = panel.style.display === "block";
-        panel.style.display = open ? "none":"block";
-      });
-    });
-
-    // Loaders
-    async function loadJSON(urls){
-      for(const url of urls){
-        try{
-          const res = await fetch(url + qv(), {cache:"no-store"});
-          if(res.ok){ return await res.json(); }
-        }catch(_){/* try next */}
+  // ===== Último evento (robusto) =====
+  async function pollLast(){
+    try{
+      const r   = await fetch('/live/last.json?ts='+Date.now(), {cache:'no-store'});
+      const txt = await r.text();                // <- texto SIEMPRE (más tolerante)
+      const d   = safeParseJson(txt);
+      if(d){
+        liveEls.sym.textContent   = d.symbol || '—';
+        liveEls.side.innerHTML    = badgeHTML(d.side);
+        liveEls.price.textContent = nice(d.price);
+        liveEls.lots.textContent  = nice(d.lots,2);
+        liveEls.sltp.textContent  = `${nice(d.sl)} / ${nice(d.tp)}`;
+        liveEls.ts.textContent    = localTs(d.ts);
+        // evita caché de la imagen
+        liveEls.img.src = '/live/shots/latest.jpg?ts=' + Date.now();
       }
-      return null;
+    }catch(_){}
+    setTimeout(pollLast, 2500);
+  }
+
+  // ===== Historial (últimas 10 de trades.jsonl) =====
+  async function pollHist(){
+    const tbl=$('hist-table'), body=$('hist-body'), empty=$('hist-empty');
+    function render(rows){
+      if(!rows.length){ tbl.style.display='none'; empty.style.display='block'; return; }
+      empty.style.display='none'; tbl.style.display='table';
+      body.innerHTML = rows.map(r=>(
+        `<tr>
+          <td>${localTs(r.ts)}</td>
+          <td>${r.symbol||'—'}</td>
+          <td>${badgeHTML(r.side)}</td>
+          <td style="text-align:right">${nice(r.price)}</td>
+          <td style="text-align:right">${nice(r.lots,2)}</td>
+          <td style="text-align:right">${nice(r.sl)}</td>
+          <td style="text-align:right">${nice(r.tp)}</td>
+        </tr>`
+      )).join('');
     }
+    try{
+      const r   = await fetch('/live/trades.jsonl?ts='+Date.now(), {cache:'no-store'});
+      if(!r.ok){ render([]); return; }
+      const txt = await r.text();
+      const lines = (txt||'').trim().split(/\r?\n/).filter(Boolean);
+      const objs  = lines.slice(-10).map(l=>{try{return JSON.parse(l);}catch(_){return null;}}).filter(Boolean).reverse();
+      render(objs);
+    }catch(_){ render([]); }
+    setTimeout(pollHist, 5000);
+  }
 
-    function setLive(info){
-      if(!info) return;
-      const sideC = (info.side||"").toUpperCase()==="BUY" ? "buy" : ( (info.side||"").toUpperCase()==="SELL" ? "sell" : "" );
-      $("#kvSymbol").textContent = info.symbol ?? "—";
-      $("#kvSide").innerHTML = sideC ? `<span class="${sideC}">${(info.side||"").toUpperCase()}</span>` : (info.side||"—");
-      $("#kvPrice").textContent = fmt(info.price);
-      $("#kvLot").textContent = fmt(info.lot);
-      $("#kvSLTP").textContent = `${fmt(info.sl)} / ${fmt(info.tp)}`;
-      $("#kvTime").textContent = info.ts ?? "—";
-      // refresh shot
-      shotEl.src = "live/shots/latest.jpg" + qv();
-    }
-
-    function setHistory(list){
-      const tb = $("#tblHistory tbody");
-      tb.innerHTML = "";
-      if(!list || !list.length){
-        tb.innerHTML = `<tr><td colspan="7" class="muted small">Sin operaciones aún…</td></tr>`;
-        return;
-      }
-      // Mostramos últimos 5
-      list.slice(-5).reverse().forEach(o=>{
-        const sideC = (o.side||"").toUpperCase()==="BUY" ? "buy" : ( (o.side||"").toUpperCase()==="SELL" ? "sell" : "" );
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td class="mono">${o.ts ?? "—"}</td>
-          <td class="mono">${o.symbol ?? "—"}</td>
-          <td class="${sideC}">${(o.side||"").toUpperCase()}</td>
-          <td class="mono">${fmt(o.price)}</td>
-          <td class="mono">${fmt(o.lot)}</td>
-          <td class="mono">${fmt(o.sl)}</td>
-          <td class="mono">${fmt(o.tp)}</td>`;
-        tb.appendChild(tr);
-      });
-    }
-
-    async function refreshAll(){
-      lastUpdateEl.textContent = new Date().toISOString().slice(0,19).replace("T"," ");
-      // live
-      const live = await loadJSON(["live/last.json","live/last.jsonl"]);
-      if(live) setLive(live);
-      // history (acepta json o jsonl)
-      let trades = await loadJSON(["live/trades.json","live/trades.jsonl"]);
-      if(Array.isArray(trades)){ setHistory(trades); }
-      else if(trades && typeof trades === "string"){
-        try{
-          const lines = trades.trim().split(/\r?\n/).map(l=>JSON.parse(l));
-          setHistory(lines);
-        }catch(_){ setHistory([]); }
-      }else setHistory([]);
-    }
-
-    refreshAll();
-    setInterval(()=>{ if(auto) refreshAll(); }, 5000);
-
-    // misc
-    $("#yyyy").textContent = new Date().getFullYear();
-  })();
+  // Init
+  pollLast();
+  pollHist();
   </script>
+
+
+<script>
+// ======= ADITIVO: recarga completa opcional + refresco de imagen MT4 sin tocar el resto =======
+(function(){
+  const btn = document.getElementById('btn-hard-reload');
+  const chk = document.getElementById('chk-auto');
+  let timer = null;
+  function start(){ stop(); timer = setInterval(function(){ location.reload(); }, 5000); }
+  function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+  if(btn){
+    btn.addEventListener('click', function(){
+      const url = new URL(window.location.href);
+      url.searchParams.set('ts', Date.now());
+      window.location.replace(url.toString());
+    });
+  }
+  if(chk){
+    try{ const saved = localStorage.getItem('dh_auto_reload_5s'); if(saved==='1'){ chk.checked=true; start(); } }catch(_){}
+    chk.addEventListener('change', function(){ if(chk.checked){ start(); try{localStorage.setItem('dh_auto_reload_5s','1')}catch(_){} } else { stop(); try{localStorage.removeItem('dh_auto_reload_5s')}catch(_){} } });
+  }
+
+  // Refresco de imagen del MT4 (lv-shot) cada 2.5s sin modificar su ruta
+  function refreshImage(){
+    var img = document.getElementById('lv-shot');
+    if(!img) return;
+    var base = img.getAttribute('data-base') || (img.src||'').split('?')[0];
+    // Si no es latest.png/jpg, intentará png y luego jpg automáticamente
+    var url = new URL(base, window.location.origin);
+    var path = url.pathname;
+    function setSrcWithTs(b){ img.setAttribute('data-base', b); img.src = b + (b.indexOf('?')===-1?'?':'&') + 'ts=' + Date.now(); }
+    function attempt(list, idx){
+      if(idx>=list.length){ return; }
+      var candidate = list[idx];
+      var test = new Image();
+      test.onload = function(){ setSrcWithTs(candidate); };
+      test.onerror = function(){ attempt(list, idx+1); };
+      test.src = candidate + '?ping=' + Date.now();
+    }
+    if(/latest\.(png|jpg|jpeg)$/i.test(path)){
+      setSrcWithTs(base);
+    }else{
+      var dir = path.replace(/[^\/]*$/, ''); // directorio
+      attempt([dir+'latest.png', dir+'latest.jpg'], 0);
+    }
+  }
+  window.DH_refreshImage = refreshImage;
+  setInterval(refreshImage, 2500);
+})();
+</script>
+
+<script>
+(function(){
+  // Cambiar 'Cerrar' por '×' en la alerta superior (no destructivo)
+  var sel = '#site-alert button, .site-alert button, .alert-banner button';
+  var btn = document.querySelector(sel);
+  if(btn){
+    btn.textContent = '×';
+    btn.setAttribute('aria-label','Cerrar');
+    // añade clase común para que tome el estilo
+    btn.classList.add('btn-close');
+  }
+})();
+</script>
+
+
+<!-- ==================== START: NON-DESTRUCTIVE LIVE OVERLAY ==================== -->
+<style>
+  .dh-fixed-tools{
+    position:fixed; top:.5rem; left:.5rem; z-index:9999;
+    display:flex; gap:.4rem; flex-wrap:wrap;
+    font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;
+  }
+  .dh-btn{ 
+    font-size:.70rem; line-height:1; padding:.35rem .45rem;
+    border-radius:.45rem; border:1px solid #2b2f37; 
+    background:#0f172a; color:#e5e7eb; cursor:pointer; opacity:.92;
+  }
+  .dh-btn:hover{opacity:1}
+  .dh-card{max-width:1024px; margin:4.5rem auto 1.5rem auto; padding:1rem; 
+    border:1px solid #1f2937; border-radius:.75rem; background:#0b1220; color:#cbd5e1}
+  .dh-title{font-weight:700; font-size:1.05rem; margin-bottom:.6rem}
+  .dh-grid{display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:.25rem}
+  .dh-cell{padding:.35rem .45rem; background:#0e1526; border:1px solid #1f2937; font-size:.78rem}
+  .dh-live{display:grid; grid-template-columns: 160px 1fr; gap:.75rem}
+  .dh-kv{font-size:.82rem; line-height:1.4}
+  .dh-kv b{color:#e2e8f0}
+  .dh-img{width:100%; border-radius:.5rem; border:1px solid #1f2937}
+  @media (max-width:640px){
+    .dh-fixed-tools{top:.35rem; left:.35rem}
+    .dh-btn{font-size:.62rem; padding:.32rem .4rem; border-radius:.4rem}
+    .dh-card{margin-top:3.2rem; padding:.75rem}
+    .dh-live{grid-template-columns:1fr}
+  }
+</style>
+
+<div class="dh-fixed-tools" id="dhTools">
+  <button class="dh-btn" id="dhRefresh">Actualizar</button>
+  <button class="dh-btn" id="dhAuto">Auto 5s: Off</button>
+  <button class="dh-btn" id="dhPGP">PGP</button>
+  <button class="dh-btn" id="dhClose">Cerrar</button>
+</div>
+
+<div class="dh-card" id="dhHistCard" hidden>
+  <div class="dh-title">Historial reciente</div>
+  <div class="dh-grid" id="dhHistGrid">
+    <div class="dh-cell"><b>Hora</b></div>
+    <div class="dh-cell"><b>Par</b></div>
+    <div class="dh-cell"><b>Lado</b></div>
+    <div class="dh-cell"><b>Precio</b></div>
+    <div class="dh-cell"><b>Lote</b></div>
+    <div class="dh-cell"><b>SL</b></div>
+    <div class="dh-cell"><b>TP</b></div>
+  </div>
+</div>
+
+<div class="dh-card" id="dhLiveCard" hidden>
+  <div class="dh-title">Operación en vivo</div>
+  <div class="dh-live">
+    <div class="dh-kv" id="dhLiveKv">—</div>
+    <div><img id="dhShot" class="dh-img" src="" alt="MT4 Live"></div>
+  </div>
+</div>
+
+<div class="dh-card" id="dhPGPBox" hidden>
+  <div class="dh-title">PGP público</div>
+  <textarea id="dhPGPText" style="width:100%;height:210px;background:#0e1526;color:#e2e8f0;border:1px solid #1f2937;border-radius:.5rem;padding:.6rem">-----BEGIN PGP PUBLIC KEY BLOCK-----
+(Coloca aquí tu clave PGP real; este es un marcador)
+-----END PGP PUBLIC KEY BLOCK-----</textarea>
+  <div style="margin-top:.5rem;display:flex;gap:.5rem">
+    <button class="dh-btn" id="dhCopy">Copiar</button>
+  </div>
+</div>
+
+<script>
+(()=>{
+  const el = (id)=>document.getElementById(id);
+  const fmt = (n)=> (typeof n==="number") ? n.toLocaleString("en-US",{maximumFractionDigits:2}) : (n??"—");
+  const $histCard=el("dhHistCard"), $histGrid=el("dhHistGrid");
+  const $liveCard=el("dhLiveCard"), $liveKv=el("dhLiveKv"), $shot=el("dhShot");
+  const $pgpBox=el("dhPGPBox");
+  const btnRefresh=el("dhRefresh"), btnAuto=el("dhAuto"), btnClose=el("dhClose"), btnPGP=el("dhPGP"), btnCopy=el("dhCopy");
+  const ROOT = (window.DH_ROOT ?? "./live");
+  let auto=false, timer=null;
+  const setAuto=(v)=>{auto=v; btnAuto.textContent="Auto 5s: "+(auto?"On":"Off"); if(timer)clearInterval(timer); if(auto) timer=setInterval(loadAll, 5000); localStorage.setItem("dh_auto", auto?"1":"0");};
+  const getAuto=()=> localStorage.getItem("dh_auto")==="1";
+  const fetchJSON = async (p)=>{
+    try{
+      const r = await fetch(p+"?t="+Date.now()); 
+      if(r.ok) return await r.json();
+      return null;
+    }catch{ return null; }
+  };
+  const loadHist = async ()=>{
+    let trades = await fetchJSON(ROOT+"/trades.json");
+    if(!trades){ // intentar JSONL
+      const r = await fetch(ROOT+"/trades.jsonl?t="+Date.now()).then(x=>x.text()).catch(()=>null);
+      if(r){
+        trades = r.trim().split("\n").map(line=>{ try{return JSON.parse(line);}catch{return null} }).filter(Boolean);
+      }
+    }
+    if(!trades || !Array.isArray(trades) || trades.length===0){ $histCard.hidden=true; return; }
+    $histCard.hidden=false;
+    // Vaciar filas previas excepto cabecera (7 celdas)
+    while($histGrid.children.length>7) $histGrid.removeChild($histGrid.lastChild);
+    trades.slice(-5).reverse().forEach(t=>{
+      const cells=[t.ts||"—", t.symbol||"—", t.side||"—", fmt(t.price), fmt(t.lot||t.lots), fmt(t.sl), fmt(t.tp)];
+      cells.forEach(v=>{ const d=document.createElement("div"); d.className="dh-cell"; d.textContent=v; $histGrid.appendChild(d); });
+    });
+  };
+  const loadLive = async ()=>{
+    let o = await fetchJSON(ROOT+"/last.json");
+    if(!o){
+      const r = await fetch(ROOT+"/last.jsonl?t="+Date.now()).then(x=>x.text()).catch(()=>null);
+      if(r){ try{ o = JSON.parse(r.split("\n").pop()); }catch{} }
+    }
+    if(!o){ $liveCard.hidden=true; return; }
+    $liveCard.hidden=false;
+    $liveKv.innerHTML = [
+      "<b>Par:</b> "+(o.symbol??"—"),
+      "<b>Lado:</b> "+(o.side??"—"),
+      "<b>Precio:</b> "+fmt(o.price),
+      "<b>Lote:</b> "+fmt(o.lot||o.lots),
+      "<b>SL / TP:</b> "+fmt(o.sl)+" / "+fmt(o.tp),
+      "<b>Hora:</b> "+(o.ts??"—"),
+    ].join("<br>");
+    $shot.src = ROOT+"/shots/latest.jpg?v="+Date.now();
+  };
+  const loadAll = ()=>{ loadHist(); loadLive(); };
+  // Botones
+  btnRefresh?.addEventListener("click", loadAll);
+  btnClose?.addEventListener("click", ()=>{ document.getElementById("dhTools").style.display="none"; });
+  btnPGP?.addEventListener("click", ()=>{ $pgpBox.hidden=!$pgpBox.hidden; });
+  btnCopy?.addEventListener("click", ()=>{
+    navigator.clipboard.writeText(document.getElementById("dhPGPText").value).then(()=>{
+      btnCopy.textContent="Copiado"; setTimeout(()=>btnCopy.textContent="Copiar",1200);
+    });
+  });
+  btnAuto?.addEventListener("click", ()=> setAuto(!auto) );
+  setAuto(getAuto());
+  loadAll();
+})();
+</script>
+<!-- ==================== END: NON-DESTRUCTIVE LIVE OVERLAY ==================== -->
 </body>
 </html>
+
+
+<!-- ======= EN VIVO ======= -->
+  <section id="en-vivo" class="card" style="margin-top:24px">
+    <h2>Operaciones en vivo</h2>
+    <div class="live-grid">
+      <div class="kv">
+        <strong>Par:</strong>   <span id="lv-symbol">—</span>
+        <strong>Lado:</strong>  <span id="lv-side">—</span>
+        <strong>Precio:</strong><span id="lv-price">—</span>
+        <strong>Lote:</strong>  <span id="lv-lots">—</span>
+        <strong>SL / TP:</strong><span id="lv-sltp">—</span>
+        <strong>Hora:</strong>  <span id="lv-ts">—</span>
+      </div>
+      <img id="lv-shot" src="/live/shots/latest.jpg" alt="Captura MT4 en vivo"
+           style="width:100%;max-width:960px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2)">
+    </div>
+  </section>
+
+Redes oficiales</h2>
+      <p>Síguenos para novedades y soporte:</p>
+      <div class="cta-row">
+        <a class="cta cta--dark" href="https://www.facebook.com/share/1J54upxdPb/" target="_blank" rel="noopener">Facebook</a>
+        <a class="cta cta--wa" href="whatsapp.html" aria-label="WhatsApp ventas">WhatsApp</a>
+      </div>
+    </div>
+
+    
+
+<section id="medios-pago" class="card" style="margin-top:16px">
+  <details>
+    <summary style="cursor:pointer; font-weight:800; font-size:1.05rem;">💳 Medios de Pagos + Planes Premium –DejandoHuella Trader</summary>
+    <div style="margin-top:12px">
+<!-- ======= P A G O S ======= -->
+    <div class="card">
+      <h2>Pagos (verifica la red)</h2>
+
+      <div class="grid grid-2">
+        <div>
+          <!-- BTC -->
+          <div class="payrow">
+            <div class="row"><b>BTC</b><span class="tag">Bitcoin</span></div>
+            <div class="row">
+              <code id="btc">bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4</code>
+              <span class="copy" onclick="copyTxt('btc')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="btc"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-btc" class="qr" aria-label="QR BTC"></div></div>
+            </details>
+          </div>
+
+          <!-- TRC20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">TRC20 / Tron</span></div>
+            <div class="row">
+              <code id="trc20">TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd</code>
+              <span class="copy" onclick="copyTxt('trc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="trc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-trc20" class="qr" aria-label="QR USDT TRC20"></div></div>
+            </details>
+          </div>
+
+          <!-- BEP20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">BEP20 / BSC</span></div>
+            <div class="row">
+              <code id="bep20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('bep20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="bep20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-bep20" class="qr" aria-label="QR USDT BEP20"></div></div>
+            </details>
+          </div>
+        </div>
+
+        <div>
+          <!-- ARBITRUM ONE -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">Arbitrum One</span></div>
+            <div class="row">
+              <code id="arb1">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('arb1')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="arb1"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-arb1" class="qr" aria-label="QR USDT Arbitrum One"></div></div>
+            </details>
+          </div>
+
+          <!-- ERC-20 -->
+          <div class="payrow">
+            <div class="row"><b>USDT</b><span class="tag">ERC-20 / Ethereum</span></div>
+            <div class="row">
+              <code id="erc20">0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F</code>
+              <span class="copy" onclick="copyTxt('erc20')">Copiar</span>
+            </div>
+            <details class="qrbox" data-key="erc20"><summary>Mostrar QR</summary>
+              <div class="qrwrap"><div id="qr-erc20" class="qr" aria-label="QR USDT ERC-20"></div></div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border-color:var(--border);opacity:.5;margin:18px 0">
+
+      <!-- Transferencia bancaria -->
+      <div class="payrow">
+        <div class="row">
+          <b>Transferencia bancaria (USD)</b>
+          <span class="tag">Banco Pichincha</span>
+        </div>
+        <div>
+          <p style="margin:6px 0 10px">
+            <b>Titular:</b> Empresa DejandoHuella<br>
+            <b>Banco:</b> Pichincha<br>
+            <b>Tipo de cuenta:</b> Ahorros / Corriente<br>
+            <b>Número de cuenta:</b> <code id="cta-pich">2207922413</code>
+            <span class="copy" onclick="copyTxt('cta-pich')">Copiar</span><br>
+            <b>Referencia:</b> “DejandoHuella + tu nombre”
+          </p>
+
+          <details class="qrbox">
+            <summary>Mostrar QR Banco Pichincha</summary>
+            <div class="qrwrap" style="flex-direction:column;gap:10px">
+              <img id="qr-pich" alt="QR Banco Pichincha" width="220" height="220"
+                   style="border:1px solid var(--border);border-radius:10px;background:#fff"
+                   src="img/qr-pichincha.png">
+              <a id="qr-pich-dl" class="cta" href="img/qr-pichincha.png" download="qr-pichincha.png">Descargar PNG</a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- PayPal -->
+      <div class="payrow">
+        <div class="row"><b>PayPal</b><span class="tag">Pagos con tarjeta</span></div>
+        <div class="row" style="gap:10px;align-items:center">
+          <a class="cta" href="https://paypal.me/TU_ALIAS" target="_blank" rel="noopener">Pagar con PayPal</a>
+          <small>o enviar a: <b>dejandohuella_pool@proton.me</b></small>
+        </div>
+        <details class="qrbox">
+          <summary>¿Cómo pagar por PayPal?</summary>
+          <div class="qrwrap" style="flex-direction:column;gap:8px">
+            <ol style="margin:0;padding-left:18px;color:var(--muted)">
+              <li>Abre el enlace PayPal o envía al correo indicado.</li>
+              <li>Incluye en el mensaje tu nombre y plan elegido.</li>
+              <li>Recibirás confirmación y acceso al grupo/EA.</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+
+      <small>Si envías por red equivocada, los fondos se pierden. Verifica dos veces.</small>
+    </div>
+
+    <div class="card">
+      <h2>Cómo pagar (paso a paso)</h2>
+      <ol>
+        <li>Elige la <b>red correcta</b> (BTC, TRC20, BEP20, Arbitrum One o ERC-20).</li>
+        <li>Abre el QR con “Mostrar QR” o copia la dirección con “Copiar”.</li>
+        <li>Envía el monto acordado y espera 1–3 confirmaciones.</li>
+        <li>Envíanos el <b>hash de la transacción</b> por correo para acreditar tu plan.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Qué recibes</h2>
+      <ul>
+        <li>✅ <b>Señales Premium</b> en tiempo real.</li>
+        <li>✅ <b>EA MT4</b> con licencia y soporte de instalación.</li>
+        <li>✅ <b>Mentoría / soporte</b> privado.</li>
+        <li>✅ <b>Transparencia</b>: bitácora de entradas (RSI, ADX, EMAs, zona, etc.).</li>
+      </ul>
+    </div>
+
+    <div class="card" id="planes">
+      <h2>Planes Premium – DejandoHuella Trader</h2>
+      <div class="grid grid-2">
+        <div class="plan">
+          <h3>■ Señales Premium <span class="price">USD 500 / mes</span></h3>
+          <p class="note">Grupo privado con señales del par <b>BTC/USD</b>. 1–3 señales/día con entrada, SL y TP.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20el%20plan%20Se%C3%B1ales%20Premium"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Señales Premium'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Licencia EA Personal <span class="price">USD 3,000 / anual</span></h3>
+          <p class="note">EA <b>DejandoHuella_BTCUSD</b> para una cuenta MT4. 12 meses con soporte y updates.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20licencia%20EA%20personal"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Licencia EA'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ EA Full + Mentoría <span class="price">USD 7,500 / pago único</span></h3>
+          <p class="note">EA sin restricciones + <b>3 meses de mentoría</b>, instalación y optimización.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20me%20interesa%20EA%20Full%20%2B%20Mentor%C3%ADa"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'EA Full + Mentoría'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+        <div class="plan">
+          <h3>■ Socio / Inversionista <span class="price">Desde USD 10,000</span></h3>
+          <p class="note">Participación en utilidades y derecho de marca en tu región.</p>
+          <div class="cta-row">
+            <a class="cta cta--wa"
+               href="https://wa.me/593983566273?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Socio%20%2F%20Inversionista"
+               target="_blank" rel="noopener"
+               onclick="try{fbq('trackCustom','WhatsAppClick',{plan:'Socio/Inversionista'});}catch(e){}">
+               Chatear por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px"><a class="cta" href="#contacto">Solicitar información</a></div>
+    </div>
+
+    <div class="card" id="contacto">
+      <h2>Contacto</h2>
+      <p><a class="cta" href="mailto:dejandohuella_pool@proton.me">Escríbenos a ProtonMail</a></p>
+      <p>.onion: <b>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</b></p>
+
+      <p><small>PGP para mensajes cifrados (compara la huella / fingerprint):</small></p>
+      <details>
+        <summary style="cursor:pointer">PGP Public Key — <strong>Fingerprint:</strong>
+          <code>6C26 A663 02E2 095D CABA E3A4 1372 F256 5381 6452</code>
+        </summary>
+<pre style="white-space:pre-wrap;border:1px solid var(--border);border-radius:10px;padding:10px;background:#0f1522;margin-top:10px">-----BEGIN PGP PUBLIC KEY BLOCK-----
+xjMEaLfYihYJKwYBBAHaRw8BAQdAtxVgF8zGlETJFchumSOySa0fYyoWVL+k
+gAdoJzAIj7bNO0RlamFuZG9IdWVsbGFfUG9vbEBwcm90b24ubWUgPERlamFu
+ZG9IdWVsbGFfUG9vbEBwcm90b24ubWU+wsARBBMWCgCDBYJot9iKAwsJBwkQ
+E3LyVlOBZFJFFAAAAAAAHAAgc2FsdEBub3RhdGlvbnMub3BlbnBncGpzLm9y
+Z7QGl5DnUkpLn44szFx+0bL7PtTKJ1OdjzCG3kKkrNbSAxUKCAQWAAIBAhkB
+ApsDAh4BFiEEbCamYwLiCV3KuuOkE3LyVlOBZFIAAGgwAQDxsnXKWpa6tDlA
+Q92ZfUqYf7Hu/jnJZXN00jpvsPnsJAEA00tUpVhkO62cYwIoR9LvOp8olQcs
+buCJOy/dk3rLzQvOOARot9iKEgorBgEEAZdVAQUBAQdAuuS/mnJR2JOjHm6N
+X8x/V4HLOgaLZqqtpwGZB7JpMBIDAQgHwr4EGBYKAHAFgmi32IoJEBNy8lZT
+gWRSRRQAAAAAABwAIHNhbHRAbm90YXRpb25zLm9wZW5wZ3Bqcy5vcme8JW46
+H2+MmFpdvrzyGXVqogCmc3ZqbY+s41cIvotS3QKbDBYhBGwmpmMC4gldyrrj
+pBNy8lZTgWRSAACwxgEAyq7WSbledwSIS15YtgmQmuAzDvd3+dqsjKI+s47Q
+XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
+=EcvG
+-----END PGP PUBLIC KEY BLOCK-----</pre>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Transparencia de señales</h2>
+      <p>✅ <b>BTCUSD BUY (BREAK_L2)</b><br>L1..L4 • EMA50/200 • ADX/+DI/−DI • RSI • ATR • Zona</p>
+    </div>
+
+    <footer class="card" style="margin-top:16px">
+      <p>
+        Clearnet: <a href="./">Abrir sitio</a> |
+        .onion: <code>xsfd6o4hs4lffweef6jnfkfvyhmnldi5ng7zjccev2kouh5grsvvh4yd.onion</code>
+      </p>
+      <p>Contacto: <a href="mailto:dejandohuella_pool@proton.me">dejandohuella_pool@proton.me</a></p>
+    </footer>
+
+    <small style="color:#94a3b8">© 2025 DejandoHuella Trader</small>
+  </div>
+
+  <!-- QRCode CDN -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    // Barra superior
+    function closeBar(){ const b=document.querySelector('.bar'); if(b) b.remove(); }
+
+    // Fecha
+    document.getElementById('lu').textContent = new Date().toISOString().slice(0,10);
+
+    // Panel "Solicitar información"
+    (function(){
+      const btn=document.getElementById('btn-info');
+      const panel=document.getElementById('panel-info');
+      btn.addEventListener('click',(e)=>{e.preventDefault(); panel.style.display = panel.style.display==='block'?'none':'block';});
+      document.addEventListener('click',(e)=>{ if(!panel.contains(e.target) && e.target!==btn) panel.style.display='none'; });
+    })();
+
+    // Copiar con fallback
+    function copyTxt(id){
+      const el = document.getElementById(id); if(!el) return;
+      const txt = el.textContent.trim();
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(txt).then(()=>toast('✔ Copiado'));
+      }else{
+        const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
+        ta.select(); try{document.execCommand('copy');toast('✔ Copiado');}catch(_){}
+        ta.remove();
+      }
+    }
+    function toast(text){
+      const msg=document.createElement('div'); msg.textContent=text;
+      Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
+      padding:'8px 12px',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,.4)',zIndex:'9999'}); 
+      document.body.appendChild(msg); setTimeout(()=>msg.remove(),1500);
+    }
+
+    // Direcciones cripto
+    const ADDR = {
+      btc:'bc1qu6c2036ehv2rssqv32mzv5z9tf92px6q8wp0f4',
+      trc20:'TCoqxfkqA4MAmTbqtWnCzwBzQToecwSiHd',
+      bep20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      arb1:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F',
+      erc20:'0xa721CD06Fce89aAD41e7f8eC6604653712B7c22F'
+    };
+
+    // Crear QR (usa el texto real)
+    function ensureQR(boxId, text, key){
+      const box=document.getElementById(boxId);
+      if(!box || box.dataset.done) return;
+      if(window.QRCode){
+        const size=180;
+        new QRCode(box,{text,width:size,height:size,correctLevel: QRCode.CorrectLevel.M});
+      }else{
+        const img=document.createElement('img'); img.alt='QR '+key.toUpperCase(); img.src='img/qr_'+key+'.png';
+        box.appendChild(img);
+      }
+      box.dataset.done='1';
+    }
+    document.querySelectorAll('.qrbox').forEach(d=>{
+      d.addEventListener('toggle', ()=>{
+        if(!d.open) return;
+        const key=d.dataset.key; const target='qr-'+key;
+        if(key && ADDR[key]) ensureQR(target, ADDR[key], key);
+      });
+    });
+  </script>
+
+  
+
+  
+    </div>
+  </details>
+</section>
+
+<!-- ====== BLOQUE NUEVO (muy pequeño y sin tocar nada de arriba): anti-caché de URL ====== -->
+<script>
+(function(){
+  // Adjunta un parámetro `v` con timestamp a la URL actual (solo reemplaza en el historial)
+  try{
+    var u = new URL(location.href);
+    if(!u.searchParams.get('v')){
+      u.searchParams.set('v', Date.now());
+      history.replaceState(null, '', u.toString());
+    }
+  }catch(_){}
+})();
+</script>
