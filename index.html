@@ -2,291 +2,386 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DejandoHuella Trader — Live</title>
-  <meta name="color-scheme" content="dark" />
-  <link rel="preload" as="image" href="live/shots/latest.jpg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>DejandoHuella Trader — Panel</title>
+
   <style>
     :root{
-      --bg:#0b1118;
-      --card:#111a24;
-      --muted:#8ea0b5;
-      --line:#223244;
-      --green:#1f9d61;
-      --green-2:#163e2d;
-      --accent:#4ea1ff;
-      --bad:#f05d7a;
+      --bg:#0c1117;
+      --card:#121a24;
+      --muted:#9fb3c8;
+      --text:#e5edf5;
+      --accent:#00c16a;
+      --accent-2:#2ea3f2;
+      --danger:#ff4d4d;
+      --border:#1e2a36;
+      --chip:#0f1720;
+      --shadow:0 6px 22px rgba(0,0,0,.35);
+      --radius:14px;
+      --radius-sm:10px;
+      --font: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      --mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     }
-    html,body{background:var(--bg);color:#dbe8ff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
-    .wrap{max-width:960px;margin:28px auto;padding:0 14px}
-    .brand{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-    .brand img{width:36px;height:36px;border-radius:10px}
-    .badge{display:inline-block;background:#13324d;border:1px solid var(--line);border-radius:10px;padding:6px 10px;color:#cde1f9;font-size:.85rem}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:840px){.grid{grid-template-columns:1fr}}
-    table{width:100%;border-collapse:collapse;font-size:.9rem}
-    th,td{padding:8px;border-bottom:1px dashed var(--line);text-align:center}
-    th{color:#a8c0da;font-weight:600}
-    .ok{color:#98eec8}
-    .muted{color:var(--muted);font-size:.85rem}
-    /* live shot */
-    .shot{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#081018}
-    /* topbar small controls */
-    .topbar{position:sticky;top:0;z-index:9999;background:rgba(10,16,23,.82);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-    .topbar__inner{max-width:960px;margin:0 auto;padding:6px 10px;display:flex;gap:8px;align-items:center}
-    .chip{background:#0f1b28;border:1px solid #284058;color:#9bb2cb;border-radius:999px;padding:6px 10px;font-size:.78rem;line-height:1;cursor:pointer}
-    .chip--ok{background:#153c2a;border-color:#1f704c;color:#98eec8}
-    .chip--bad{background:#2b1317;border-color:#5f2b37;color:#ff98a9}
-    @media (max-width:480px){.chip{padding:5px 9px;font-size:.72rem}}
-    /* modal */
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.55);z-index:10000}
-    .modal__card{width:min(840px,92vw);max-height:85vh;overflow:auto;background:#101721;border:1px solid var(--line);
-      border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.4);padding:12px}
-    .modal__hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
-    .txtarea{
-      width:100%;min-height:220px;resize:vertical;border-radius:10px;border:1px solid var(--line);
-      background:#09131c;color:#cde1f9;padding:10px;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:radial-gradient(80% 120% at 100% 0%,#0e1622 0%, var(--bg) 60%) no-repeat fixed;
+      line-height:1.45;
     }
-    /* payments */
-    .pay-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    @media (max-width:560px){.pay-grid{grid-template-columns:1fr}}
-    .pay-card{background:#0f1620;border:1px solid var(--line);border-radius:12px;padding:12px}
-    .note{font-size:.82rem;color:var(--muted)}
-    details.card summary{cursor:pointer;list-style:none}
-    details.card summary::-webkit-details-marker{display:none}
-    .btn{border:1px solid var(--line);background:#0f1b28;color:#cde1f9;border-radius:10px;padding:8px 12px;cursor:pointer}
+    a{color:var(--accent-2);text-decoration:none}
+    .wrap{max-width:1060px;margin:28px auto;padding:0 14px}
+
+    /* Top Notice + Controls */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:linear-gradient(180deg, rgba(12,17,23,.92), rgba(12,17,23,.70));
+      backdrop-filter:saturate(180%) blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{max-width:1060px;margin:0 auto;padding:8px 14px;display:flex;gap:8px;align-items:center}
+    .badge{
+      font-family:var(--mono);
+      font-size:.68rem;
+      background:#0a2a18;border:1px solid #164c2d;color:#9ff2c4;
+      padding:6px 8px;border-radius:10px;box-shadow:var(--shadow);
+    }
+    .tiny-controls{margin-left:auto;display:flex;gap:8px}
+    .btn-tiny{
+      font-size:.68rem;line-height:1;
+      padding:6px 8px;border-radius:8px;border:1px solid var(--border);
+      background:var(--chip);color:var(--muted);cursor:pointer;
+      display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 0 rgba(0,0,0,.18);
+    }
+    .btn-tiny.success{background:#0f2b1e;border-color:#1f5e45;color:#b6ffe3}
+    .btn-tiny.warn{background:#29120f;border-color:#6a251d;color:#ffb3a7}
+    .btn-tiny.blue{background:#0f2334;border-color:#1b4a6b;color:#a7d9ff}
+    .btn-tiny:hover{filter:brightness(1.12)}
+
+    /* Card */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    .card-body{padding:14px 18px}
+    .title{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:36px;height:36px;border-radius:10px;background:#1b2836;border:1px solid var(--border);display:grid;place-content:center;font-weight:800}
+
+    .pill{font-size:.72rem;padding:6px 10px;border-radius:999px;background:#0d1b27;border:1px solid var(--border);color:#a8c3d7}
+
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:840px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* History Table */
+    table{width:100%;border-collapse:collapse;font-size:.88rem}
+    th,td{padding:10px 8px;border-bottom:1px dashed #1d2a36}
+    th{font-weight:600;color:#9fbad0;text-transform:uppercase;font-size:.72rem;letter-spacing:.02em}
+    .buy{color:#46e79a;font-weight:700}
+    .sell{color:#ff7777;font-weight:700}
+    .mono{font-family:var(--mono);font-size:.86rem}
+
+    /* Live block */
+    .kv{display:grid;grid-template-columns:repeat(2,auto);gap:10px 22px;margin:8px 0 12px}
+    .kv b{color:#9fbad0;font-weight:600}
+    .shot{
+      width:100%;aspect-ratio:16/9;border-radius:12px;
+      border:1px solid var(--border);background:#0b141e;
+      object-fit:contain;display:block;box-shadow:var(--shadow)
+    }
+    .row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+    .row .btn{padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0f1723;color:#b8d2ea;cursor:pointer}
+    .row .btn.green{background:#0f2b1f;color:#bfffe8;border-color:#1c6046}
+
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    .social{display:flex;gap:10px}
+    .social a{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#0f1723;color:#cde3ff}
+    .social a.whatsapp{background:#0d2a1d;border-color:#1d5b41;color:#b3ffe1}
+    .muted{color:#99adc2}
+    .small{font-size:.82rem}
+
+    /* Accordion */
+    .accordion{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .acc-item + .acc-item{border-top:1px solid var(--border)}
+    .acc-btn{width:100%;text-align:left;background:#0e1622;color:var(--text);padding:14px 16px;border:0;display:flex;align-items:center;gap:10px;cursor:pointer}
+    .acc-panel{display:none;padding:12px 16px;background:#0c131e}
+    .qr-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;align-items:start}
+    .qr{background:#0e1724;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center}
+    .qr img{max-width:220px;width:100%;height:auto;border-radius:8px;display:block;margin:6px auto}
+    .label{font-size:.78rem;color:#9fbad0;margin-top:6px}
+
+    /* PGP Modal */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.55);z-index:200}
+    .modal.open{display:grid}
+    .modal-card{width:min(720px,94vw);background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+    .modal-card h3{margin:0;padding:12px 14px;border-bottom:1px solid var(--border)}
+    .modal-body{padding:14px}
+    .pgp{width:100%;min-height:240px;background:#0a1420;color:#a7c7dd;border:1px solid #1b3248;border-radius:10px;padding:12px;font-family:var(--mono);font-size:.82rem;white-space:pre;overflow:auto}
+    .modal-actions{display:flex;gap:8px;justify-content:flex-end;padding:12px 14px;border-top:1px solid var(--border)}
+
+    .timestamp{color:#7fa5c4;font-family:var(--mono);font-size:.78rem}
+    footer{padding:30px 6px;color:#6d839a;text-align:center}
+    .sep{height:18px}
+
+    /* Mobile controls sizing */
+    @media(max-width:560px){
+      .btn-tiny{padding:5px 7px;font-size:.66rem}
+      .badge{padding:5px 6px;font-size:.62rem}
+      .title .logo{width:30px;height:30px}
+      .kv{grid-template-columns:auto 1fr}
+      .social a{padding:9px 10px}
+      .row .btn{padding:8px 10px}
+    }
   </style>
 </head>
 <body>
-  <!-- compact controls -->
+  <!-- Top notice -->
   <div class="topbar">
-    <div class="topbar__inner">
-      <button id="btnRefresh" class="chip">Actualizar</button>
-      <button id="btnAuto" class="chip">Auto 5s</button>
-      <div style="flex:1"></div>
-      <button id="btnPGP" class="chip chip--ok" title="PGP público">PGP</button>
-      <button id="btnCloseBar" class="chip chip--bad">Cerrar</button>
+    <div class="topbar-inner">
+      <span class="badge">⚠️ Verifica los enlaces. Usa la Verificación oficial o la dirección .onion.</span>
+      <div class="tiny-controls">
+        <button id="btnRefresh" class="btn-tiny">↻ Actualizar</button>
+        <button id="btnAuto" class="btn-tiny blue" aria-pressed="false">⏱ Auto 5s: OFF</button>
+        <button id="btnPGP" class="btn-tiny success">🔐 PGP</button>
+        <button id="btnClose" class="btn-tiny warn">✕ Cerrar</button>
+      </div>
     </div>
   </div>
 
   <div class="wrap">
-    <div class="brand">
-      <img src="img/logo.png" alt="logo" onerror="this.style.display='none'">
-      <div>
-        <div style="font-weight:700">DejandoHuella Trader</div>
-        <div id="lastUpdate" class="muted">Última actualización: —</div>
+    <!-- Header -->
+    <div class="card">
+      <div class="card-head">
+        <div class="title">
+          <div class="logo">🐾</div>
+          <div>
+            <div style="font-size:1.05rem;font-weight:800">DejandoHuella Trader</div>
+            <div class="timestamp">Última actualización: <span id="lastUpdate">—</span></div>
+          </div>
+        </div>
+        <button id="btnInfo" class="pill">Solicitar información</button>
       </div>
-      <div style="flex:1"></div>
-      <a href="#contact" class="badge">Solicitar información</a>
     </div>
 
+    <div class="sep"></div>
+
+    <!-- History + Live -->
     <div class="grid">
-      <section class="card">
-        <h3 style="margin:2px 0 10px">Historial reciente</h3>
-        <table id="tblHistory">
-          <thead>
-            <tr><th>Hora</th><th>Par</th><th>Lado</th><th>Precio</th><th>Lote</th><th>SL</th><th>TP</th></tr>
-          </thead>
-          <tbody>
-            <tr><td colspan="7" class="muted">Sin operaciones aún…</td></tr>
-          </tbody>
-        </table>
+      <!-- History -->
+      <section class="card" id="historyCard">
+        <div class="card-head">
+          <div class="title">📜 <span>Historial reciente</span></div>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table id="tblHistory" aria-label="Historial de operaciones">
+              <thead>
+                <tr>
+                  <th>Hora</th>
+                  <th>Par</th>
+                  <th>Lado</th>
+                  <th>Precio</th>
+                  <th>Lote</th>
+                  <th>SL</th>
+                  <th>TP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="7" class="muted small">Cargando historial…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
-      <section class="card">
-        <h3 style="margin:2px 0 10px">Operaciones en vivo</h3>
-        <div class="muted" id="liveFields">
-          <div>Par: <b id="f_symbol">—</b></div>
-          <div>Lado: <b id="f_side">—</b></div>
-          <div>Precio: <b id="f_price">—</b></div>
-          <div>Lote: <b id="f_lot">—</b></div>
-          <div>SL / TP: <b id="f_sl">—</b> / <b id="f_tp">—</b></div>
-          <div>Hora: <b id="f_time">—</b></div>
+      <!-- Live -->
+      <section class="card" id="liveCard">
+        <div class="card-head">
+          <div class="title">🟢 <span>Operaciones en vivo</span></div>
         </div>
-        <div style="margin-top:10px">
-          <img id="shot" class="shot" src="live/shots/latest.jpg" alt="Captura MT4 en vivo">
+        <div class="card-body">
+          <div class="kv">
+            <b>Par:</b>    <div id="kvSymbol" class="mono">—</div>
+            <b>Lado:</b>   <div id="kvSide" class="mono">—</div>
+            <b>Precio:</b> <div id="kvPrice" class="mono">—</div>
+            <b>Lote:</b>   <div id="kvLot" class="mono">—</div>
+            <b>SL / TP:</b><div id="kvSLTP" class="mono">—</div>
+            <b>Hora:</b>   <div id="kvTime" class="mono">—</div>
+          </div>
+
+          <img id="liveShot" alt="Captura MT4 en vivo" class="shot" src="live/shots/latest.jpg" loading="lazy">
+
+          <div class="sep"></div>
+          <div class="actions">
+            <div class="social">
+              <a href="https://facebook.com" target="_blank" rel="noopener">📘 Facebook</a>
+              <a class="whatsapp" href="https://wa.me/" target="_blank" rel="noopener">🟢 WhatsApp</a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
 
-    <section class="card" style="margin-top:12px">
-      <h3 style="margin:2px 0 12px">Redes oficiales</h3>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn" href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a class="btn" href="https://wa.me" target="_blank" rel="noopener">WhatsApp</a>
+    <div class="sep"></div>
+
+    <!-- Payments -->
+    <section class="accordion">
+      <div class="acc-item">
+        <button class="acc-btn" data-acc>💳 Medios de Pagos + Planes Premium – DejandoHuella Trader</button>
+        <div class="acc-panel">
+          <div class="qr-wrap">
+            <div class="qr">
+              <div class="label">Banco Pichincha</div>
+              <img src="img/qr_pichincha.png" alt="QR Banco Pichincha">
+              <div class="small muted mono">Titular / Ref: **Actualiza con tus datos**</div>
+            </div>
+            <div class="qr">
+              <div class="label">Cripto (BEP20)</div>
+              <img src="img/qr_bep20.png" alt="QR BEP20">
+              <div class="small muted mono">Dirección: <span id="addrBep20">—</span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <details class="card" id="pay" style="margin-top:12px">
-      <summary>💳 Medios de Pagos + Planes Premium – DejandoHuella Trader</summary>
-      <div class="pay-grid" style="margin-top:10px">
-        <div class="pay-card">
-          <h4>Banco Pichincha</h4>
-          <img src="img/qr_pichincha.png" alt="QR Banco Pichincha" style="border-radius:10px;border:1px solid var(--line);max-width:320px;background:#081018"
-               onerror="this.src='img/qr_arb1.png'">
-          <div class="note">Cuenta/CCI verificada — solicita el detalle exacto antes de enviar.</div>
-        </div>
-        <div class="pay-card">
-          <h4>Cripto</h4>
-          <img src="img/qr_bep20.png" alt="QR BEP20" style="border-radius:10px;border:1px solid var(--line);max-width:320px;background:#081018">
-          <div class="note">Red BEP20 / ERC20 según disponibilidad.</div>
-        </div>
-      </div>
-    </details>
-
-    <footer class="muted" style="text-align:center;margin:24px 0 10px">© 2025 DejandoHuella Trader</footer>
+    <footer>© <span id="yyyy"></span> DejandoHuella Trader</footer>
   </div>
 
   <!-- PGP Modal -->
-  <div id="pgpModal" class="modal" aria-hidden="true">
-    <div class="modal__card">
-      <div class="modal__hdr">
-        <strong>PGP público — verifica la huella</strong>
-        <div>
-          <button id="btnCopyPGP" class="chip">Copiar</button>
-          <button id="btnClosePGP" class="chip chip--bad">Cerrar</button>
-        </div>
+  <div id="pgpModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pgpTitle">
+    <div class="modal-card">
+      <h3 id="pgpTitle">🔐 PGP público (verifica huella/fingerprint)</h3>
+      <div class="modal-body">
+        <pre id="pgpBlock" class="pgp">-----BEGIN PGP PUBLIC KEY BLOCK-----
+mQINBGWlZGgBEADG6q8v5g2jUo2qJH+9V3S1mSsc9m2Xf9dS4e2Zkqk7i5bBqVg1
+IX9w6z2pG3b6sD6t0lQmQ3QqzvboC1Av8i9r4Gg1HfWPa3x6X3zZ4sJr+V8mYI7e
+QfG7Xk3JcW5QvD0qS9p3mw6A2oUqf4J6X4n3KQJ4ax+8hwmN0ZkT7ZJ5qF9o4Vbq
+… (reemplaza con tu clave real)
+-----END PGP PUBLIC KEY BLOCK-----</pre>
       </div>
-      <textarea id="pgpText" class="txtarea" readonly>-----BEGIN PGP PUBLIC KEY BLOCK-----
-mQENBGZmZkABCADaQ2C2F3X3b6T3Px8gQ0jWkQ3WZB4nVnYk6m1y7zW0h6o
-... Coloca aquí tu llave PGP completa ...
-=ABCD
------END PGP PUBLIC KEY BLOCK-----</textarea>
-      <div class="note">Si el fingerprint no coincide, no confíes.</div>
+      <div class="modal-actions">
+        <button class="btn-tiny blue" id="btnCopyPGP">Copiar</button>
+        <button class="btn-tiny warn" id="btnClosePGP">Cerrar</button>
+      </div>
     </div>
   </div>
 
   <script>
   (function(){
-    const $ = s => document.querySelector(s);
+    const $ = (s,p=document)=>p.querySelector(s);
+    const $$ = (s,p=document)=>Array.from(p.querySelectorAll(s));
+    const fmt = (n)=> (n==null||n==='') ? '—' : Number(n).toLocaleString('en-US',{maximumFractionDigits:5});
+    const qv = ()=> `?v=${Date.now()}`;
 
-    const btnRefresh   = $('#btnRefresh');
-    const btnAuto      = $('#btnAuto');
-    const btnCloseBar  = $('#btnCloseBar');
-    const shot         = $('#shot');
-    const lastUpdate   = $('#lastUpdate');
+    // UI basic
+    const lastUpdateEl = $("#lastUpdate");
+    const shotEl = $("#liveShot");
+    const autoBtn = $("#btnAuto");
+    const pgpModal = $("#pgpModal");
 
-    const f_symbol = $('#f_symbol');
-    const f_side   = $('#f_side');
-    const f_price  = $('#f_price');
-    const f_lot    = $('#f_lot');
-    const f_sl     = $('#f_sl');
-    const f_tp     = $('#f_tp');
-    const f_time   = $('#f_time');
-    const tblBody  = document.querySelector('#tblHistory tbody');
+    // Persist auto refresh
+    let auto = localStorage.getItem("auto5s") === "1";
+    const setAutoLabel = ()=> {
+      autoBtn.setAttribute('aria-pressed', auto ? 'true':'false');
+      autoBtn.textContent = `⏱ Auto 5s: ${auto?"ON":"OFF"}`;
+    };
+    setAutoLabel();
 
-    const pgpModal   = $('#pgpModal');
-    const btnPGP     = $('#btnPGP');
-    const btnClosePGP= $('#btnClosePGP');
-    const btnCopyPGP = $('#btnCopyPGP');
-    const pgpText    = $('#pgpText');
+    // Actions
+    $("#btnRefresh").addEventListener("click", refreshAll);
+    autoBtn.addEventListener("click", ()=>{
+      auto = !auto; localStorage.setItem("auto5s", auto?"1":"0");
+      setAutoLabel();
+    });
+    $("#btnClose").addEventListener("click", ()=> window.scrollTo({top:0,behavior:'smooth'}));
+    $("#btnPGP").addEventListener("click", ()=> pgpModal.classList.add("open"));
+    $("#btnClosePGP").addEventListener("click", ()=> pgpModal.classList.remove("open"));
+    $("#btnCopyPGP").addEventListener("click", ()=>{
+      const t = $("#pgpBlock").innerText; navigator.clipboard.writeText(t);
+    });
 
-    let autoTimer = null;
+    // Accordion
+    $$("[data-acc]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const panel = btn.parentElement.querySelector(".acc-panel");
+        const open = panel.style.display === "block";
+        panel.style.display = open ? "none":"block";
+      });
+    });
 
-    function setUpdated(){
-      if(lastUpdate) lastUpdate.textContent = 'Última actualización: ' + new Date().toLocaleString();
+    // Loaders
+    async function loadJSON(urls){
+      for(const url of urls){
+        try{
+          const res = await fetch(url + qv(), {cache:"no-store"});
+          if(res.ok){ return await res.json(); }
+        }catch(_){/* try next */}
+      }
+      return null;
     }
 
-    function bust(url){ return url + (url.includes('?')?'&':'?') + 'v=' + Date.now(); }
-
-    async function fetchJSON(url){
-      try{
-        const r = await fetch(bust(url), {cache:'no-store'});
-        if(!r.ok) return null;
-        return await r.json();
-      }catch(e){ return null; }
+    function setLive(info){
+      if(!info) return;
+      const sideC = (info.side||"").toUpperCase()==="BUY" ? "buy" : ( (info.side||"").toUpperCase()==="SELL" ? "sell" : "" );
+      $("#kvSymbol").textContent = info.symbol ?? "—";
+      $("#kvSide").innerHTML = sideC ? `<span class="${sideC}">${(info.side||"").toUpperCase()}</span>` : (info.side||"—");
+      $("#kvPrice").textContent = fmt(info.price);
+      $("#kvLot").textContent = fmt(info.lot);
+      $("#kvSLTP").textContent = `${fmt(info.sl)} / ${fmt(info.tp)}`;
+      $("#kvTime").textContent = info.ts ?? "—";
+      // refresh shot
+      shotEl.src = "live/shots/latest.jpg" + qv();
     }
 
-    async function fetchText(url){
-      try{
-        const r = await fetch(bust(url), {cache:'no-store'});
-        if(!r.ok) return null;
-        return await r.text();
-      }catch(e){ return null; }
-    }
-
-    function renderHistory(trades){
-      if(!Array.isArray(trades) || trades.length===0){
-        tblBody.innerHTML = '<tr><td colspan="7" class="muted">Sin operaciones aún…</td></tr>';
+    function setHistory(list){
+      const tb = $("#tblHistory tbody");
+      tb.innerHTML = "";
+      if(!list || !list.length){
+        tb.innerHTML = `<tr><td colspan="7" class="muted small">Sin operaciones aún…</td></tr>`;
         return;
       }
-      const rows = trades.slice(0,5).map(t => {
-        const side = t.side||t.lado||'';
-        const niceSide = /buy/i.test(side)? '<span class="ok">BUY</span>' :
-                         /sell/i.test(side)? '<span style="color:#ff9aa7">SELL</span>' : side;
-        const par  = t.symbol || t.par || '';
-        const lot  = (t.lot ?? t.lote ?? '').toString();
-        const sl   = t.sl ?? '';
-        const tp   = t.tp ?? '';
-        const pr   = t.price ?? t.precio ?? '';
-        const tm   = t.ts  ?? t.hora   ?? '';
-        return `<tr>
-          <td>${tm}</td><td>${par}</td><td>${niceSide}</td><td>${pr}</td>
-          <td>${lot}</td><td>${sl}</td><td>${tp}</td>
-        </tr>`;
-      }).join('');
-      tblBody.innerHTML = rows;
-    }
-
-    function renderLive(last){
-      if(!last) return;
-      f_symbol.textContent = last.symbol ?? '—';
-      f_side.textContent   = last.side   ?? '—';
-      f_price.textContent  = last.price  ?? '—';
-      f_lot.textContent    = last.lot    ?? '—';
-      f_sl.textContent     = last.sl     ?? '—';
-      f_tp.textContent     = last.tp     ?? '—';
-      f_time.textContent   = last.ts     ?? '—';
+      // Mostramos últimos 5
+      list.slice(-5).reverse().forEach(o=>{
+        const sideC = (o.side||"").toUpperCase()==="BUY" ? "buy" : ( (o.side||"").toUpperCase()==="SELL" ? "sell" : "" );
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="mono">${o.ts ?? "—"}</td>
+          <td class="mono">${o.symbol ?? "—"}</td>
+          <td class="${sideC}">${(o.side||"").toUpperCase()}</td>
+          <td class="mono">${fmt(o.price)}</td>
+          <td class="mono">${fmt(o.lot)}</td>
+          <td class="mono">${fmt(o.sl)}</td>
+          <td class="mono">${fmt(o.tp)}</td>`;
+        tb.appendChild(tr);
+      });
     }
 
     async function refreshAll(){
-      // last.json
-      const last = await fetchJSON('live/last.json');
-      if(last) renderLive(last);
-      // trades.json (array) o trades.jsonl (línea por línea)
-      let trades = await fetchJSON('live/trades.json');
-      if(!trades){
-        const txt = await fetchText('live/trades.jsonl');
-        if(txt){ trades = txt.trim().split('\\n').map(l=>{try{return JSON.parse(l)}catch(_){return null}}).filter(Boolean); }
-      }
-      renderHistory(trades || []);
-      // shot
-      if(shot){ shot.src = bust('live/shots/latest.jpg'); }
-      setUpdated();
+      lastUpdateEl.textContent = new Date().toISOString().slice(0,19).replace("T"," ");
+      // live
+      const live = await loadJSON(["live/last.json","live/last.jsonl"]);
+      if(live) setLive(live);
+      // history (acepta json o jsonl)
+      let trades = await loadJSON(["live/trades.json","live/trades.jsonl"]);
+      if(Array.isArray(trades)){ setHistory(trades); }
+      else if(trades && typeof trades === "string"){
+        try{
+          const lines = trades.trim().split(/\r?\n/).map(l=>JSON.parse(l));
+          setHistory(lines);
+        }catch(_){ setHistory([]); }
+      }else setHistory([]);
     }
 
-    function setAuto(on){
-      if(on){
-        btnAuto.classList.add('chip--ok');
-        if(autoTimer) clearInterval(autoTimer);
-        autoTimer = setInterval(refreshAll, 5000);
-      }else{
-        btnAuto.classList.remove('chip--ok');
-        if(autoTimer) clearInterval(autoTimer);
-        autoTimer = null;
-      }
-    }
-
-    btnRefresh?.addEventListener('click', refreshAll);
-    btnAuto?.addEventListener('click', ()=> setAuto(!autoTimer));
-    btnCloseBar?.addEventListener('click', ()=>{
-      const bar = document.querySelector('.topbar');
-      if(bar) bar.style.display='none';
-    });
-
-    // PGP modal
-    btnPGP?.addEventListener('click', ()=> { pgpModal.style.display='grid'; pgpModal.ariaHidden='false'; });
-    btnClosePGP?.addEventListener('click', ()=> { pgpModal.style.display='none'; pgpModal.ariaHidden='true'; });
-    pgpModal?.addEventListener('click', e=>{ if(e.target===pgpModal){ pgpModal.style.display='none'; pgpModal.ariaHidden='true'; }});
-    btnCopyPGP?.addEventListener('click', ()=>{
-      pgpText.select();
-      try{ document.execCommand('copy'); btnCopyPGP.textContent='¡Copiado!'; setTimeout(()=>btnCopyPGP.textContent='Copiar',1200); }
-      catch(_){}
-    });
-
-    // Initial
     refreshAll();
+    setInterval(()=>{ if(auto) refreshAll(); }, 5000);
+
+    // misc
+    $("#yyyy").textContent = new Date().getFullYear();
   })();
   </script>
 </body>
