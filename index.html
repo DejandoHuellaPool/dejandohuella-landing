@@ -19,22 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' fill='%23e5e7eb' font-family='Arial'%3EDH%3C/text%3E%3C/svg%3E">
-  <!-- PRELOAD dinámico para que respete el prefijo en GH Pages -->
-  <link rel="preload" as="image" href="" id="preload-shot">
-
-  <!-- ⬇️ NUEVO: autodetección de entorno y helpers de ruta -->
-  <script>
-    (function(){
-      // En GitHub Pages el sitio vive bajo /dejandohuella-landing
-      var isGH = location.host.includes('github.io') || location.pathname.startsWith('/dejandohuella-landing');
-      window.DH_BASE = isGH ? '/dejandohuella-landing' : '';
-      // Raíz de /live (JSON/JSONL/JPG) para ambos entornos:
-      window.DH_ROOT = window.DH_BASE + '/live';
-      // Configura el <link rel="preload"> para latest.jpg
-      var pre = document.getElementById('preload-shot');
-      if (pre) pre.href = window.DH_ROOT + '/shots/latest.jpg?ts=' + Date.now();
-    })();
-  </script>
+  <link rel="preload" as="image" href="live/shots/latest.jpg">
 
   <style>
     :root{
@@ -146,6 +131,65 @@
       padding:2px 6px; font-size:10px; line-height:1; border-radius:8px;
     }
   </style>
+
+<script>
+// === AUTODETECCIÓN GH PAGES / NGINX + HELPERS DE RUTA ===
+(function(){
+  var looksGH = location.host.endsWith('github.io');
+  var base = (window.DH_BASE !== undefined) ? window.DH_BASE :
+             (looksGH ? '/dejandohuella-landing' :
+              (location.pathname.startsWith('/dejandohuella-landing') ? '/dejandohuella-landing' : ''));
+  window.DH_BASE = base;
+  window.DH_ROOT = (window.DH_ROOT !== undefined) ? window.DH_ROOT : (base + '/live');
+  // Preload dinámico si existe
+  var pre = document.querySelector('link#preload-shot');
+  if (pre) pre.href = window.DH_ROOT + '/shots/latest.jpg?ts=' + Date.now();
+})();
+
+// === CANDIDATAS DE URL + FETCH CON FALLBACK + CACHE-BUSTING ===
+function dhCandidates(path){
+  var p = path[0] === '/' ? path : '/' + path;
+  var abs = window.DH_ROOT + p;      // ej: '/dejandohuella-landing/live/last.json'
+  var relAbs = '/live' + p;          // '/live/last.json'
+  var rel = 'live' + p;              // 'live/last.json'
+  return Array.from(new Set([abs, relAbs, rel]));
+}
+
+async function dhFetchText(path, timeoutMs){
+  const urls = dhCandidates(path);
+  const tmo = timeoutMs || 6000;
+  let lastErr;
+  for (const u of urls){
+    const url = u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+    try{
+      const ctrl = new AbortController();
+      const tid = setTimeout(()=>ctrl.abort(), tmo);
+      const r = await fetch(url, { cache:'no-store', signal: ctrl.signal });
+      clearTimeout(tid);
+      if(r.ok) return await r.text();
+      lastErr = new Error('HTTP ' + r.status + ' @ ' + url);
+    }catch(e){ lastErr = e; }
+  }
+  throw lastErr || new Error('No reachable URL for ' + path);
+}
+
+window.DH_FETCH_JSON = async function(path){
+  const txt = await dhFetchText(path, 7000);
+  const clean = txt.replace(/^\uFEFF/, '').trim();
+  return JSON.parse(clean);
+};
+
+window.DH_FETCH_JSONL = async function(path){
+  const txt = await dhFetchText(path, 7000);
+  return txt.split(/\r?\n/).filter(Boolean).map(s=>{ try{return JSON.parse(s);}catch(_){return null;} }).filter(Boolean);
+};
+
+window.DH_IMG_URL = function(path){
+  const u = dhCandidates(path)[0];
+  return u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+};
+</script>
+
 </head>
 <body>
 
@@ -228,8 +272,8 @@
       </div>
     </div>
 
-    <!-- Imagen MT4: src se setea por JS con DH_ROOT para evitar cache -->
-    <img id="lv-shot" src="" alt="Captura MT4 en vivo"
+    <!-- Imagen MT4 (ruta RELATIVA al repo) -->
+    <img id="lv-shot" src="live/shots/latest.jpg" alt="Captura MT4 en vivo"
          style="width:100%;max-width:1000px;border-radius:12px;border:1px solid var(--border);display:block;margin:auto"
          loading="lazy" decoding="async">
   </section>
@@ -457,7 +501,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
   // ===== Utilidades base =====
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement;
-  const LIVE_ROOT = (window.DH_ROOT || 'live'); // RUTA RELATIVA (set por el script del <head>)
+  const LIVE_ROOT = (window.DH_ROOT || 'live'); // RUTA RELATIVA
   const liveEls = {sym:$('lv-symbol'), side:$('lv-side'), price:$('lv-price'), lots:$('lv-lots'), sltp:$('lv-sltp'), ts:$('lv-ts'), img:$('lv-shot')};
   const status = { pill:$('status-pill'), dot:$('dot'), text:$('status-text') };
   let lastUpdate = 0;
@@ -480,8 +524,8 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     return `<span class="badge" style="background:${color}22;color:${color}">${s||'—'}</span>`;
   }
   function nice(n,dp){ if(n===undefined||n===null||n==='')return '—'; const x=Number(n); if(Number.isNaN(x))return '—'; return dp===undefined?x.toString():x.toFixed(dp); }
-  function localTs(ts){ if(!ts)return '—'; const t=ts.replace(/\./g,'-').replace(' ','T'); const d=new Date(t); return Number.isNaN(+d)?ts:d.toLocaleString(); }
-  function safeParseJson(txt){ if(!txt)return null; try{ txt=txt.replace(/^\uFEFF/,'').trim(); const a=txt.indexOf('{'),b=txt.lastIndexOf('}'); if(a>=0&&b>=0) txt=txt.slice(a,b+1); return JSON.parse(txt);}catch(_){return null;} }
+  function localTs(ts){ if(!ts)return '—'; const t=ts.replace(/\\./g,'-').replace(' ','T'); const d=new Date(t); return Number.isNaN(+d)?ts:d.toLocaleString(); }
+  function safeParseJson(txt){ if(!txt)return null; try{ txt=txt.replace(/^\\uFEFF/,'').trim(); const a=txt.indexOf('{'),b=txt.lastIndexOf('}'); if(a>=0&&b>=0) txt=txt.slice(a,b+1); return JSON.parse(txt);}catch(_){return null;} }
   function toast(text){
     const msg=document.createElement('div'); msg.textContent=text;
     Object.assign(msg.style,{position:'fixed',bottom:'20px',right:'20px',background:'#22c55e',color:'#06250f',
@@ -562,7 +606,6 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
         liveEls.lots.textContent=nice(d.lot??d.lots,2);
         liveEls.sltp.textContent=`${nice(d.sl)} / ${nice(d.tp)}`;
         liveEls.ts.textContent=localTs(d.ts);
-        // refresca imagen respetando prefijo y rompiendo caché
         liveEls.img.src=`${LIVE_ROOT}/shots/latest.jpg?ts=${Date.now()}`;
         setStatus(true);
         backoff = 1500; // reset
@@ -654,5 +697,84 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
   startLoops();
 })();
 </script>
+
+<script>
+// === BOOSTER: si tu script original no actualiza, este se encarga sin romper nada ===
+(function(){
+  const $ = (id)=>document.getElementById(id);
+  const elSym=$('lv-symbol'), elSide=$('lv-side'), elPrice=$('lv-price'),
+        elLots=$('lv-lots'), elSLTP=$('lv-sltp'), elTS=$('lv-ts'),
+        elShot=$('lv-shot'), pill=$('status-pill'), dot=$('dot'), stext=$('status-text'),
+        histBody=$('hist-body'), histTbl=$('hist-table'), histEmpty=$('hist-empty');
+
+  function nice(n,dp){ if(n===undefined||n===null||n==='')return '—'; const x=Number(n); if(Number.isNaN(x))return '—'; return dp===undefined?x.toString():x.toFixed(dp); }
+  function localTs(ts){ if(!ts) return '—'; const t = new Date((ts+'').replace(/\./g,'-').replace(' ','T')); return isNaN(+t)? ts : t.toLocaleString(); }
+  function badgeHTML(text){
+    const s=(text||'').toUpperCase(); let color='#9aa6bd';
+    if(s.includes('BUY'))  color='#16a34a';
+    if(s.includes('SELL')) color='#dc2626';
+    return '<span class="badge" style="background:'+color+'22;color:'+color+'">'+(s||'—')+'</span>';
+  }
+  function setStatus(ok){
+    if(!pill||!dot||!stext) return;
+    if(ok){ dot.style.background='#16a34a'; stext.textContent='En vivo'; }
+    else  { dot.style.background='#f87171'; stext.textContent='Desconectado'; }
+  }
+
+  async function updateLast(){
+    try{
+      const last = await window.DH_FETCH_JSON('/last.json');
+      if(elSym)   elSym.textContent = last.symbol || '—';
+      if(elSide)  elSide.innerHTML  = badgeHTML(last.side);
+      if(elPrice) elPrice.textContent = nice(last.price);
+      if(elLots)  elLots.textContent  = nice(last.lot ?? last.lots, 2);
+      if(elSLTP)  elSLTP.textContent  = nice(last.sl) + ' / ' + nice(last.tp);
+      if(elTS)    elTS.textContent    = localTs(last.ts);
+
+      if(elShot){
+        const u = window.DH_IMG_URL('/shots/latest.jpg');
+        elShot.src = u;
+      }
+      setStatus(true);
+    }catch(e){
+      setStatus(false);
+    }
+  }
+
+  async function updateHist(){
+    if(!histBody) return;
+    try{
+      const rows = await window.DH_FETCH_JSONL('/trades.jsonl');
+      const last10 = rows.slice(-10).reverse();
+      if(last10.length===0){
+        if(histTbl) histTbl.style.display='none';
+        if(histEmpty) histEmpty.style.display='block';
+        return;
+      }
+      if(histEmpty) histEmpty.style.display='none';
+      if(histTbl) histTbl.style.display='table';
+      histBody.innerHTML = last10.map(r=>(
+        '<tr>' +
+          '<td>'+ localTs(r.ts) +'</td>' +
+          '<td>'+ (r.symbol||'—') +'</td>' +
+          '<td>'+ badgeHTML(r.side) +'</td>' +
+          '<td style="text-align:right">'+ nice(r.price) +'</td>' +
+          '<td style="text-align:right">'+ nice(r.lot ?? r.lots, 2) +'</td>' +
+          '<td style="text-align:right">'+ nice(r.sl) +'</td>' +
+          '<td style="text-align:right">'+ nice(r.tp) +'</td>' +
+        '</tr>'
+      )).join('');
+      setStatus(true);
+    }catch(e){
+      setStatus(false);
+    }
+  }
+
+  updateLast(); updateHist();
+  setInterval(updateLast, 5000);
+  setInterval(updateHist, 7000);
+})();
+</script>
+
 </body>
 </html>
