@@ -47,3 +47,5 @@
 {"ts":"2025.10.06 16:26:10","symbol":"BTCUSD","side":"BUY_CLOSE","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
 {"side":"BUY","symbol":"BTCUSD","price":124931.00,"lot":0.20,"sl":123581.00,"tp":125031.00,"level":"BREAK_L2","ts":"2025.10.06 16:27"}\r\n{"ts":"2025.10.06 16:27:01","symbol":"BTCUSD","side":"BUY","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
 {"ts":"2025.10.06 16:40:09","symbol":"BTCUSD","side":"BUY_CLOSE","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
+{"side":"BUY","symbol":"BTCUSD","price":125055.00,"lot":0.20,"sl":123705.00,"tp":125155.00,"level":"BREAK_L2","ts":"2025.10.06 16:58"}\r\n{"ts":"2025.10.06 16:58:01","symbol":"BTCUSD","side":"BUY","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
+{"ts":"2025.10.06 16:59:34","symbol":"BTCUSD","side":"BUY_CLOSE","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
