@@ -649,7 +649,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     const box=$(boxId);
     if(!box || box.dataset.done) return;
     if(window.QRCode){ new QRCode(box,{text, width:180, height:180, correctLevel:QRCode.CorrectLevel.M}); }
-    else{ const img=document.createElement('img'); img.alt='QR '+(key||''); img.loading='lazy'; img.decoding='async'; img.src='img/qr_'+key+'.png'; box.appendChild(img); }
+    else{ const img=document.createElement('img'); img.alt='QR '+(key||''); img.loading='lazy'; img.decoding='async'; img.src='qr_'+key+'.png'; img.onerror=function(){ this.onerror=null; this.src='img/qr_'+key+'.png'; }; box.appendChild(img); }
     box.dataset.done='1';
   }
   document.querySelectorAll('.qrbox').forEach(d=>{
