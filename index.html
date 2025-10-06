@@ -307,7 +307,7 @@ window.DH_IMG_URL = function(path){
             <a class="cta" href="verificacion.html" rel="noopener">Verificación oficial</a>
             <a class="cta cta--dark" href="mailto:dejandohuella_pool@proton.me?subject=Solicitud%20de%20informaci%C3%B3n%20-%20DejandoHuella%20Trader">Solicitud por mail</a>
             <hr>
-            <a class="cta" href="clases.html" rel="noopener"><b>🎓 Cursos Trading</b></a>
+            <a class="cta" href="clases.html" rel="noopener"><b>🎓 Info Trading</b></a>
           </div>
         </div>
       </div>
@@ -942,40 +942,5 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
 
 
 
-
-<!-- === INYECTADO: Override ensureQR para mostrar QR embebidos === -->
-<script>
-(function() {
-  var QR_DATA = {};
-  function renderEmbeddedQR(key, box) {
-    if(!box) return false;
-    var data = QR_DATA[key];
-    if(!data) return false;
-    // Limpia y coloca el <img> con data URI
-    while (box.firstChild) box.removeChild(box.firstChild);
-    var img = new Image();
-    img.alt = "QR " + key;
-    img.loading = "lazy";
-    img.decoding = "async";
-    img.src = data;
-    box.appendChild(img);
-    return true;
-  }
-  // Fuerza nuestra versión
-  window.ensureQR = function(key, box) {
-    if (!renderEmbeddedQR(key, box)) {
-      // fallback por si falta el embebido: intenta raíz y luego /img
-      var img = new Image();
-      img.alt = "QR " + key;
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.src = "qr_" + key + ".png";
-      img.onerror = function() { this.onerror=null; this.src = "img/qr_" + key + ".png"; };
-      while (box.firstChild) box.removeChild(box.firstChild);
-      box.appendChild(img);
-    }
-  };
-})();
-</script>
 </body>
 </html>
