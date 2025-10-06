@@ -1,1 +1,3 @@
 {"time":"2000-01-01T00:00:00Z","symbol":"BTCUSD","side":"-","price":0,"lot":0,"sl":0,"tp":0}
+{"ts":"2025.10.06 22:26:15","symbol":"BTCUSD","side":"BUY_CLOSE","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
+{"side":"BUY","symbol":"BTCUSD","price":125958.50,"lot":0.20,"sl":124608.50,"tp":126058.50,"level":"BREAK_L2","ts":"2025.10.06 22:26"}\r\n{"ts":"2025.10.06 22:26:22","symbol":"BTCUSD","side":"BUY","price": .*f,"lots":2.00,"sl": .*f,"tp": .*f}
