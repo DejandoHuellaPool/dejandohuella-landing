@@ -1,75 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<script>
-// ⚡ GH Pages hotfix: matar SW y forzar 1 recarga con ?v=timestamp para bustear caché del HTML
-(function(){
-  // 1) Si no hay ?v=... en la URL, recarga una sola vez con ese parámetro
-  var u = new URL(location.href);
-  if(!u.searchParams.has('v')){
-    u.searchParams.set('v', Date.now().toString());
-    // Recarga una vez con la URL versionada (evita bucles)
-    location.replace(u.toString());
-  }
 
-  // 2) Mata cualquier Service Worker antiguo (si existiera)
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(rs){
-      rs.forEach(function(r){ r.unregister(); });
-    });
-  }
+<script>
+// === AUTODETECCIÓN GH PAGES / NGINX + HELPERS DE RUTA ===
+(function(){
+  var looksGH = location.host.endsWith('github.io');
+  var base = (window.DH_BASE !== undefined) ? window.DH_BASE :
+             (looksGH ? '/dejandohuella-landing' :
+              (location.pathname.startsWith('/dejandohuella-landing') ? '/dejandohuella-landing' : ''));
+  window.DH_BASE = base;
+  window.DH_ROOT = (window.DH_ROOT !== undefined) ? window.DH_ROOT : (base + '/live');
+  // Preload dinámico si existe
+  var pre = document.querySelector('link#preload-shot');
+  if (pre) pre.href = window.DH_ROOT + '/shots/latest.jpg?ts=' + Date.now();
 })();
+
+// === CANDIDATAS DE URL + FETCH CON FALLBACK + CACHE-BUSTING ===
+function dhCandidates(path){
+  var p = path[0] === '/' ? path : '/' + path;
+  var abs = window.DH_ROOT + p;      // ej: '/dejandohuella-landing/live/last.json'
+  var relAbs = '/live' + p;          // '/live/last.json'
+  var rel = 'live' + p;              // 'live/last.json'
+  return Array.from(new Set([abs, relAbs, rel]));
+}
+
+async function dhFetchText(path, timeoutMs){
+  const urls = dhCandidates(path);
+  const tmo = timeoutMs || 6000;
+  let lastErr;
+  for (const u of urls){
+    const url = u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+    try{
+      const ctrl = new AbortController();
+      const tid = setTimeout(()=>ctrl.abort(), tmo);
+      const r = await fetch(url, { cache:'no-store', signal: ctrl.signal });
+      clearTimeout(tid);
+      if(r.ok) return await r.text();
+      lastErr = new Error('HTTP ' + r.status + ' @ ' + url);
+    }catch(e){ lastErr = e; }
+  }
+  throw lastErr || new Error('No reachable URL for ' + path);
+}
+
+window.DH_FETCH_JSON = async function(path){
+  const txt = await dhFetchText(path, 7000);
+  const clean = txt.replace(/^\uFEFF/, '').trim();
+  return JSON.parse(clean);
+};
+
+window.DH_FETCH_JSONL = async function(path){
+  const txt = await dhFetchText(path, 7000);
+  return txt.split(/\r?\n/).filter(Boolean).map(s=>{ try{return JSON.parse(s);}catch(_){return null;} }).filter(Boolean);
+};
+
+window.DH_IMG_URL = function(path){
+  const u = dhCandidates(path)[0];
+  return u + (u.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+};
 </script>
 
 
 
-
-
-<!-- FORZAR RUTAS 1.1: GH Pages vs Onion -->
-<script>
-(function(){
-  // Forzar rutas según host, sin autodetección “lista”
-  if (location.host.endsWith('github.io')) {
-    // GH Pages (project pages)
-    window.DH_BASE = '/dejandohuella-landing';
-    window.DH_ROOT = '/dejandohuella-landing/live';
-  } else {
-    // Onion/Nginx
-    window.DH_BASE = '';
-    window.DH_ROOT = '/live';
-  }
-
-  // Helpers mínimos con cache-busting
-  window.DH_FETCH_JSON = async function(path){
-    const url = window.DH_ROOT + (path[0]==='/'?path:'/'+path) + '?ts=' + Date.now();
-    const r = await fetch(url, {cache:'no-store'});
-    if(!r.ok) throw new Error('HTTP '+r.status+' @ '+url);
-    return r.json();
-  };
-  window.DH_FETCH_JSONL = async function(path){
-    const url = window.DH_ROOT + (path[0]==='/'?path:'/'+path) + '?ts=' + Date.now();
-    const r = await fetch(url, {cache:'no-store'});
-    if(!r.ok) throw new Error('HTTP '+r.status+' @ '+url);
-    const txt = await r.text();
-    return txt.split(/\r?\n/).filter(Boolean).map(s=>{try{return JSON.parse(s);}catch(_){return null;}}).filter(Boolean);
-  };
-  window.DH_IMG_URL = function(path){
-    const url = window.DH_ROOT + (path[0]==='/'?path:'/'+path) + '?ts=' + Date.now();
-    return url;
-  };
-
-  // (opcional) Mata SW en GH Pages para evitar HTML viejo y recarga 1 vez con ?v
-  try{
-    if (location.host.endsWith('github.io')) {
-      if('serviceWorker' in navigator){
-        navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));
-      }
-      const u = new URL(location.href);
-      if(!u.searchParams.has('v')){ u.searchParams.set('v', Date.now()); location.replace(u.toString()); }
-    }
-  }catch(e){}
-})();
-</script>
 
 
 
@@ -942,37 +934,5 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
 
 
 
-
-<!-- === INYECTADO: Forzar QR visibles (no borra nada) === -->
-<script>
-(function() {
-  var QR_DATA = {};
-  function keyFromAlt(alt) {
-    if(!alt) return null;
-    var m = alt.toLowerCase().match(/^\s*qr\s+(btc|trc20|arb1|erc20|bep20)\s*$/);
-    return m ? m[1] : null;
-  }
-  function tryFill(img) {
-    var key = keyFromAlt(img.getAttribute('alt'));
-    if(!key) return;
-    var data = QR_DATA[key];
-    if(!data) return;
-    if(img.dataset.filled === '1') return;
-    img.dataset.filled = '1';
-    img.src = data;
-  }
-  function scan() {
-    document.querySelectorAll('img[alt^="QR "]').forEach(tryFill);
-  }
-  document.addEventListener('error', function(e) {
-    if(e.target && e.target.tagName === 'IMG') tryFill(e.target);
-  }, true);
-  var mo = new MutationObserver(scan);
-  window.addEventListener('DOMContentLoaded', function(){
-    scan();
-    mo.observe(document.documentElement, {childList:true, subtree:true});
-  });
-})();
-</script>
 </body>
 </html>
