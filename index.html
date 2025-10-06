@@ -649,7 +649,7 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
     const box=$(boxId);
     if(!box || box.dataset.done) return;
     if(window.QRCode){ new QRCode(box,{text, width:180, height:180, correctLevel:QRCode.CorrectLevel.M}); }
-    else{ const img=document.createElement('img'); img.alt='QR '+(key||''); img.loading='lazy'; img.decoding='async'; img.src='qr_'+key+'.png'; img.onerror=function(){ this.onerror=null; this.src='img/qr_'+key+'.png'; }; box.appendChild(img); }
+    else{ const img=document.createElement('img'); img.alt='QR '+(key||''); img.loading='lazy'; img.decoding='async'; img.src='img/qr_'+key+'.png'; box.appendChild(img); }
     box.dataset.done='1';
   }
   document.querySelectorAll('.qrbox').forEach(d=>{
@@ -942,5 +942,40 @@ XPIBAPFGstueFY5MPK2dHDQJpNdpsTfnQ4r0VM8hZk3TD/kM
 
 
 
+
+<!-- === INYECTADO: Override ensureQR para mostrar QR embebidos === -->
+<script>
+(function() {
+  var QR_DATA = {};
+  function renderEmbeddedQR(key, box) {
+    if(!box) return false;
+    var data = QR_DATA[key];
+    if(!data) return false;
+    // Limpia y coloca el <img> con data URI
+    while (box.firstChild) box.removeChild(box.firstChild);
+    var img = new Image();
+    img.alt = "QR " + key;
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.src = data;
+    box.appendChild(img);
+    return true;
+  }
+  // Fuerza nuestra versión
+  window.ensureQR = function(key, box) {
+    if (!renderEmbeddedQR(key, box)) {
+      // fallback por si falta el embebido: intenta raíz y luego /img
+      var img = new Image();
+      img.alt = "QR " + key;
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.src = "qr_" + key + ".png";
+      img.onerror = function() { this.onerror=null; this.src = "img/qr_" + key + ".png"; };
+      while (box.firstChild) box.removeChild(box.firstChild);
+      box.appendChild(img);
+    }
+  };
+})();
+</script>
 </body>
 </html>
